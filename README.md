@@ -1,3 +1,3 @@
 # GrocerEase
 
-A streamlined native app in Flutter, made for storing groceries and suggesting meals. Available on iOS and Android (soon!)
+A streamlined native app made for storing groceries and suggesting meals. Made using OnsenUI 2 with React bindings.
