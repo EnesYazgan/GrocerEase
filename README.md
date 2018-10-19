@@ -1,3 +1,4 @@
 # GrocerEase
 
-A streamlined native app made for storing groceries and suggesting meals. Made using OnsenUI 2 with React bindings.
+A streamlined React Native app built for storing groceries and recommending recipes. Available on Android, iOS and the Web.
+
