@@ -1,86 +1,184 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
+import ListItem from './ListItem';
+import Icon from './Icon';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      data: [], //for the autocomplete menu
+      filter: [], //for the autocomplete menu
       inventory: [], //for the ingredients list
       output: ''
     };
   }
 
+  changeQuantity = (key, quantityChange) => {
+    var newInventory = this.state.inventory.slice(0);
+    var obj = newInventory.find(o => o.key === key);
+    typeof obj != 'undefined' ? obj.quantity = obj.quantity + quantityChange : newInventory.push(new Ingredient(key, 1));
+    this.setState({ text: '', inventory: newInventory });
+    // Set the state here and update as required
+  }
+
+  //remember, arrow functions bind the function to the class, allowing it to use global (state) variables
+  search = (text) => {
+    var newData = []; //make a copy of the current array
+    for (var j = 0; j < this.state.inventory.length; j++) {
+      var match = true;
+      for (var l = 0; l < text.length; l++) {
+        if (text.charAt(l).toLowerCase() != this.state.inventory[j].key.charAt(l).toLowerCase()) {
+          match = false;
+          break;
+        }
+      }
+      if (match) newData.push(this.state.inventory[j]);
+    }
+    this.setState({ text: text, filter: newData });
+  }
+
+  add = () => {
+    var newInventory = this.state.inventory.slice(0);
+    var obj = newInventory.find(o => o.key === this.state.text.toTitleCase());
+    typeof obj != 'undefined' ? obj.quantity = obj.quantity + 1 : newInventory.push(new Ingredient(this.state.text.toTitleCase(), 1));
+    this.textInput.clear();
+    this.setState({ text: '', inventory: newInventory });
+    // Set the state here and update as required
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text alignItems='center'>GrocerEase</Text>
-        <TextInput
-          placeholder="Type food!"
-          onChangeText={(text) => {
-            var newData = []; //make a copy of the current array
-            for (var j = 0; j < ingredients.length; j++) {
-              var match = true;
-              for (var l = 0; l < text.length; l++) {
-                if (text.charAt(l) != ingredients[j].key.charAt(l)) {
-                  match = false;
-                  break;
+        <StatusBar hidden />
+        <View style={styles.banner}>
+          <Text style={styles.headerText}>My Ingredients</Text>
+        </View>
+        <View style={styles.container}>
+          <FlatList
+            data={this.state.text == '' ? this.state.inventory : this.state.filter}
+            renderItem={({ item }) => (
+              <ListItem
+                //onTextPress={this.handleShowDetails}
+                //onCaretPress={this.handleDrillDown}
+                item={item}
+                setParentState={
+                  this.changeQuantity
                 }
-              }
-              if (match) newData.push(ingredients[j]);
+              />
+            )}
+            ItemSeparatorComponent={this.renderSeparator}
+            ListHeaderComponent={
+              <View style={styles.row}>
+                <TextInput style={styles.searchBar}
+                  ref={input => { this.textInput = input }}
+                  placeholder="Search for or add food!"
+                  onChangeText={
+                    this.search
+                  }
+                />
+                {
+                  this.state.text == '' ?
+                    <Icon
+                      style={styles.icon}
+                      name="search"
+                      color="#ccc"
+                      size={25}
+                    /> :
+                    <Button
+                      style={styles.icon}
+                      onPress={
+                        this.add
+                      }
+                      title="Add"
+                    />
+                }
+              </View>
             }
-            this.setState({text});
-          }
-          }
-        />
-        <FlatList
-          data={this.state.data}
-          renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
-        />
-        <FlatList
-          data={this.state.inventory}
-          renderItem={({ item }) => <Text style={styles.item}>{item.key} {item.quantity > 1 ? item.quantity : ''} </Text>}
-        />
-        {this.state.text == '' ?
-          null :
-          <Button
-            onPress={() => {
-              //var newInventory = [this.state.inventory];
-              var newInventory = this.state.inventory.slice(0);
-              var index = newInventory.indexOf(this.state.text);
-              index > -1 ? newInventory[index].key = newInventory[index].quantity = newInventory[index].quantity + 1 : newInventory.push({key: this.state.text, quantity: 1});
-              this.setState({text: '', inventory: newInventory});
-            }}
-            title="Add"
           />
-        }
+        </View>
       </View>
     );
   }
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "0%"
+        }}
+      />
+    );
+  };
+}
+
+function Ingredient(key, quantity){
+  this.key = key;
+  this.quantity = quantity;
 }
 
 const ingredients = [
-  {key: 'Milk'},
-  {key: 'Cheese'},
-  {key: 'Eggs'},
-  {key: 'Bread'},
-  {key: 'Fruit'},
-  {key: 'Vegetable'},
-  {key: 'Sugar'},
-  {key: 'Salt'},
+  new Ingredient('Milk', 1),
+  new Ingredient('Cheese', 1),
+  new Ingredient('Eggs', 1),
+  new Ingredient('Fruit', 1),
+  new Ingredient('Vegetable', 1),
+  new Ingredient('Bread', 1),
+  new Ingredient('Sugar', 1),
+  new Ingredient('Salt', 1),
 ];
 
+String.prototype.toTitleCase = function () {
+  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
+
 const styles = StyleSheet.create({
+  banner: {
+    backgroundColor: 'green',
+  },
+  headerText: {
+    flexDirection: 'row',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'space-evenly',
+    backgroundColor: '#fff'
   },
   item: {
     padding: 10,
     fontSize: 18,
     height: 44,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+  searchBar: {
+    flex: 1,
+    fontSize: 20,
+    padding: 10,
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderBottomWidth: 1,
+  },
+  icon: {
+    marginRight: 10,
+  }
 });
