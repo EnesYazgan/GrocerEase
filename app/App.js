@@ -1,28 +1,35 @@
-//import React, { Component } from 'react';
-//import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList } from 'react-native';
-
-//import React from 'react';
-import List from './components/List.js'
-
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry, Text, StyleSheet } from 'react-native';
+import List from './components/List.js';
 
-/*class Greeting extends Component {
-  render() {
-    return (
-      <Text>Hello {this.props.name}!</Text>
-    );
+export default class TextInANest extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      titleText: "Bird's Nest",
+      bodyText: 'This is not really a bird nest.'
+    };
   }
-}*/
 
-export default class LotsOfGreetings extends Component {
   render() {
     return (
-      <View style={{alignItems: 'center'}}>
-        <List name='Rexxar' />
-        <List name='Jaina' />
-        <List name='Valeera' />
-      </View>
+	  //List.insert(titleText);
+      <Text style={styles.baseText}>
+		//List.insert(titleText)
+        <Text style={styles.titleText} onPress={this.onPressTitle}>
+          {List.head}{'\n'}{'\n'}
+        </Text>
+        <Text numberOfLines={5}>
+          {this.state.bodyText}
+        </Text>
+      </Text>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
