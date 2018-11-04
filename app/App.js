@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
-import ListItem from './ListItem';
-import SearchList from './SearchList';
-import Icon from './Icon';
+import SearchList from '.components/SearchList';
 
 export default class App extends Component {
   constructor(props) {
