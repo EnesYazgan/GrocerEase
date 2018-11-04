@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
 import SearchList from './components/SearchList';
 import BarcodeScanner from './components/BarcodeScanner';
+import lookup from './components/BarcodeLookup'
 
 export default class App extends Component {
   constructor(props) {

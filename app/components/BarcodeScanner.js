@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
+// import { lookup } from './BarcodeLookup'
 
 export default class BarcodeScanner extends React.Component {
   state = {
     hasCameraPermission: null,
+    scannedCode: null,
+    codeType: null
   }
 
   async componentWillMount() {
@@ -33,5 +36,7 @@ export default class BarcodeScanner extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.setState({codeType: type, scannedCode: data})
+    lookup(scannedCode)
   }
 }
