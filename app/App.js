@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
 import SearchList from '.components/SearchList';
+import BarcodeScanner from './components/BarcodeScanner'
 
 export default class App extends Component {
   constructor(props) {
@@ -13,6 +14,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        
+         <BarcodeScanner />
         <SearchList
         inventory = {this.state.inventory}
         />
