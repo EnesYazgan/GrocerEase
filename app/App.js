@@ -1,102 +1,23 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
 import ListItem from './ListItem';
+import SearchList from './SearchList';
 import Icon from './Icon';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
-      filter: [], //for the autocomplete menu
       inventory: [], //for the ingredients list
-      output: ''
     };
-  }
-
-  changeQuantity = (key, quantityChange) => {
-    var newInventory = this.state.inventory.slice(0);
-    var obj = newInventory.find(o => o.key === key);
-    typeof obj != 'undefined' ? obj.quantity = obj.quantity + quantityChange : newInventory.push(new Ingredient(key, 1));
-    this.setState({ text: '', inventory: newInventory });
-    // Set the state here and update as required
-  }
-
-  //remember, arrow functions bind the function to the class, allowing it to use global (state) variables
-  search = (text) => {
-    var newData = []; //make a copy of the current array
-    for (var j = 0; j < this.state.inventory.length; j++) {
-      var match = true;
-      for (var l = 0; l < text.length; l++) {
-        if (text.charAt(l).toLowerCase() != this.state.inventory[j].key.charAt(l).toLowerCase()) {
-          match = false;
-          break;
-        }
-      }
-      if (match) newData.push(this.state.inventory[j]);
-    }
-    this.setState({ text: text, filter: newData });
-  }
-
-  add = () => {
-    var newInventory = this.state.inventory.slice(0);
-    var obj = newInventory.find(o => o.key === this.state.text.toTitleCase());
-    typeof obj != 'undefined' ? obj.quantity = obj.quantity + 1 : newInventory.push(new Ingredient(this.state.text.toTitleCase(), 1));
-    this.textInput.clear();
-    this.setState({ text: '', inventory: newInventory });
-    // Set the state here and update as required
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
-        </View>
-        <View style={styles.container}>
-          <FlatList
-            data={this.state.text == '' ? this.state.inventory : this.state.filter}
-            renderItem={({ item }) => (
-              <ListItem
-                //onTextPress={this.handleShowDetails}
-                //onCaretPress={this.handleDrillDown}
-                item={item}
-                setParentState={
-                  this.changeQuantity
-                }
-              />
-            )}
-            ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={
-              <View style={styles.row}>
-                <TextInput style={styles.searchBar}
-                  ref={input => { this.textInput = input }}
-                  placeholder="Search for or add food!"
-                  onChangeText={
-                    this.search
-                  }
-                />
-                {
-                  this.state.text == '' ?
-                    <Icon
-                      style={styles.icon}
-                      name="search"
-                      color="#ccc"
-                      size={25}
-                    /> :
-                    <Button
-                      style={styles.icon}
-                      onPress={
-                        this.add
-                      }
-                      title="Add"
-                    />
-                }
-              </View>
-            }
-          />
-        </View>
+        <SearchList
+        inventory = {this.state.inventory}
+        />
       </View>
     );
   }
@@ -114,26 +35,6 @@ export default class App extends Component {
     );
   };
 }
-
-function Ingredient(key, quantity){
-  this.key = key;
-  this.quantity = quantity;
-}
-
-const ingredients = [
-  new Ingredient('Milk', 1),
-  new Ingredient('Cheese', 1),
-  new Ingredient('Eggs', 1),
-  new Ingredient('Fruit', 1),
-  new Ingredient('Vegetable', 1),
-  new Ingredient('Bread', 1),
-  new Ingredient('Sugar', 1),
-  new Ingredient('Salt', 1),
-];
-
-String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-};
 
 const styles = StyleSheet.create({
   banner: {
