@@ -50,54 +50,48 @@ class SearchList extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
-        </View>
-        <View style={styles.container}>
-          <FlatList
-            //Here we input the data to be rendered as a list. We want the list to change when the user uses the search bar.
-            data={this.state.text == '' ? this.state.inventory : this.state.filter}
-            renderItem={({ item }) => (
-              <ListItem
-                //onTextPress={this.handleShowDetails}
-                //onCaretPress={this.handleDrillDown}
-                item={item}
-                setParentState={
-                  this.changeQuantity
+        <FlatList
+          //Here we input the data to be rendered as a list. We want the list to change when the user uses the search bar.
+          data={this.state.text == '' ? this.state.inventory : this.state.filter}
+          renderItem={({ item }) => (
+            <ListItem
+              //onTextPress={this.handleShowDetails}
+              //onCaretPress={this.handleDrillDown}
+              item={item}
+              setParentState={
+                this.changeQuantity
+              }
+            />
+          )}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={
+            <View style={styles.row}>
+              <TextInput style={styles.searchBar}
+                ref={input => { this.textInput = input }}
+                placeholder="Search for or add food!"
+                onChangeText={
+                  this.search
                 }
               />
-            )}
-            ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={
-              <View style={styles.row}>
-                <TextInput style={styles.searchBar}
-                  ref={input => { this.textInput = input }}
-                  placeholder="Search for or add food!"
-                  onChangeText={
-                    this.search
-                  }
-                />
-                {
-                  this.state.text == '' ?
-                    <Icon
-                      style={styles.icon}
-                      name="search"
-                      color="#ccc"
-                      size={25}
-                    /> :
-                    <Button
-                      style={styles.icon}
-                      onPress={
-                        this.add
-                      }
-                      title="Add"
-                    />
-                }
-              </View>
-            }
-          />
-        </View>
+              {
+                this.state.text == '' ?
+                  <Icon
+                    style={styles.icon}
+                    name="search"
+                    color="#ccc"
+                    size={25}
+                  /> :
+                  <Button
+                    style={styles.icon}
+                    onPress={
+                      this.add
+                    }
+                    title="Add"
+                  />
+              }
+            </View>
+          }
+        />
       </View>
     );
   }
@@ -120,17 +114,6 @@ function Ingredient(key, quantity){
   this.key = key;
   this.quantity = quantity;
 }
-
-const ingredients = [
-  new Ingredient('Milk', 1),
-  new Ingredient('Cheese', 1),
-  new Ingredient('Eggs', 1),
-  new Ingredient('Fruit', 1),
-  new Ingredient('Vegetable', 1),
-  new Ingredient('Bread', 1),
-  new Ingredient('Sugar', 1),
-  new Ingredient('Salt', 1),
-];
 
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
