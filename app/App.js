@@ -1,45 +1,65 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
-import SearchList from '.components/SearchList';
-import BarcodeScanner from './components/BarcodeScanner'
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, FlatList, StatusBar} from 'react-native';
+import List from './components/List';
+import BarcodeScanner from './components/BarcodeScanner';
+import Icon from './components/Icon';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: [], //for the ingredients list
+      cameraOn: false,
     };
+  }
+
+  toggleCamera = () => {
+    this.setState({ cameraOn: !this.state.cameraOn });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        
-         <BarcodeScanner />
-        <SearchList
-        inventory = {this.state.inventory}
+        <StatusBar hidden />
+        <View style={styles.banner}>
+          <Text style={styles.headerText}>My Ingredients</Text>
+          <View style={styles.end}>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={this.toggleCamera}
+            >
+              <Icon
+                style={styles.icon}
+                name="camera"
+                color="white"
+                size={24}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        {
+          this.state.cameraOn == false ?
+            null :
+            <BarcodeScanner />
+        }
+        <List
+          data={[]}
         />
       </View>
     );
   }
-
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "0%"
-        }}
-      />
-    );
-  };
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
   banner: {
     backgroundColor: 'green',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  end: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   headerText: {
     flexDirection: 'row',
@@ -50,37 +70,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  searchBar: {
-    flex: 1,
-    fontSize: 20,
-    padding: 10,
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderBottomWidth: 1,
+  iconContainer: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:40,
+    height:40,
+    backgroundColor:'green',
+    borderRadius:40,
   },
   icon: {
-    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
   }
 });
