@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
-import Ingredient from './Ingredient';
-import Icon from './Icon';
+import Icon from '../Icon';
 
-class SearchList extends Component {
+export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -148,8 +147,6 @@ class SearchList extends Component {
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
-
-export default SearchList;
 
 const styles = StyleSheet.create({
   container: {
