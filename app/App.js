@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, StatusBar} from 'react-native';
 import SearchList from './components/SearchList';
 import BarcodeScanner from './components/BarcodeScanner';
 import User from './components/UserLogin';
+=======
+import UI from './components/UI';
+>>>>>>> origin/master
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inventory: [], //for the ingredients list
-    };
+  state = {
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <View style={styles.container}>
         <BarcodeScanner/>
         <User/>
@@ -33,55 +34,11 @@ export default class App extends Component {
           backgroundColor: "#CED0CE",
           marginLeft: "0%"
         }}
+=======
+      <UI
+        data={[]}
+>>>>>>> origin/master
       />
     );
-  };
-}
-
-const styles = StyleSheet.create({
-  banner: {
-    backgroundColor: 'green',
-  },
-  headerText: {
-    flexDirection: 'row',
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  searchBar: {
-    flex: 1,
-    fontSize: 20,
-    padding: 10,
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderBottomWidth: 1,
-  },
-  icon: {
-    marginRight: 10,
   }
-});
+}
