@@ -1,88 +1,102 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, FlatList, StatusBar} from 'react-native';
-import List from './components/List';
-import BarcodeScanner from './components/BarcodeScanner';
-import Icon from './components/Icon';
+import {View, StatusBar, AppState} from 'react-native'
+import CurrentScreen from './components/CurrentScreen';
+import * as firebase from 'firebase';
+import Ingredient from './objects/Ingredient';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+  authDomain: "grocerease-6e9ee.firebaseapp.com",
+  databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+  projectId: "grocerease-6e9ee",
+  storageBucket: "grocerease-6e9ee.appspot.com",
+  messagingSenderId: "719228868931"
+};
+
+//const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export default class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      cameraOn: false,
-    };
+    super(props)
+    //this.itemsRef = firebaseApp.database().ref();
   }
 
-  toggleCamera = () => {
-    this.setState({ cameraOn: !this.state.cameraOn });
+  state = {
+    appState: AppState.currentState,
+    inventory: [],
+    sortParameter: true,
+    loggedIn: false,
+  }
+
+  componentDidMount() {
+    console.log('I PRINTED SOME THING');
+    /*
+    AppState.addEventListener('change', this._handleAppStateChange);
+    this.itemsRef.once('value').then(snapshot => {
+      this.setState({ inventory: snapshot.val() })
+    })
+    */
+  }
+
+  logIn = (login) => {
+    this.setState({ loggedIn: login });
+  }
+
+  sortList = () => {
+    var newInventory = this.state.inventory.slice(0);
+    if (this.state.sortParameter == true)
+      newInventory.sort();
+    else {
+      newInventory.sort();
+      newInventory.reverse();
+    }
+    this.setState({ inventory: newInventory, sortParameter: !this.state.sortParameter });
+  }
+  
+  changeItemQuantity = (key, quantityChange) => {
+    var newInventory = this.state.inventory.slice(0);
+    var obj = newInventory.find(o => o.key === key);
+    if (typeof obj != 'undefined') {
+      obj.quantity = obj.quantity + quantityChange
+      if (obj.quantity < 0)
+        newInventory.splice(newInventory.indexOf(obj), 1)
+    }
+    else {
+      newInventory.push(new Ingredient(key, quantityChange));
+    }
+    this.setState({ inventory: newInventory });
+    console.log(key)
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
-          <View style={styles.end}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={this.toggleCamera}
-            >
-              <Icon
-                style={styles.icon}
-                name="camera"
-                color="white"
-                size={24}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        {
-          this.state.cameraOn == false ?
-            null :
-            <BarcodeScanner />
-        }
-        <List
-          data={[]}
-        />
-      </View>
+      <CurrentScreen
+        changeItemQuantity={this.changeItemQuantity}
+        sortList={this.sortList}
+        inventory={this.state.inventory}
+        loggedIn={this.state.loggedIn}
+        setUser={this.logIn}
+      />
     );
   }
-}
 
-const styles = StyleSheet.create({ 
-  banner: {
-    backgroundColor: 'green',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  end: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  headerText: {
-    flexDirection: 'row',
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
-    width:40,
-    height:40,
-    backgroundColor:'green',
-    borderRadius:40,
-  },
-  icon: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
   }
-});
+
+  _handleAppStateChange = (nextAppState) => {
+    console.log('WHATS THE STATE?: ' + nextAppState);
+    //if (nextAppState === 'inactive' || nextAppState === 'background') {
+      //this.itemsRef.push(this.state.inventory);
+    //}
+    this.setState({appState: nextAppState});
+  }
+  
+  /*
+  handleAppStateChange = (nextAppState) => {
+    if (nextAppState === 'inactive') {
+      console.log('the app is closed');
+    }    
+  }
+  */
+}
