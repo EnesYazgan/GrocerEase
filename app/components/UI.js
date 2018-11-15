@@ -12,7 +12,7 @@ export default class UI extends Component {
     userId: this.props.userId,
     cameraOn: false,
   }
- 
+
   static defaultProps = {
     data: [],
     userId: undefined,
@@ -25,7 +25,7 @@ export default class UI extends Component {
     this.setState({ inventory: newInventory });
     // Set the state here and update as required
   }
-  
+
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
@@ -66,7 +66,7 @@ export default class UI extends Component {
   }
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   banner: {
     backgroundColor: 'green',
   },

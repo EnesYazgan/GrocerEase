@@ -36,11 +36,7 @@ export default class List extends Component {
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1)
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/master
     decrementItemQuantity = () => {
       if (item.quantity > 0)
         this.props.changeItemQuantity(item.key, -1)
@@ -213,8 +209,4 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     borderRadius:30,
   }
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> origin/master

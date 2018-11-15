@@ -21,11 +21,7 @@ function updateMe(userId, list){
 class DataBase extends Component{
     componentWillMount(){
 
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> origin/master
 
 
         var config = {
@@ -37,30 +33,18 @@ class DataBase extends Component{
           messagingSenderId: "719228868931"
         };
         firebase.initializeApp(config);
-<<<<<<< HEAD
 
         firebase.database().ref('users/001').set(
           {
             list:'milk'
           }
-=======
-    
-        firebase.database().ref('users/001').set(
-          {
-            list:'milk'
-          }      
->>>>>>> origin/master
         ).then(()=>{
           console.log('INSERT!');
         }).catch((error)=>{
           console.log('ERROR !');
         })
 
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/master
       }
 
 
@@ -68,8 +52,4 @@ class DataBase extends Component{
 
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master
