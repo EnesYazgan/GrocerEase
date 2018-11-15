@@ -20,7 +20,7 @@ export default class UserLogin extends Component{
   state = {
     email: this.props.email,
     password: this.props.password,
-    loggedIn: false,  //false = dont show
+    loggedIn: false,  //false = dont show the logOut button
   }
 
   emailText = (text) => {
@@ -80,20 +80,20 @@ export default class UserLogin extends Component{
     return(
       <View style={styles.container}>
         <StatusBar hidden/>
-        //email text box
+        {/*email text box*/}
         <TextInput
           style={styles.text}
           placeholder="email"
           onChangeText={this.emailText}
         />
-        //password text box
+        {/*password text box*/}
         <TextInput
           style={styles.text}
           placeholder="password"
           secureTextEntry={true}
           onChangeText={this.passwordText}
         />
-        //log in button
+        {/*log in button*/}
         <TouchableOpacity
           style={styles.button}
           //when button pressed, grab email and password from text boxes
@@ -101,7 +101,7 @@ export default class UserLogin extends Component{
         >
           <Text>Log In</Text>
         </TouchableOpacity>
-        //sign up button
+        {/*sign up button*/}
         <TouchableOpacity
           style={styles.button}
           //when button pressed, grab email and password from text boxes
@@ -139,7 +139,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    padding: 20,
+    marginTop: 30
   },
   end: {
     flex: 1,

@@ -9,12 +9,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <View>
+      // <View>
         <UserLogin/>
         // <UI
         //   data={[]}
         // />
-      </View>
+      // </View>
     );
   }
 }
