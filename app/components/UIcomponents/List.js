@@ -3,12 +3,9 @@ import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, Touch
 import Icon from '../Icon';
 
 export default class List extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      filter: [],
-    }
+  static defaultProps = {
+    text: '',
+    data: [],
   }
 
   render() {
@@ -17,15 +14,11 @@ export default class List extends Component {
         <FlatList
           //A FlatList renders a component in multiple rows like a list, given an array of data.
           data={
-            this.state.text == ''
-              ? this.props.data
-              : this.state.filter
+            this.props.data
           }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
-          //This optional parameter gives FlatList a component to render above the list
-          ListHeaderComponent={this.renderSearchBar}
         />
       </View>
     );
@@ -36,48 +29,99 @@ export default class List extends Component {
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1)
     }
-    
+
     decrementItemQuantity = () => {
-      if (item.quantity > 0)
-        this.props.changeItemQuantity(item.key, -1)
+      this.props.changeItemQuantity(item.key, -1)
     }
 
-    return (
-      <View style={styles.listRow}>
-        <Text
-          style={styles.textContainer}
-          onPress={this.handleTextPress}>
-          {item.key}
-        </Text>
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={decrementItemQuantity}
-          >
-            <Icon
-              name="remove"
-              color="#ccc"
-              size={20}
-            />
-          </TouchableOpacity>
+    setQuantity = (text) => {
+      text == ''
+        ? this.props.changeItemQuantity(item.key, -item.quantity)
+        : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
+    }
+
+    if (item.quantity > 0)
+      return (
+        <View style={styles.listRow}>
           <Text
             style={styles.textContainer}
-          >
-            {item.quantity}
+            onPress={this.handleTextPress}>
+            {item.key}
           </Text>
-          <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={incrementItemQuantity}
-          >
-            <Icon
-              name="add"
-              color="#ccc"
-              size={20}
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={decrementItemQuantity}
+            >
+              <Icon
+                name="remove"
+                color="#ccc"
+                size={20}
+              />
+            </TouchableOpacity>
+            <TextInput
+              underlineColorAndroid={'rgba(0,0,0,0)'}
+              style={styles.textContainer}
+              keyboardType={'numeric'}
+              defaultValue={item.quantity.toString()}
+              onChangeText={
+                setQuantity
+              }
             />
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={incrementItemQuantity}
+            >
+              <Icon
+                name="add"
+                color="#ccc"
+                size={20}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    )
+      )
+    else
+      return (
+        <View style={styles.listRow}>
+          <Text
+            style={styles.fadedTextContainer}
+            onPress={this.handleTextPress}>
+            {item.key}
+          </Text>
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={decrementItemQuantity}
+            >
+              <Icon
+                name="close"
+                color="#ccc"
+                size={20}
+              />
+            </TouchableOpacity>
+            <TextInput
+              underlineColorAndroid={'rgba(0,0,0,0)'}
+              style={styles.fadedTextContainer}
+              keyboardType={'numeric'}
+              defaultValue={item.quantity.toString()}
+              onChangeText={
+                setQuantity
+              }
+            />
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={incrementItemQuantity}
+            >
+              <Icon
+                name="add"
+                color="#ccc"
+                size={20}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
   }
 
   renderSeparator = () => {
@@ -92,56 +136,6 @@ export default class List extends Component {
       />
     );
   };
-
-  renderSearchBar = () => {
-    //local functions
-    addNewItem = () => {
-      this.textInput.clear()
-      this.setState({ text: '' })
-      this.props.changeItemQuantity(this.state.text, 1)
-    }
-
-    searchData = (text) => {
-      var newData = [] //make a copy of the current array
-      for (var j = 0; j < this.props.data.length; j++) {
-        var match = true
-        for (var l = 0; l < text.length; l++) {
-          if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-            match = false
-            break
-          }
-        }
-        if (match) newData.push(this.props.data[j])
-      }
-      this.setState({ text: text, filter: newData })
-    }
-
-    return (
-      <View style={styles.searchBar}>
-        <TextInput style={styles.textInput}
-          ref={input => { this.textInput = input }}
-          placeholder="Add or search for food!"
-          onChangeText={
-            searchData
-          }
-        />
-        {
-          this.state.text == ''
-            ? <Icon
-              style={styles.icon}
-              name="search"
-              color="#ccc"
-              size={25}
-            />
-            : <Button
-              style={styles.buttons}
-              onPress={addNewItem}
-              title="Add"
-            />
-        }
-      </View>
-    );
-  }
 }
 
 String.prototype.toTitleCase = function () {
@@ -151,7 +145,7 @@ String.prototype.toTitleCase = function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   item: {
     padding: 10,
@@ -198,6 +192,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
+  },
+  fadedTextContainer: {
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 20,
+    color: '#ccc'
   },
   iconContainer: {
     borderWidth:1,
