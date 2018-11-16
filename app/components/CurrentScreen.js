@@ -20,7 +20,8 @@ export default class CurrentScreen extends Component {
         setUser={this.props.setUser}
       />
     } else {
-      screen = <IngredientScreen />
+      screen = <IngredientScreen 
+      setUser={this.props.setUser}/>
     }
     return (
       <View style={styles.container}>
@@ -31,6 +32,7 @@ export default class CurrentScreen extends Component {
           setUser={this.props.setUser}
         />
       : <IngredientScreen 
+      setUser={this.props.setUser}
         sortList={this.props.sortList}
         changeItemQuantity={this.props.changeItemQuantity}
         inventory={this.props.inventory}

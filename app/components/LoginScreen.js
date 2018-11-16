@@ -9,18 +9,6 @@ export default class UserLogin extends Component{
     loggedIn: false,
   }
 
-  componentWillMount(){
-    var config = {
-      apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-      authDomain: "grocerease-6e9ee.firebaseapp.com",
-      databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-      projectId: "grocerease-6e9ee",
-      storageBucket: "grocerease-6e9ee.appspot.com",
-      messagingSenderId: "719228868931"
-    };
-    firebase.initializeApp(config);
-  }
-
   state = {
     email: this.props.email,
     password: this.props.password,
@@ -54,13 +42,8 @@ export default class UserLogin extends Component{
     const anyLoginErrors = auth.signInWithEmailAndPassword(this.state.email, this.state.password);
     anyLoginErrors.catch(e => console.log(e.message));
 
-    this.checkIfLoggedInOrOut();
-  }
-
-  logOut = () => {
-    const auth = firebase.auth();
-    firebase.auth().signOut();
-
+    var user = firebase.auth().currentUser
+    console.log(user)
     this.checkIfLoggedInOrOut();
   }
 
@@ -68,7 +51,9 @@ export default class UserLogin extends Component{
     //simple statement checking if user is logged in or not.
     //should be used to see if user login splash-screen should be put up or not
     firebase.auth().onAuthStateChanged(firebaseUser => {
+      console.log("checking authentication");
       if(firebaseUser){
+        console.log("loggin in successfully");
         this.props.setUser(true);
       }else{
         console.log("not logged in");
@@ -110,18 +95,6 @@ export default class UserLogin extends Component{
         >
           <Text>Sign Up</Text>
         </TouchableOpacity>
-
-        {
-          this.props.loggedIn == true
-          ? //log out button
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.logOut}
-          >
-            <Text>Log Out</Text>
-          </TouchableOpacity>
-          : null
-        }
       </View>
     );
   }

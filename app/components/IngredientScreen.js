@@ -5,6 +5,7 @@ import List from './UIcomponents/List';
 import ActionBar from './UIcomponents/ActionBar';
 
 import BarcodeScanner from './UIcomponents/BarcodeScanner';
+import firebase from 'firebase';
 
 export default class IngredientScreen extends Component {
   state = {
@@ -17,6 +18,7 @@ export default class IngredientScreen extends Component {
     sortList: undefined,
     changeItemQuantity: undefined,
     inventory: [],
+    setUser: undefined,
   }
   
   toggleCamera = () => {
@@ -26,6 +28,23 @@ export default class IngredientScreen extends Component {
   addNewItem = () => {
     this.props.changeItemQuantity(this.state.text, 1)
     this.setState({ text: '', filter: this.props.inventory })
+  }
+
+  logOut = () => {
+    firebase.auth().signOut();
+    //simple statement checking if user is logged in or not.
+    //should be used to see if user login splash-screen should be put up or not
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      console.log("checking authentication");
+      if(firebaseUser){
+        console.log("loggin in successfully");
+        this.props.setUser(true);
+      }else{
+        console.log("not logged in");
+        //pull up login splash-screen
+        this.props.setUser(false);
+      }
+    });
   }
 
   searchData = (text) => {
@@ -49,6 +68,17 @@ export default class IngredientScreen extends Component {
         <StatusBar hidden />
         <View style={styles.banner}>
           <Text style={styles.headerText}>My Ingredients</Text>
+            <TouchableOpacity
+              style={styles.end}
+              onPress={this.logOut}
+            >
+              <Icon
+                style={styles.icon}
+                name="log-out"
+                color="white"
+                size={30}
+              />
+            </TouchableOpacity>
         </View>
         {
           this.state.cameraOn == false
@@ -85,6 +115,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     backgroundColor: 'green',
+    flexDirection: 'row',
   },
   container: {
     flex: 1,
@@ -96,9 +127,11 @@ const styles = StyleSheet.create({
   },
   end: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   headerText: {
+    flex: 1,
     flexDirection: 'row',
     textAlign: 'center',
     color: 'white',

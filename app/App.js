@@ -29,6 +29,15 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    var config = {
+      apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+      authDomain: "grocerease-6e9ee.firebaseapp.com",
+      databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+      projectId: "grocerease-6e9ee",
+      storageBucket: "grocerease-6e9ee.appspot.com",
+      messagingSenderId: "719228868931"
+    };
+    firebase.initializeApp(config);
     console.log('I PRINTED SOME THING');
     /*
     AppState.addEventListener('change', this._handleAppStateChange);
@@ -39,6 +48,7 @@ export default class App extends Component {
   }
 
   logIn = (login) => {
+    console.log(login)
     this.setState({ loggedIn: login });
   }
 
