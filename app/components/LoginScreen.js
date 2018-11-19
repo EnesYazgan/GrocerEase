@@ -28,10 +28,12 @@ export default class UserLogin extends Component{
 
   emailText = (text) => {
     this.setState({email: text});
+	console.log("My email is:" + text);
   }
 
   passwordText = (text) => {
     this.setState({password: text});
+	console.log("My password is:" + text);
   }
 
   //sign up function that grabs the email and password from the text boxes and uses
@@ -42,19 +44,62 @@ export default class UserLogin extends Component{
     const auth = firebase.auth();
     //make new account
     const anyLoginErrors = auth.createUserWithEmailAndPassword(this.state.email, this.state.password);
-    anyLoginErrors.catch(e => console.log(e.message));
-
-    this.checkIfLoggedInOrOut();
+	anyLoginErrors.catch(e => console.log(e.message));
+	this.checkIfLoggedInOrOut();
+	
   }
 
   //log in function that grabs the email and password from the text boxes and uses
   //firebase to authenticate the user
   logIn = () => {
-    const auth = firebase.auth();
+	console.log(this.state.email);
+    console.log(this.state.password);
+    
+	const auth = firebase.auth();
     const anyLoginErrors = auth.signInWithEmailAndPassword(this.state.email, this.state.password);
-    anyLoginErrors.catch(e => console.log(e.message));
-
-    this.checkIfLoggedInOrOut();
+	/*anyLoginErrors.catch( 
+		function(error){
+			console.log("error caught");
+			var errorMessage = error.message;
+			alert(errorMessage);
+			console.log(error);
+		}
+	);*/
+	
+	/*const anyLoginErrors = console.log(y);
+	var success = true;
+	anyLoginErrors.catch(
+		function(error){
+			success = false;
+			console.log("catch: " + success);
+		}
+	);
+	console.log("out: " + success);*/
+	
+	var success = true;
+	console.log("Succ0: " + success);
+	anyLoginErrors.catch(		
+		function(error){
+			console.log("error caught");
+			var errorMessage = error.message;
+			alert(errorMessage);
+			console.log(errorMessage);
+			console.log(error);
+			success = false;
+			console.log("catch: " + success);
+		}
+	);
+	console.log("Succ1: " + success);
+	
+	try{
+		console.log(y);
+	}catch(e){
+		success = false;
+		console.log("Succ2: " + success);
+	}
+	console.log("Succ3: " + success);
+	
+	this.checkIfLoggedInOrOut();
   }
 
   logOut = () => {
@@ -69,10 +114,15 @@ export default class UserLogin extends Component{
     //should be used to see if user login splash-screen should be put up or not
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if(firebaseUser){
+		console.log("pull up Ingredients Screeen");
+		console.log("1" + this.state.email);
+		console.log("2" + this.state.password);
+    
         this.props.setUser(true);
       }else{
         console.log("not logged in");
-        //pull up login splash-screen
+        //pull up loging splash-screen
+		console.log("pull up Logging Screeen");
         this.props.setUser(false);
       }
     });
