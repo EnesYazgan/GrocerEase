@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import {View, StatusBar, AppState} from 'react-native'
 import CurrentScreen from './components/CurrentScreen';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
+import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-  authDomain: "grocerease-6e9ee.firebaseapp.com",
-  databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-  projectId: "grocerease-6e9ee",
-  storageBucket: "grocerease-6e9ee.appspot.com",
-  messagingSenderId: "719228868931"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+//   authDomain: "grocerease-6e9ee.firebaseapp.com",
+//   databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+//   projectId: "grocerease-6e9ee",
+//   storageBucket: "grocerease-6e9ee.appspot.com",
+//   messagingSenderId: "719228868931"
+// };
 
 //const firebaseApp = firebase.initializeApp(firebaseConfig);
 

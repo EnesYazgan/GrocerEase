@@ -12,8 +12,20 @@ export default class CurrentScreen extends Component {
     loggedIn: false,
   }
 
+  getLogStatus = () => {
+    console.log(this.props.loggedIn);
+  }
+
+  setLogStatus = (logBool) => {
+    if (logBool == true){
+      this.props.loggedIn = true;
+    }else{
+      this.props.loggedIn = false;
+    }
+  }
+
   render() {
-    const state = 0
+    const state = 0;
     let screen;
     if (this.props.loggedIn == false) {
       screen = <LoginScreen
@@ -26,11 +38,11 @@ export default class CurrentScreen extends Component {
       <View style={styles.container}>
       {
         this.props.loggedIn == false
-        ? 
+        ?
         <LoginScreen
           setUser={this.props.setUser}
         />
-      : <IngredientScreen 
+      : <IngredientScreen
         sortList={this.props.sortList}
         changeItemQuantity={this.props.changeItemQuantity}
         inventory={this.props.inventory}
@@ -41,7 +53,7 @@ export default class CurrentScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     marginRight: 10,

@@ -3,8 +3,9 @@ import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacit
 import Icon from './Icon';
 import List from './UIcomponents/List';
 import ActionBar from './UIcomponents/ActionBar';
-
 import BarcodeScanner from './UIcomponents/BarcodeScanner';
+import firebase from 'firebase';
+import CurrentScreen from './CurrentScreen.js';
 
 export default class IngredientScreen extends Component {
   state = {
@@ -12,13 +13,33 @@ export default class IngredientScreen extends Component {
     filter: this.props.inventory,
     text: '',
   }
- 
+
   static defaultProps = {
     sortList: undefined,
     changeItemQuantity: undefined,
     inventory: [],
   }
-  
+
+  logOut = () => {
+    const auth = firebase.auth();
+    firebase.auth().signOut();
+    this.checkIfLoggedInOrOut();
+  }
+  checkIfLoggedInOrOut = () => {
+    //simple statement checking if user is logged in or not.
+    //should be used to see if user login splash-screen should be put up or not
+    CurrentScreen.getLogStatus();
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if(firebaseUser){
+        console.log("still logged in");
+        CurrentScreen.setLogStatus(true);
+      }else{
+        console.log("should be logged out now");
+        CurrentScreen.setLogStatus(false);
+      }
+    });
+  }
+
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
@@ -49,6 +70,13 @@ export default class IngredientScreen extends Component {
         <StatusBar hidden />
         <View style={styles.banner}>
           <Text style={styles.headerText}>My Ingredients</Text>
+          <TouchableOpacity style={styles.iconContainer} > {/*onPress={this.logOut}*/}
+            <Icon
+              style={styles.icon}
+              name='log-out'
+              size={25}
+            />
+          </TouchableOpacity>
         </View>
         {
           this.state.cameraOn == false
@@ -78,13 +106,14 @@ export default class IngredientScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
   banner: {
-    backgroundColor: 'green',
+    backgroundColor: '#51A4F7',
+    flexDirection: 'row',
   },
   container: {
     flex: 1,
@@ -100,22 +129,26 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flexDirection: 'row',
+    flex: 100,
     textAlign: 'center',
     color: 'white',
     fontSize: 24,
+    justifyContent: 'center',
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
+    marginRight: -60
   },
   iconContainer: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
+    alignItems:'center',
+    justifyContent:'center',
     width:50,
     height:50,
-    backgroundColor:'green',
-    borderRadius:50,
+    backgroundColor: '#51A4F7',
+    paddingTop: 10,
+    borderRadius:10,
   },
   icon: {
     flexDirection: 'row',
