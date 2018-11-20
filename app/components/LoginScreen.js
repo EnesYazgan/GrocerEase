@@ -24,7 +24,7 @@ export default class UserLogin extends Component{
   }
   
   //sign up function that grabs the email and password from the text boxes and uses
-  //firebase to create an account for the user
+  //firebase to create an account for the us
   signUpWithEmailAndPassword = () => {
     this.props.signUp(this.state.email, this.state.password)
   }
