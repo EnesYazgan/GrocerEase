@@ -5,39 +5,25 @@ import List from './UIcomponents/List';
 import ActionBar from './UIcomponents/ActionBar';
 import BarcodeScanner from './UIcomponents/BarcodeScanner';
 import firebase from 'firebase';
-import CurrentScreen from './CurrentScreen.js';
 
 export default class IngredientScreen extends Component {
   state = {
     cameraOn: false,
-    filter: this.props.inventory,
+    filter: this.props.data,
     text: '',
+    sortParameter: true,
   }
 
   static defaultProps = {
-    sortList: undefined,
+    orderList: undefined,
     changeItemQuantity: undefined,
-    inventory: [],
+    data: [],
+    logOut: undefined,
   }
 
-  logOut = () => {
-    const auth = firebase.auth();
-    firebase.auth().signOut();
-    this.checkIfLoggedInOrOut();
-  }
-  checkIfLoggedInOrOut = () => {
-    //simple statement checking if user is logged in or not.
-    //should be used to see if user login splash-screen should be put up or not
-    CurrentScreen.getLogStatus();
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      if(firebaseUser){
-        console.log("still logged in");
-        CurrentScreen.setLogStatus(true);
-      }else{
-        console.log("should be logged out now");
-        CurrentScreen.setLogStatus(false);
-      }
-    });
+  changeSortParameterThenOrderList = () => {
+    this.setState({ sortParameter: !this.state.sortParameter })
+    this.props.orderList(this.state.sortParameter)
   }
 
   toggleCamera = () => {
@@ -46,20 +32,20 @@ export default class IngredientScreen extends Component {
 
   addNewItem = () => {
     this.props.changeItemQuantity(this.state.text, 1)
-    this.setState({ text: '', filter: this.props.inventory })
+    this.setState({ text: '', filter: this.props.data })
   }
 
   searchData = (text) => {
     var searchResults = [] //make a copy of the current array
-    for (var j = 0; j < this.props.inventory.length; j++) {
+    for (var j = 0; j < this.props.data.length; j++) {
       var match = true
       for (var l = 0; l < text.length; l++) {
-        if (text.charAt(l).toLowerCase() != this.props.inventory[j].key.charAt(l).toLowerCase()) {
+        if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
           match = false
           break
         }
       }
-      if (match) searchResults.push(this.props.inventory[j])
+      if (match) searchResults.push(this.props.data[j])
     }
     this.setState({ text: text, filter: searchResults })
   }
@@ -70,9 +56,11 @@ export default class IngredientScreen extends Component {
         <StatusBar hidden />
         <View style={styles.banner}>
           <Text style={styles.headerText}>My Ingredients</Text>
-          <TouchableOpacity style={styles.iconContainer} > {/*onPress={this.logOut}*/}
+          <TouchableOpacity style={styles.iconContainer}
+          onPress={this.props.logOut}>
             <Icon
               style={styles.icon}
+              color='white'
               name='log-out'
               size={25}
             />
@@ -91,11 +79,11 @@ export default class IngredientScreen extends Component {
             toggleCamera={this.toggleCamera}
             addNewItem={this.addNewItem}
             searchData={this.searchData}
-            sortList={this.props.sortList}
+            sortList={this.changeSortParameterThenOrderList}
           />
           <List
             data={this.state.text == ''
-              ? this.props.inventory
+              ? this.props.data
               : this.state.filter
             }
             changeItemQuantity={this.props.changeItemQuantity}
