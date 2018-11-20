@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {Button, View, TextInput, StatusBar, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import firebase from 'firebase';
+import {AppRegistry, Button, View, TextInput, StatusBar, Text, TouchableOpacity, StyleSheet} from 'react-native';
 // import UI from './components/UI';
 
-export default class UserLogin extends Component{  
+export default class UserLogin extends Component{
   static defaultProps = {
-    setUser: undefined,
-    loggedIn: false,
+    login: undefined,
+    signUp: undefined,
   }
 
   state = {
@@ -15,67 +14,42 @@ export default class UserLogin extends Component{
   }
 
   emailText = (text) => {
-    this.setState({email: text});
+    this.setState({ email: text });
+    console.log("My email is:" + text);
   }
 
   passwordText = (text) => {
-    this.setState({password: text});
+    this.setState({ password: text });
+    console.log("My password is:" + text);
   }
-
+  
   //sign up function that grabs the email and password from the text boxes and uses
   //firebase to create an account for the user
-  signUp = () => {
-    console.log(this.state.email);
-    console.log(this.state.password);
-    const auth = firebase.auth();
-    //make new account
-    const anyLoginErrors = auth.createUserWithEmailAndPassword(this.state.email, this.state.password);
-    anyLoginErrors.catch(e => console.log(e.message));
-
-    this.checkIfLoggedInOrOut();
+  signUpWithEmailAndPassword = () => {
+    this.props.signUp(this.state.email, this.state.password)
   }
 
   //log in function that grabs the email and password from the text boxes and uses
   //firebase to authenticate the user
-  logIn = () => {
-    const auth = firebase.auth();
-    const anyLoginErrors = auth.signInWithEmailAndPassword(this.state.email, this.state.password);
-    anyLoginErrors.catch(e => console.log(e.message));
-
-    var user = firebase.auth().currentUser
-    console.log(user)
-    this.checkIfLoggedInOrOut();
+  loginWithEmailAndPassword = () => {
+    this.props.login(this.state.email, this.state.password)
   }
 
-  checkIfLoggedInOrOut = () => {
-    //simple statement checking if user is logged in or not.
-    //should be used to see if user login splash-screen should be put up or not
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      console.log("checking authentication");
-      if(firebaseUser){
-        console.log("loggin in successfully");
-        this.props.setUser(true);
-      }else{
-        console.log("not logged in");
-        //pull up login splash-screen
-        this.props.setUser(false);
-      }
-    });
-  }
-
-  render(){
-    return(
+  render() {
+    return (
       <View style={styles.container}>
-        <StatusBar hidden/>
+        <StatusBar hidden />
         {/*email text box*/}
+        <Text style={styles.headerText}>GrocerEase</Text>
         <TextInput
-          style={styles.text}
+          style={styles.emailInput}
           placeholder="email"
+          autoCapitalize="none"
           onChangeText={this.emailText}
         />
         {/*password text box*/}
         <TextInput
-          style={styles.text}
+          style={styles.passwordInput}
           placeholder="password"
           secureTextEntry={true}
           onChangeText={this.passwordText}
@@ -84,14 +58,14 @@ export default class UserLogin extends Component{
         <TouchableOpacity
           style={styles.button}
           //when button pressed, grab email and password from text boxes
-          onPress={this.logIn}
+          onPress={this.loginWithEmailAndPassword}
         >
           <Text>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           //when button pressed, grab email and password from text boxes
-          onPress={this.signUp}
+          onPress={this.signUpWithEmailAndPassword}
         >
           <Text>Sign Up</Text>
         </TouchableOpacity>
@@ -101,30 +75,49 @@ export default class UserLogin extends Component{
 }
 
 const styles = StyleSheet.create({
-  banner: {
-    backgroundColor: 'green',
+  headerText: {
+    backgroundColor: '#F5F6FF',
+    flexDirection: 'row',
+    textAlign: 'center',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginTop: 40,
+    marginBottom: 10,
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    backgroundColor: '#51A4F7',
+    padding: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    width: 200
+  },
+  emailInput: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 40,
+    marginBottom: 5,
+    backgroundColor: '#D0E3F5',
+    padding: 15,
+  },
+  passwordInput: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 5,
+    marginBottom: 10,
+    backgroundColor: '#D0E3F5',
+    padding: 15,
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#F5F6FF'
   },
   end: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  headerText: {
-    flexDirection: 'row',
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
   },
   iconContainer: {
     borderWidth:1,

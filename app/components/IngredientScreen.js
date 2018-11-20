@@ -3,61 +3,49 @@ import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacit
 import Icon from './Icon';
 import List from './UIcomponents/List';
 import ActionBar from './UIcomponents/ActionBar';
-
 import BarcodeScanner from './UIcomponents/BarcodeScanner';
 import firebase from 'firebase';
 
 export default class IngredientScreen extends Component {
   state = {
     cameraOn: false,
-    filter: this.props.inventory,
+    filter: this.props.data,
     text: '',
+    sortParameter: true,
   }
- 
+
   static defaultProps = {
-    sortList: undefined,
+    orderList: undefined,
     changeItemQuantity: undefined,
-    inventory: [],
-    setUser: undefined,
+    data: [],
+    logOut: undefined,
   }
   
+  changeSortParameterThenOrderList = () => {
+    this.setState({ sortParameter: !this.state.sortParameter })
+    this.props.orderList(this.state.sortParameter)
+  }
+
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
 
   addNewItem = () => {
     this.props.changeItemQuantity(this.state.text, 1)
-    this.setState({ text: '', filter: this.props.inventory })
-  }
-
-  logOut = () => {
-    firebase.auth().signOut();
-    //simple statement checking if user is logged in or not.
-    //should be used to see if user login splash-screen should be put up or not
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      console.log("checking authentication");
-      if(firebaseUser){
-        console.log("loggin in successfully");
-        this.props.setUser(true);
-      }else{
-        console.log("not logged in");
-        //pull up login splash-screen
-        this.props.setUser(false);
-      }
-    });
+    this.setState({ text: '', filter: this.props.data })
   }
 
   searchData = (text) => {
     var searchResults = [] //make a copy of the current array
-    for (var j = 0; j < this.props.inventory.length; j++) {
+    for (var j = 0; j < this.props.data.length; j++) {
       var match = true
       for (var l = 0; l < text.length; l++) {
-        if (text.charAt(l).toLowerCase() != this.props.inventory[j].key.charAt(l).toLowerCase()) {
+        if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
           match = false
           break
         }
       }
-      if (match) searchResults.push(this.props.inventory[j])
+      if (match) searchResults.push(this.props.data[j])
     }
     this.setState({ text: text, filter: searchResults })
   }
@@ -68,17 +56,15 @@ export default class IngredientScreen extends Component {
         <StatusBar hidden />
         <View style={styles.banner}>
           <Text style={styles.headerText}>My Ingredients</Text>
-            <TouchableOpacity
-              style={styles.end}
-              onPress={this.logOut}
-            >
-              <Icon
-                style={styles.icon}
-                name="log-out"
-                color="white"
-                size={30}
-              />
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer}
+          onPress={this.props.logOut}>
+            <Icon
+              style={styles.icon}
+              color='white'
+              name='log-out'
+              size={25}
+            />
+          </TouchableOpacity>
         </View>
         {
           this.state.cameraOn == false
@@ -93,11 +79,11 @@ export default class IngredientScreen extends Component {
             toggleCamera={this.toggleCamera}
             addNewItem={this.addNewItem}
             searchData={this.searchData}
-            sortList={this.props.sortList}
+            sortList={this.changeSortParameterThenOrderList}
           />
           <List
             data={this.state.text == ''
-              ? this.props.inventory
+              ? this.props.data
               : this.state.filter
             }
             changeItemQuantity={this.props.changeItemQuantity}
@@ -108,13 +94,13 @@ export default class IngredientScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
   banner: {
-    backgroundColor: 'green',
+    backgroundColor: '#51A4F7',
     flexDirection: 'row',
   },
   container: {
@@ -127,28 +113,30 @@ const styles = StyleSheet.create({
   },
   end: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   headerText: {
-    flex: 1,
     flexDirection: 'row',
+    flex: 100,
     textAlign: 'center',
     color: 'white',
     fontSize: 24,
+    justifyContent: 'center',
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
+    marginRight: -60
   },
   iconContainer: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
+    alignItems:'center',
+    justifyContent:'center',
     width:50,
     height:50,
-    backgroundColor:'green',
-    borderRadius:50,
+    backgroundColor: '#51A4F7',
+    paddingTop: 10,
+    borderRadius:10,
   },
   icon: {
     flexDirection: 'row',
