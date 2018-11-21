@@ -16,15 +16,12 @@ export default class DataBase {
 		firebase.initializeApp(config);
 	}
 	
+	//testing state
 	state = {
 		myList: []
 	}
   
 	database = firebase;
-	
-	state = {
-		thisList: [],
-	}
 	
 	static deleteMe(userId) {
 		firebase.database().ref('users/' + userId).remove();
@@ -49,13 +46,21 @@ export default class DataBase {
 	//this function should return list
 	static returnList = (userId) =>{
 		var list;
+		
+		//used to retrieve firebase list for a user
 		firebase.database().ref('/users/' + userId).once('value')
 			.then((snapshot) => {
+				//snapshot.val() is the list we want
 				list = snapshot.val();
 				
+				//lists it properly
+				console.log("User's List: " + list);
+				
+				//Does nothing. In fact, code below is not reached!
 				this.setState({ myList: list })
 				
-				console.log("User's List: " + list);
+				//lists it properly, but is not reached!
+				console.log("User's List2: " + list);
 			});
 			
 		return list; //returns undefined, because the setting of list happens out of scope
