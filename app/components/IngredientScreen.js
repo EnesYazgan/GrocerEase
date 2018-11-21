@@ -5,6 +5,7 @@ import List from './UIcomponents/List';
 import ActionBar from './UIcomponents/ActionBar';
 import BarcodeScanner from './UIcomponents/BarcodeScanner';
 import firebase from 'firebase';
+import IngredientInfo from './UIcomponents/IngredientInfo';
 
 export default class IngredientScreen extends Component {
   state = {

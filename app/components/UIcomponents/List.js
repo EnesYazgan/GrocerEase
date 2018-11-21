@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
+import IngredientInfo from './IngredientInfo';
 
 export default class List extends Component {
   static defaultProps = {
     text: '',
     data: [],
+  }
+
+  state = {
+    infoPressed: false,
   }
 
   render() {
@@ -24,8 +29,14 @@ export default class List extends Component {
     );
   }
 
+
   renderListRow = ({ item }) => {
     //local functions
+    infoButtonPressed = () => {
+      this.setState({infoPressed: !this.state.infoPressed});
+      console.log(this.state.infoPressed);
+    }
+
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1)
     }
@@ -42,42 +53,65 @@ export default class List extends Component {
 
     if (item.quantity > 0)
       return (
-        <View style={styles.listRow}>
-          <Text
-            style={styles.textContainer}
-            onPress={this.handleTextPress}>
-            {item.key}
-          </Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={decrementItemQuantity}
-            >
-              <Icon
-                name="remove"
-                color="#ccc"
-                size={20}
-              />
-            </TouchableOpacity>
-            <TextInput
-              underlineColorAndroid={'rgba(0,0,0,0)'}
+        <View>
+          <View style={styles.listRow}>
+            <Text
               style={styles.textContainer}
-              keyboardType={'numeric'}
-              defaultValue={item.quantity.toString()}
-              onChangeText={
-                setQuantity
-              }
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={incrementItemQuantity}
-            >
-              <Icon
-                name="add"
-                color="#ccc"
-                size={20}
+              onPress={this.handleTextPress}>
+              {item.key}
+            </Text>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={infoButtonPressed}
+              >
+                <Icon
+                  color='black'
+                  name='information-circle-outline'
+                  size={30}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.container}>
+            {
+              this.state.infoPressed == true
+              ? <IngredientInfo/>
+              : null
+            }
+          </View>
+          <View style={styles.listRow}>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={decrementItemQuantity}
+              >
+                <Icon
+                  name="remove"
+                  color='black'
+                  size={25}
+                />
+              </TouchableOpacity>
+              <TextInput
+                underlineColorAndroid={'rgba(0,0,0,0)'}
+                style={styles.textContainer}
+                keyboardType={'numeric'}
+                defaultValue={item.quantity.toString()}
+                onChangeText={
+                  setQuantity
+                }
               />
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={incrementItemQuantity}
+              >
+                <Icon
+                  name="add"
+                  color='black'
+                  size={25}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       )
@@ -96,7 +130,7 @@ export default class List extends Component {
             >
               <Icon
                 name="close"
-                color="#ccc"
+                color="#cccccc"
                 size={20}
               />
             </TouchableOpacity>
@@ -130,7 +164,7 @@ export default class List extends Component {
         style={{
           height: 1,
           width: "100%",
-          backgroundColor: "#CED0CE",
+          backgroundColor: "#4EA64E",
           marginLeft: "0%"
         }}
       />

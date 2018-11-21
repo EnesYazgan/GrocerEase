@@ -6,14 +6,14 @@ import Ingredient from './objects/Ingredient';
 import IngredientScreen from './components/IngredientScreen';
 import LoginScreen from './components/LoginScreen';
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-//   authDomain: "grocerease-6e9ee.firebaseapp.com",
-//   databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-//   projectId: "grocerease-6e9ee",
-//   storageBucket: "grocerease-6e9ee.appspot.com",
-//   messagingSenderId: "719228868931"
-// };
+const firebaseConfig = {
+  apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+  authDomain: "grocerease-6e9ee.firebaseapp.com",
+  databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+  projectId: "grocerease-6e9ee",
+  storageBucket: "grocerease-6e9ee.appspot.com",
+  messagingSenderId: "719228868931"
+};
 
 firebase.initializeApp(firebaseConfig);
 
