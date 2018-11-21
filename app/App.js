@@ -27,8 +27,10 @@ export default class App extends Component {
   state = {
 	currentUserId: undefined,
     appState: AppState.currentState,
-    inventory: [],
+    inventory: [], //elements are ingredients
+	testInv: [],
     isLoggedIn: false,
+	beginning: true,
   }
 
   componentDidMount() {
@@ -36,6 +38,7 @@ export default class App extends Component {
       if (firebaseUser) {
 		this.state.currentUserId = firebase.auth().currentUser.uid;  
         this.setState({ isLoggedIn: true })
+		
       } else {
         this.setState({ isLoggedIn: false })
       }
@@ -75,7 +78,6 @@ export default class App extends Component {
 			if( !(email == undefined) && !(password == undefined)){
 				firebase.auth().createUserWithEmailAndPassword(email, password)
 					.then(() => {
-								 //this.state.currentUserId = firebase.auth().currentUser.uid; 
 								 this.setState({ currentUserId: firebase.auth().currentUser.uid })
 								 this.setState({ isLoggedIn: true })
 								}
@@ -93,7 +95,6 @@ export default class App extends Component {
 			if( !(email == undefined) && !(password == undefined)){
 				firebase.auth().signInWithEmailAndPassword(email, password)
 					.then(() => {
-								 //this.state.currentUserId = firebase.auth().currentUser.uid; 
 								 this.setState({ currentUserId: firebase.auth().currentUser.uid })
 								 this.setState({ isLoggedIn: true })
 								}
@@ -109,21 +110,21 @@ export default class App extends Component {
       />
     } else {
 	  console.log("Ingredients Page Opening!");
-	  //To make sure user ID is correct
-	  console.log("AccId: " + this.state.currentUserId);
-	  
-	  //Setting user list here
-	  //Database.returnList takes in userId as a param, and returns a list of ingredients
-	  var userList = DataBase.returnList(this.state.currentUserId);
-	  console.log("user's list: " + userList); //<- says undefined rn, will work once 
-											   // the method in firebase.js is fixed
-	  
+	   //sets inventory to user's inventory;
+	    console.log("test1");
+	    this.createInventory(this.state.currentUserId);
+	  //To make sure user ID and list is correct
+	  console.log("User: " + this.state.currentUserId);
+	  console.log("List: ");
+	  for(var i = 0; i < this.state.inventory.length; i++){
+		console.log("Local ings ==> " + this.state.inventory[i].toSingleString());
+	  }
 	  
       return <IngredientScreen
         data={this.state.inventory}
 		userId={this.state.currentUserId}
         changeItemQuantity={(itemName, quantity) => {
-		
+		  
           var newInventory = this.state.inventory.slice(0);
           var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
           if (typeof foundIngredient == 'undefined') {
@@ -135,7 +136,6 @@ export default class App extends Component {
               newInventory.splice(newInventory.indexOf(foundIngredient), 1)
           }
           this.setState({ inventory: newInventory });
-		  
 		  //Update the database every time the list is changed. This works!
 		  DataBase.updateMe(this.state.currentUserId, newInventory);
         }}
@@ -153,17 +153,57 @@ export default class App extends Component {
         }}
         logOut={() => {
           firebase.auth().signOut();
-          this.setState({ isLoggedIn: false })
+          this.setState({ isLoggedIn: false });
+		  //clear local inventory upon logout
+		  this.setState({beginning : true});
+		  this.setState({inventory : []});
         }}
       />
     }
-  }
-
-  /*
-  handleAppStateChange = (nextAppState) => {
-    if (nextAppState === 'inactive') {
-      console.log('the app is closed');
+  } 
+    
+    createInventory = (userId) => {
+	    firebase.database().ref('/users/' + userId).once('value')
+			.then((snapshot) => {
+				//snapshot.val() is the list we want
+				list = snapshot.val();
+				
+				//lists it properly
+				//console.log("User's List: " + list);
+				if(list.length > 0){
+					var ingredientsList = [];
+				
+					var ingParams;
+					var ing;
+					for(var i = 0; i < list.length; i++){
+						ingParams = list[i].split(",");
+						ing = new Ingredient(
+							ingParams[0],  //name is a string
+							parseInt(ingParams[1],10),  //quantity is an int
+							ingParams[2], //unit is a string
+							parseInt(ingParams[3],10),  //calories is an int
+							parseInt(ingParams[4], 10), //seving is an int
+							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
+						);
+						ingredientsList.push(ing);
+					}
+					
+					console.log("Retrieved " + userId + "'s list:");
+					for(var i = 0; i < ingredientsList.length; i++){
+						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
+					}
+				}
+				
+				/*****Inventory gets set to database****/
+				//only happens when when first logged in
+				if(this.state.beginning == true){
+					console.log("beginning!");
+					this.state.beginning = false;
+					for(var i = 0; i < ingredientsList.length; i++){
+						this.state.inventory.push(ingredientsList[i]);
+					}
+				}
+				this.state.testInv = ingredientsList;
+			});
     }
-  }
-  */
 }
