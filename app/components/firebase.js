@@ -15,6 +15,10 @@ export default class DataBase {
 	constructor() {
 		firebase.initializeApp(config);
 	}
+	
+	state = {
+		myList: []
+	}
   
 	database = firebase;
 	
@@ -48,6 +52,9 @@ export default class DataBase {
 		firebase.database().ref('/users/' + userId).once('value')
 			.then((snapshot) => {
 				list = snapshot.val();
+				
+				this.setState({ myList: list })
+				
 				console.log("User's List: " + list);
 			});
 			
