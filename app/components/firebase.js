@@ -12,23 +12,46 @@ const config = {
 
 export default class DataBase {
 	
-  constructor() {
-    firebase.initializeApp(config);
-  }
+	constructor() {
+		firebase.initializeApp(config);
+	}
   
-database = firebase;
+	database = firebase;
 	
-  static deleteMe(userId) {
-    firebase.database().ref('users/' + userId).remove();
-  }
+	state = {
+		thisList: [],
+	}
+	
+	static deleteMe(userId) {
+		firebase.database().ref('users/' + userId).remove();
+	}
 
-  static updateMe(userId, list) {
-    const update = {
-      list: list
-    };
-    let ref = firebase.database().ref('users/' + list).update(update)
-      .then((res) => {
-        console.log("Data has been updated ");
-      });
-  }
+	//update a user's list
+	static updateMe(userId, list) {
+		console.log("adding to database");
+	
+		//Add list elements to update array
+		const update = new Array();
+		for(var i = 0; i < list.length; i++){
+			update[i] = list[i].toSingleString();
+		}
+	
+		//set it to the list corresponding to userID
+		let ref = firebase.database().ref('users/' + userId).set(update);
+    }
+  
+	//return list corresponding to user
+	//NOTE: I can't get the list out of the then statement.
+	//this function should return list
+	static returnList = (userId) =>{
+		var list;
+		firebase.database().ref('/users/' + userId).once('value')
+			.then((snapshot) => {
+				list = snapshot.val();
+				console.log("User's List: " + list);
+			});
+			
+		return list; //returns undefined, because the setting of list happens out of scope
+	}
+
 }

@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
 import IngredientScreen from './components/IngredientScreen';
 import LoginScreen from './components/LoginScreen';
+import DataBase from './components/firebase.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
@@ -24,6 +25,7 @@ export default class App extends Component {
   }
 
   state = {
+	currentUserId: undefined,
     appState: AppState.currentState,
     inventory: [],
     isLoggedIn: false,
@@ -32,12 +34,12 @@ export default class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
+		this.state.currentUserId = firebase.auth().currentUser.uid;  
         this.setState({ isLoggedIn: true })
       } else {
         this.setState({ isLoggedIn: false })
       }
     });
-    console.log('I PRINTED SOME THING');
     /*
     AppState.addEventListener('change', this._handleAppStateChange);
     this.itemsRef.once('value').then(snapshot => {
@@ -66,12 +68,18 @@ export default class App extends Component {
 
   SetCurrentScreen = () => {
     if (this.state.isLoggedIn == false) {
+	  console.log("Login Page Opening!");
       return <LoginScreen
         signUp={(email, password) => {
 			console.log("Sign up:");
 			if( !(email == undefined) && !(password == undefined)){
 				firebase.auth().createUserWithEmailAndPassword(email, password)
-					.then(() => this.setState({ isLoggedIn: true }))
+					.then(() => {
+								 //this.state.currentUserId = firebase.auth().currentUser.uid; 
+								 this.setState({ currentUserId: firebase.auth().currentUser.uid })
+								 this.setState({ isLoggedIn: true })
+								}
+					)
 					.catch(
 						(error) => {
 							var errorMessage = error.message;
@@ -84,7 +92,12 @@ export default class App extends Component {
 			console.log("Log in:");
 			if( !(email == undefined) && !(password == undefined)){
 				firebase.auth().signInWithEmailAndPassword(email, password)
-					.then(() => this.setState({ isLoggedIn: true }))
+					.then(() => {
+								 //this.state.currentUserId = firebase.auth().currentUser.uid; 
+								 this.setState({ currentUserId: firebase.auth().currentUser.uid })
+								 this.setState({ isLoggedIn: true })
+								}
+					)
 					.catch(
 						(error) => {
 							var errorMessage = error.message;
@@ -95,8 +108,13 @@ export default class App extends Component {
         }}
       />
     } else {
+	  console.log("Ingredients Page Opening!");
+	  console.log("AccId: " + this.state.currentUserId);
+	  var userList = DataBase.returnList(this.state.currentUserId);
+	  console.log("user's list: " + userList);
       return <IngredientScreen
         data={this.state.inventory}
+		userId={this.state.currentUserId}
         changeItemQuantity={(itemName, quantity) => {
           var newInventory = this.state.inventory.slice(0);
           var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
@@ -109,6 +127,7 @@ export default class App extends Component {
               newInventory.splice(newInventory.indexOf(foundIngredient), 1)
           }
           this.setState({ inventory: newInventory });
+		  DataBase.updateMe(this.state.currentUserId, newInventory);
         }}
         orderList={(parameter) => {
           var newInventory = this.state.inventory.slice(0);
@@ -119,6 +138,7 @@ export default class App extends Component {
             newInventory.reverse();
           }
           this.setState({ inventory: newInventory });
+		  DataBase.updateMe(this.state.currentUserId, newInventory);
         }}
         logOut={() => {
           firebase.auth().signOut();
