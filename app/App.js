@@ -68,14 +68,30 @@ export default class App extends Component {
     if (this.state.isLoggedIn == false) {
       return <LoginScreen
         signUp={(email, password) => {
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(() => this.setState({ isLoggedIn: true }))
-            .catch(() => console.log("error signing up caught"))
+			console.log("Sign up:");
+			if( !(email == undefined) && !(password == undefined)){
+				firebase.auth().createUserWithEmailAndPassword(email, password)
+					.then(() => this.setState({ isLoggedIn: true }))
+					.catch(
+						(error) => {
+							var errorMessage = error.message;
+							alert(errorMessage);
+						}
+					)
+			}
         }}
         login={(email, password) => {
-          firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => this.setState({ isLoggedIn: true }))
-            .catch(() => console.log("error logging in caught"))
+			console.log("Log in:");
+			if( !(email == undefined) && !(password == undefined)){
+				firebase.auth().signInWithEmailAndPassword(email, password)
+					.then(() => this.setState({ isLoggedIn: true }))
+					.catch(
+						(error) => {
+							var errorMessage = error.message;
+							alert(errorMessage);
+						}
+					)
+			}
         }}
       />
     } else {
