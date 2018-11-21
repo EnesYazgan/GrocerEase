@@ -14,13 +14,38 @@ import {
   Text,
   View,
   TextInput,
-  FlatList
+  StatusBar,
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
+var uid;
+function updateMe(userId, list){
+  const update = {
+      list: list
+  };
+  let ref = firebase.database().ref('users/' + userId).update(update)
+      .then((res)=>{
+          console.log("Data has been updated ");
+      });
+}
+
+
+function deleteMe(userId){
+    firebase.database().ref('users/'+ userId).remove();
+}
+/*
+function readMe(userId){
+  firebase.database().ref('users/'+userId).on('value',snap=>{
+    this.setState({
+      text: snap.val()
+    });
+  });  
+}
+*/
 
 
 class Enter extends Component {
-
 
 
   componentWillMount(){
@@ -44,6 +69,31 @@ class Enter extends Component {
       console.log('ERROR !');
     })
 
+    var user = firebase.auth().currentUser;
+    console.log(user);
+    if (user) {
+      uid = user.uid;
+      firebase.database().ref('users'+ uid).set(
+        {
+          list:'test'
+        }
+      )
+      } else {
+      uid = '001';
+    }
+    firebase.database().ref('users/002').set(
+      {
+        list:'food'
+      }
+    )
+    firebase.database().ref('users/'+ uid).child('list').on('value',snap=>{
+      this.setState({
+
+        value: snap.val()
+      });
+    });  
+
+    updateMe("001","food");
   }
 
   
@@ -52,7 +102,7 @@ class Enter extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+    this.state = {text: '',value: ''};
   }
  
   render() {
@@ -69,59 +119,139 @@ class Enter extends Component {
             <View style={styles.btn}>
               <Text style={styles.enter} onPress={this.enter.bind(this)}>Enter</Text>
             </View>
+            <View style={styles.container}>
+              <Text>{this.state.value}</Text>
+            </View>
           </View>
       </View>
     );
   }
  
   enter(){
-    alert("add："+this.state.text);
+    if(this.state.text.localeCompare("d")==0){
+      deleteMe(uid);
+
+    }else if(this.state.text.localeCompare("r")==0){
+      alert("read:" + this.state.text);
+    }
+    
+    else{
+    updateMe(uid,this.state.text);
+
+        alert("add："+this.state.text);
+    }
   }
 }
 
-var REQUEST_URL =
-  "https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json";
+class UserLogin extends Component{
 
- class List_Ingradients extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loaded: false
-    };
-    //this.fetchData = this.fetchData.bind(this);
+
+  state = {
+    email: this.props.email,
+    password: this.props.password,
+    loggedIn: false,  //false = dont show
   }
 
-
-  render() {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
-    }
-
-    return (
-      <FlatList
-        data={this.state.data}
-        renderItem={this.renderList}
-        style={styles.list}
-      />
-    );
+  emailText = (text) => {
+    this.setState({email: text});
   }
 
-  renderLoadingView() {
-    return (
+  passwordText = (text) => {
+    this.setState({password: text});
+  }
+
+  //sign up function that grabs the email and password from the text boxes and uses
+  //firebase to create an account for the user
+  signUp = () => {
+    console.log(this.state.email);
+    console.log(this.state.password);
+    const auth = firebase.auth();
+    //make new account
+    const anyLoginErrors = auth.createUserWithEmailAndPassword(this.state.email, this.state.password);
+    anyLoginErrors.catch(e => console.log(e.message));
+
+    this.checkIfLoggedInOrOut();
+  }
+
+  //log in function that grabs the email and password from the text boxes and uses
+  //firebase to authenticate the user
+  logIn = () => {
+    const auth = firebase.auth();
+    const anyLoginErrors = auth.signInWithEmailAndPassword(this.state.email, this.state.password);
+    anyLoginErrors.catch(e => console.log(e.message));
+
+    this.checkIfLoggedInOrOut();
+  }
+
+  logOut = () => {
+    const auth = firebase.auth();
+    firebase.auth().signOut();
+
+    this.checkIfLoggedInOrOut();
+  }
+
+  checkIfLoggedInOrOut = () => {
+    //simple statement checking if user is logged in or not.
+    //should be used to see if user login splash-screen should be put up or not
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if(firebaseUser){
+        this.setState({loggedIn: true});
+      }else{
+        console.log("not logged in");
+        //pull up login splash-screen
+        this.setState({loggedIn: false});
+      }
+    });
+  }
+  
+ 
+
+
+  render(){
+    return(
       <View style={styles.container}>
-        <Text>Loading list...</Text>
-      </View>
-    );
-  }
+        <StatusBar hidden/>
+        //email text box
+        <TextInput
+          style={styles.text}
+          placeholder="email"
+          onChangeText={this.emailText}
+        />
+        //password text box
+        <TextInput
+          style={styles.text}
+          placeholder="password"
+          secureTextEntry={true}
+          onChangeText={this.passwordText}
+        />
+        //log in button
+        <TouchableOpacity
+          style={styles.button}
+          //when button pressed, grab email and password from text boxes
+          onPress={this.logIn}
+        >
+          <Text>Log In</Text>
+        </TouchableOpacity>
+        //sign up button
+        <TouchableOpacity
+          style={styles.button}
+          //when button pressed, grab email and password from text boxes
+          onPress={this.signUp}
+        >
+          <Text>Sign Up</Text>
+        </TouchableOpacity>
 
-  renderList({ item }) {
-    return (
-      <View style={styles.container}>
-       
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>{item.title}</Text>
-        </View>
+        {
+          this.state.loggedIn == true
+          ? //log out button
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.logOut}
+          >
+            <Text>Log Out</Text>
+          </TouchableOpacity>
+          : null
+        }
       </View>
     );
   }
@@ -130,14 +260,16 @@ var REQUEST_URL =
 export default class App extends Component {
    render() {
       return (
-        <View style={[styles.flex, styles.topStatus]}>
+        <View style={[styles.flex, styles.topStatus, styles.container1]}>
+          <View style = {styles.container1}>
+          <UserLogin></UserLogin>
+          </View>
           <View style = {[styles.flex, styles.topStatus]}>
           <Enter></Enter> 
           </View>
-          <View style={[styles.topList]}>
-          <List_Ingradients></List_Ingradients>
-          </View>
+          
         </View>
+
         
       );
    }
@@ -223,6 +355,51 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: '#C0C0C0',
   },
+  banner: {
+    backgroundColor: 'green',
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10
+  },
+  container1: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  end: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  headerText: {
+    flexDirection: 'row',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  iconContainer: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:40,
+    height:40,
+    backgroundColor:'green',
+    borderRadius:40,
+  },
+  icon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+  textContainer: {
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 20
+  }
 });
 
 AppRegistry.registerComponent('HelloWorld', () => App);
