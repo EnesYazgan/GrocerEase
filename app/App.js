@@ -109,13 +109,21 @@ export default class App extends Component {
       />
     } else {
 	  console.log("Ingredients Page Opening!");
+	  //To make sure user ID is correct
 	  console.log("AccId: " + this.state.currentUserId);
+	  
+	  //Setting user list here
+	  //Database.returnList takes in userId as a param, and returns a list of ingredients
 	  var userList = DataBase.returnList(this.state.currentUserId);
-	  console.log("user's list: " + userList);
+	  console.log("user's list: " + userList); //<- says undefined rn, will work once 
+											   // the method in firebase.js is fixed
+	  
+	  
       return <IngredientScreen
         data={this.state.inventory}
 		userId={this.state.currentUserId}
         changeItemQuantity={(itemName, quantity) => {
+		
           var newInventory = this.state.inventory.slice(0);
           var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
           if (typeof foundIngredient == 'undefined') {
@@ -127,6 +135,8 @@ export default class App extends Component {
               newInventory.splice(newInventory.indexOf(foundIngredient), 1)
           }
           this.setState({ inventory: newInventory });
+		  
+		  //Update the database every time the list is changed. This works!
 		  DataBase.updateMe(this.state.currentUserId, newInventory);
         }}
         orderList={(parameter) => {
@@ -138,6 +148,7 @@ export default class App extends Component {
             newInventory.reverse();
           }
           this.setState({ inventory: newInventory });
+		  //Update the database every time the list is changed. This works!
 		  DataBase.updateMe(this.state.currentUserId, newInventory);
         }}
         logOut={() => {
