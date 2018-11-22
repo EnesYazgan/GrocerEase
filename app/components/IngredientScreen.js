@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
-import List from './UIcomponents/List';
-import ActionBar from './UIcomponents/ActionBar';
-import BarcodeScanner from './UIcomponents/BarcodeScanner';
-import firebase from 'firebase';
-import IngredientInfo from './UIcomponents/IngredientInfo';
+import List from './IngredientScreenComponents/List';
+import ActionBar from './IngredientScreenComponents/ActionBar';
+import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
 
 export default class IngredientScreen extends Component {
   state = {

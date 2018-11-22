@@ -10,25 +10,30 @@ const config = {
   messagingSenderId: "719228868931"
 };
 
-export default class DataBase {
+export default class DataBase{
 
-  constructor() {
-    firebase.initializeApp(config);
-  }
-  
-database = firebase;
+	constructor(){
+		firebase.initializeApp(config);
+	}
 
-  static deleteMe(userId) {
-    firebase.database().ref('users/' + userId).remove();
-  }
+	database = firebase;
 
-  static updateMe(userId, list) {
-    const update = {
-      list: list
-    };
-    let ref = firebase.database().ref('users/' + list).update(update)
-      .then((res) => {
-        console.log("Data has been updated ");
-      });
-  }
+	//to delete a user..
+	deleteMe(userId) {
+		firebase.database().ref('users/' + userId).remove();
+	}
+
+	//update a user's list
+	static updateMe(userId, list){
+		console.log("adding to database");
+
+		//Add list elements to update array
+		const update = new Array();
+		for(var i = 0; i < list.length; i++){
+			update[i] = list[i].toSingleString();
+		}
+
+		//set it to the list corresponding to userID
+		let ref = firebase.database().ref('users/' + userId).set(update);
+    }
 }

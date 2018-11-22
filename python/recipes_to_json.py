@@ -1,9 +1,23 @@
 import lxml.html
 import requests
 import json
+import unicodedata
+import re
 
-# currently this works with the Bon Appetit Basically recipes, not their main site
-#TODO convert unicode fractions to decimal
+quantity_regex = r'.+?(?=tbsp|tablespoon|tablespoons|oz|ounce|ounces|tsp|teaspoon|teaspoons|cup|cp|lb|pound)'
+units = ['tbsp',
+         'tablespoon',
+         'tablespoons',
+         'oz',
+         'ounce',
+         'ounces',
+         'tsp',
+         'teaspoon',
+         'teaspoons',
+         'cup',
+         'cp',
+         'lb',
+         'pound']
 
 class Recipe:
     def __init__(self,
@@ -27,9 +41,71 @@ class Recipe:
                           indent=4)
 
 
-def stringUTF8(string):
-    return str(string.text_content())
+class Ingredient:
+    def __init__(self, name, quantity, type):
+        self.name = name
+        self.quantity = quantity
+        self.type = type
+        if type == 'unit':
+            unit_word = name.split(' ')[0]  # grab everything after the unit
+            check = [unit in unit_word for unit in units]  # check if each unit name is in the grabbed word
+            self.unit = units[check.index(True)]  # get the first unit that matches
+            if self.unit in self.name.split(' ')[0]:  # if the first word is the unit, remove it for clarity
+                self.name = ' '.join(self.name.split(' ')[1:])
+    def __repr__(self):
+        if self.quantity == -1:  # no unit or quantity
+            return '{}'.format(self.name)
+        else:
+            if hasattr(self, 'unit'):  # has unit
+                return '{} ... {} -> {}'.format(self.quantity, self.unit, self.name)
+            else:  # no units
+                return '{} -> {}'.format(self.quantity, self.name)
+    def toJSON(self):
+        return json.dumps(self,
+                          default=lambda o: o.__dict__,
+                          sort_keys=True,
+                          indent=4)
 
+
+def stringUTF8(string):
+    string = unicodedata.normalize('NFKD', string.text_content())
+    for key, val in unicode_convert.items():
+        # print('{} {} {}'.format(string, key, val))
+        string = string.replace(key, val)
+    # print(string)
+    return string
+
+def getIngredient(line):
+    ing = None
+    line = line.strip()
+    try:
+        # this tries to grab the quantity using the regex for unit-based stuff
+        matched = re.match(quantity_regex, line.lower())  # find unit with regex
+        quantity = matched.group(0).split(' ')[0]  # get just number for quantity
+        item = line.lower()[(line.lower().index(quantity) + len(quantity) + 1):]  # cut off the quantity from the item
+        ing = Ingredient(item, quantity, 'unit')
+        # print(ing)
+    except Exception as e:
+        # print(e)
+        quantity = line.split(' ')[0]
+        try:
+            # this just grabs the first integer for non-unit stuff
+            quantity = int(quantity)
+            item = ' '.join(line.split(' ')[1:])
+            ing = Ingredient(item, quantity, 'unitless')
+        except Exception as e:
+            # if there aren't units, just grab the line
+            # print(e)
+            # print('oof')
+            # print(line)
+            ing = Ingredient(line, -1, 'other')
+    return ing
+
+
+unicode_convert = {
+    '\u2013': '-',
+    '\u2044': '/',
+}
 
 recipe_urls_json = ''
 
@@ -72,6 +148,10 @@ for url in urls:
 
     # grab text from HTML elements
     ingredients = [stringUTF8(ingredient) for ingredient in ingredients]
+    ingredients = [getIngredient(ingredient) for ingredient in ingredients]
+
+    for ingredient in ingredients:
+        print(ingredient)
 
     # get equipment necessary
     equip_links = html.xpath('//div[@class="image-grid-item-image"]/div/a/@href')
