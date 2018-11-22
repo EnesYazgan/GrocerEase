@@ -43,30 +43,31 @@
             "type": "unitless"
         },
         {
-            "name": "13.5-oz. can unsweetened coconut milk, divided",
+            "name": "can unsweetened coconut milk, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "3",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup unsweetened coconut flakes",
+            "name": "unsweetened coconut flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -118,7 +119,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup (1/2 stick) unsalted butter or extra-virgin olive oil",
+            "name": "(1/2 stick) unsalted butter or extra-virgin olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -176,29 +177,34 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. white miso",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "white miso",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. vegetable oil",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "vegetable oil",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. unseasoned rice vinegar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "unseasoned rice vinegar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. honey",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "honey",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. sesame seeds",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "sesame seeds",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "scallions",
@@ -206,7 +212,7 @@
             "type": "unitless"
         },
         {
-            "name": "4-6-oz. skin-on salmon fillets",
+            "name": "skin-on salmon fillets",
             "quantity": "4",
             "type": "unit",
             "unit": "oz"
@@ -254,13 +260,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain full-fat yogurt",
+            "name": "plain full-fat yogurt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -271,13 +277,13 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. freshly ground black pepper, plus more",
+            "name": "freshly ground black pepper, plus more",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -288,7 +294,7 @@
             "type": "other"
         },
         {
-            "name": "cup roasted, salted almonds",
+            "name": "roasted, salted almonds",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -299,9 +305,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -338,18 +345,19 @@
             "type": "unitless"
         },
         {
-            "name": "cups packed mixed herbs, such as parsley, cilantro, basil, and/or dill, divided",
+            "name": "packed mixed herbs, such as parsley, cilantro, basil, and/or dill, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. drained capers",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "drained capers",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup walnuts",
+            "name": "walnuts",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -360,29 +368,31 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. paprika",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "paprika",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. plus 1/2 cup extra-virgin olive oil, divided",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "plus 1/2 cup extra-virgin olive oil, divided",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup panko (Japanese breadcrumbs)",
+            "name": "panko (japanese breadcrumbs)",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "lb. ground beef (20% fat)",
+            "name": "ground beef (20% fat)",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -443,39 +453,40 @@
             "type": "unitless"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup red wine vinegar",
+            "name": "red wine vinegar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "7-oz. tin chipotle chiles in adobo, or 2 Tbsp. hot sauce",
+            "name": "tin chipotle chiles in adobo, or 2 tbsp. hot sauce",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "lb. dried black beans (not soaked)",
+            "name": "dried black beans (not soaked)",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "tsp. dried oregano",
+            "name": "dried oregano",
             "quantity": "11/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. kosher salt, plus more",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "kosher salt, plus more",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "limes",
@@ -483,7 +494,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup whole-milk Greek yogurt",
+            "name": "whole-milk greek yogurt",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -532,7 +543,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5bb50be0fd392d354d90b131/3:2/w_940,c_limit/Basically-Lemon-Pound-Cake-03.jpg",
     "ingredients": [
         {
-            "name": "cup (2 sticks) unsalted butter, room temperature, plus more for pan",
+            "name": "(2 sticks) unsalted butter, room temperature, plus more for pan",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -543,7 +554,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup granulated sugar",
+            "name": "granulated sugar",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -554,30 +565,31 @@
             "type": "unitless"
         },
         {
-            "name": "cups all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "13/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. baking powder",
+            "name": "baking powder",
             "quantity": "11/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. whole milk",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "whole milk",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cups powdered sugar",
+            "name": "powdered sugar",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
@@ -627,9 +639,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. plus 1/2 tsp. kosher salt, divided",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "plus 1/2 tsp. kosher salt, divided",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "medium red onions",
@@ -647,12 +660,13 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. curry powder, such as garam masala",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "curry powder, such as garam masala",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "13.5-oz. can unsweetened coconut milk",
+            "name": "can unsweetened coconut milk",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -663,7 +677,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup large unsweetened coconut flakes",
+            "name": "large unsweetened coconut flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -727,12 +741,13 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "2",
             "type": "unit",
             "unit": "tsp"
@@ -748,14 +763,16 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. tahini",
-            "quantity": 5,
-            "type": "unitless"
+            "name": "tahini",
+            "quantity": "5",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. raw sesame seeds",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "raw sesame seeds",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -808,19 +825,22 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. Dijon mustard",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "dijon mustard",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. red wine vinegar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "red wine vinegar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "pint cherry tomatoes",
@@ -838,9 +858,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "sprigs thyme",
@@ -884,12 +905,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5b9009799915d52d4edc0f73/3:2/w_940,c_limit/basically-pasta-pomodoro-1.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. kosher salt, plus more",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "kosher salt, plus more",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "28-oz. can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -900,9 +922,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Pinch of crushed red pepper flakes, plus more",
@@ -915,21 +938,22 @@
             "type": "unitless"
         },
         {
-            "name": "lb. spaghetti",
+            "name": "spaghetti",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "oz. Parmesan, finely grated, divided (about 1 cup)",
+            "name": "parmesan, finely grated, divided (about 1 cup)",
             "quantity": "41/2",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -963,13 +987,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5b8806cd5970fa63e2600ad4/3:2/w_940,c_limit/basically-zucchini-flatbread-2.jpg",
     "ingredients": [
         {
-            "name": "lb. pizza dough",
+            "name": "pizza dough",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "lb. zucchini (about 3 medium)",
+            "name": "zucchini (about 3 medium)",
             "quantity": "11/2",
             "type": "unit",
             "unit": "lb"
@@ -980,9 +1004,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more for drizzling",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more for drizzling",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -995,13 +1020,13 @@
             "type": "unitless"
         },
         {
-            "name": "cups fresh ricotta",
+            "name": "fresh ricotta",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup finely grated Parmesan (about 11/4 oz.)",
+            "name": "finely grated parmesan (about 11/4 oz.)",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -1012,13 +1037,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup mint leaves",
+            "name": "mint leaves",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -1058,13 +1083,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5b83f86662f6f00b95ee1475/3:2/w_940,c_limit/basically-banana-pudding-1.jpg",
     "ingredients": [
         {
-            "name": "cup plus 2 Tbsp. sugar, divided",
+            "name": "plus 2 tbsp. sugar, divided",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. ground cinnamon, divided",
+            "name": "ground cinnamon, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -1075,35 +1100,37 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. cornstarch",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "cornstarch",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cups half-and-half, divided",
+            "name": "half-and-half, divided",
             "quantity": "21/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. vanilla extract",
+            "name": "vanilla extract",
             "quantity": "11/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cups sour cream",
+            "name": "sour cream",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
@@ -1169,7 +1196,7 @@
             "type": "other"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -1233,37 +1260,37 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "3",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. light brown sugar",
+            "name": "light brown sugar",
             "quantity": "11/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. ground cumin",
+            "name": "ground cumin",
             "quantity": "11/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. freshly ground black pepper, plus more",
+            "name": "freshly ground black pepper, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. sweet paprika",
+            "name": "sweet paprika",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. garlic powder",
+            "name": "garlic powder",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -1274,17 +1301,19 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. apple cider vinegar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "apple cider vinegar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup store-bought barbecue sauce",
+            "name": "store-bought barbecue sauce",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -1326,9 +1355,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided, plus more for drizzling",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided, plus more for drizzling",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -1351,31 +1381,31 @@
             "type": "unitless"
         },
         {
-            "name": "cup parsley leaves with tender stems",
+            "name": "parsley leaves with tender stems",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup whole-milk plain yogurt",
+            "name": "whole-milk plain yogurt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "lb. ground beef",
+            "name": "ground beef",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "tsp. ground cumin",
+            "name": "ground cumin",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup pomegranate arils (about 3 oz.)",
+            "name": "pomegranate arils (about 3 oz.)",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -1416,12 +1446,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5b5f825e88c6c02d0713fc76/3:2/w_940,c_limit/basically-summer-salmon-nicoise-1.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 8,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "8",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "lb. skinless salmon fillet",
+            "name": "skinless salmon fillet",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -1437,13 +1468,13 @@
             "type": "other"
         },
         {
-            "name": "oz. green beans",
+            "name": "green beans",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup cherry tomatoes",
+            "name": "cherry tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -1464,14 +1495,16 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. Dijon mustard",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "dijon mustard",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. red wine vinegar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "red wine vinegar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "A pinch of sugar",
@@ -1479,7 +1512,7 @@
             "type": "other"
         },
         {
-            "name": "cup Nic\u0327oise or other black olives",
+            "name": "nic\u0327oise or other black olives",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -1528,9 +1561,10 @@
             "type": "other"
         },
         {
-            "name": "Tbsp. plus 1/4 cup extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "plus 1/4 cup extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "fennel bulb",
@@ -1596,9 +1630,10 @@
     "image_src": "https://assets.bonappetit.com/photos/5b4caf4f044d361e20d3bf10/3:2/w_940,c_limit/frozen-margarita-pie-2.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "graham crackers",
@@ -1606,18 +1641,19 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. sugar",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "sugar",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt. divided",
+            "name": "kosher salt. divided",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup chilled heavy cream",
+            "name": "chilled heavy cream",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
@@ -1628,15 +1664,16 @@
             "type": "unitless"
         },
         {
-            "name": "14-oz. can sweetened condensed milk",
+            "name": "can sweetened condensed milk",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. tequila blanco",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "tequila blanco",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -1669,17 +1706,19 @@
     "image_src": "https://assets.bonappetit.com/photos/5b4362282264d46863323801/3:2/w_940,c_limit/honey-chipotle-shrimp-tacos.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. adobo sauce from 1 can chipotle chiles in adobo",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "adobo sauce from 1 can chipotle chiles in adobo",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. honey",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "honey",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "lb. medium shrimp, peeled, deveined",
+            "name": "medium shrimp, peeled, deveined",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -1690,7 +1729,7 @@
             "type": "other"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -1706,7 +1745,7 @@
             "type": "other"
         },
         {
-            "name": "cup cilantro leaves with tender stems",
+            "name": "cilantro leaves with tender stems",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -1727,9 +1766,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. vegetable oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "vegetable oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -1760,7 +1800,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5b312c1b0bf43c771217199c/3:2/w_940,c_limit/slow-roasted-onion-and-garlic-dip.jpg",
     "ingredients": [
         {
-            "name": "lb. mixed onions (such as sweet, yellow, and/or red)",
+            "name": "mixed onions (such as sweet, yellow, and/or red)",
             "quantity": "11/2",
             "type": "unit",
             "unit": "lb"
@@ -1771,7 +1811,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -1782,13 +1822,13 @@
             "type": "other"
         },
         {
-            "name": "cups plain whole-milk Greek yogurt",
+            "name": "plain whole-milk greek yogurt",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. fresh lemon juice",
+            "name": "fresh lemon juice",
             "quantity": "2",
             "type": "unit",
             "unit": "tsp"
@@ -1841,9 +1881,10 @@
             "type": "other"
         },
         {
-            "name": "Tbsp. plus 1/3 cup extra-virgin olive oil",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "plus 1/3 cup extra-virgin olive oil",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -1866,22 +1907,25 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. Dijon mustard",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "dijon mustard",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. fresh lemon juice",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "fresh lemon juice",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. mayonnaise",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "mayonnaise",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "3-oz. piece Parmesan",
+            "name": "piece parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -1931,7 +1975,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup blackberry jam",
+            "name": "blackberry jam",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -1942,13 +1986,13 @@
             "type": "unitless"
         },
         {
-            "name": "cups chilled heavy cream",
+            "name": "chilled heavy cream",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup powdered sugar",
+            "name": "powdered sugar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -1959,7 +2003,7 @@
             "type": "other"
         },
         {
-            "name": "oz. vanilla wafers, divided",
+            "name": "vanilla wafers, divided",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
@@ -2002,19 +2046,19 @@
             "type": "other"
         },
         {
-            "name": "10-oz. bag frozen peas (no need to thaw)",
+            "name": "bag frozen peas (no need to thaw)",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "lb. medium shell pasta",
+            "name": "medium shell pasta",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "cup mint leaves, divided",
+            "name": "mint leaves, divided",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -2030,18 +2074,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup heavy cream",
+            "name": "heavy cream",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more for drizzling",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more for drizzling",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup store-bought grated Parmesan",
+            "name": "store-bought grated parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -2083,28 +2128,31 @@
     "image_src": "https://assets.bonappetit.com/photos/5b082b97cb25b938fafaa8de/3:2/w_940,c_limit/beef-snap-pea-and-asparagus-stir-fry.jpg",
     "ingredients": [
         {
-            "name": "lb. sirloin steak",
+            "name": "sirloin steak",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "Tbsp. cornstarch",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "cornstarch",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. soy sauce, divided",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "soy sauce, divided",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. vegetable oil, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "vegetable oil, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "oz. sugar snap peas",
+            "name": "sugar snap peas",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
@@ -2125,20 +2173,22 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. mirin (Japanese rice wine)",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "mirin (japanese rice wine)",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup oyster sauce",
+            "name": "oyster sauce",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. unseasoned rice vinegar",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "unseasoned rice vinegar",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -2146,7 +2196,7 @@
             "type": "other"
         },
         {
-            "name": "cups cooked white rice",
+            "name": "cooked white rice",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
@@ -2188,14 +2238,16 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. seasoned rice vinegar, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "seasoned rice vinegar, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. soy sauce, divided",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "soy sauce, divided",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -2213,15 +2265,16 @@
             "type": "other"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. Sriracha",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "sriracha",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "soft seeded hamburger buns",
@@ -2239,7 +2292,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup cornstarch",
+            "name": "cornstarch",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
@@ -2277,9 +2330,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more for drizzling",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more for drizzling",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -2297,7 +2351,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain whole-milk Greek yogurt",
+            "name": "plain whole-milk greek yogurt",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -2347,7 +2401,7 @@
             "type": "unitless"
         },
         {
-            "name": "15-ounce can chickpeas",
+            "name": "can chickpeas",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -2358,31 +2412,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons olive oil, divided",
+            "name": "olive oil, divided",
             "quantity": "4",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoon kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup whole milk Greek yogurt",
+            "name": "whole milk greek yogurt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons CholulaA\u0302\u00ae Original Hot Sauce, plus more",
+            "name": "cholulaa\u0302\u00ae original hot sauce, plus more",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "ounces feta cheese, in brine, divided",
+            "name": "feta cheese, in brine, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
@@ -2445,31 +2499,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons olive oil",
+            "name": "olive oil",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "pound ground beef",
+            "name": "ground beef",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "teaspoon kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "tablespoons CholulaA\u0302\u00ae Green Pepper Hot Sauce, divided, plus more for serving",
+            "name": "cholulaa\u0302\u00ae green pepper hot sauce, divided, plus more for serving",
             "quantity": "4",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -2515,48 +2569,49 @@
             "type": "unitless"
         },
         {
-            "name": "cup plus 2 Tbsp. sugar",
+            "name": "plus 2 tbsp. sugar",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups all-purpose flour, plus more for dusting",
+            "name": "all-purpose flour, plus more for dusting",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup plus 2 Tbsp. old-fashioned oats",
+            "name": "plus 2 tbsp. old-fashioned oats",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. baking powder",
+            "name": "baking powder",
             "quantity": "21/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cups plus 1 Tbsp. chilled heavy cream",
+            "name": "plus 1 tbsp. chilled heavy cream",
             "quantity": "11/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. honey",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "honey",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup frozen blueberries, preferably wild",
+            "name": "frozen blueberries, preferably wild",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -2597,7 +2652,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5aeb201a6601e82e7e847def/3:2/w_940,c_limit/tuna-avocado-salad.jpg",
     "ingredients": [
         {
-            "name": "3-oz. tins smoked trout",
+            "name": "tins smoked trout",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
@@ -2613,12 +2668,13 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. mayonnaise",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "mayonnaise",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt, divided",
+            "name": "kosher salt, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -2666,30 +2722,31 @@
     "image_src": "https://assets.bonappetit.com/photos/5ae74366069b66739aee0ff5/3:2/w_940,c_limit/shrimp-and-grits.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. unsalted butter, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "unsalted butter, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup white corn grits (not quick-cooking)",
+            "name": "white corn grits (not quick-cooking)",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "lb. large shrimp",
+            "name": "large shrimp",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "oz. sharp white cheddar cheese",
+            "name": "sharp white cheddar cheese",
             "quantity": "6",
             "type": "unit",
             "unit": "oz"
@@ -2705,7 +2762,7 @@
             "type": "unitless"
         },
         {
-            "name": "oz. bacon (about 3 medium slices)",
+            "name": "bacon (about 3 medium slices)",
             "quantity": "3",
             "type": "unit",
             "unit": "oz"
@@ -2761,30 +2818,31 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt, divided",
+            "name": "kosher salt, divided",
             "quantity": "3/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup panko (Japanese breadcrumbs)",
+            "name": "panko (japanese breadcrumbs)",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup finely grated Parmesan",
+            "name": "finely grated parmesan",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. garlic powder",
+            "name": "garlic powder",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -2800,7 +2858,7 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. Aleppo-style or other mild red pepper flakes",
+            "name": "aleppo-style or other mild red pepper flakes",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -2842,9 +2900,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 5,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "5",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -2852,31 +2911,31 @@
             "type": "other"
         },
         {
-            "name": "lb. pizza dough",
+            "name": "pizza dough",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "cups low-moisture grated mozzarella",
+            "name": "low-moisture grated mozzarella",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup fresh ricotta",
+            "name": "fresh ricotta",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup grated Parmesan, plus more for serving",
+            "name": "grated parmesan, plus more for serving",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. red pepper flakes",
+            "name": "red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -2892,7 +2951,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup basil leaves",
+            "name": "basil leaves",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -2940,26 +2999,28 @@
     "image_src": "https://assets.bonappetit.com/photos/5adf54ac026131045b415ffd/3:2/w_940,c_limit/cashew-cream.jpg",
     "ingredients": [
         {
-            "name": "cups raw cashews",
+            "name": "raw cashews",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup mixed tender herbs, such as parsley, cilantro, dill, and/or basil",
+            "name": "mixed tender herbs, such as parsley, cilantro, dill, and/or basil",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. unseasoned rice or distilled white vinegar",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "unseasoned rice or distilled white vinegar",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. kosher salt",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "kosher salt",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Crudite\u0301s, such as radicchio, carrots, radishes, and batons of bread (for serving)",
@@ -2996,21 +3057,22 @@
     "image_src": "https://assets.bonappetit.com/photos/5ad51b40d63c0e2f9cf49236/3:2/w_940,c_limit/italian-wedding-soup.jpg",
     "ingredients": [
         {
-            "name": "lb. sweet Italian sausage",
+            "name": "sweet italian sausage",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "cup panko (Japanese breadcrumbs), divided",
+            "name": "panko (japanese breadcrumbs), divided",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "garlic cloves, divided",
@@ -3033,25 +3095,25 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup dry white wine",
+            "name": "dry white wine",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "4-oz. piece Parmesan with rind",
+            "name": "piece parmesan with rind",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "15-oz. can cannellini (white kidney) beans",
+            "name": "can cannellini (white kidney) beans",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -3109,13 +3171,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup plus 2 Tbsp. extra-virgin olive oil, divided, plus more for drizzling",
+            "name": "plus 2 tbsp. extra-virgin olive oil, divided, plus more for drizzling",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. kosher salt, divided",
+            "name": "kosher salt, divided",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -3136,7 +3198,7 @@
             "type": "other"
         },
         {
-            "name": "3-oz. piece hard blue cheese (such as Bayley Hazen Blue)",
+            "name": "piece hard blue cheese (such as bayley hazen blue)",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -3171,15 +3233,16 @@
     "image_src": "https://assets.bonappetit.com/photos/5ad51b07ff795274c43a0f58/3:2/w_940,c_limit/20180403_Basically_122.jpg",
     "ingredients": [
         {
-            "name": "15-oz. can chickpeas",
+            "name": "can chickpeas",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. plus 1/3 cup extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "plus 1/3 cup extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt, freshly ground pepper",
@@ -3202,13 +3265,13 @@
             "type": "unitless"
         },
         {
-            "name": "6-oz. block feta cheese in brine",
+            "name": "block feta cheese in brine",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup jarred peperoncini",
+            "name": "jarred peperoncini",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -3219,18 +3282,19 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. red wine vinegar",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "red wine vinegar",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. dried oregano",
+            "name": "dried oregano",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. sugar",
+            "name": "sugar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -3280,24 +3344,25 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. kimchi brine from jar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "kimchi brine from jar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup soy sauce, divided",
+            "name": "soy sauce, divided",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup plus 1 Tbsp. all-purpose flour",
+            "name": "plus 1 tbsp. all-purpose flour",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups kimchi",
+            "name": "kimchi",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
@@ -3308,14 +3373,16 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. grapeseed or other neutral oil, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "grapeseed or other neutral oil, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. unseasoned rice or distilled white vinegar",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "unseasoned rice or distilled white vinegar",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         }
     ],
     "steps": [
@@ -3347,36 +3414,37 @@
     "image_src": "https://assets.bonappetit.com/photos/5ac27cd53b54622a98dae653/3:2/w_940,c_limit/chocolate-sheet-pan-birthday-cake.jpg",
     "ingredients": [
         {
-            "name": "cups (31/2 sticks) unsalted butter, room temperature, divided, plus more for pan",
+            "name": "(31/2 sticks) unsalted butter, room temperature, divided, plus more for pan",
             "quantity": "13/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups all-purpose flour, plus more for pan",
+            "name": "all-purpose flour, plus more for pan",
             "quantity": "31/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups granulated sugar",
+            "name": "granulated sugar",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. baking powder",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "baking powder",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt, divided",
+            "name": "kosher salt, divided",
             "quantity": "13/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. baking soda",
+            "name": "baking soda",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -3387,35 +3455,37 @@
             "type": "unitless"
         },
         {
-            "name": "cups buttermilk, room temperature",
+            "name": "buttermilk, room temperature",
             "quantity": "11/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. vegetable oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "vegetable oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. plus 1 tsp. vanilla extract, divided",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "plus 1 tsp. vanilla extract, divided",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "oz. cream cheese, room temperature",
+            "name": "cream cheese, room temperature",
             "quantity": "6",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cups powdered sugar",
+            "name": "powdered sugar",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup unsweetened cocoa powder",
+            "name": "unsweetened cocoa powder",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -3462,18 +3532,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain whole milk yogurt (not Greek)",
+            "name": "plain whole milk yogurt (not greek)",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. garam masala",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "garam masala",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -3484,19 +3555,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup pomegranate seeds (a.k.a. \"arils\")",
+            "name": "pomegranate seeds (a.k.a. \"arils\")",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup store-bought fried shallots or onions",
+            "name": "store-bought fried shallots or onions",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "7-oz. bag pita chips",
+            "name": "bag pita chips",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -3542,36 +3613,37 @@
             "type": "unitless"
         },
         {
-            "name": "lb. mussels",
+            "name": "mussels",
             "quantity": "4",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup mirin (sweet Japanese rice wine)",
+            "name": "mirin (sweet japanese rice wine)",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup sambal oelek",
+            "name": "sambal oelek",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup plus 1 Tbsp. low-sodium soy sauce",
+            "name": "plus 1 tbsp. low-sodium soy sauce",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "28-oz. can whole tomatoes",
+            "name": "can whole tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -3582,7 +3654,7 @@
             "type": "other"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -3625,7 +3697,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a8474a38e5ab504d767b0c6/3:2/w_940,c_limit/chorizo-chickpea-tostadas-16x9.jpg",
     "ingredients": [
         {
-            "name": "15-oz. can chickpeas",
+            "name": "can chickpeas",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -3636,13 +3708,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain whole milk Greek yogurt",
+            "name": "plain whole milk greek yogurt",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. kosher salt, divided",
+            "name": "kosher salt, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -3720,19 +3792,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup mild miso",
+            "name": "mild miso",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. toasted sesame oil",
+            "name": "toasted sesame oil",
             "quantity": "4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. light brown sugar",
+            "name": "light brown sugar",
             "quantity": "4",
             "type": "unit",
             "unit": "tsp"
@@ -3743,13 +3815,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup grapeseed or other neutral oil",
+            "name": "grapeseed or other neutral oil",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "lb. spaghetti or thin wheat noodles",
+            "name": "spaghetti or thin wheat noodles",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -3808,13 +3880,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. smoked or hot paprika",
+            "name": "smoked or hot paprika",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -3855,7 +3927,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5aafe94e30a186203c128cd6/3:2/w_940,c_limit/chipotle-rubbed-chicken-sheet-pan-dinner.jpg",
     "ingredients": [
         {
-            "name": "oz. tomatillos (about 6 medium)",
+            "name": "tomatillos (about 6 medium)",
             "quantity": "12",
             "type": "unit",
             "unit": "oz"
@@ -3876,9 +3948,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 6,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "6",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -3891,18 +3964,19 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. adobo sauce, from 1 can chipotles in adobo",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "adobo sauce, from 1 can chipotles in adobo",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. honey",
+            "name": "honey",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. ground cumin, divided",
+            "name": "ground cumin, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -3965,19 +4039,19 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. freshly ground black pepper, plus more",
+            "name": "freshly ground black pepper, plus more",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "oz. whole-milk ricotta",
+            "name": "whole-milk ricotta",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
@@ -3988,9 +4062,10 @@
             "type": "other"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Crusty bread (for serving)",
@@ -4033,46 +4108,49 @@
             "type": "unitless"
         },
         {
-            "name": "cup roasted, salted peanuts",
+            "name": "roasted, salted peanuts",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "oz. dried flat pad Thai noodles or stir-fry rice noodles",
+            "name": "dried flat pad thai noodles or stir-fry rice noodles",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup tamarind juice concentrate (or 2 Tbsp. tamarind paste mixed with 2 Tbsp. water)",
+            "name": "tamarind juice concentrate (or 2 tbsp. tamarind paste mixed with 2 tbsp. water)",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. dark brown sugar",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "dark brown sugar",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. fish sauce",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "fish sauce",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. chili-garlic sauce, such as sambal oelek or Sriracha, plus more for serving",
+            "name": "chili-garlic sauce, such as sambal oelek or sriracha, plus more for serving",
             "quantity": "2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. vegetable oil",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "vegetable oil",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cups mung bean sprouts",
+            "name": "mung bean sprouts",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
@@ -4115,28 +4193,31 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. neutral oil, such as canola or grapeseed",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "neutral oil, such as canola or grapeseed",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. tahini",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "tahini",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. white miso",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "white miso",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. distilled white vinegar",
+            "name": "distilled white vinegar",
             "quantity": "2",
             "type": "unit",
             "unit": "tsp"
@@ -4147,7 +4228,7 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. raw sesame seeds",
+            "name": "raw sesame seeds",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -4183,49 +4264,49 @@
     "image_src": "https://assets.bonappetit.com/photos/5a9d5ccafc24be1b59dc40b7/3:2/w_940,c_limit/apple-butter-cinnamon-cake.jpg",
     "ingredients": [
         {
-            "name": "cup (1 stick) plus 2 Tbsp. unsalted butter, room temperature",
+            "name": "(1 stick) plus 2 tbsp. unsalted butter, room temperature",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "oz. dried apple rings",
+            "name": "dried apple rings",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cups all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. baking powder",
+            "name": "baking powder",
             "quantity": "11/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. baking soda",
+            "name": "baking soda",
             "quantity": "1/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "tsp. ground cinnamon, divided",
+            "name": "ground cinnamon, divided",
             "quantity": "21/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "cup plus 1/4 cup sugar",
+            "name": "plus 1/4 cup sugar",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -4236,13 +4317,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup apple butter",
+            "name": "apple butter",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. vanilla extract",
+            "name": "vanilla extract",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
@@ -4279,30 +4360,31 @@
     "image_src": "https://assets.bonappetit.com/photos/5a8478c6bcc56579b57f2431/3:2/w_940,c_limit/antipasta-hand-salad.jpg",
     "ingredients": [
         {
-            "name": "oz. cherry or grape tomatoes",
+            "name": "cherry or grape tomatoes",
             "quantity": "8",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. red wine vinegar",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "red wine vinegar",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "oz. unsliced spicy salami",
+            "name": "unsliced spicy salami",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "oz. Parmesan cheese",
+            "name": "parmesan cheese",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup Castelvetrano olives (about 8)",
+            "name": "castelvetrano olives (about 8)",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -4313,12 +4395,13 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "tsp. chopped or dried oregano",
+            "name": "chopped or dried oregano",
             "quantity": "1",
             "type": "unit",
             "unit": "tsp"
@@ -4363,7 +4446,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a8da1ab4cc2c47b122066f3/3:2/w_940,c_limit/soy-braised-short-ribs-with-bacon-pineapple-relish.jpg",
     "ingredients": [
         {
-            "name": "oz. bacon",
+            "name": "bacon",
             "quantity": "4",
             "type": "unit",
             "unit": "oz"
@@ -4394,35 +4477,37 @@
             "type": "other"
         },
         {
-            "name": "cup soy sauce",
+            "name": "soy sauce",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup plus 1 Tbsp. unseasoned rice wine vinegar",
+            "name": "plus 1 tbsp. unseasoned rice wine vinegar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. brown sugar",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "brown sugar",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "Tbsp. Sriracha or sambal oelek",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "sriracha or sambal oelek",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup fresh pineapple chunks (about 6 oz.)",
+            "name": "fresh pineapple chunks (about 6 oz.)",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup cilantro leaves with tender stems",
+            "name": "cilantro leaves with tender stems",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -4479,42 +4564,43 @@
             "type": "unitless"
         },
         {
-            "name": "oz. Parmesan cheese",
+            "name": "parmesan cheese",
             "quantity": "4",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more for drizzling",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more for drizzling",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "4.5-oz. tube double-concentrated tomato paste",
+            "name": "tube double-concentrated tomato paste",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "tsp. crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "oz. vodka",
+            "name": "vodka",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup heavy cream",
+            "name": "heavy cream",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "lb. rigatoni",
+            "name": "rigatoni",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -4556,7 +4642,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a845d048ca2430893f4deca/3:2/w_940,c_limit/hummus-16x9.jpg",
     "ingredients": [
         {
-            "name": "151/2-oz. can chickpeas",
+            "name": "can chickpeas",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
@@ -4572,13 +4658,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup tahini, well mixed",
+            "name": "tahini, well mixed",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. (or more) kosher salt",
+            "name": "(or more) kosher salt",
             "quantity": "3/4",
             "type": "unit",
             "unit": "tsp"
@@ -4589,15 +4675,16 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. ground cumin",
+            "name": "ground cumin",
             "quantity": "1/4",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, plus more for drizzling",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, plus more for drizzling",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Za\u2019atar and/or sesame seeds (for serving)",
@@ -4642,7 +4729,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a675d620da9fc5892ef09f5/3:2/w_940,c_limit/chocolate-dutch-baby.jpg",
     "ingredients": [
         {
-            "name": "lb. bone-in pork loin chop, 1-11/2\" thick",
+            "name": "bone-in pork loin chop, 1-11/2\" thick",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -4663,30 +4750,31 @@
             "type": "unitless"
         },
         {
-            "name": "cup all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup sugar",
+            "name": "sugar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "Tbsp. unsweetened cocoa powder",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "unsweetened cocoa powder",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup whole milk",
+            "name": "whole milk",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "oz. drained Castelvetrano, Cerignola, or other unpitted green olives",
+            "name": "drained castelvetrano, cerignola, or other unpitted green olives",
             "quantity": "4",
             "type": "unit",
             "unit": "oz"
@@ -4702,19 +4790,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tsp. crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "oz. feta",
+            "name": "feta",
             "quantity": "3",
             "type": "unit",
             "unit": "oz"
@@ -4725,27 +4813,28 @@
             "type": "other"
         },
         {
-            "name": "oz. bittersweet, semisweet, or milk chocolate",
+            "name": "bittersweet, semisweet, or milk chocolate",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "cup heavy cream",
+            "name": "heavy cream",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "oz. Parmesan",
+            "name": "parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. raw unblanched hazelnuts",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "raw unblanched hazelnuts",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "medium shallot",
@@ -4758,7 +4847,7 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. honey, divided",
+            "name": "honey, divided",
             "quantity": "21/2",
             "type": "unit",
             "unit": "tsp"
@@ -4769,9 +4858,10 @@
             "type": "unitless"
         },
         {
-            "name": "Tbsp. unsalted butter",
-            "quantity": 1,
-            "type": "unitless"
+            "name": "unsalted butter",
+            "quantity": "1",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Coffee ice cream (for serving)",
@@ -4829,18 +4919,19 @@
     "image_src": "https://assets.bonappetit.com/photos/5a6f48f94f860a026c60fd71/3:2/w_940,c_limit/pasta-carbonara.jpg",
     "ingredients": [
         {
-            "name": "Tbsp. kosher salt, plus more",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "kosher salt, plus more",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "oz. guanciale (salt-cured pork jowl), pancetta (Italian bacon), or bacon",
+            "name": "guanciale (salt-cured pork jowl), pancetta (italian bacon), or bacon",
             "quantity": "4",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "oz. Parmesan",
+            "name": "parmesan",
             "quantity": "2",
             "type": "unit",
             "unit": "oz"
@@ -4861,12 +4952,13 @@
             "type": "other"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "extra-virgin olive oil",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "lb. spaghetti, bucatini, or rigatoni",
+            "name": "spaghetti, bucatini, or rigatoni",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -4925,15 +5017,16 @@
             "type": "unitless"
         },
         {
-            "name": "lb. sweet Italian sausage (about 8 links)",
+            "name": "sweet italian sausage (about 8 links)",
             "quantity": "2",
             "type": "unit",
             "unit": "lb"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 5,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "5",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "Kosher salt",
@@ -4946,12 +5039,13 @@
             "type": "other"
         },
         {
-            "name": "Tbsp. tomato paste",
-            "quantity": 2,
-            "type": "unitless"
+            "name": "tomato paste",
+            "quantity": "2",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
-            "name": "cup red wine vinegar",
+            "name": "red wine vinegar",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
@@ -4996,49 +5090,49 @@
             "type": "unitless"
         },
         {
-            "name": "cup all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup sugar",
+            "name": "sugar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons unsweetened cocoa powder",
+            "name": "unsweetened cocoa powder",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoon kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "3/4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup whole milk",
+            "name": "whole milk",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "ounce bittersweet, semisweet, or milk chocolate",
+            "name": "bittersweet, semisweet, or milk chocolate",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup heavy cream",
+            "name": "heavy cream",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoon unsalted butter",
+            "name": "unsalted butter",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -5077,7 +5171,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a60e9839af01310221d533d/3:2/w_940,c_limit/pork-chop-with-endive-and-apple-salad.jpg",
     "ingredients": [
         {
-            "name": "lb. bone-in pork loin chop, 1-11/2\" thick",
+            "name": "bone-in pork loin chop, 1-11/2\" thick",
             "quantity": "1",
             "type": "unit",
             "unit": "lb"
@@ -5093,15 +5187,16 @@
             "type": "other"
         },
         {
-            "name": "oz. Parmesan",
+            "name": "parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "oz"
         },
         {
-            "name": "Tbsp. raw unblanched hazelnuts",
-            "quantity": 3,
-            "type": "unitless"
+            "name": "raw unblanched hazelnuts",
+            "quantity": "3",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "medium shallot",
@@ -5114,15 +5209,16 @@
             "type": "unitless"
         },
         {
-            "name": "tsp. honey, divided",
+            "name": "honey, divided",
             "quantity": "21/2",
             "type": "unit",
             "unit": "tsp"
         },
         {
-            "name": "Tbsp. extra-virgin olive oil, divided",
-            "quantity": 4,
-            "type": "unitless"
+            "name": "extra-virgin olive oil, divided",
+            "quantity": "4",
+            "type": "unit",
+            "unit": "tbsp"
         },
         {
             "name": "lemon",
@@ -5190,7 +5286,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a5e2ad54c8d2e4841a187a1/3:2/w_940,c_limit/marinated-olives-and-feta-appetizer.jpg",
     "ingredients": [
         {
-            "name": "ounces drained Castelvetrano, Cerignola, or other unpitted green olives",
+            "name": "drained castelvetrano, cerignola, or other unpitted green olives",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
@@ -5206,19 +5302,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "ounces feta",
+            "name": "feta",
             "quantity": "3",
             "type": "unit",
             "unit": "ounce"
@@ -5260,25 +5356,25 @@
             "type": "unitless"
         },
         {
-            "name": "ounces leftover roasted vegetables, cut into 1/2-inch pieces (about 11/2 cups)",
+            "name": "leftover roasted vegetables, cut into 1/2-inch pieces (about 11/2 cups)",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup leftover cooked grains",
+            "name": "leftover cooked grains",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "ounce coarsely grated or crumbled cheese",
+            "name": "coarsely grated or crumbled cheese",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoon finely chopped tender herbs, such as thyme, basil, and/or chives",
+            "name": "finely chopped tender herbs, such as thyme, basil, and/or chives",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -5294,7 +5390,7 @@
             "type": "other"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -5344,55 +5440,55 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons virgin coconut oil",
+            "name": "virgin coconut oil",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons curry powder",
+            "name": "curry powder",
             "quantity": "5",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon cayenne pepper",
+            "name": "cayenne pepper",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "13.5-ounce can unsweetened coconut milk",
+            "name": "can unsweetened coconut milk",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup split red lentils",
+            "name": "split red lentils",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup unsweetened shredded coconut",
+            "name": "unsweetened shredded coconut",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "10-ounce box frozen spinach, thawed",
+            "name": "box frozen spinach, thawed",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "15-ounce can crushed tomatoes",
+            "name": "can crushed tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -5435,13 +5531,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5a3830655a60b108cf7a9492/3:2/w_940,c_limit/chicken-paprikash-16x9.jpg",
     "ingredients": [
         {
-            "name": "cup sour cream",
+            "name": "sour cream",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "pounds bone-in, skin-on chicken thighs (about 6 large or 8 small)",
+            "name": "bone-in, skin-on chicken thighs (about 6 large or 8 small)",
             "quantity": "21/2",
             "type": "unit",
             "unit": "pound"
@@ -5467,37 +5563,37 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons unsalted butter, divided",
+            "name": "unsalted butter, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons paprika",
+            "name": "paprika",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoon cayenne pepper",
+            "name": "cayenne pepper",
             "quantity": "1/4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "15-ounce can crushed tomatoes",
+            "name": "can crushed tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "ounces egg noodles",
+            "name": "egg noodles",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup parsley leaves with tender stems",
+            "name": "parsley leaves with tender stems",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -5537,13 +5633,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5a3aa2d300190231c0f0caa0/3:2/w_940,c_limit/kale-and-brussels-sprout-salad.jpg",
     "ingredients": [
         {
-            "name": "cup raw sunflower seeds",
+            "name": "raw sunflower seeds",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon plus 1/3 cup extra-virgin olive oil",
+            "name": "plus 1/3 cup extra-virgin olive oil",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
@@ -5574,7 +5670,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons Dijon mustard",
+            "name": "dijon mustard",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -5585,13 +5681,13 @@
             "type": "unitless"
         },
         {
-            "name": "ounces brussels sprouts",
+            "name": "brussels sprouts",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "ounces Parmesan",
+            "name": "parmesan",
             "quantity": "2",
             "type": "unit",
             "unit": "ounce"
@@ -5650,13 +5746,13 @@
             "type": "unitless"
         },
         {
-            "name": "28-ounce can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "5",
             "type": "unit",
             "unit": "tablespoon"
@@ -5672,31 +5768,31 @@
             "type": "other"
         },
         {
-            "name": "teaspoon hot smoked paprika",
+            "name": "hot smoked paprika",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "ounces sharp cheddar cheese",
+            "name": "sharp cheddar cheese",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "15-ounce can crushed tomatoes",
+            "name": "can crushed tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons Worcestershire sauce",
+            "name": "worcestershire sauce",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cup sour cream or whole-milk Greek yogurt, plus more for serving",
+            "name": "sour cream or whole-milk greek yogurt, plus more for serving",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -5741,61 +5837,61 @@
     "image_src": "https://assets.bonappetit.com/photos/5a25cd4ff6c5233cc2301d0d/3:2/w_940,c_limit/chocolate-nutella-pudding.jpg",
     "ingredients": [
         {
-            "name": "ounces bittersweet or semisweet chocolate",
+            "name": "bittersweet or semisweet chocolate",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup cornstarch",
+            "name": "cornstarch",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup sugar",
+            "name": "sugar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup unsweetened cocoa powder",
+            "name": "unsweetened cocoa powder",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cups whole milk",
+            "name": "whole milk",
             "quantity": "3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon vanilla extract",
+            "name": "vanilla extract",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup Nutella",
+            "name": "nutella",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup whole raw hazelnuts",
+            "name": "whole raw hazelnuts",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons unsalted butter",
+            "name": "unsalted butter",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -5840,19 +5936,19 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoon fennel seeds",
+            "name": "fennel seeds",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons kosher salt",
+            "name": "kosher salt",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -5863,7 +5959,7 @@
             "type": "other"
         },
         {
-            "name": "11/2-pound pork tenderloin",
+            "name": "pork tenderloin",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -5907,7 +6003,7 @@
             "type": "other"
         },
         {
-            "name": "ounces Fontina and/or aged cheddar cheese",
+            "name": "fontina and/or aged cheddar cheese",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
@@ -5928,31 +6024,31 @@
             "type": "unitless"
         },
         {
-            "name": "cup plus 1 tablespoon extra-virgin olive oil",
+            "name": "plus 1 tablespoon extra-virgin olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "pound sweet or hot Italian sausage",
+            "name": "sweet or hot italian sausage",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cups half-and-half",
+            "name": "half-and-half",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "pound ridged medium pasta shells, or large tube pasta, such as lumaconi or rigatoni",
+            "name": "ridged medium pasta shells, or large tube pasta, such as lumaconi or rigatoni",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -5988,7 +6084,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a296a6e7d4b9b484283eb12/3:2/w_940,c_limit/easiest-cheese-straws.jpg",
     "ingredients": [
         {
-            "name": "ounces hard or semi-firm cheese, such as Gruye\u0301re, Parmesan, Manchego, or extra sharp cheddar",
+            "name": "hard or semi-firm cheese, such as gruye\u0301re, parmesan, manchego, or extra sharp cheddar",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
@@ -6009,13 +6105,13 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoon sweet paprika, divided",
+            "name": "sweet paprika, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon cayenne pepper, divided",
+            "name": "cayenne pepper, divided",
             "quantity": "1/4",
             "type": "unit",
             "unit": "teaspoon"
@@ -6062,7 +6158,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a2b053f5468684549cf8b1a/3:2/w_940,c_limit/20171207_Basically-TEST_049.jpg",
     "ingredients": [
         {
-            "name": "pounds steak (sirloin, boneless ribeye, or NY strip)",
+            "name": "steak (sirloin, boneless ribeye, or ny strip)",
             "quantity": "1-11/2",
             "type": "unit",
             "unit": "pound"
@@ -6078,7 +6174,7 @@
             "type": "other"
         },
         {
-            "name": "tablespoon vegetable oil",
+            "name": "vegetable oil",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -6094,7 +6190,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup (1/2 stick) cold unsalted butter",
+            "name": "(1/2 stick) cold unsalted butter",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -6105,13 +6201,13 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons Dijon mustard",
+            "name": "dijon mustard",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons Worcestershire sauce",
+            "name": "worcestershire sauce",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
@@ -6148,13 +6244,13 @@
     "image_src": "https://assets.bonappetit.com/photos/5a26d6d11cad0d50f80bce50/3:2/w_940,c_limit/tofu-and-mushroom-stir-fry.jpg",
     "ingredients": [
         {
-            "name": "14-ounce block extra-firm tofu, drained",
+            "name": "block extra-firm tofu, drained",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "pound mixed mushrooms, such as maitake, shiitake, oyster, button, and/or crimini",
+            "name": "mixed mushrooms, such as maitake, shiitake, oyster, button, and/or crimini",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -6170,13 +6266,13 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoons cornstarch",
+            "name": "cornstarch",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
@@ -6187,25 +6283,25 @@
             "type": "other"
         },
         {
-            "name": "tablespoons soy sauce, divided",
+            "name": "soy sauce, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons seasoned rice vinegar",
+            "name": "seasoned rice vinegar",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons Shaoxing wine (Chinese rice wine) or mirin",
+            "name": "shaoxing wine (chinese rice wine) or mirin",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons vegetable oil, divided, plus more",
+            "name": "vegetable oil, divided, plus more",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -6249,25 +6345,25 @@
     "image_src": "https://assets.bonappetit.com/photos/5a20657d09fc2115a299ee94/3:2/w_940,c_limit/basically-pinwheel-cookies.jpg",
     "ingredients": [
         {
-            "name": "cup (1 stick) unsalted butter, room temperature",
+            "name": "(1 stick) unsalted butter, room temperature",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup sugar",
+            "name": "sugar",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon ground cinnamon",
+            "name": "ground cinnamon",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
@@ -6278,25 +6374,25 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons honey",
+            "name": "honey",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons vanilla extract",
+            "name": "vanilla extract",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup plus 2 tablespoons all-purpose flour, plus more for dusting",
+            "name": "plus 2 tablespoons all-purpose flour, plus more for dusting",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup raspberry preserves",
+            "name": "raspberry preserves",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -6340,7 +6436,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1eda432479441876ab9952/3:2/w_940,c_limit/cheesy-slice-and-bake-crackers.jpg",
     "ingredients": [
         {
-            "name": "ounces extra-sharp white cheddar cheese",
+            "name": "extra-sharp white cheddar cheese",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
@@ -6351,19 +6447,19 @@
             "type": "other"
         },
         {
-            "name": "cups all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "11/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons kosher salt",
+            "name": "kosher salt",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon sugar",
+            "name": "sugar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
@@ -6374,13 +6470,13 @@
             "type": "other"
         },
         {
-            "name": "ounces chilled cream cheese",
+            "name": "chilled cream cheese",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons poppy seeds",
+            "name": "poppy seeds",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -6420,13 +6516,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup (1/2 stick) unsalted butter",
+            "name": "(1/2 stick) unsalted butter",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "28-ounce can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -6437,7 +6533,7 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoon crushed red pepper flakes, plus more for serving",
+            "name": "crushed red pepper flakes, plus more for serving",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
@@ -6453,7 +6549,7 @@
             "type": "other"
         },
         {
-            "name": "ounces bucatini or spaghetti",
+            "name": "bucatini or spaghetti",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
@@ -6493,31 +6589,31 @@
     "image_src": "https://assets.bonappetit.com/photos/5a0b2a504c9d1625b7ff7962/3:2/w_940,c_limit/peanut-butter-blondies-a-la-mode.jpg",
     "ingredients": [
         {
-            "name": "cup salted, roasted peanuts, plus more for serving",
+            "name": "salted, roasted peanuts, plus more for serving",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup (1 stick) plus 3 tablespoons unsalted butter, plus more for pan",
+            "name": "(1 stick) plus 3 tablespoons unsalted butter, plus more for pan",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups all-purpose flour, plus more for pan",
+            "name": "all-purpose flour, plus more for pan",
             "quantity": "11/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon baking powder",
+            "name": "baking powder",
             "quantity": "3/4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "3/4",
             "type": "unit",
             "unit": "teaspoon"
@@ -6528,19 +6624,19 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoons vanilla extract",
+            "name": "vanilla extract",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup plus 3 tablespoons all-natural peanut butter, creamy or crunchy",
+            "name": "plus 3 tablespoons all-natural peanut butter, creamy or crunchy",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups plus 2 tablespoons light brown sugar",
+            "name": "plus 2 tablespoons light brown sugar",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
@@ -6587,7 +6683,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1f010f2479441876ab9987/3:2/w_940,c_limit/Peach%20Mousse%20Beauty%2032.jpg",
     "ingredients": [
         {
-            "name": "cup chilled bourbon",
+            "name": "chilled bourbon",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -6598,31 +6694,31 @@
             "type": "unitless"
         },
         {
-            "name": "pound ripe peaches (about 4 medium), or 12 ounces frozen sliced peaches, thawed, plus 2 more peaches for garnish",
+            "name": "ripe peaches (about 4 medium), or 12 ounces frozen sliced peaches, thawed, plus 2 more peaches for garnish",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "cup plus 1/4 cup peach or apricot jam",
+            "name": "plus 1/4 cup peach or apricot jam",
             "quantity": "2/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup mint leaves, plus sprigs for serving",
+            "name": "mint leaves, plus sprigs for serving",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons fresh lemon juice, divided",
+            "name": "fresh lemon juice, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cups cold heavy cream",
+            "name": "cold heavy cream",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
@@ -6669,7 +6765,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1f02dd2479441876ab998b/3:2/w_940,c_limit/Steak%20Skillet%20Peas%20Asparagus%20Beauty%2032.jpg",
     "ingredients": [
         {
-            "name": "pound boneless New York strip steak, patted dry",
+            "name": "boneless new york strip steak, patted dry",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -6685,19 +6781,19 @@
             "type": "unitless"
         },
         {
-            "name": "cup Dijon mustard",
+            "name": "dijon mustard",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoon sherry vinegar or red wine vinegar",
+            "name": "sherry vinegar or red wine vinegar",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoon honey",
+            "name": "honey",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
@@ -6708,7 +6804,7 @@
             "type": "other"
         },
         {
-            "name": "cup plus 3 tablespoons olive oil",
+            "name": "plus 3 tablespoons olive oil",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
@@ -6719,7 +6815,7 @@
             "type": "unitless"
         },
         {
-            "name": "10-ounce bag frozen peas",
+            "name": "bag frozen peas",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -6762,7 +6858,7 @@
             "type": "other"
         },
         {
-            "name": "cup dried white or red quinoa, rinsed",
+            "name": "dried white or red quinoa, rinsed",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -6783,31 +6879,31 @@
             "type": "unitless"
         },
         {
-            "name": "ounces sharp cheddar, cut into 1/4-inch pieces (about 1 cup)",
+            "name": "sharp cheddar, cut into 1/4-inch pieces (about 1 cup)",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup salted, roasted almonds, chopped",
+            "name": "salted, roasted almonds, chopped",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup olive oil",
+            "name": "olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons (or more) fresh lemon juice",
+            "name": "(or more) fresh lemon juice",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -6844,7 +6940,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cb83d923e31d08fed17/3:2/w_940,c_limit/basically-burger-1.jpg",
     "ingredients": [
         {
-            "name": "ounces ground beef, 80% lean",
+            "name": "ground beef, 80% lean",
             "quantity": "20",
             "type": "unit",
             "unit": "ounce"
@@ -6855,13 +6951,13 @@
             "type": "other"
         },
         {
-            "name": "tablespoons vegetable oil, divided",
+            "name": "vegetable oil, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons plus 1/2 cup mayonnaise (preferably Hellmann\u2019s)",
+            "name": "plus 1/2 cup mayonnaise (preferably hellmann\u2019s)",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -6877,19 +6973,19 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons ketchup",
+            "name": "ketchup",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cup sweet pickle relish",
+            "name": "sweet pickle relish",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoon hot sauce (such as Tapati\u0301o, Cholula, or Crystal)",
+            "name": "hot sauce (such as tapati\u0301o, cholula, or crystal)",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -6944,25 +7040,25 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cac8ebd2b24ac2d3dbd/3:2/w_940,c_limit/Basically-brisket-sandwich.jpg",
     "ingredients": [
         {
-            "name": "5-6-pound brisket, first-cut, untrimmed",
+            "name": "brisket, first-cut, untrimmed",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "tablespoons Diamond Crystal or 1 tablespoon Morton kosher salt",
+            "name": "diamond crystal or 1 tablespoon morton kosher salt",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons light brown sugar",
+            "name": "light brown sugar",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon ground cumin",
+            "name": "ground cumin",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -6978,25 +7074,25 @@
             "type": "unitless"
         },
         {
-            "name": "cup seasoned rice vinegar",
+            "name": "seasoned rice vinegar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup soy sauce",
+            "name": "soy sauce",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons Worcestershire sauce",
+            "name": "worcestershire sauce",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cup Sriracha, plus more for serving",
+            "name": "sriracha, plus more for serving",
             "quantity": "2/3",
             "type": "unit",
             "unit": "cup"
@@ -7040,7 +7136,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cb37995142c3c3abc54/3:2/w_940,c_limit/basically-no-cook-tomato-sauce.jpg",
     "ingredients": [
         {
-            "name": "pounds tomatoes, any shape (larger than cherry), preferably slightly overripe so they feel like full water balloons",
+            "name": "tomatoes, any shape (larger than cherry), preferably slightly overripe so they feel like full water balloons",
             "quantity": "11/2",
             "type": "unit",
             "unit": "pound"
@@ -7051,31 +7147,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons unsalted butter, cut into small pieces",
+            "name": "unsalted butter, cut into small pieces",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons red wine vinegar",
+            "name": "red wine vinegar",
             "quantity": "4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup extra-virgin olive oil, plus more for drizzling",
+            "name": "extra-virgin olive oil, plus more for drizzling",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "ounces finely grated Parmesan (about 1 cup), divided",
+            "name": "finely grated parmesan (about 1 cup), divided",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
@@ -7086,13 +7182,13 @@
             "type": "other"
         },
         {
-            "name": "ounces strand pasta, such as bucatini, spaghetti, or linguini",
+            "name": "strand pasta, such as bucatini, spaghetti, or linguini",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup basil leaves, torn",
+            "name": "basil leaves, torn",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -7134,19 +7230,19 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "3/4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup all-purpose flour, plus more for rolling",
+            "name": "all-purpose flour, plus more for rolling",
             "quantity": "2/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons sugar, divided",
+            "name": "sugar, divided",
             "quantity": "5",
             "type": "unit",
             "unit": "tablespoon"
@@ -7157,13 +7253,13 @@
             "type": "unitless"
         },
         {
-            "name": "cup (1 stick) unsalted butter, melted, cooled, divided",
+            "name": "(1 stick) unsalted butter, melted, cooled, divided",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "pound strawberries, hulled, sliced",
+            "name": "strawberries, hulled, sliced",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -7174,7 +7270,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup very cold heavy cream",
+            "name": "very cold heavy cream",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -7217,7 +7313,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1f009ca4d4e87fed1c29ae/3:2/w_940,c_limit/Magic%20Chicken%20Beauty%2032.jpg",
     "ingredients": [
         {
-            "name": "pounds boneless, skinless chicken thighs (about 6)",
+            "name": "boneless, skinless chicken thighs (about 6)",
             "quantity": "11/2",
             "type": "unit",
             "unit": "pound"
@@ -7228,19 +7324,19 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons plus 1/4 cup mayonnaise",
+            "name": "plus 1/4 cup mayonnaise",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon plus 1/4 cup Dijon mustard",
+            "name": "plus 1/4 cup dijon mustard",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons Diamond Crystal or 3/4 teaspoon Morton kosher salt, plus more",
+            "name": "diamond crystal or 3/4 teaspoon morton kosher salt, plus more",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
@@ -7251,19 +7347,19 @@
             "type": "other"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups panko (Japanese breadcrumbs)",
+            "name": "panko (japanese breadcrumbs)",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoon honey",
+            "name": "honey",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -7274,7 +7370,7 @@
             "type": "other"
         },
         {
-            "name": "tablespoons finely chopped chives",
+            "name": "finely chopped chives",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -7312,7 +7408,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1f0055bf2afd03e358c366/3:2/w_940,c_limit/Falafel%20Fritter%20Beauty%2032.jpg",
     "ingredients": [
         {
-            "name": "15-ounce cans chickpeas, drained",
+            "name": "cans chickpeas, drained",
             "quantity": "2",
             "type": "unit",
             "unit": "ounce"
@@ -7323,25 +7419,25 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons cornstarch",
+            "name": "cornstarch",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons ground cumin",
+            "name": "ground cumin",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup finely chopped parsley, plus 1 cup whole leaves with tender stems",
+            "name": "finely chopped parsley, plus 1 cup whole leaves with tender stems",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup plain whole-milk Greek yogurt, divided",
+            "name": "plain whole-milk greek yogurt, divided",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
@@ -7357,13 +7453,13 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons olive oil, divided",
+            "name": "olive oil, divided",
             "quantity": "8",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons fresh lemon juice (from about 1/2 lemon), plus wedges for serving",
+            "name": "fresh lemon juice (from about 1/2 lemon), plus wedges for serving",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -7405,49 +7501,49 @@
     "image_src": "https://assets.bonappetit.com/photos/5a0479ab2fff8c4e1363fdd4/3:2/w_940,c_limit/pumpkin-sheet-cake-with-toasted-marshmallows.jpg",
     "ingredients": [
         {
-            "name": "cup extra-virgin olive oil, plus more for pan",
+            "name": "extra-virgin olive oil, plus more for pan",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cups all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "21/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons ground cinnamon",
+            "name": "ground cinnamon",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoons ground ginger",
+            "name": "ground ginger",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon baking soda",
+            "name": "baking soda",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon baking powder",
+            "name": "baking powder",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "15-ounce can pumpkin pure\u0301e",
+            "name": "can pumpkin pure\u0301e",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -7458,19 +7554,19 @@
             "type": "unitless"
         },
         {
-            "name": "cups (packed) light brown sugar",
+            "name": "(packed) light brown sugar",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup whole-milk Greek yogurt",
+            "name": "whole-milk greek yogurt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "10-ounce bag marshmallows (not mini)",
+            "name": "bag marshmallows (not mini)",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -7520,7 +7616,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup heavy cream",
+            "name": "heavy cream",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -7546,7 +7642,7 @@
             "type": "unitless"
         },
         {
-            "name": "pound fresh pork sausage, such as sweet Italian (about 4 links)",
+            "name": "fresh pork sausage, such as sweet italian (about 4 links)",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -7557,7 +7653,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons unsalted butter, divided",
+            "name": "unsalted butter, divided",
             "quantity": "5",
             "type": "unit",
             "unit": "tablespoon"
@@ -7613,31 +7709,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons rice wine vinegar",
+            "name": "rice wine vinegar",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons soy sauce",
+            "name": "soy sauce",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon honey",
+            "name": "honey",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons cornstarch",
+            "name": "cornstarch",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "6-ounce skin-on salmon fillets",
+            "name": "skin-on salmon fillets",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
@@ -7653,7 +7749,7 @@
             "type": "other"
         },
         {
-            "name": "tablespoons vegetable oil, divided",
+            "name": "vegetable oil, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -7691,13 +7787,13 @@
     "image_src": "https://assets.bonappetit.com/photos/59ef54473b712f2957b88c64/3:2/w_940,c_limit/one-skillet-shakshuka-with-shawarma-spices.jpg",
     "ingredients": [
         {
-            "name": "teaspoon coriander seeds",
+            "name": "coriander seeds",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon cumin seeds",
+            "name": "cumin seeds",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
@@ -7713,13 +7809,13 @@
             "type": "unitless"
         },
         {
-            "name": "12-ounce jar roasted red peppers",
+            "name": "jar roasted red peppers",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup extra-virgin olive oil, plus more for drizzling",
+            "name": "extra-virgin olive oil, plus more for drizzling",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -7735,7 +7831,7 @@
             "type": "other"
         },
         {
-            "name": "28-ounce can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -7746,7 +7842,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain Greek yogurt",
+            "name": "plain greek yogurt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -7790,7 +7886,7 @@
     "image_src": "https://assets.bonappetit.com/photos/59e8c4ded0ff01212836c5e8/3:2/w_940,c_limit/big-batch-white-bean-and-chorizo-chili.jpg",
     "ingredients": [
         {
-            "name": "16-ounce bag dried cannellini beans, covered in 2 inches of cold water, soaked overnight",
+            "name": "bag dried cannellini beans, covered in 2 inches of cold water, soaked overnight",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -7806,31 +7902,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "pounds fresh chorizo sausage",
+            "name": "fresh chorizo sausage",
             "quantity": "2",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "teaspoons chili powder",
+            "name": "chili powder",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoons ground cumin",
+            "name": "ground cumin",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "28-ounce can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -7893,7 +7989,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -7909,19 +8005,19 @@
             "type": "other"
         },
         {
-            "name": "cup long grain white rice (such as jasmine or basmati)",
+            "name": "long grain white rice (such as jasmine or basmati)",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons curry powder",
+            "name": "curry powder",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup frozen peas",
+            "name": "frozen peas",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -7932,7 +8028,7 @@
             "type": "other"
         },
         {
-            "name": "cup roasted, unsalted pistachios or almonds",
+            "name": "roasted, unsalted pistachios or almonds",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -7987,19 +8083,19 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoon vegetable oil",
+            "name": "vegetable oil",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cup distilled white vinegar",
+            "name": "distilled white vinegar",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup soy sauce (not low sodium)",
+            "name": "soy sauce (not low sodium)",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
@@ -8010,7 +8106,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoon light or dark brown sugar",
+            "name": "light or dark brown sugar",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -8021,7 +8117,7 @@
             "type": "other"
         },
         {
-            "name": "cup uncooked white rice, preferably short grain",
+            "name": "uncooked white rice, preferably short grain",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -8057,7 +8153,7 @@
     "image_src": "https://assets.bonappetit.com/photos/58c2c2c7b1bf59134d606c67/3:2/w_940,c_limit/0317-ba-basics-upside-down-cake-beauty-28.jpg",
     "ingredients": [
         {
-            "name": "cup (1 stick) unsalted butter",
+            "name": "(1 stick) unsalted butter",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -8068,37 +8164,37 @@
             "type": "unitless"
         },
         {
-            "name": "10-ounce bags frozen sweet cherries or blueberries (no need to thaw)",
+            "name": "bags frozen sweet cherries or blueberries (no need to thaw)",
             "quantity": "2",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons plus 1 cup sugar; plus more for serving",
+            "name": "plus 1 cup sugar; plus more for serving",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "cups all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons baking powder",
+            "name": "baking powder",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon baking soda",
+            "name": "baking soda",
             "quantity": "1/4",
             "type": "unit",
             "unit": "teaspoon"
@@ -8109,7 +8205,7 @@
             "type": "unitless"
         },
         {
-            "name": "cups sour cream or whole plain yogurt, room temperature, divided",
+            "name": "sour cream or whole plain yogurt, room temperature, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
@@ -8145,13 +8241,13 @@
     "image_src": "https://assets.bonappetit.com/photos/59d64ceda02eaa65814f3b73/3:2/w_940,c_limit/perfectly-roasted-potatoes.jpg",
     "ingredients": [
         {
-            "name": "pounds medium Yukon Gold potatoes (about 2 inches in diameter)",
+            "name": "medium yukon gold potatoes (about 2 inches in diameter)",
             "quantity": "2",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
@@ -8186,61 +8282,61 @@
     "image_src": "https://assets.bonappetit.com/photos/59d3975dcc3b562b44e535ea/3:2/w_940,c_limit/crispiest-clusteriest-crunchiest-granola.jpg",
     "ingredients": [
         {
-            "name": "cups old-fashioned oats",
+            "name": "old-fashioned oats",
             "quantity": "2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup bran flake cereal",
+            "name": "bran flake cereal",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup large unsweetened coconut flakes",
+            "name": "large unsweetened coconut flakes",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup raw pecans",
+            "name": "raw pecans",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup raw pumpkin seeds (pepitas)",
+            "name": "raw pumpkin seeds (pepitas)",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup raw sunflower seeds",
+            "name": "raw sunflower seeds",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup wheat germ",
+            "name": "wheat germ",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup pure maple syrup",
+            "name": "pure maple syrup",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup virgin coconut oil, melted",
+            "name": "virgin coconut oil, melted",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -8279,13 +8375,13 @@
     "image_src": "https://assets.bonappetit.com/photos/59cbec073cfc500568765c1a/3:2/w_940,c_limit/bacony-carnitas-with-chipotle-salsa.jpg",
     "ingredients": [
         {
-            "name": "ounces bacon",
+            "name": "bacon",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "pounds boneless pork shoulder",
+            "name": "boneless pork shoulder",
             "quantity": "11/2",
             "type": "unit",
             "unit": "pound"
@@ -8296,7 +8392,7 @@
             "type": "other"
         },
         {
-            "name": "14.5-ounce can whole peeled tomatoes",
+            "name": "can whole peeled tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -8327,7 +8423,7 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoons agave syrup (nectar) or honey",
+            "name": "agave syrup (nectar) or honey",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
@@ -8365,13 +8461,13 @@
     "image_src": "https://assets.bonappetit.com/photos/59c97376751936091660b55d/3:2/w_940,c_limit/sheet-pan-pizza-with-brussels-sprouts-and-salami.jpg",
     "ingredients": [
         {
-            "name": "pound prepared pizza dough",
+            "name": "prepared pizza dough",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "pound Brussels sprouts",
+            "name": "brussels sprouts",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -8382,7 +8478,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "tablespoon"
@@ -8398,13 +8494,13 @@
             "type": "other"
         },
         {
-            "name": "ounces hard salami",
+            "name": "hard salami",
             "quantity": "3",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "ounces low-moisture salted mozzarella cheese",
+            "name": "low-moisture salted mozzarella cheese",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
@@ -8477,31 +8573,31 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons vegetable oil, divided",
+            "name": "vegetable oil, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "4-ounce jar prepared green curry paste",
+            "name": "jar prepared green curry paste",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "13.5-ounce cans unsweetened coconut milk",
+            "name": "cans unsweetened coconut milk",
             "quantity": "2",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "ounces rice noodles",
+            "name": "rice noodles",
             "quantity": "8",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "pounds large shrimp, peeled, deveined",
+            "name": "large shrimp, peeled, deveined",
             "quantity": "11/2",
             "type": "unit",
             "unit": "pound"
@@ -8547,37 +8643,37 @@
             "type": "unitless"
         },
         {
-            "name": "cup plus 1/3 cup light brown sugar",
+            "name": "plus 1/3 cup light brown sugar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoon kosher salt",
+            "name": "kosher salt",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cups half-and-half",
+            "name": "half-and-half",
             "quantity": "11/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons whiskey, bourbon, rum, brandy, or other liquor",
+            "name": "whiskey, bourbon, rum, brandy, or other liquor",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons vanilla extract",
+            "name": "vanilla extract",
             "quantity": "2",
             "type": "unit",
             "unit": "teaspoon"
@@ -8588,7 +8684,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons unsalted butter, divided",
+            "name": "unsalted butter, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "tablespoon"
@@ -8639,37 +8735,37 @@
             "type": "other"
         },
         {
-            "name": "tablespoons sesame oil, preferably toasted, divided",
+            "name": "sesame oil, preferably toasted, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "pound medium carrots, scrubbed",
+            "name": "medium carrots, scrubbed",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "tablespoons soy sauce",
+            "name": "soy sauce",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons Sriracha",
+            "name": "sriracha",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons unseasoned rice vinegar",
+            "name": "unseasoned rice vinegar",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon honey",
+            "name": "honey",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -8723,7 +8819,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "5",
             "type": "unit",
             "unit": "tablespoon"
@@ -8734,13 +8830,13 @@
             "type": "other"
         },
         {
-            "name": "ounce Parmesan",
+            "name": "parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons capers, drained, divided",
+            "name": "capers, drained, divided",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -8781,7 +8877,7 @@
     "image_src": "https://assets.bonappetit.com/photos/59b175526dd4d0051682c593/3:2/w_940,c_limit/beans-and-greens-rigatoni-pasta.jpg",
     "ingredients": [
         {
-            "name": "tablespoons (or more) kosher salt",
+            "name": "(or more) kosher salt",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -8792,7 +8888,7 @@
             "type": "unitless"
         },
         {
-            "name": "15-ounce can cannellini (white kidney) beans",
+            "name": "can cannellini (white kidney) beans",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -8803,31 +8899,31 @@
             "type": "unitless"
         },
         {
-            "name": "2-ounce chunk of Parmesan",
+            "name": "chunk of parmesan",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "ounces rigatoni pasta",
+            "name": "rigatoni pasta",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "tablespoons unsalted butter",
+            "name": "unsalted butter",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -8875,7 +8971,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919caf17db4f24491d5bcc/3:2/w_940,c_limit/basically-pesto-potatoes-1.jpg",
     "ingredients": [
         {
-            "name": "cup raw walnuts",
+            "name": "raw walnuts",
             "quantity": "2/3",
             "type": "unit",
             "unit": "cup"
@@ -8891,13 +8987,13 @@
             "type": "unitless"
         },
         {
-            "name": "ounce Parmesan (about a 2x1-inch knob)",
+            "name": "parmesan (about a 2x1-inch knob)",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "pounds small red-skinned potatoes or other small potatoes",
+            "name": "small red-skinned potatoes or other small potatoes",
             "quantity": "11/2",
             "type": "unit",
             "unit": "pound"
@@ -8908,7 +9004,7 @@
             "type": "other"
         },
         {
-            "name": "cup (packed) basil leaves, plus a small handful for serving",
+            "name": "(packed) basil leaves, plus a small handful for serving",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
@@ -8919,7 +9015,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup extra-virgin olive oil",
+            "name": "extra-virgin olive oil",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
@@ -8981,7 +9077,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup cherry tomatoes",
+            "name": "cherry tomatoes",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -8992,7 +9088,7 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoon Diamond Crystal or 3/4 teaspoon Morton kosher salt, plus more",
+            "name": "diamond crystal or 3/4 teaspoon morton kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
@@ -9003,13 +9099,13 @@
             "type": "other"
         },
         {
-            "name": "pound ground lamb or beef",
+            "name": "ground lamb or beef",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "tablespoons extra-virgin olive oil, divided",
+            "name": "extra-virgin olive oil, divided",
             "quantity": "4",
             "type": "unit",
             "unit": "tablespoon"
@@ -9020,7 +9116,7 @@
             "type": "unitless"
         },
         {
-            "name": "cup plain whole-milk yogurt",
+            "name": "plain whole-milk yogurt",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
@@ -9053,7 +9149,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cae7211841faf39f91d/3:2/w_940,c_limit/basically-chicken-meatballs-1.jpg",
     "ingredients": [
         {
-            "name": "tablespoons jarred harissa paste, such as Mina, divided",
+            "name": "jarred harissa paste, such as mina, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "tablespoon"
@@ -9064,25 +9160,25 @@
             "type": "unitless"
         },
         {
-            "name": "cup panko (Japanese breadcrumbs)",
+            "name": "panko (japanese breadcrumbs)",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "ounces feta in brine plus 1/4 cup brine, cheese crumbled, divided",
+            "name": "feta in brine plus 1/4 cup brine, cheese crumbled, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup chopped parsley, divided",
+            "name": "chopped parsley, divided",
             "quantity": "2/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons olive oil, divided",
+            "name": "olive oil, divided",
             "quantity": "6",
             "type": "unit",
             "unit": "tablespoon"
@@ -9093,7 +9189,7 @@
             "type": "unitless"
         },
         {
-            "name": "teaspoon kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1",
             "type": "unit",
             "unit": "teaspoon"
@@ -9104,7 +9200,7 @@
             "type": "other"
         },
         {
-            "name": "pound ground chicken",
+            "name": "ground chicken",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -9115,7 +9211,7 @@
             "type": "unitless"
         },
         {
-            "name": "15-ounce can chickpeas, rinsed, drained",
+            "name": "can chickpeas, rinsed, drained",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -9152,7 +9248,7 @@
     "image_src": "https://assets.bonappetit.com/photos/5a1f0318d526dc0f3a88c2fe/3:2/w_940,c_limit/Summer%20Corn%20Chilaquiles%20Beauty%2032.jpg",
     "ingredients": [
         {
-            "name": "ounces tomatillos",
+            "name": "tomatillos",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
@@ -9173,7 +9269,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons olive oil, divided",
+            "name": "olive oil, divided",
             "quantity": "3",
             "type": "unit",
             "unit": "tablespoon"
@@ -9189,7 +9285,7 @@
             "type": "other"
         },
         {
-            "name": "12-ounce jar pickled jalapen\u0303os",
+            "name": "jar pickled jalapen\u0303os",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -9200,13 +9296,13 @@
             "type": "other"
         },
         {
-            "name": "cup sour cream",
+            "name": "sour cream",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "9-ounce bag corn tortilla chips",
+            "name": "bag corn tortilla chips",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
@@ -9246,31 +9342,31 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cb836ade933a34c9d8d/3:2/w_940,c_limit/basically-salmon-teriyaki.jpg",
     "ingredients": [
         {
-            "name": "cup sake",
+            "name": "sake",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup mirin (sweet Japanese rice wine)",
+            "name": "mirin (sweet japanese rice wine)",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup soy sauce",
+            "name": "soy sauce",
             "quantity": "1/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoon vegetable oil, plus more if needed",
+            "name": "vegetable oil, plus more if needed",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "6-ounce skin-on, boneless salmon fillets (about 1 inch thick)",
+            "name": "skin-on, boneless salmon fillets (about 1 inch thick)",
             "quantity": "4",
             "type": "unit",
             "unit": "ounce"
@@ -9311,19 +9407,19 @@
             "type": "unitless"
         },
         {
-            "name": "4-ounce piece rustic country-style bread",
+            "name": "piece rustic country-style bread",
             "quantity": "1",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup mayonnaise",
+            "name": "mayonnaise",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "tablespoons fresh lemon juice",
+            "name": "fresh lemon juice",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -9334,7 +9430,7 @@
             "type": "other"
         },
         {
-            "name": "cup olive oil",
+            "name": "olive oil",
             "quantity": "1/3",
             "type": "unit",
             "unit": "cup"
@@ -9355,7 +9451,7 @@
             "type": "unitless"
         },
         {
-            "name": "pound ripe juicy tomatoes, cut into bite-size wedges or slices",
+            "name": "ripe juicy tomatoes, cut into bite-size wedges or slices",
             "quantity": "1",
             "type": "unit",
             "unit": "pound"
@@ -9397,55 +9493,55 @@
     "image_src": "https://assets.bonappetit.com/photos/5b919cba3d923e31d08fed1b/3:2/w_940,c_limit/basically-crispy-peppercorn-wings.jpg",
     "ingredients": [
         {
-            "name": "tablespoons black peppercorns",
+            "name": "black peppercorns",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoons Diamond Crystal or 1 tablespoon Morton kosher salt",
+            "name": "diamond crystal or 1 tablespoon morton kosher salt",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon ground coriander",
+            "name": "ground coriander",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "tablespoon ground cumin",
+            "name": "ground cumin",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
         },
         {
-            "name": "teaspoons garam masala or Chinese five-spice powder",
+            "name": "garam masala or chinese five-spice powder",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon baking soda",
+            "name": "baking soda",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon sugar",
+            "name": "sugar",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "pounds chicken wings, flats and drumettes separated, patted dry with paper towels",
+            "name": "chicken wings, flats and drumettes separated, patted dry with paper towels",
             "quantity": "3",
             "type": "unit",
             "unit": "pound"
         },
         {
-            "name": "tablespoons olive oil",
+            "name": "olive oil",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"
@@ -9495,49 +9591,49 @@
             "type": "unitless"
         },
         {
-            "name": "cup all-purpose flour",
+            "name": "all-purpose flour",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup light brown sugar",
+            "name": "light brown sugar",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "teaspoons ground cinnamon",
+            "name": "ground cinnamon",
             "quantity": "11/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "teaspoon kosher salt, plus more",
+            "name": "kosher salt, plus more",
             "quantity": "1/2",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "cup (1 stick) unsalted butter, melted, cooled",
+            "name": "(1 stick) unsalted butter, melted, cooled",
             "quantity": "1/2",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "cup pistachios or sliced almonds",
+            "name": "pistachios or sliced almonds",
             "quantity": "3/4",
             "type": "unit",
             "unit": "cup"
         },
         {
-            "name": "ounces blackberries (from 2 6-ounce containers), halved crosswise if large",
+            "name": "blackberries (from 2 6-ounce containers), halved crosswise if large",
             "quantity": "12",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "tablespoon cornstarch",
+            "name": "cornstarch",
             "quantity": "1",
             "type": "unit",
             "unit": "tablespoon"
@@ -9582,7 +9678,7 @@
             "type": "unitless"
         },
         {
-            "name": "ounces cherry and/or grape tomatoes",
+            "name": "cherry and/or grape tomatoes",
             "quantity": "24",
             "type": "unit",
             "unit": "ounce"
@@ -9593,7 +9689,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons olive oil, plus more",
+            "name": "olive oil, plus more",
             "quantity": "5",
             "type": "unit",
             "unit": "tablespoon"
@@ -9604,25 +9700,25 @@
             "type": "other"
         },
         {
-            "name": "ounces fresh ricotta (about 1 cup)",
+            "name": "fresh ricotta (about 1 cup)",
             "quantity": "8",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "teaspoon crushed red pepper flakes",
+            "name": "crushed red pepper flakes",
             "quantity": "3/4",
             "type": "unit",
             "unit": "teaspoon"
         },
         {
-            "name": "ounces salted low-moisture mozzarella, grated, divided",
+            "name": "salted low-moisture mozzarella, grated, divided",
             "quantity": "8",
             "type": "unit",
             "unit": "ounce"
         },
         {
-            "name": "cup basil leaves, divided",
+            "name": "basil leaves, divided",
             "quantity": "1",
             "type": "unit",
             "unit": "cup"
@@ -9665,7 +9761,7 @@
             "type": "unitless"
         },
         {
-            "name": "tablespoons unsalted butter",
+            "name": "unsalted butter",
             "quantity": "2",
             "type": "unit",
             "unit": "tablespoon"

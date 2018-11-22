@@ -50,6 +50,8 @@ class Ingredient:
             unit_word = name.split(' ')[0]  # grab everything after the unit
             check = [unit in unit_word for unit in units]  # check if each unit name is in the grabbed word
             self.unit = units[check.index(True)]  # get the first unit that matches
+            if self.unit in self.name.split(' ')[0]:  # if the first word is the unit, remove it for clarity
+                self.name = ' '.join(self.name.split(' ')[1:])
     def __repr__(self):
         if self.quantity == -1:  # no unit or quantity
             return '{}'.format(self.name)
@@ -78,9 +80,9 @@ def getIngredient(line):
     line = line.strip()
     try:
         # this tries to grab the quantity using the regex for unit-based stuff
-        matched = re.match(quantity_regex, line.lower())
-        quantity = matched.group(0).split(' ')[0]
-        item = line[line.index(quantity) + len(quantity) + 1:]
+        matched = re.match(quantity_regex, line.lower())  # find unit with regex
+        quantity = matched.group(0).split(' ')[0]  # get just number for quantity
+        item = line.lower()[(line.lower().index(quantity) + len(quantity) + 1):]  # cut off the quantity from the item
         ing = Ingredient(item, quantity, 'unit')
         # print(ing)
     except Exception as e:
