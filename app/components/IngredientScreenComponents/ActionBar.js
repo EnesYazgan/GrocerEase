@@ -26,7 +26,7 @@ export default class ActionBar extends Component {
           <Icon
             style={styles.icon}
             name="list"
-            color="#ccc"
+            color="#51A4F7"
             size={24}
           />
         </TouchableOpacity>
@@ -37,7 +37,7 @@ export default class ActionBar extends Component {
           <Icon
             style={styles.icon}
             name="camera"
-            color="#ccc"
+            color="#51A4F7"
             size={24}
           />
         </TouchableOpacity>
@@ -53,7 +53,7 @@ export default class ActionBar extends Component {
             ? <Icon
                 style={styles.icon}
                 name="search"
-                color="black"
+                color="#ccc"
                 size={24}
               />
             : <TouchableOpacity
@@ -65,7 +65,7 @@ export default class ActionBar extends Component {
               <Icon
                 style={styles.icon}
                 name="add-circle"
-                color="#ccc"
+                color="#51A4F7"
                 size={24}
               />
             </TouchableOpacity>

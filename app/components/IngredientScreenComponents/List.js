@@ -25,7 +25,9 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
+
     //local functions
+
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1)
     }
@@ -39,6 +41,9 @@ export default class List extends Component {
         ? this.props.changeItemQuantity(item.key, -item.quantity)
         : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
     }
+
+    //the actual rendering
+    //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
 
     if (item.quantity > 0)
       return (
@@ -55,7 +60,7 @@ export default class List extends Component {
             >
               <Icon
                 name="remove"
-                color="#ccc"
+                color="#51A4F7"
                 size={20}
               />
             </TouchableOpacity>
@@ -74,7 +79,7 @@ export default class List extends Component {
             >
               <Icon
                 name="add"
-                color="#ccc"
+                color="#51A4F7"
                 size={20}
               />
             </TouchableOpacity>
@@ -96,7 +101,7 @@ export default class List extends Component {
             >
               <Icon
                 name="close"
-                color="#ccc"
+                color="red"
                 size={20}
               />
             </TouchableOpacity>
@@ -115,7 +120,7 @@ export default class List extends Component {
             >
               <Icon
                 name="add"
-                color="#ccc"
+                color="#51A4F7"
                 size={20}
               />
             </TouchableOpacity>

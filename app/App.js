@@ -34,11 +34,9 @@ export default class App extends Component {
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged(firebaseUser => {
 			if (firebaseUser) {
-				this.state.currentUserId = firebase.auth().currentUser.uid;  
-        this.setState({ isLoggedIn: true })
-
+				this.setState({ currentUserId: firebase.auth().currentUser.uid, isLoggedIn: true })
 			} else {
-				this.setState({ isLoggedIn: false })
+				this.setState({ currentUserId: undefined, isLoggedIn: false })
 			}
 		});
 	}
@@ -129,7 +127,7 @@ export default class App extends Component {
 			}}
 			logOut={() => {
 				firebase.auth().signOut();
-				this.setState({ isLoggedIn: false });
+				this.setState({ currentUserId: undefined, isLoggedIn: false })
 				//clear local inventory upon logout
 				this.setState({ inventory: [] });
 			}}
