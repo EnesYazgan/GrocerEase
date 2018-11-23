@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StatusBar, AppState} from 'react-native'
+import { View, StatusBar, AppState } from 'react-native'
 //import * as firebase from 'firebase';
 import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
@@ -8,18 +8,18 @@ import LoginScreen from './components/LoginScreen';
 import DataBase from './components/firebase.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-  authDomain: "grocerease-6e9ee.firebaseapp.com",
-  databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-  projectId: "grocerease-6e9ee",
-  storageBucket: "grocerease-6e9ee.appspot.com",
-  messagingSenderId: "719228868931"
+	apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+	authDomain: "grocerease-6e9ee.firebaseapp.com",
+	databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+	projectId: "grocerease-6e9ee",
+	storageBucket: "grocerease-6e9ee.appspot.com",
+	messagingSenderId: "719228868931"
 };
 
 firebase.initializeApp(firebaseConfig);
 
 export default class App extends Component {
-  constructor(props) {
+	constructor(props) {
 		super(props)
 	}
 
@@ -28,15 +28,25 @@ export default class App extends Component {
 		appState: AppState.currentState,
 		inventory: [], //elements are ingredients
 		testInv: [],
-		isLoggedIn: false,
+		screen: 'login'
+	}
+
+	loginAndGetData = (userId) => {
+		this.setState({ currentUserId: userId, screen: 'ingredients' })
+		this.cloneFirebaseInventory(userId)
+	}
+	
+	logoutAndClearData = () => {
+		firebase.auth().signOut();
+		this.setState({ currentUserId: undefined, inventory: [], screen: 'login' })
 	}
 
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged(firebaseUser => {
 			if (firebaseUser) {
-				this.setState({ currentUserId: firebase.auth().currentUser.uid, isLoggedIn: true })
+				this.loginAndGetData(firebase.auth().currentUser.uid)
 			} else {
-				this.setState({ currentUserId: undefined, isLoggedIn: false })
+				this.logoutAndClearData()
 			}
 		});
 	}
@@ -48,10 +58,18 @@ export default class App extends Component {
 	}
 
 	GetCurrentScreen = () => {
-		if (this.state.isLoggedIn == false) {
+		if (this.state.screen == 'login') {
 			return this.constructedLoginScreen();
 		} else {
-			return this.constructedIngredientsScreen();
+			if (this.state.screen == 'ingredients') {
+				return this.constructedIngredientsScreen();
+			}
+			else if (this.state.screen == 'recipes') {
+				return this.constructedRecipesScreen();
+			}
+			else {
+				return "going to a nonexistant screen"
+			}
 		}
 	}
 
@@ -60,10 +78,10 @@ export default class App extends Component {
 			signUp={(email, password) => {
 				console.log("Sign up:");
 				if (!(email == undefined) && !(password == undefined)) {
+					alert('Checking authentication', 'One moment please...');
 					firebase.auth().createUserWithEmailAndPassword(email, password)
 						.then(() => {
-							this.setState({ currentUserId: firebase.auth().currentUser.uid, isLoggedIn: true })
-							this.cloneFirebaseInventory(this.state.currentUserId);
+							this.loginAndGetData(firebase.auth().currentUser.uid)
 						}
 						)
 						.catch(
@@ -77,10 +95,10 @@ export default class App extends Component {
 			login={(email, password) => {
 				console.log("Log in:");
 				if (!(email == undefined) && !(password == undefined)) {
+					alert('Checking authentication', 'One moment please...');
 					firebase.auth().signInWithEmailAndPassword(email, password)
 						.then(() => {
-							this.setState({ currentUserId: firebase.auth().currentUser.uid, isLoggedIn: true })
-							this.cloneFirebaseInventory(this.state.currentUserId);
+							this.loginAndGetData(firebase.auth().currentUser.uid)
 						}
 						)
 						.catch(
@@ -93,11 +111,10 @@ export default class App extends Component {
 			}}
 		/>
 	}
-	
+
 	constructedIngredientsScreen = () => {
 		return <IngredientScreen
 			data={this.state.inventory}
-			userId={this.state.currentUserId}
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
@@ -125,14 +142,73 @@ export default class App extends Component {
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
+			switchScreen={() => {
+				this.setState({ screen: 'recipes' });
+			}}
 			logOut={() => {
-				firebase.auth().signOut();
-				this.setState({ currentUserId: undefined, isLoggedIn: false })
-				//clear local inventory upon logout
-				this.setState({ inventory: [] });
+				this.logoutAndClearData()
 			}}
 		/>
 	}
+	
+	// constructedRecipesScreen = () => {
+	// 	returnMatchingRecipes = (allRecipes) => {
+	// 		var matchingRecipes = this.state.inventory.slice(0);
+	// 		var searchResults = [] //make a copy of the current array
+	// 		for (var j = 0; j < this.props.data.length; j++) {
+	// 		  var match = true
+	// 		  for (var l = 0; l < text.length; l++) {
+	// 			if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
+	// 			  match = false
+	// 			  break
+	// 			}
+	// 		  }
+	// 		  if (match) searchResults.push(this.props.data[j])
+	// 		}
+	// 		this.setState({ text: text, filter: searchResults })
+	// 		allRecipes.find(eachRecipe => )
+	// 		this.props.changeItemQuantity(item.key, 1)
+	// 	}
+
+	// 	return <RecipeScreen
+	// 		data={
+	// 			returnMatchingRecipes
+	// 		}
+	// 		changeItemQuantity={(itemName, quantity) => {
+	// 			var newInventory = this.state.inventory.slice(0);
+	// 			var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+	// 			if (typeof foundIngredient == 'undefined') {
+	// 				newInventory.push(new Ingredient(itemName, quantity));
+	// 			}
+	// 			else {
+	// 				foundIngredient.quantity = foundIngredient.quantity + quantity
+	// 				if (foundIngredient.quantity < 0)
+	// 					newInventory.splice(newInventory.indexOf(foundIngredient), 1)
+	// 			}
+	// 			this.setState({ inventory: newInventory });
+	// 			//Update the database every time the list is changed. This works!
+	// 			DataBase.updateMe(this.state.currentUserId, newInventory);
+	// 		}}
+	// 		orderList={(parameter) => {
+	// 			var newInventory = this.state.inventory.slice(0);
+	// 			if (parameter == true)
+	// 				newInventory.sort();
+	// 			else {
+	// 				newInventory.sort();
+	// 				newInventory.reverse();
+	// 			}
+	// 			this.setState({ inventory: newInventory });
+	// 			//Update the database every time the list is changed. This works!
+	// 			DataBase.updateMe(this.state.currentUserId, newInventory);
+	// 		}}
+	// 		switchScreen={() => {
+	// 			this.setState({ screen: 'ingredients' });
+	// 		}}
+	// 		logOut={() => {
+	// 			this.logoutAndClearData()
+	// 		}}
+	// 	/>
+	// }
 
 	cloneFirebaseInventory = (userId) => {
 		firebase.database().ref('/users/' + userId).once('value')
@@ -167,17 +243,6 @@ export default class App extends Component {
 
 					this.setState({ inventory: ingredientsList });
 				}
-
-				/*****Inventory gets set to database****/
-				//only happens when when first logged in
-				// if (this.state.beginning == true) {
-				// 	console.log("beginning!");
-				// 	this.state.beginning = false;
-				// 	for (var i = 0; i < ingredientsList.length; i++) {
-				// 		this.state.inventory.push(ingredientsList[i]);
-				// 	}
-				// }
-				// this.state.testInv = ingredientsList;
 			});
 	}
 }

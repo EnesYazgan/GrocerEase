@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
 import List from './IngredientScreenComponents/List';
 import ActionBar from './IngredientScreenComponents/ActionBar';
@@ -14,15 +14,15 @@ export default class IngredientScreen extends Component {
   }
 
   static defaultProps = {
-    switchScreen: undefined,
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
     logOut: undefined,
   }
-
+  
   changeSortParameterThenOrderList = () => {
-    this.setState({ sortParameter: !this.state.sortParameter }, () => this.props.orderList(this.state.sortParameter))
+    this.setState({ sortParameter: !this.state.sortParameter })
+    this.props.orderList(this.state.sortParameter)
   }
 
   toggleCamera = () => {
@@ -35,27 +35,29 @@ export default class IngredientScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = [] //make a copy of the current array
-    for (var j = 0; j < this.props.data.length; j++) {
-      var match = true
-      for (var l = 0; l < text.length; l++) {
-        if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-          match = false
-          break
-        }
-      }
-      if (match) searchResults.push(this.props.data[j])
-    }
+    var searchResults = this.props.data.filter(item => item.substring(0, text.length) == text); 
+    // var searchResults = [] //make a copy of the current array
+    // for (var j = 0; j < this.props.data.length; j++) {
+    //   var match = true
+    //   for (var l = 0; l < text.length; l++) {
+    //     if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
+    //       match = false
+    //       break
+    //     }
+    //   }
+    //   if (match) searchResults.push(this.props.data[j])
+    // }
     this.setState({ text: text, filter: searchResults })
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
+          <Text style={styles.headerText}>Find Recipes</Text>
           <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.logOut}>
+          onPress={this.props.logOut}>
             <Icon
               style={styles.icon}
               color='white'
@@ -64,13 +66,6 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
         </View>
-        {
-          this.state.cameraOn == false
-            ? null
-            : <BarcodeScanner
-              changeItemQuantity={this.props.changeItemQuantity}
-            />
-        }
         <View style={styles.container}>
           <ActionBar
             text={this.state.text}
@@ -87,15 +82,15 @@ export default class IngredientScreen extends Component {
             changeItemQuantity={this.props.changeItemQuantity}
           />
         </View>
-        <TouchableOpacity style={styles.iconContainer}
+          <TouchableOpacity style={styles.iconContainer}
           onPress={this.props.switchScreen}>
-          <Icon
-            style={styles.footer}
-            color='#ccc'
-            name='cafe'
-            size={25}
-          />
-        </TouchableOpacity>
+            <Icon
+              style={styles.footer}
+              color='#ccc'
+              name='cafe'
+              size={25}
+            />
+          </TouchableOpacity>
       </View>
     );
   }
@@ -147,15 +142,15 @@ const styles = StyleSheet.create({
     marginRight: -60
   },
   iconContainer: {
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:50,
+    height:50,
     backgroundColor: '#51A4F7',
     paddingTop: 10,
-    borderRadius: 10,
+    borderRadius:10,
   },
   icon: {
     flexDirection: 'row',
