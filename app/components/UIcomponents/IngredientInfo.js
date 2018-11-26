@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import {View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
-import List from './List';
 
 export default class IngredientInfo extends React.Component {
+
+  static defaultProps = {
+    item: null,
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textInput}>testing information</Text>
+        <Text style={styles.textInput}>Quantity: {this.props.item.quantity}</Text>
+        <Text style={styles.textInput}>Calories: {this.props.item.calories}</Text>
+        <Text style={styles.textInput}>Serving size: {this.props.item.serving}</Text>
+        <Text style={styles.textInput}>Expiration date: {this.props.item.expiry}</Text>
       </View>
     );
   }
@@ -18,7 +24,10 @@ export default class IngredientInfo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0000ff'
+    flexDirection: 'column',
+    backgroundColor: '#D0E3F5',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   beginning: {
     flex: 1,
@@ -27,18 +36,6 @@ const styles = StyleSheet.create({
   end: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  headerText: {
-    flexDirection: 'row',
-    flex: 100,
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: -60
   },
   iconContainer: {
     borderWidth:1,
@@ -58,7 +55,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: 20,
-    padding: 10,
+    fontSize: 15,
+    padding: 5,
+    paddingLeft: 10
   },
 });
