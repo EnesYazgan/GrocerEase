@@ -122,7 +122,10 @@ export default class List extends Component {
         </View>
         {
           this.state.infoPressed == item
-          ? <IngredientInfo item={item}/>
+          ? <IngredientInfo item={item}
+            changeItemCalories={this.props.changeItemCalories}
+            changeItemServingSize={this.props.changeItemServingSize}
+          />
           : null
         }
         </View>
