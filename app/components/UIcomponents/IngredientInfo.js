@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
-import {View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import {DatePickerIOS, View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class IngredientInfo extends React.Component {
 
   static defaultProps = {
     item: null,
   }
+
+  state = {
+    isDateTimePickerVisible: false,
+  };
+
+  _showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
+  }
+
+  _hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  }
+
 
   render() {
     setCalories = (text) => {
@@ -18,6 +32,14 @@ export default class IngredientInfo extends React.Component {
       text == ''
         ? this.props.changeItemServingSize(this.props.item.key, 0)
         : this.props.changeItemServingSize(this.props.item.key, parseInt(text))
+    }
+    setDate = (date) => {
+      parsedDate = date.toString();
+      dateArray = parsedDate.split(' ');
+      onlyDate = dateArray[0] + " " + dateArray[1] + " "+ dateArray[2] + ", " + dateArray[3];
+      this.props.changeItemExpiration(this.props.item.key, onlyDate);
+      this.setState({dateChosen: onlyDate});
+      this._hideDateTimePicker();
     }
 
     return (
@@ -47,8 +69,21 @@ export default class IngredientInfo extends React.Component {
             }
           />
         </View>
-
-        <Text style={styles.textInput}>Expiration date: {this.props.item.expiry}</Text>
+        <View style={styles.itemAndField}>
+          <Text style={styles.textInput}>Expiration date:</Text>
+          <Text style={styles.calendarText}>{this.props.item.expiry}</Text>
+          <TouchableOpacity onPress={this._showDateTimePicker}>
+            <Icon
+              name="calendar"
+              size={30}
+            />
+          </TouchableOpacity>
+          <DateTimePicker
+            isVisible={this.state.isDateTimePickerVisible}
+            onConfirm={setDate}
+            onCancel={this._hideDateTimePicker}
+          />
+        </View>
       </View>
     );
   }
@@ -108,6 +143,12 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 15,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
+  },
+  calendarText: {
+    fontSize: 15,
+    padding: 5,
+    paddingLeft: 5,
+    paddingRight: 10
   },
 });

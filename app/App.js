@@ -132,6 +132,15 @@ export default class App extends Component {
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
 
+      changeItemExpiration={(itemName, expiry) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.expiry = expiry;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+
 			orderList={(parameter) => {
 				var newInventory = this.state.inventory.slice(0);
 				if (parameter == true)

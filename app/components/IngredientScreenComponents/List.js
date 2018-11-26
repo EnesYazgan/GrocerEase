@@ -125,6 +125,7 @@ export default class List extends Component {
           ? <IngredientInfo item={item}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
+            changeItemExpiration={this.props.changeItemExpiration}
           />
           : null
         }
