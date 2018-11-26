@@ -6,7 +6,6 @@ import ActionBar from './IngredientScreenComponents/ActionBar';
 import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
 
 export default class IngredientScreen extends Component {
-
   constructor(props){
     super(props)
   }
@@ -57,6 +56,7 @@ export default class IngredientScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
         <View style={styles.banner}>
           <Text style={styles.headerText}>My Ingredients</Text>
           <TouchableOpacity style={styles.iconContainer}

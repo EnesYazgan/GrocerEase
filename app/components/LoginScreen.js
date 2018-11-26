@@ -22,7 +22,7 @@ export default class UserLogin extends Component{
     this.setState({ password: text });
     console.log("My password is:" + text);
   }
-
+  
   //sign up function that grabs the email and password from the text boxes and uses
   //firebase to create an account for the us
   signUpWithEmailAndPassword = () => {

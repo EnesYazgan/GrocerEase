@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
 import IngredientScreen from './components/IngredientScreen';
 import LoginScreen from './components/LoginScreen';
+import RecipeScreen from './components/RecipeScreen';
 import DataBase from './components/firebase.js';
 
 const firebaseConfig = {
@@ -62,13 +63,10 @@ export default class App extends Component {
 			return this.constructedLoginScreen();
 		} else {
 			if (this.state.screen == 'ingredients') {
-				return this.constructedIngredientsScreen();
+				return this.constructedIngredientScreen();
 			}
 			else if (this.state.screen == 'recipes') {
-				return this.constructedRecipesScreen();
-			}
-			else {
-				return "going to a nonexistant screen"
+				return this.constructedRecipeScreen();
 			}
 		}
 	}
@@ -112,7 +110,7 @@ export default class App extends Component {
 		/>
 	}
 
-	constructedIngredientsScreen = () => {
+	constructedIngredientScreen = () => {
 		return <IngredientScreen
 			data={this.state.inventory}
 			changeItemQuantity={(itemName, quantity) => {
@@ -131,7 +129,7 @@ export default class App extends Component {
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
 
-      changeItemCalories={(itemName, calories) => {
+			changeItemCalories={(itemName, calories) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				foundIngredient.calories = calories;
@@ -140,7 +138,7 @@ export default class App extends Component {
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
 
-      changeItemServingSize={(itemName, serving) => {
+			changeItemServingSize={(itemName, serving) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				foundIngredient.serving = serving;
@@ -169,65 +167,53 @@ export default class App extends Component {
 			}}
 		/>
 	}
-	
-	// constructedRecipesScreen = () => {
-	// 	returnMatchingRecipes = (allRecipes) => {
-	// 		var matchingRecipes = this.state.inventory.slice(0);
-	// 		var searchResults = [] //make a copy of the current array
-	// 		for (var j = 0; j < this.props.data.length; j++) {
-	// 		  var match = true
-	// 		  for (var l = 0; l < text.length; l++) {
-	// 			if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-	// 			  match = false
-	// 			  break
-	// 			}
-	// 		  }
-	// 		  if (match) searchResults.push(this.props.data[j])
-	// 		}
-	// 		this.setState({ text: text, filter: searchResults })
-	// 		allRecipes.find(eachRecipe => )
-	// 		this.props.changeItemQuantity(item.key, 1)
-	// 	}
 
-	// 	return <RecipeScreen
-	// 		data={
-	// 			returnMatchingRecipes
-	// 		}
-	// 		changeItemQuantity={(itemName, quantity) => {
-	// 			var newInventory = this.state.inventory.slice(0);
-	// 			var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-	// 			if (typeof foundIngredient == 'undefined') {
-	// 				newInventory.push(new Ingredient(itemName, quantity));
-	// 			}
-	// 			else {
-	// 				foundIngredient.quantity = foundIngredient.quantity + quantity
-	// 				if (foundIngredient.quantity < 0)
-	// 					newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-	// 			}
-	// 			this.setState({ inventory: newInventory });
-	// 			//Update the database every time the list is changed. This works!
-	// 			DataBase.updateMe(this.state.currentUserId, newInventory);
-	// 		}}
-	// 		orderList={(parameter) => {
-	// 			var newInventory = this.state.inventory.slice(0);
-	// 			if (parameter == true)
-	// 				newInventory.sort();
-	// 			else {
-	// 				newInventory.sort();
-	// 				newInventory.reverse();
-	// 			}
-	// 			this.setState({ inventory: newInventory });
-	// 			//Update the database every time the list is changed. This works!
-	// 			DataBase.updateMe(this.state.currentUserId, newInventory);
-	// 		}}
-	// 		switchScreen={() => {
-	// 			this.setState({ screen: 'ingredients' });
-	// 		}}
-	// 		logOut={() => {
-	// 			this.logoutAndClearData()
-	// 		}}
-	// 	/>
-	// }
+	constructedRecipeScreen = () => {
+		returnMatchingRecipes = (allRecipes) => {
+			var matchingRecipes = this.state.inventory.slice(0);
+			var searchResults = [] //make a copy of the current array
+			for (var j = 0; j < this.props.data.length; j++) {
+				var match = true
+				for (var l = 0; l < text.length; l++) {
+					if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
+						match = false
+						break
+					}
+				}
+				if (match) searchResults.push(this.props.data[j])
+			}
+			this.setState({ text: text, filter: searchResults })
+			//allRecipes.find(eachRecipe => )
+			this.props.changeItemQuantity(item.key, 1)
+		}
+
+		return <RecipeScreen
+			data={
+				
+			}
+			changeItemQuantity={(itemName, quantity) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				if (typeof foundIngredient == 'undefined') {
+					newInventory.push(new Ingredient(itemName, quantity));
+				}
+				else {
+					foundIngredient.quantity = foundIngredient.quantity + quantity
+					if (foundIngredient.quantity < 0)
+						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
+				}
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+			switchScreen={() => {
+				this.setState({ screen: 'ingredients' });
+			}}
+			logOut={() => {
+				this.logoutAndClearData()
+			}}
+		/>
+	}
 
 	cloneFirebaseInventory = (userId) => {
 		firebase.database().ref('/users/' + userId).once('value')
@@ -246,6 +232,42 @@ export default class App extends Component {
 						ingParams = list[i].split(",");
 						ing = new Ingredient(
 							ingParams[0],  //name is a string
+							parseInt(ingParams[1], 10),  //quantity is an int
+							ingParams[2], //unit is a string
+							parseInt(ingParams[3], 10),  //calories is an int
+							parseInt(ingParams[4], 10), //seving is an int
+							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
+						);
+						ingredientsList.push(ing);
+					}
+
+					console.log("Retrieved " + userId + "'s list:");
+					for (var i = 0; i < ingredientsList.length; i++) {
+						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
+					}
+
+					this.setState({ inventory: ingredientsList });
+				}
+			});
+	}
+	
+	getRecipes = (userId) => {
+		firebase.database().ref('/users/' + userId).once('value')
+			.then((snapshot) => {
+				//snapshot.val() is the list we want
+				list = snapshot.val();
+
+				//lists it properly
+				//console.log("User's List: " + list);
+				if (list.length > 0) {
+					var ingredientsList = [];
+
+					var ingParams;
+					var ing;
+					for (var i = 0; i < list.length; i++) {
+						ingParams = list[i].split(",");
+						ing = new Ingredient(
+							ingParams[0], //name is a string
 							parseInt(ingParams[1], 10),  //quantity is an int
 							ingParams[2], //unit is a string
 							parseInt(ingParams[3], 10),  //calories is an int

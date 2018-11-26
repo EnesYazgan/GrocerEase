@@ -84,8 +84,8 @@ export default class List extends Component {
                 onPress={infoButtonPressed}
               >
                 <Icon
+                  color='black'
                   name='information-circle-outline'
-                  color="#51A4F7"
                   size={30}
                 />
               </TouchableOpacity>

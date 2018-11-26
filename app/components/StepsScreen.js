@@ -61,19 +61,6 @@ export default class RecipeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.logOut}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='log-out'
-              size={25}
-            />
-          </TouchableOpacity>
-        </View>
         <View style={styles.container}>
           <ActionBar
             text={this.state.text}
