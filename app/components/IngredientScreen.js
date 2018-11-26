@@ -90,6 +90,8 @@ export default class IngredientScreen extends Component {
               : this.state.filter
             }
             changeItemQuantity={this.props.changeItemQuantity}
+            changeItemCalories={this.props.changeItemCalories}
+            changeItemServingSize={this.props.changeItemServingSize}
           />
         </View>
         <TouchableOpacity style={styles.iconContainer}

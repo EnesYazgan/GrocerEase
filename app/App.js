@@ -119,7 +119,7 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity));
+					newInventory.push(new Ingredient(itemName, quantity, 'none', 0, 0, 'none set'));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -130,6 +130,25 @@ export default class App extends Component {
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
+
+      changeItemCalories={(itemName, calories) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.calories = calories;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+
+      changeItemServingSize={(itemName, serving) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.serving = serving;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+
 			orderList={(parameter) => {
 				var newInventory = this.state.inventory.slice(0);
 				if (parameter == true)
