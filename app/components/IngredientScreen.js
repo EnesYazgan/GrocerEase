@@ -6,6 +6,11 @@ import ActionBar from './IngredientScreenComponents/ActionBar';
 import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
 
 export default class IngredientScreen extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
   state = {
     cameraOn: false,
     filter: this.props.data,

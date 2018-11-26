@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
+import IngredientInfo from '../UIcomponents/IngredientInfo';
 
 export default class List extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
   static defaultProps = {
     text: '',
     data: [],
+  }
+
+  state = {
+    infoPressed: null,
   }
 
   render() {
@@ -13,6 +23,7 @@ export default class List extends Component {
       <View style={styles.container}>
         <FlatList
           //A FlatList renders a component in multiple rows like a list, given an array of data.
+          extraData = {this.state}
           data={
             this.props.data
           }
@@ -25,8 +36,20 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-
     //local functions
+    //this function below doesn't update this.state.infoPressed until the
+    //NEXT time I click the info button... so the before and after console logs
+    //both say either false or both true
+    infoButtonPressed = () => {
+      // console.log("got in" + item);
+      if(this.state.infoPressed == item){
+        this.setState({infoPressed: null});
+        console.log(this.state.infoBool);
+      }else{
+        this.setState({infoPressed: item});
+        console.log(this.state.infoBool);
+      }
+    }
 
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1)
@@ -47,43 +70,61 @@ export default class List extends Component {
 
     if (item.quantity > 0)
       return (
-        <View style={styles.listRow}>
-          <Text
-            style={styles.textContainer}
-            onPress={this.handleTextPress}>
-            {item.key}
-          </Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={decrementItemQuantity}
-            >
-              <Icon
-                name="remove"
-                color="#51A4F7"
-                size={20}
-              />
-            </TouchableOpacity>
-            <TextInput
-              underlineColorAndroid={'rgba(0,0,0,0)'}
+        <View>
+          <View style={styles.listRow}>
+            <Text
               style={styles.textContainer}
-              keyboardType={'numeric'}
-              defaultValue={item.quantity.toString()}
-              onChangeText={
-                setQuantity
-              }
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={incrementItemQuantity}
-            >
-              <Icon
-                name="add"
-                color="#51A4F7"
-                size={20}
+              onPress={this.handleTextPress}>
+              {item.key}
+            </Text>
+
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.iconInfo}
+                onPress={infoButtonPressed}
+              >
+                <Icon
+                  color='black'
+                  name='information-circle-outline'
+                  size={30}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={decrementItemQuantity}
+              >
+                <Icon
+                  name="remove"
+                  color="#51A4F7"
+                  size={20}
+                />
+              </TouchableOpacity>
+              <TextInput
+                underlineColorAndroid={'rgba(0,0,0,0)'}
+                style={styles.textContainer}
+                keyboardType={'numeric'}
+                defaultValue={item.quantity.toString()}
+                onChangeText={
+                  setQuantity
+                }
               />
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={incrementItemQuantity}
+              >
+                <Icon
+                  name="add"
+                  color="#51A4F7"
+                  size={20}
+                />
+              </TouchableOpacity>
+            </View>
+        </View>
+        {
+          this.state.infoPressed == item
+          ? <IngredientInfo item={item}/>
+          : null
+        }
         </View>
       )
     else
@@ -187,7 +228,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 50
+    height: 50,
   },
   buttons: {
     flexDirection: "row",
@@ -203,6 +244,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 20,
     color: '#ccc'
+  },
+  iconInfo: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:30,
+    height:30,
   },
   iconContainer: {
     borderWidth:1,
