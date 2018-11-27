@@ -1,10 +1,11 @@
 import React, { Component, PureComponent } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import Icon from '../Icon';
 import RecipeInfo from './RecipeInfo';
 
 export default class List extends Component {
   static defaultProps = {
+    viewRecipeSteps: undefined,
     text: '',
     data: [],
   }
@@ -25,6 +26,7 @@ export default class List extends Component {
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
+          initialNumToRender={15}
         />
       </View>
     );
@@ -39,6 +41,7 @@ export default class List extends Component {
       viewRecipeSteps={
         viewRecipeSteps
       }
+
       item={item}
       infoButtonPressed={() => {
         // console.log("got in" + item);
@@ -72,22 +75,27 @@ class ListRow extends PureComponent {
     return (
       <View>
         <TouchableOpacity style={styles.listRow}
-        onPress={this.props.infoButtonPressed}>
+          onPress={this.props.infoButtonPressed}>
           <Text
             style={styles.textContainer}
             onPress={this.handleTextPress}>
             {this.props.item.title}
           </Text>
-              <Icon
-                color='black'
-                name='information-circle'
-                size={30}
-              />
+          <Text
+            style={styles.textContainer}
+            onPress={this.handleTextPress}>
+            {this.props.item.matchingIngredients} out of {this.props.item.ingredients.length}
+          </Text>
+          <Icon
+            color='#51A4F7'
+            name='information-circle'
+            size={30}
+          />
         </TouchableOpacity>
         {
           this.props.visible
             ? <RecipeInfo item={this.props.item}
-            switchScreen={this.props.viewRecipeSteps}/>
+              switchScreen={this.props.viewRecipeSteps} />
             : null
         }
       </View>
@@ -96,7 +104,7 @@ class ListRow extends PureComponent {
 }
 
 String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 const styles = StyleSheet.create({
@@ -139,14 +147,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 50,
+    height: 75,
   },
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
   textContainer: {
-    flex: 0.8,
+    flex: 1,
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
@@ -158,21 +166,21 @@ const styles = StyleSheet.create({
     color: '#ccc'
   },
   iconInfo: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
-    width:30,
-    height:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    width: 30,
+    height: 30,
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:30,
-    height:30,
-    backgroundColor:'#fff',
-    borderRadius:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    backgroundColor: '#fff',
+    borderRadius: 30,
   }
 });

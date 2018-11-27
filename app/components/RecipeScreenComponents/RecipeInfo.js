@@ -22,9 +22,9 @@ export default class RecipeInfo extends React.Component {
             <Text key={element} style={styles.textInput}>{element}</Text>
           )
         })}
-        <Button onPress={this.props.switchScreen}>
-          View Steps
-        </Button>
+        <Button
+        title='View Steps'
+        onPress={this.props.switchScreen}/>
       </View>
     );
   }
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 15,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
+    fontWeight: 'bold'
   },
 });

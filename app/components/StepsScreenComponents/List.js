@@ -31,14 +31,7 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-    viewRecipeSteps = () => {
-      this.props.viewRecipeSteps(item)
-    }
-
     return <ListRow
-      viewRecipeSteps={
-        viewRecipeSteps
-      }
       item={item}
       infoButtonPressed={() => {
         // console.log("got in" + item);
@@ -71,24 +64,24 @@ class ListRow extends PureComponent {
   render() {
     return (
       <View>
-        <TouchableOpacity style={styles.listRow}
-        onPress={this.props.infoButtonPressed}>
-          <Text
-            style={styles.textContainer}
-            onPress={this.handleTextPress}>
-            {this.props.item.title}
-          </Text>
-              <Icon
-                color='black'
-                name='information-circle'
-                size={30}
-              />
-        </TouchableOpacity>
         {
           this.props.visible
-            ? <RecipeInfo item={this.props.item}
-            switchScreen={this.props.viewRecipeSteps}/>
-            : null
+            ? <TouchableOpacity style={styles.listRow}
+            onPress={this.props.infoButtonPressed}>
+              <Text
+                style={styles.highlightedTextContainer}
+                onPress={this.handleTextPress}>
+                {this.props.item}
+              </Text>
+            </TouchableOpacity>
+            : <TouchableOpacity style={styles.listRow}
+            onPress={this.props.infoButtonPressed}>
+              <Text
+                style={styles.textContainer}
+                onPress={this.handleTextPress}>
+                {this.props.item}
+              </Text>
+            </TouchableOpacity>
         }
       </View>
     )
@@ -118,7 +111,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 15,
     padding: 10,
   },
   searchBar: {
@@ -139,14 +132,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 50,
+    height: 100,
   },
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
+  highlightedTextContainer: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#51A4F7',
+    fontSize: 20
+  },
   textContainer: {
-    flex: 0.8,
+    flex: 1,
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20

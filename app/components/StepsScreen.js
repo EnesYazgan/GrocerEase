@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
-import List from './RecipeScreenComponents/List';
-import StepsScreen from './StepsScreen';
+import List from './StepsScreenComponents/List';
+import ActionBar from './StepsScreenComponents/ActionBar';
 
 export default class StepsScreen extends Component {  
   state = {
@@ -58,7 +58,7 @@ export default class StepsScreen extends Component {
             <Icon
               style={styles.icon}
               color='white'
-              name='flame'
+              name='arrow-back'
               size={30}
             />
           </TouchableOpacity>
@@ -89,46 +89,8 @@ export default class StepsScreen extends Component {
             changeItemQuantity={this.props.changeItemQuantity}
           />
         </View>
-        <TouchableOpacity style={styles.iconContainer}
-          onPress={this.props.switchScreen}>
-          <Icon
-            style={styles.footer}
-            color='#ccc'
-            name='cafe'
-            size={25}
-          />
-        </TouchableOpacity>
       </View>
     );
-  }
-  
-	constructedStepsScreen = () => {
-		return <StepsScreen
-			data={
-				currentRecipe.steps
-			}
-			changeItemQuantity={(itemName, quantity) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity));
-				}
-				else {
-					foundIngredient.quantity = foundIngredient.quantity + quantity
-					if (foundIngredient.quantity < 0)
-						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-				}
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
-			switchScreen={() => {
-				this.setState({ screen: 'ingredients' });
-			}}
-			logOut={() => {
-				this.logoutAndClearData()
-			}}
-		/>
 	}
 }
 
