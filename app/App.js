@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, AppState } from 'react-native'
+import { View, StatusBar, AppState} from 'react-native'
 //import * as firebase from 'firebase';
 import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
@@ -36,7 +36,7 @@ export default class App extends Component {
 		this.setState({ currentUserId: userId, screen: 'ingredients' })
 		this.cloneFirebaseInventory(userId)
 	}
-	
+
 	logoutAndClearData = () => {
 		firebase.auth().signOut();
 		this.setState({ currentUserId: undefined, inventory: [], screen: 'login' })
@@ -76,7 +76,7 @@ export default class App extends Component {
 			signUp={(email, password) => {
 				console.log("Sign up:");
 				if (!(email == undefined) && !(password == undefined)) {
-					alert('Checking authentication', 'One moment please...');
+					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().createUserWithEmailAndPassword(email, password)
 						.then(() => {
 							this.loginAndGetData(firebase.auth().currentUser.uid)
@@ -93,7 +93,7 @@ export default class App extends Component {
 			login={(email, password) => {
 				console.log("Log in:");
 				if (!(email == undefined) && !(password == undefined)) {
-					alert('Checking authentication', 'One moment please...');
+					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().signInWithEmailAndPassword(email, password)
 						.then(() => {
 							this.loginAndGetData(firebase.auth().currentUser.uid)
@@ -197,9 +197,7 @@ export default class App extends Component {
 		}
 
 		return <RecipeScreen
-			data={
-				
-			}
+
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
@@ -259,7 +257,7 @@ export default class App extends Component {
 				}
 			});
 	}
-	
+
 	getRecipes = (userId) => {
 		firebase.database().ref('/users/' + userId).once('value')
 			.then((snapshot) => {
