@@ -173,4 +173,4 @@ for url in urls:
 recipe_json_string = ''.join(recipes)
 
 with open('recipes.json', 'w') as file:
-    file.write('[{}]'.format(recipe_json_string))
+    file.write('[{}]'.format(recipe_json_string[:-2] + '}'))

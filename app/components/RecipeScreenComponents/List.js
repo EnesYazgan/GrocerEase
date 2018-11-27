@@ -84,8 +84,8 @@ export default class List extends Component {
                 onPress={infoButtonPressed}
               >
                 <Icon
+                  color='black'
                   name='information-circle-outline'
-                  color="#51A4F7"
                   size={30}
                 />
               </TouchableOpacity>
@@ -125,7 +125,6 @@ export default class List extends Component {
           ? <IngredientInfo item={item}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
-            changeItemExpiration={this.props.changeItemExpiration}
           />
           : null
         }
