@@ -29,14 +29,17 @@ export default class App extends Component {
 		appState: AppState.currentState,
 		inventory: [], //elements are ingredients
 		testInv: [],
-		screen: 'login'
+		screen: 'login',
+		recipes: [],
 	}
 
 	loginAndGetData = (userId) => {
-		this.setState({ currentUserId: userId, screen: 'ingredients' })
 		this.cloneFirebaseInventory(userId)
+		this.setState({
+			currentUserId: userId, screen: 'ingredients'
+		})
 	}
-	
+
 	logoutAndClearData = () => {
 		firebase.auth().signOut();
 		this.setState({ currentUserId: undefined, inventory: [], screen: 'login' })
@@ -117,7 +120,7 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity, 'none', 0, 0, 'none set'));
+					newInventory.push(new Ingredient(itemName.toTitleCase, quantity, 'none', 0, 0, 'none set'));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -160,6 +163,7 @@ export default class App extends Component {
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
 			switchScreen={() => {
+				console.log('switching to recipes screen')
 				this.setState({ screen: 'recipes' });
 			}}
 			logOut={() => {
@@ -189,13 +193,16 @@ export default class App extends Component {
 
 		return <RecipeScreen
 			data={
-				
+				this.state.recipes
+			}
+			userData={
+				this.state.inventory
 			}
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity));
+					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -246,44 +253,41 @@ export default class App extends Component {
 						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
 					}
 
-					this.setState({ inventory: ingredientsList });
+					this.setState({ inventory: ingredientsList }, this.getRecipes)
 				}
 			});
 	}
-	
-	getRecipes = (userId) => {
-		firebase.database().ref('/users/' + userId).once('value')
+
+	getRecipes = () => {
+		firebase.database().ref('/recipe').once('value')
 			.then((snapshot) => {
-				//snapshot.val() is the list we want
 				list = snapshot.val();
-
-				//lists it properly
-				//console.log("User's List: " + list);
-				if (list.length > 0) {
-					var ingredientsList = [];
-
-					var ingParams;
-					var ing;
-					for (var i = 0; i < list.length; i++) {
-						ingParams = list[i].split(",");
-						ing = new Ingredient(
-							ingParams[0], //name is a string
-							parseInt(ingParams[1], 10),  //quantity is an int
-							ingParams[2], //unit is a string
-							parseInt(ingParams[3], 10),  //calories is an int
-							parseInt(ingParams[4], 10), //seving is an int
-							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
-						);
-						ingredientsList.push(ing);
+				list.sort((recipeA, recipeB) => {
+					var countMatching = 0;
+					if (typeof recipeA.ingredients != 'undefined' && typeof recipeB.ingredients != 'undefined') {
+						this.state.inventory.forEach(userIngredient => {
+							recipeA.ingredients.forEach(ingredient => {
+								if (ingredient.name.toTitleCase().includes(userIngredient.key))
+									countMatching++;
+							})
+						});
+						this.state.inventory.forEach(userIngredient => {
+							recipeB.ingredients.forEach(ingredient => {
+								if (ingredient.name.toTitleCase().includes(userIngredient.key))
+									countMatching--;
+							})
+						});
+					} else {
+						console.log('AHA THERES THE ERROR. EITHER IN RECIPE: ' + recipeA.title + ' OR ' + recipeB.title)
 					}
-
-					console.log("Retrieved " + userId + "'s list:");
-					for (var i = 0; i < ingredientsList.length; i++) {
-						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
-					}
-
-					this.setState({ inventory: ingredientsList });
-				}
-			});
+					return countMatching;
+				})
+				this.setState({recipes: list})
+			})
+			.catch(console.log('CANT FIND THE RECIPE'))
 	}
 }
+
+String.prototype.toTitleCase = function () {
+	return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+};

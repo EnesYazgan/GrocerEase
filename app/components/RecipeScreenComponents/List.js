@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
-import IngredientInfo from './IngredientInfo';
+import RecipeInfo from './RecipeInfo';
 
 export default class List extends Component {
-
-  constructor(props){
-    super(props)
-  }
-
   static defaultProps = {
     text: '',
     data: [],
@@ -23,7 +18,7 @@ export default class List extends Component {
       <View style={styles.container}>
         <FlatList
           //A FlatList renders a component in multiple rows like a list, given an array of data.
-          extraData = {this.state}
+          extraData={this.state}
           data={
             this.props.data
           }
@@ -36,141 +31,19 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-    //local functions
-    //this function below doesn't update this.state.infoPressed until the
-    //NEXT time I click the info button... so the before and after console logs
-    //both say either false or both true
-    infoButtonPressed = () => {
-      // console.log("got in" + item);
-      if(this.state.infoPressed == item){
-        this.setState({infoPressed: null});
-        console.log(this.state.infoBool);
-      }else{
-        this.setState({infoPressed: item});
-        console.log(this.state.infoBool);
-      }
-    }
-
-    incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1)
-    }
-
-    decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1)
-    }
-
-    setQuantity = (text) => {
-      text == ''
-        ? this.props.changeItemQuantity(item.key, -item.quantity)
-        : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
-    }
-
-    //the actual rendering
-    //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
-
-    if (item.quantity > 0)
-      return (
-        <View>
-          <View style={styles.listRow}>
-            <Text
-              style={styles.textContainer}
-              onPress={this.handleTextPress}>
-              {item.key}
-            </Text>
-
-            <View style={styles.buttons}>
-              <TouchableOpacity
-                style={styles.iconInfo}
-                onPress={infoButtonPressed}
-              >
-                <Icon
-                  color='black'
-                  name='information-circle-outline'
-                  size={30}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
-                <Icon
-                  name="remove"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
-              <TextInput
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                style={styles.textContainer}
-                keyboardType={'numeric'}
-                defaultValue={item.quantity.toString()}
-                onChangeText={
-                  setQuantity
-                }
-              />
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={incrementItemQuantity}
-              >
-                <Icon
-                  name="add"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
-            </View>
-        </View>
-        {
-          this.state.infoPressed == item
-          ? <IngredientInfo item={item}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-          />
-          : null
+    return <ListRow
+      item={item}
+      infoButtonPressed={() => {
+        // console.log("got in" + item);
+        if (this.state.infoPressed == item) {
+          this.setState({ infoPressed: null });
+        } else {
+          this.setState({ infoPressed: item });
         }
-        </View>
-      )
-    else
-      return (
-        <View style={styles.listRow}>
-          <Text
-            style={styles.fadedTextContainer}
-            onPress={this.handleTextPress}>
-            {item.key}
-          </Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={decrementItemQuantity}
-            >
-              <Icon
-                name="close"
-                color="red"
-                size={20}
-              />
-            </TouchableOpacity>
-            <TextInput
-              underlineColorAndroid={'rgba(0,0,0,0)'}
-              style={styles.fadedTextContainer}
-              keyboardType={'numeric'}
-              defaultValue={item.quantity.toString()}
-              onChangeText={
-                setQuantity
-              }
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={incrementItemQuantity}
-            >
-              <Icon
-                name="add"
-                color="#51A4F7"
-                size={20}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )
+      }
+      }
+      visible={this.state.infoPressed == item}
+    />
   }
 
   renderSeparator = () => {
@@ -185,6 +58,33 @@ export default class List extends Component {
       />
     );
   };
+}
+
+class ListRow extends PureComponent {
+  render() {
+    return (
+      <View>
+        <TouchableOpacity style={styles.listRow}
+        onPress={this.props.infoButtonPressed}>
+          <Text
+            style={styles.textContainer}
+            onPress={this.handleTextPress}>
+            {this.props.item.title}
+          </Text>
+              <Icon
+                color='black'
+                name='information-circle'
+                size={30}
+              />
+        </TouchableOpacity>
+        {
+          this.props.visible
+            ? <RecipeInfo item={this.props.item}/>
+            : null
+        }
+      </View>
+    )
+  }
 }
 
 String.prototype.toTitleCase = function () {
@@ -238,6 +138,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textContainer: {
+    flex: 0.8,
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20

@@ -6,10 +6,6 @@ import ActionBar from './IngredientScreenComponents/ActionBar';
 import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
 
 export default class IngredientScreen extends Component {
-  constructor(props){
-    super(props)
-  }
-
   state = {
     cameraOn: false,
     filter: this.props.data,
@@ -39,17 +35,7 @@ export default class IngredientScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = [] //make a copy of the current array
-    for (var j = 0; j < this.props.data.length; j++) {
-      var match = true
-      for (var l = 0; l < text.length; l++) {
-        if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-          match = false
-          break
-        }
-      }
-      if (match) searchResults.push(this.props.data[j])
-    }
+    var searchResults = this.props.data.filter(item => item.key.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
   }
 
@@ -58,6 +44,15 @@ export default class IngredientScreen extends Component {
       <View style={styles.container}>
         <StatusBar hidden />
         <View style={styles.banner}>
+          <TouchableOpacity style={styles.iconContainer}
+            onPress={this.props.switchScreen}>
+            <Icon
+              style={styles.icon}
+              color='white'
+              name='nutrition'
+              size={30}
+            />
+          </TouchableOpacity>
           <Text style={styles.headerText}>My Ingredients</Text>
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
@@ -65,7 +60,7 @@ export default class IngredientScreen extends Component {
               style={styles.icon}
               color='white'
               name='log-out'
-              size={25}
+              size={30}
             />
           </TouchableOpacity>
         </View>
@@ -94,15 +89,6 @@ export default class IngredientScreen extends Component {
             changeItemServingSize={this.props.changeItemServingSize}
           />
         </View>
-        <TouchableOpacity style={styles.iconContainer}
-          onPress={this.props.switchScreen}>
-          <Icon
-            style={styles.footer}
-            color='#ccc'
-            name='cafe'
-            size={25}
-          />
-        </TouchableOpacity>
       </View>
     );
   }
@@ -131,7 +117,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flexDirection: 'row',
-    flex: 100,
+    flex: 1,
     textAlign: 'center',
     color: 'white',
     fontSize: 24,
@@ -139,19 +125,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
-    marginRight: -60
-  },
-  footer: {
-    flexDirection: 'row',
-    flex: 100,
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: -60
   },
   iconContainer: {
     borderWidth: 1,
@@ -161,7 +134,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: '#51A4F7',
-    paddingTop: 10,
     borderRadius: 10,
   },
   icon: {

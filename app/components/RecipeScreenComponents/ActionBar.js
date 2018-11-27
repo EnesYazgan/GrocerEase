@@ -30,20 +30,9 @@ export default class ActionBar extends Component {
             size={24}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={this.props.toggleCamera}
-        >
-          <Icon
-            style={styles.icon}
-            name="camera"
-            color="#51A4F7"
-            size={24}
-          />
-        </TouchableOpacity>
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
-          placeholder="Add or search for food!"
+          placeholder="Add or search for recipes!"
           onChangeText={
             this.props.searchData
           }

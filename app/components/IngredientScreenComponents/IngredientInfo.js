@@ -3,7 +3,6 @@ import {View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity
 import Icon from '../Icon';
 
 export default class IngredientInfo extends React.Component {
-
   static defaultProps = {
     item: null,
   }
