@@ -5,7 +5,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 export default class IngredientInfo extends React.Component {
-
   static defaultProps = {
     item: null,
   }
