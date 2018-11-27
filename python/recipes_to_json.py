@@ -107,6 +107,10 @@ def getIngredient(line):
 unicode_convert = {
     '\u2013': '-',
     '\u2044': '/',
+    '$': 'S',
+    '[': '(',
+    ']': ')',
+    '#': '||',
 }
 
 recipe_urls_json = ''

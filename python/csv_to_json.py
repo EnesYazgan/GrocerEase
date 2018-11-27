@@ -33,8 +33,8 @@ with open('grocery_upc_database.csv') as csvfile:
 # print(json.dumps(barcodes[3].toJSON(), ensure_ascii=True))
 
 # convert arrays to strings with commas, skip first index since it's the header
-barcodes_upc12_string = ','.join(barcodes_upc12[1:])
-barcodes_upc14_string = ','.join(barcodes_upc14[1:])
+barcodes_upc12_string = ','.join(barcodes_upc12[1:]).strip()
+barcodes_upc14_string = ','.join(barcodes_upc14[1:]).strip()
 
 # write json strings to files
 with open('barcodes_upc12.json', 'w') as fp:
