@@ -73,7 +73,7 @@ export default class List extends Component {
                 onPress={infoButtonPressed}
               >
                 <Icon
-                  name='information-circle-outline'
+                  name='information-circle'
                   color="#51A4F7"
                   size={30}
                 />

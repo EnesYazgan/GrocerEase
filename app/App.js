@@ -116,11 +116,38 @@ export default class App extends Component {
 	constructedIngredientScreen = () => {
 		return <IngredientScreen
 			data={this.state.inventory}
+
+			checkBarcode={(barcode) => {firebase.database().ref('/users/' + userId).once('value')
+			.then((snapshot) => {
+				//snapshot.val() is the list we want
+				list = snapshot.val();
+
+				//lists it properly
+				//console.log("User's List: " + list);
+				if (list.length > 0) {
+					var ingredientsList = [];
+
+					var ingParams;
+					var ing;
+					for (var i = 0; i < list.length; i++) {
+						ingParams = list[i].split(",");
+						ingredientsList.push(ing);
+					}
+
+					console.log("Retrieved " + userId + "'s list:");
+					for (var i = 0; i < ingredientsList.length; i++) {
+						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
+					}
+
+					this.setState({ inventory: ingredientsList }, this.getRecipes)
+				}
+			})}}
+
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase, quantity, 'none', 0, 0, 'none set'));
+					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set'));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -182,24 +209,7 @@ export default class App extends Component {
 	}
 
 	constructedRecipeScreen = () => {
-		returnMatchingRecipes = (allRecipes) => {
-			var matchingRecipes = this.state.inventory.slice(0);
-			var searchResults = [] //make a copy of the current array
-			for (var j = 0; j < this.props.data.length; j++) {
-				var match = true
-				for (var l = 0; l < text.length; l++) {
-					if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-						match = false
-						break
-					}
-				}
-				if (match) searchResults.push(this.props.data[j])
-			}
-			this.setState({ text: text, filter: searchResults })
-			//allRecipes.find(eachRecipe => )
-			this.props.changeItemQuantity(item.key, 1)
-		}
-
+		this.getRecipes()
 		return <RecipeScreen
 			data={
 				this.state.recipes
@@ -207,21 +217,6 @@ export default class App extends Component {
 			userData={
 				this.state.inventory
 			}
-			changeItemQuantity={(itemName, quantity) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity));
-				}
-				else {
-					foundIngredient.quantity = foundIngredient.quantity + quantity
-					if (foundIngredient.quantity < 0)
-						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-				}
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
 			switchScreen={() => {
 				this.setState({ screen: 'ingredients' });
 			}}
@@ -235,7 +230,7 @@ export default class App extends Component {
 		firebase.database().ref('/users/' + userId).once('value')
 			.then((snapshot) => {
 				//snapshot.val() is the list we want
-				list = snapshot.val();
+				list = snapshot.val().slice(0);
 
 				//lists it properly
 				//console.log("User's List: " + list);
@@ -270,36 +265,28 @@ export default class App extends Component {
 	getRecipes = () => {
 		firebase.database().ref('/recipe').once('value')
 			.then((snapshot) => {
-				list = snapshot.val();
-				// list.forEach(recipe => {
-				// 	var countMatching = 0;
-				// 	this.state.inventory.forEach(userIngredient => {
-				// 		recipe.ingredients.forEach(ingredient => {
-				// 			if (ingredient.name.toTitleCase().includes(userIngredient.key))
-				// 				countMatching++;
-				// 		})
-				// 	});
-				// 	recipe.matchingIngredients = countMatching;
-				// });
+				list = snapshot.val().slice(0);
+				list.forEach(recipe => {
+					recipe.matchingIngredients = 0;
+					this.state.inventory.forEach(userIngredient => {
+						if (typeof recipe.ingredients != 'undefined') {
+							recipe.ingredients.forEach(ingredient => {
+								ingredient.name = ingredient.name.toTitleCase()
+								if (ingredient.name.includes(userIngredient.key))
+									recipe.matchingIngredients = recipe.matchingIngredients + 1;
+							})
+							recipe.equipment_names.forEach(tool => {
+								tool = tool.toTitleCase()
+							})
+						}
+					});
+					console.log('matching ingredients are ' + recipe.matchingIngredients)
+				});
 				list.sort((recipeA, recipeB) => {
-					var countMatching = 0;
-					if (typeof recipeA.ingredients != 'undefined' && typeof recipeB.ingredients != 'undefined') {
-						this.state.inventory.forEach(userIngredient => {
-							recipeA.ingredients.forEach(ingredient => {
-								if (ingredient.name.toTitleCase().includes(userIngredient.key))
-									countMatching++;
-							})
-						});
-						this.state.inventory.forEach(userIngredient => {
-							recipeB.ingredients.forEach(ingredient => {
-								if (ingredient.name.toTitleCase().includes(userIngredient.key))
-									countMatching--;
-							})
-						});
-					} else {
-						console.log('AHA THERES THE ERROR. EITHER IN RECIPE: ' + recipeA.title + ' OR ' + recipeB.title)
-					}
-					return countMatching;
+					if (recipeB.matchingIngredients == recipeA.matchingIngredients)
+						return (recipeB.ingredients.length - recipeA.ingredients.length)
+					else
+						return (recipeB.matchingIngredients - recipeA.matchingIngredients)
 				})
 				this.setState({recipes: list})
 			})
