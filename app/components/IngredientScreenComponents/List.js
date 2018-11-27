@@ -32,17 +32,11 @@ export default class List extends Component {
 
   renderListRow = ({ item }) => {
     //local functions
-    //this function below doesn't update this.state.infoPressed until the
-    //NEXT time I click the info button... so the before and after console logs
-    //both say either false or both true
     infoButtonPressed = () => {
-      // console.log("got in" + item);
       if(this.state.infoPressed == item){
         this.setState({infoPressed: null});
-        console.log(this.state.infoBool);
       }else{
         this.setState({infoPressed: item});
-        console.log(this.state.infoBool);
       }
     }
 
@@ -118,8 +112,10 @@ export default class List extends Component {
         {
           this.state.infoPressed == item
           ? <IngredientInfo item={item}
+            changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
+            changeItemExpiration={this.props.changeItemExpiration}
           />
           : null
         }
