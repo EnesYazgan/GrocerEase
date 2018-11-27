@@ -4,11 +4,6 @@ import Icon from '../Icon';
 import IngredientInfo from './IngredientInfo';
 
 export default class List extends Component {
-
-  constructor(props){
-    super(props)
-  }
-
   static defaultProps = {
     text: '',
     data: [],
@@ -78,7 +73,7 @@ export default class List extends Component {
                 onPress={infoButtonPressed}
               >
                 <Icon
-                  name='information-circle-outline'
+                  name='information-circle'
                   color="#51A4F7"
                   size={30}
                 />

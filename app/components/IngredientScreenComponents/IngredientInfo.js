@@ -5,7 +5,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 export default class IngredientInfo extends React.Component {
-
   static defaultProps = {
     item: null,
   }
@@ -262,7 +261,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "space-between",
+    alignItems: "center",
     marginBottom: 1,
     height: 50,
   }

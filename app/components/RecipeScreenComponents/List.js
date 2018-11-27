@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
+import React, { Component, PureComponent } from 'react';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar } from 'react-native';
 import Icon from '../Icon';
-import IngredientInfo from './IngredientInfo';
+import RecipeInfo from './RecipeInfo';
 
 export default class List extends Component {
-
-  constructor(props){
-    super(props)
-  }
-
   static defaultProps = {
+    viewRecipeSteps: undefined,
     text: '',
     data: [],
   }
@@ -23,154 +19,41 @@ export default class List extends Component {
       <View style={styles.container}>
         <FlatList
           //A FlatList renders a component in multiple rows like a list, given an array of data.
-          extraData = {this.state}
+          extraData={this.state}
           data={
             this.props.data
           }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
+          initialNumToRender={15}
         />
       </View>
     );
   }
 
   renderListRow = ({ item }) => {
-    //local functions
-    //this function below doesn't update this.state.infoPressed until the
-    //NEXT time I click the info button... so the before and after console logs
-    //both say either false or both true
-    infoButtonPressed = () => {
-      // console.log("got in" + item);
-      if(this.state.infoPressed == item){
-        this.setState({infoPressed: null});
-        console.log(this.state.infoBool);
-      }else{
-        this.setState({infoPressed: item});
-        console.log(this.state.infoBool);
+    viewRecipeSteps = () => {
+      this.props.viewRecipeSteps(item)
+    }
+
+    return <ListRow
+      viewRecipeSteps={
+        viewRecipeSteps
       }
-    }
 
-    incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1)
-    }
-
-    decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1)
-    }
-
-    setQuantity = (text) => {
-      text == ''
-        ? this.props.changeItemQuantity(item.key, -item.quantity)
-        : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
-    }
-
-    //the actual rendering
-    //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
-
-    if (item.quantity > 0)
-      return (
-        <View>
-          <View style={styles.listRow}>
-            <Text
-              style={styles.textContainer}
-              onPress={this.handleTextPress}>
-              {item.key}
-            </Text>
-
-            <View style={styles.buttons}>
-              <TouchableOpacity
-                style={styles.iconInfo}
-                onPress={infoButtonPressed}
-              >
-                <Icon
-                  color='black'
-                  name='information-circle-outline'
-                  size={30}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
-                <Icon
-                  name="remove"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
-              <TextInput
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                style={styles.textContainer}
-                keyboardType={'numeric'}
-                defaultValue={item.quantity.toString()}
-                onChangeText={
-                  setQuantity
-                }
-              />
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={incrementItemQuantity}
-              >
-                <Icon
-                  name="add"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
-            </View>
-        </View>
-        {
-          this.state.infoPressed == item
-          ? <IngredientInfo item={item}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-          />
-          : null
+      item={item}
+      infoButtonPressed={() => {
+        // console.log("got in" + item);
+        if (this.state.infoPressed == item) {
+          this.setState({ infoPressed: null });
+        } else {
+          this.setState({ infoPressed: item });
         }
-        </View>
-      )
-    else
-      return (
-        <View style={styles.listRow}>
-          <Text
-            style={styles.fadedTextContainer}
-            onPress={this.handleTextPress}>
-            {item.key}
-          </Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={decrementItemQuantity}
-            >
-              <Icon
-                name="close"
-                color="red"
-                size={20}
-              />
-            </TouchableOpacity>
-            <TextInput
-              underlineColorAndroid={'rgba(0,0,0,0)'}
-              style={styles.fadedTextContainer}
-              keyboardType={'numeric'}
-              defaultValue={item.quantity.toString()}
-              onChangeText={
-                setQuantity
-              }
-            />
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={incrementItemQuantity}
-            >
-              <Icon
-                name="add"
-                color="#51A4F7"
-                size={20}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )
+      }
+      }
+      visible={this.state.infoPressed == item}
+    />
   }
 
   renderSeparator = () => {
@@ -187,8 +70,41 @@ export default class List extends Component {
   };
 }
 
+class ListRow extends PureComponent {
+  render() {
+    return (
+      <View>
+        <TouchableOpacity style={styles.listRow}
+          onPress={this.props.infoButtonPressed}>
+          <Text
+            style={styles.textContainer}
+            onPress={this.handleTextPress}>
+            {this.props.item.title}
+          </Text>
+          <Text
+            style={styles.textContainer}
+            onPress={this.handleTextPress}>
+            {this.props.item.matchingIngredients} out of {this.props.item.ingredients.length}
+          </Text>
+          <Icon
+            color='#51A4F7'
+            name='information-circle'
+            size={30}
+          />
+        </TouchableOpacity>
+        {
+          this.props.visible
+            ? <RecipeInfo item={this.props.item}
+              switchScreen={this.props.viewRecipeSteps} />
+            : null
+        }
+      </View>
+    )
+  }
+}
+
 String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 const styles = StyleSheet.create({
@@ -231,13 +147,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 50,
+    height: 75,
   },
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
   textContainer: {
+    flex: 1,
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
@@ -249,21 +166,21 @@ const styles = StyleSheet.create({
     color: '#ccc'
   },
   iconInfo: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
-    width:30,
-    height:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    width: 30,
+    height: 30,
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:30,
-    height:30,
-    backgroundColor:'#fff',
-    borderRadius:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    backgroundColor: '#fff',
+    borderRadius: 30,
   }
 });

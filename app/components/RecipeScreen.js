@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import Icon from './Icon';
 import List from './RecipeScreenComponents/List';
+import ActionBar from './RecipeScreenComponents/ActionBar';
 import StepsScreen from './StepsScreen';
 
 export default class RecipeScreen extends Component {
-	constructor(props) {
-		super(props)
-  }
-  
   state = {
-    cameraOn: false,
     filter: this.props.data,
     text: '',
     sortParameter: true,
@@ -23,18 +19,9 @@ export default class RecipeScreen extends Component {
     changeItemQuantity: undefined,
     data: [],
   }
-  
-  viewRecipeSteps = (recipe) => {
-    this.setState({ currentRecipe: recipe })
-  }
-  
-  changeSortParameterThenOrderList = () => {
-    this.setState({ sortParameter: !this.state.sortParameter })
-    this.props.orderList(this.state.sortParameter)
-  }
 
-  toggleCamera = () => {
-    this.setState({ cameraOn: !this.state.cameraOn });
+  orderList = (sortingFunction) => {
+    this.setState({ filter: this.props.data.sort(sortingFunction) })
   }
 
   addNewItem = () => {
@@ -43,95 +30,79 @@ export default class RecipeScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = this.props.data.filter(item => item.substring(0, text.length) == text); 
-    // var searchResults = [] //make a copy of the current array
-    // for (var j = 0; j < this.props.data.length; j++) {
-    //   var match = true
-    //   for (var l = 0; l < text.length; l++) {
-    //     if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
-    //       match = false
-    //       break
-    //     }
-    //   }
-    //   if (match) searchResults.push(this.props.data[j])
-    // }
+    var searchResults = this.props.data.filter(item => item.title.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <Text style={styles.headerText}>My Ingredients</Text>
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.logOut}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='log-out'
-              size={25}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <ActionBar
-            text={this.state.text}
-            toggleCamera={this.toggleCamera}
-            addNewItem={this.addNewItem}
-            searchData={this.searchData}
-            sortList={this.changeSortParameterThenOrderList}
-          />
-          <List
-            data={this.state.text == ''
-              ? this.props.data
-              : this.state.filter
-            }
-            changeItemQuantity={this.props.changeItemQuantity}
-          />
-        </View>
-        <TouchableOpacity style={styles.iconContainer}
-          onPress={this.props.switchScreen}>
-          <Icon
-            style={styles.footer}
-            color='#ccc'
-            name='cafe'
-            size={25}
-          />
-        </TouchableOpacity>
-      </View>
-    );
+  viewSteps = (recipe) => {
+    this.setState({ currentRecipe: recipe })
   }
-  
-	constructedStepsScreen = () => {
-		return <StepsScreen
-			data={
-				currentRecipe.steps
-			}
-			changeItemQuantity={(itemName, quantity) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity));
-				}
-				else {
-					foundIngredient.quantity = foundIngredient.quantity + quantity
-					if (foundIngredient.quantity < 0)
-						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-				}
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
-			switchScreen={() => {
-				this.setState({ screen: 'ingredients' });
-			}}
-			logOut={() => {
-				this.logoutAndClearData()
-			}}
-		/>
-	}
+
+  render() {
+    if (this.state.currentRecipe == null) {
+      return (
+        <View style={styles.container}>
+          <StatusBar hidden />
+          <View style={styles.banner}>
+            <TouchableOpacity style={styles.iconContainer}
+              onPress={this.props.switchScreen}>
+              <Icon
+                style={styles.icon}
+                color='white'
+                name='flame'
+                size={30}
+              />
+            </TouchableOpacity>
+            <Text style={styles.headerText}>Find Recipes</Text>
+            <TouchableOpacity style={styles.iconContainer}
+              onPress={this.props.logOut}>
+              <Icon
+                style={styles.icon}
+                color='white'
+                name='log-out'
+                size={30}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <ActionBar
+              text={this.state.text}
+              addNewItem={this.addNewItem}
+              searchData={this.searchData}
+              sortList={this.changeSortParameterThenOrderList}
+            />
+            <List
+              viewRecipeSteps={this.viewSteps}
+              data={this.state.filter}
+              changeItemQuantity={this.props.changeItemQuantity}
+            />
+          </View>
+        </View>
+      );
+    } else {
+      return this.constructedStepsScreen();
+    }
+  }
+
+  constructedStepsScreen = () => {
+    return <StepsScreen
+      title={
+        this.state.currentRecipe.title
+      }
+      data={
+        this.state.currentRecipe.steps
+      }
+      switchScreen={() => {
+        this.setState({ currentRecipe: null });
+      }}
+      logOut={this.props.logOut}
+    />
+  }
 }
+
+String.prototype.toTitleCase = function () {
+  return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+};
 
 const styles = StyleSheet.create({
   buttons: {
@@ -156,7 +127,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flexDirection: 'row',
-    flex: 100,
+    flex: 1,
     textAlign: 'center',
     color: 'white',
     fontSize: 24,
@@ -164,30 +135,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
-    marginRight: -60
-  },
-  footer: {
-    flexDirection: 'row',
-    flex: 100,
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: -60
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:50,
-    height:50,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
     backgroundColor: '#51A4F7',
-    paddingTop: 10,
-    borderRadius:10,
+    borderRadius: 10,
   },
   icon: {
     flexDirection: 'row',
