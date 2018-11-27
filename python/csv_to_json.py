@@ -1,5 +1,6 @@
 import csv
 import json
+import codecs
 
 class BarcodeObject:
     # initialize the object
@@ -12,9 +13,9 @@ class BarcodeObject:
     # returns a json string representing the object, indexed by upc12 or upc14 value
     def toJSON(self, barcode):
         if barcode == 'upc14':
-            return '{}: {{upc12: {}, brand: {}, name: {}}}'.format(self.upc14, self.upc12, self.brand, self.name)
+            return '"{}": {{upc12: "{}", brand: "{}", name: "{}"}}'.format(self.upc14, self.upc12, self.brand, self.name)
         else:
-            return '{}: {{upc14: {}, brand: {}, name: {}}}'.format(self.upc12, self.upc14, self.brand, self.name)
+            return '"{}": {{upc14: "{}", brand: "{}", name: "{}"}}'.format(self.upc12, self.upc14, self.brand, self.name)
 
 barcodes_upc14 = []
 barcodes_upc12 = []
@@ -33,12 +34,18 @@ with open('grocery_upc_database.csv') as csvfile:
 # print(json.dumps(barcodes[3].toJSON(), ensure_ascii=True))
 
 # convert arrays to strings with commas, skip first index since it's the header
-barcodes_upc12_string = ','.join(barcodes_upc12[1:]).strip()
-barcodes_upc14_string = ','.join(barcodes_upc14[1:]).strip()
+barcodes_upc12_string = '{{{}}}'.format(','.join(barcodes_upc12[1:]).strip())
+barcodes_upc14_string = '{{{}}}'.format(','.join(barcodes_upc14[1:]).strip())
+
+with open('barcodes_upc12.json', 'w') as file:
+    file.write(barcodes_upc12_string)
+
+with open('barcodes_upc14.json', 'w') as file:
+    file.write(barcodes_upc14_string)
 
 # write json strings to files
-with open('barcodes_upc12.json', 'w') as fp:
-    json.dump('{{{}}}'.format(barcodes_upc12_string), fp)
-
-with open('barcodes_upc14.json', 'w') as fp:
-    json.dump('{{{}}}'.format(barcodes_upc14_string), fp)
+# with open('barcodes_upc12.json', 'w') as fp:
+#     json.dump(codecs.decode(barcodes_upc12_string, 'unicode_escape'), fp)
+#
+# with open('barcodes_upc14.json', 'w') as fp:
+#     json.dump(codecs.decode(barcodes_upc14_string, 'unicode_escape'), fp)
