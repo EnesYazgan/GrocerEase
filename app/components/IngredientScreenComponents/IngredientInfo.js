@@ -88,14 +88,19 @@ export default class IngredientInfo extends React.Component {
         month = "12";
       }else{}
 
+      console.log("ah " + dateArray[3]+month+dateArray[2]);
       timeDifference = moment((dateArray[3]+month+dateArray[2]), "YYYYMMDD").fromNow();
       timeAgo = timeDifference.split(' ');
 
       if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"){
       	alert("Expiration date for " + this.props.item.key + " is nearing! Think about replacing your " + this.props.item.key + ".");
       }else if(timeAgo[2] == "ago"){
-      	alert("Expiration date for " + this.props.item.key + " has passed! Think about replacing your " + this.props.item.key + ".");
-      }else{}
+        console.log("ago: " + timeDifference);
+        alert("Expiration date for " + this.props.item.key + " has passed! Think about replacing your " + this.props.item.key + ".");
+      }else{
+        console.log("bam" + timeDifference);
+        alert("You're all set!");
+      }
 
     }
 
@@ -185,6 +190,12 @@ export default class IngredientInfo extends React.Component {
             onConfirm={setDate}
             onCancel={this._hideDateTimePicker}
           />
+          <TouchableOpacity onPress={expirationAlert}>
+            <Icon
+              name="checkmark-circle"
+              size={30}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     );
