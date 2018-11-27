@@ -129,6 +129,8 @@ root_url = 'https://www.bonappetit.com'
 
 # combine hrefs with the base urls generate array of urls to parse
 urls = [root_url + recipe_href for recipe_href in recipe_hrefs]
+urls.remove('https://www.bonappetit.com/recipe/creamy-kimchi-dip')
+urls.remove('https://www.bonappetit.com/recipe/cider-braised-pork-shoulder-with-butternut-squash')
 
 recipes = []
 
