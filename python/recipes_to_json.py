@@ -25,13 +25,15 @@ class Recipe:
                  title,
                  image_src,
                  ingredients,
-                 equipment_dict,
+                 equipment_names,
+                 equipment_links,
                  steps):
                     self.url = url
                     self.title = title
                     self.image_src = image_src
                     self.ingredients = ingredients
-                    self.equipment_dict = equipment_dict
+                    self.equipment_names = equipment_names
+                    self.equipment_links = equipment_links
                     self.steps = steps
     # converts object to JSON string
     def toJSON(self):
@@ -158,7 +160,7 @@ for url in urls:
     equip_names = html.xpath('//div[@class="image-grid-item-text"]/text()')
 
     # create dictionary of equipment, key is name of equipment, value is link to it
-    equipment = dict(zip(equip_names, equip_links))
+    # equipment = dict(zip(equip_names, equip_links))
 
     # get steps
     steps = html.xpath('//li[@class="step"]/div/p')
@@ -166,7 +168,7 @@ for url in urls:
     # use list comprehension to run text_content on all steps
     steps = [stringUTF8(step) for step in steps]
 
-    recipe = Recipe(url, title, image_src, ingredients, equipment, steps)
+    recipe = Recipe(url, title, image_src, ingredients, equip_names, equip_links, steps)
 
     recipes.append(recipe.toJSON() + ',')
 
