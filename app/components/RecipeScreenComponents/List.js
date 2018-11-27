@@ -31,7 +31,14 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
+    viewRecipeSteps = () => {
+      this.props.viewRecipeSteps(item)
+    }
+
     return <ListRow
+      viewRecipeSteps={
+        viewRecipeSteps
+      }
       item={item}
       infoButtonPressed={() => {
         // console.log("got in" + item);
@@ -79,7 +86,8 @@ class ListRow extends PureComponent {
         </TouchableOpacity>
         {
           this.props.visible
-            ? <RecipeInfo item={this.props.item}/>
+            ? <RecipeInfo item={this.props.item}
+            switchScreen={this.props.viewRecipeSteps}/>
             : null
         }
       </View>

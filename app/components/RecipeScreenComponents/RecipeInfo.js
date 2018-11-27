@@ -22,10 +22,12 @@ export default class RecipeInfo extends React.Component {
             <Text key={element} style={styles.textInput}>{element}</Text>
           )
         })}
+        <Button onPress={this.props.switchScreen}>
+          View Steps
+        </Button>
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

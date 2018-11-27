@@ -7,7 +7,6 @@ import StepsScreen from './StepsScreen';
 
 export default class RecipeScreen extends Component {  
   state = {
-    cameraOn: false,
     filter: this.props.data,
     text: '',
     sortParameter: true,
@@ -19,10 +18,6 @@ export default class RecipeScreen extends Component {
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
-  }
-  
-  viewRecipeSteps = (recipe) => {
-    this.setState({ currentRecipe: recipe })
   }
   
   orderList = (sortingFunction) => {
@@ -37,6 +32,10 @@ export default class RecipeScreen extends Component {
   searchData = (text) => {
     var searchResults = this.props.data.filter(item => item.title.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
+  }
+  
+  viewSteps = (recipe) => {
+    this.setState({ currentRecipe: recipe })
   }
 
   render() {
@@ -72,6 +71,7 @@ export default class RecipeScreen extends Component {
             sortList={this.changeSortParameterThenOrderList}
           />
           <List
+            viewSteps={this.viewSteps}
             data={this.state.filter}
             changeItemQuantity={this.props.changeItemQuantity}
           />
