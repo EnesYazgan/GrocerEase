@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, AppState } from 'react-native'
+import { View, StatusBar, AppState} from 'react-native'
 //import * as firebase from 'firebase';
 import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
@@ -79,7 +79,7 @@ export default class App extends Component {
 			signUp={(email, password) => {
 				console.log("Sign up:");
 				if (!(email == undefined) && !(password == undefined)) {
-					alert('Checking authentication', 'One moment please...');
+					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().createUserWithEmailAndPassword(email, password)
 						.then(() => {
 							this.loginAndGetData(firebase.auth().currentUser.uid)
@@ -96,7 +96,7 @@ export default class App extends Component {
 			login={(email, password) => {
 				console.log("Log in:");
 				if (!(email == undefined) && !(password == undefined)) {
-					alert('Checking authentication', 'One moment please...');
+					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().signInWithEmailAndPassword(email, password)
 						.then(() => {
 							this.loginAndGetData(firebase.auth().currentUser.uid)
@@ -145,6 +145,15 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				foundIngredient.serving = serving;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+
+      changeItemExpiration={(itemName, expiry) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.expiry = expiry;
 				this.setState({ inventory: newInventory });
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);

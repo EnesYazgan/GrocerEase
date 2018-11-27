@@ -87,6 +87,7 @@ export default class IngredientScreen extends Component {
             changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
+            changeItemExpiration={this.props.changeItemExpiration}
           />
         </View>
       </View>
