@@ -39,6 +39,7 @@ export default class RecipeScreen extends Component {
   }
 
   render() {
+    if (currentRecipe == null) {
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -78,34 +79,23 @@ export default class RecipeScreen extends Component {
         </View>
       </View>
     );
+    } else {
+      return this.constructedStepsScreen();
+    }
   }
   
 	constructedStepsScreen = () => {
 		return <StepsScreen
+      title={
+        currentRecipe.title
+      }
 			data={
 				currentRecipe.steps
 			}
-			changeItemQuantity={(itemName, quantity) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName, quantity));
-				}
-				else {
-					foundIngredient.quantity = foundIngredient.quantity + quantity
-					if (foundIngredient.quantity < 0)
-						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-				}
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
 			switchScreen={() => {
-				this.setState({ screen: 'ingredients' });
+				this.setState({ currentRecipe: null });
 			}}
-			logOut={() => {
-				this.logoutAndClearData()
-			}}
+			logOut={this.props.logOut}
 		/>
 	}
 }
