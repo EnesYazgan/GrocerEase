@@ -4,28 +4,18 @@ import Icon from './Icon';
 import List from './RecipeScreenComponents/List';
 import StepsScreen from './StepsScreen';
 
-export default class RecipeScreen extends Component {
-	constructor(props) {
-		super(props)
-  }
-  
+export default class StepsScreen extends Component {  
   state = {
-    cameraOn: false,
     filter: this.props.data,
     text: '',
-    sortParameter: true,
     viewAllRecipes: false,
-    currentRecipe: null,
   }
 
   static defaultProps = {
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
-  }
-  
-  viewRecipeSteps = (recipe) => {
-    this.setState({ currentRecipe: recipe })
+    title: '',
   }
   
   changeSortParameterThenOrderList = () => {
@@ -61,6 +51,28 @@ export default class RecipeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar hidden />
+        <View style={styles.banner}>
+          <TouchableOpacity style={styles.iconContainer}
+            onPress={this.props.switchScreen}>
+            <Icon
+              style={styles.icon}
+              color='white'
+              name='flame'
+              size={30}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>How to Make {this.props.title}</Text>
+          <TouchableOpacity style={styles.iconContainer}
+            onPress={this.props.logOut}>
+            <Icon
+              style={styles.icon}
+              color='white'
+              name='log-out'
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
         <View style={styles.container}>
           <ActionBar
             text={this.state.text}

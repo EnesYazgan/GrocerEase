@@ -271,6 +271,16 @@ export default class App extends Component {
 		firebase.database().ref('/recipe').once('value')
 			.then((snapshot) => {
 				list = snapshot.val();
+				// list.forEach(recipe => {
+				// 	var countMatching = 0;
+				// 	this.state.inventory.forEach(userIngredient => {
+				// 		recipe.ingredients.forEach(ingredient => {
+				// 			if (ingredient.name.toTitleCase().includes(userIngredient.key))
+				// 				countMatching++;
+				// 		})
+				// 	});
+				// 	recipe.matchingIngredients = countMatching;
+				// });
 				list.sort((recipeA, recipeB) => {
 					var countMatching = 0;
 					if (typeof recipeA.ingredients != 'undefined' && typeof recipeB.ingredients != 'undefined') {
