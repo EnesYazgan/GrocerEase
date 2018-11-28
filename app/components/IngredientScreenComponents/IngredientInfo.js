@@ -9,9 +9,14 @@ export default class IngredientInfo extends React.Component {
     item: null,
   }
 
+  //isExpired 0 = not expired, 1 = close to being expired, 2 = expired
   state = {
     isDateTimePickerVisible: false,
   };
+
+  // componentDidMount() {
+  //
+  // }
 
   _showDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: true });
@@ -33,34 +38,17 @@ export default class IngredientInfo extends React.Component {
         : this.props.changeItemServingSize(this.props.item.key, parseInt(text))
     }
     setDate = (date) => {
-      parsedDate = date.toString();
-      dateArray = parsedDate.split(' ');
-      onlyDate = dateArray[0] + " " + dateArray[1] + " "+ dateArray[2] + ", " + dateArray[3];
-      this.props.changeItemExpiration(this.props.item.key, onlyDate);
-      this.setState({dateChosen: onlyDate});
-      this._hideDateTimePicker();
-    }
+      // parsedDate = date.toString();
+      // dateArray = parsedDate.split(' ');
+      // onlyDate = dateArray[0] + " " + dateArray[1] + " "+ dateArray[2] + ", " + dateArray[3];
+      // this.props.changeItemExpiration(this.props.item.key, onlyDate);
+      // this.setState({dateChosen: onlyDate});
+      // this._hideDateTimePicker();
 
-    incrementCalories = () => {
-      this.props.changeItemCalories(this.props.item.key, (this.props.item.calories + 1) );
-    }
-    decrementCalories = () => {
-      this.props.changeItemCalories(this.props.item.key, (this.props.item.calories - 1) );
-    }
-
-    incrementServing = () => {
-      this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving + 1) );
-    }
-    decrementServing = () => {
-      this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving - 1) );
-    }
-
-    expirationAlert = (date) => {
       parsedDate = date.toString();
       dateArray = parsedDate.split(' ');
 
       month = "00";
-
       if(dateArray[1] == "Jan"){
         month = "01";
       }else if(dateArray[1] == "Feb"){
@@ -90,12 +78,68 @@ export default class IngredientInfo extends React.Component {
       timeDifference = moment((dateArray[3]+month+dateArray[2]), "YYYYMMDD").fromNow();
       timeAgo = timeDifference.split(' ');
 
-      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"){
-      	alert("Expiration date for " + this.props.item.key + " is nearing! Think about replacing your " + this.props.item.key + ".");
-      }else if(timeAgo[2] == "ago"){
-      	alert("Expiration date for " + this.props.item.key + " has passed! Think about replacing your " + this.props.item.key + ".");
-      }else{}
+      this._hideDateTimePicker();
 
+      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"){
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 1);
+        console.log(timeDifference + "..." + this.props.item.key + "..." + this.props.item.isExpired);
+      }else if(timeAgo[2] == "ago"){
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 2);
+        this.props.item.isExpired = 2;
+      }else{
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 0);
+        this.props.item.isExpired = 0;
+      }
+
+    }
+
+    incrementCalories = () => {
+      this.props.changeItemCalories(this.props.item.key, (this.props.item.calories + 1) );
+    }
+    decrementCalories = () => {
+      if(this.props.item.calories > 0){
+        this.props.changeItemCalories(this.props.item.key, (this.props.item.calories - 1) );
+      }
+    }
+
+    incrementServing = () => {
+      this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving + 1) );
+    }
+    decrementServing = () => {
+      if(this.props.item.serving > 0){
+        this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving - 1) );
+      }
+    }
+
+    expirationAlert = (date) => {
+      // this.props.item.expiry
+
+      console.log("ah " + dateArray[3]+month+dateArray[2]);
+      timeDifference = moment((dateArray[3]+month+dateArray[2]), "YYYYMMDD").fromNow();
+      console.log(timeDifference);
+      timeAgo = timeDifference.split(' ');
+
+      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"){
+        console.log("timeDifference: " + timeDifference);
+      	// alert("Expiration date for " + this.props.item.key + " is nearing! Think about replacing your " + this.props.item.key + ".");
+        this.state.isExpired = 2;
+      }else if(timeAgo[2] == "ago" || timeAgo[2] == "hours"){
+        console.log("timeDifference: " + timeDifference);
+        // alert("Expiration date for " + this.props.item.key + " has passed! Think about replacing your " + this.props.item.key + ".");
+        this.state.isExpired = 1;
+      }else{
+        console.log("timeDifference: " + timeDifference);
+        // alert("You're all set!");
+        this.state.isExpired = 0;
+      }
+
+      return timeDifference;
+
+    }
+
+    bothSetDateAndExpirationAlert = (date) => {
+      setDate(date);
+      expirationAlert(date);
     }
 
     return (
@@ -172,9 +216,11 @@ export default class IngredientInfo extends React.Component {
 
         <View style={styles.listRow}>
           <Text style={styles.textInput}>Expiration date:</Text>
+
           <Text style={styles.calendarText}>{this.props.item.expiry}</Text>
           <TouchableOpacity onPress={this._showDateTimePicker}>
             <Icon
+
               name="calendar"
               size={30}
             />
@@ -184,6 +230,41 @@ export default class IngredientInfo extends React.Component {
             onConfirm={setDate}
             onCancel={this._hideDateTimePicker}
           />
+
+          {
+            this.props.item.isExpired == 0
+              ? <Icon
+                  style={styles.icon}
+                  name="checkmark-circle"
+                  size={30}
+                  color="green"
+                />
+              : null
+          }
+          {
+            this.props.item.isExpired == 1
+              ? <Icon
+                  style={styles.icon}
+                  name="checkmark-circle"
+                  size={30}
+                  color="orange"
+                />
+              : null
+          }
+          {
+            this.props.item.isExpired == 2
+              ? <Icon
+                  style={styles.icon}
+                  name="checkmark-circle"
+                  size={30}
+                  color="red"
+                />
+              : null
+          }
+
+
+
+
         </View>
       </View>
     );
@@ -221,6 +302,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: '#D0E3F5',
+  },
+  icon: {
+    marginLeft: 10
   },
   fadedTextContainer: {
     marginLeft: 10,

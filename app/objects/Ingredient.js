@@ -1,10 +1,11 @@
-function Ingredient(key, quantity, unit, calories, serving, expiry) {
+function Ingredient(key, quantity, unit, calories, serving, expiry, isExpired) {
     this.key = key;
     this.quantity = quantity;
     this.unit = unit;
     this.calories = calories;
     this.serving = serving;
     this.expiry = expiry;
+    this.isExpired = isExpired;
 
     this.toStrings = function() {
         return [
@@ -13,17 +14,19 @@ function Ingredient(key, quantity, unit, calories, serving, expiry) {
             this.unit,
             this.calories,
             this.serving,
-            this.expiry
+            this.expiry,
+            this.isExpired
         ];
     };
-	
+
 	this.toSingleString = function() {
-        var str = this.key + "," 
-				+ this.quantity + "," 
-				+ this.unit + "," 
+        var str = this.key + ","
+				+ this.quantity + ","
+				+ this.unit + ","
 				+ this.calories + ","
 				+ this.serving + ","
-				+ this.expiry;
+				+ this.expiry + ","
+        + this.isExpired;
 		return str;
     };
 }
