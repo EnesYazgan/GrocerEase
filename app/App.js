@@ -209,10 +209,12 @@ export default class App extends Component {
 	}
 
 	constructedRecipeScreen = () => {
-		this.getRecipes()
 		return <RecipeScreen
 			data={
 				this.state.recipes
+			}
+			sortList={
+				this.getRecipes
 			}
 			userData={
 				this.state.inventory

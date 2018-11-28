@@ -20,6 +20,10 @@ export default class RecipeScreen extends Component {
     data: [],
   }
 
+  componentDidMount() {
+    this.props.sortList()
+  }
+
   orderList = (sortingFunction) => {
     this.setState({ filter: this.props.data.sort(sortingFunction) })
   }
