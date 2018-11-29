@@ -131,29 +131,9 @@ export default class App extends Component {
 		return <IngredientScreen
 			data={this.state.inventory}
 
-			checkBarcode={(barcode) => {firebase.database().ref('/users/' + userId).once('value')
-			.then((snapshot) => {
-				//snapshot.val() is the list we want
-				list = snapshot.val();
-
-				//lists it properly
-				//console.log("User's List: " + list);
-				if (list.length > 0) {
-					var ingredientsList = [];
-
-					var ingParams;
-					var ing;
-					for (var i = 0; i < list.length; i++) {
-						ingParams = list[i].split(",");
-						ingredientsList.push(ing);
-					}
-
-					console.log("Retrieved " + userId + "'s list:");
-					for (var i = 0; i < ingredientsList.length; i++) {
-						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
-					}
-
-					this.setState({ inventory: ingredientsList }, this.getRecipes)
+			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
+				if (snapshot.exists()){
+				  changeItemQuantity(snapshot.val().name, 1);
 				}
 			})}}
 
@@ -285,13 +265,13 @@ export default class App extends Component {
 			.then((snapshot) => {
 				list = snapshot.val().slice(0);
 				list.forEach(recipe => {
-					recipe.matchingIngredients = 0;
+					recipe.matchingIngredients = [];
 					this.state.inventory.forEach(userIngredient => {
 						if (typeof recipe.ingredients != 'undefined') {
 							recipe.ingredients.forEach(ingredient => {
 								ingredient.name = ingredient.name.toTitleCase()
 								if (ingredient.name.includes(userIngredient.key))
-									recipe.matchingIngredients = recipe.matchingIngredients + 1;
+									recipe.matchingIngredients.push(ingredient)
 							})
 							recipe.equipment_names.forEach(tool => {
 								tool = tool.toTitleCase()

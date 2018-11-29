@@ -84,7 +84,7 @@ class ListRow extends PureComponent {
           <Text
             style={styles.ingredientInfo}
             onPress={this.handleTextPress}>
-            {this.props.item.matchingIngredients} / {this.props.item.ingredients.length}
+            {this.props.item.matchingIngredients.length} out of {this.props.item.ingredients.length}
           </Text>
           <Icon
             style={styles.iconInfo}
