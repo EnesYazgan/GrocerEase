@@ -11,13 +11,13 @@ const config = {
 };
 
 export default class DataBase{
-	
+
 	constructor(){
 		firebase.initializeApp(config);
 	}
-	
+
 	database = firebase;
-	
+
 	//to delete a user..
 	deleteMe(userId) {
 		firebase.database().ref('users/' + userId).remove();
@@ -26,13 +26,13 @@ export default class DataBase{
 	//update a user's list
 	static updateMe(userId, list){
 		console.log("adding to database");
-	
+
 		//Add list elements to update array
 		const update = new Array();
 		for(var i = 0; i < list.length; i++){
 			update[i] = list[i].toSingleString();
 		}
-	
+
 		//set it to the list corresponding to userID
 		let ref = firebase.database().ref('users/' + userId).set(update);
     }

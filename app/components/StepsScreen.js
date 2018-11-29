@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
-import List from './IngredientScreenComponents/List';
-import ActionBar from './IngredientScreenComponents/ActionBar';
-import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
+import List from './StepsScreenComponents/List';
+import ActionBar from './StepsScreenComponents/ActionBar';
 
-export default class IngredientScreen extends Component {
+export default class StepsScreen extends Component {
   state = {
-    cameraOn: false,
     filter: this.props.data,
     text: '',
-    sortParameter: true,
+    viewAllRecipes: false,
   }
 
   static defaultProps = {
-    switchScreen: undefined,
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
-    logOut: undefined,
-    checkBarcode: undefined,
+    title: '',
   }
 
   changeSortParameterThenOrderList = () => {
-    this.setState({ sortParameter: !this.state.sortParameter }, () => this.props.orderList(this.state.sortParameter))
+    this.setState({ sortParameter: !this.state.sortParameter })
+    this.props.orderList(this.state.sortParameter)
   }
 
   toggleCamera = () => {
@@ -36,7 +33,18 @@ export default class IngredientScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = this.props.data.filter(item => item.key.substring(0, text.length) == text);
+    var searchResults = this.props.data.filter(item => item.substring(0, text.length) == text);
+    // var searchResults = [] //make a copy of the current array
+    // for (var j = 0; j < this.props.data.length; j++) {
+    //   var match = true
+    //   for (var l = 0; l < text.length; l++) {
+    //     if (text.charAt(l).toLowerCase() != this.props.data[j].key.charAt(l).toLowerCase()) {
+    //       match = false
+    //       break
+    //     }
+    //   }
+    //   if (match) searchResults.push(this.props.data[j])
+    // }
     this.setState({ text: text, filter: searchResults })
   }
 
@@ -50,11 +58,11 @@ export default class IngredientScreen extends Component {
             <Icon
               style={styles.icon}
               color='white'
-              name='nutrition'
+              name='arrow-back'
               size={30}
             />
           </TouchableOpacity>
-          <Text style={styles.headerText}>My Ingredients</Text>
+          <Text style={styles.headerText}>Recipe Steps</Text> 
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon
@@ -65,14 +73,6 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
         </View>
-        {
-          this.state.cameraOn == false
-            ? null
-            : <BarcodeScanner
-              changeItemQuantity={this.props.changeItemQuantity}
-              checkBarcode={this.props.checkBarcode}
-            />
-        }
         <View style={styles.container}>
           <ActionBar
             text={this.state.text}
@@ -87,19 +87,11 @@ export default class IngredientScreen extends Component {
               : this.state.filter
             }
             changeItemQuantity={this.props.changeItemQuantity}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-            changeItemExpiration={this.props.changeItemExpiration}
-            changeItemCarbs={this.props.changeItemCarbs}
-            changeItemProtein={this.props.changeItemProtein}
-            changeItemSugar={this.props.changeItemSugar}
-            changeItemFat={this.props.changeItemFat}
-            changeItemSodium={this.props.changeItemSodium}
           />
         </View>
       </View>
     );
-  }
+	}
 }
 
 const styles = StyleSheet.create({
@@ -125,7 +117,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flexDirection: 'row',
-    flex: 1,
+    flex: 100,
     textAlign: 'center',
     color: 'white',
     fontSize: 24,
@@ -133,21 +125,35 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
+    /*marginRight: -60*/
+  },
+  footer: {
+    flexDirection: 'row',
+    flex: 100,
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: -60
   },
   iconContainer: {
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:50,
+    height:50,
     backgroundColor: '#51A4F7',
-    borderRadius: 10,
+    paddingTop: 10,
+    borderRadius:10,
   },
   icon: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
   textInput: {
     flex: 1,

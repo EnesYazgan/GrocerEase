@@ -60,14 +60,14 @@ export default class UserLogin extends Component{
           //when button pressed, grab email and password from text boxes
           onPress={this.loginWithEmailAndPassword}
         >
-          <Text>Log In</Text>
+          <Text style={styles.text}>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           //when button pressed, grab email and password from text boxes
           onPress={this.signUpWithEmailAndPassword}
         >
-          <Text>Sign Up</Text>
+          <Text style={styles.text}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     );
@@ -91,8 +91,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10,
-    borderColor: 'black',
-    borderWidth: 1,
     width: 200
   },
   emailInput: {
@@ -138,5 +136,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
   }
 });
