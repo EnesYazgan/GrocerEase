@@ -19,6 +19,7 @@ export default class IngredientScreen extends Component {
     changeItemQuantity: undefined,
     data: [],
     logOut: undefined,
+    checkBarcode: undefined,
   }
 
   changeSortParameterThenOrderList = () => {
@@ -69,6 +70,7 @@ export default class IngredientScreen extends Component {
             ? null
             : <BarcodeScanner
               changeItemQuantity={this.props.changeItemQuantity}
+              checkBarcode={this.props.checkBarcode}
             />
         }
         <View style={styles.container}>
