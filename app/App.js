@@ -265,7 +265,7 @@ export default class App extends Component {
 			.then((snapshot) => {
 				list = snapshot.val().slice(0);
 				list.forEach(recipe => {
-					recipe.key = 
+					recipe.key = recipe.title
 					recipe.matchingIngredients = [];
 					this.state.inventory.forEach(userIngredient => {
 						if (typeof recipe.ingredients != 'undefined') {
