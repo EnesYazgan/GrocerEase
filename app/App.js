@@ -249,6 +249,7 @@ export default class App extends Component {
 			.then((snapshot) => {
 				list = snapshot.val().slice(0);
 				list.forEach(recipe => {
+					recipe.key = 
 					recipe.matchingIngredients = [];
 					this.state.inventory.forEach(userIngredient => {
 						if (typeof recipe.ingredients != 'undefined') {
@@ -265,10 +266,10 @@ export default class App extends Component {
 					console.log('matching ingredients are ' + recipe.matchingIngredients)
 				});
 				list.sort((recipeA, recipeB) => {
-					if (recipeB.matchingIngredients == recipeA.matchingIngredients)
+					if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
 						return (recipeB.ingredients.length - recipeA.ingredients.length)
 					else
-						return (recipeB.matchingIngredients - recipeA.matchingIngredients)
+						return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
 				})
 				this.setState({recipes: list})
 			})
