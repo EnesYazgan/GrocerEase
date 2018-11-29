@@ -147,7 +147,7 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set', 0));
+					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set', 0, 0, 0, 0, 0, 0));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -182,6 +182,47 @@ export default class App extends Component {
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				foundIngredient.expiry = expiry;
 				foundIngredient.isExpired = num;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+
+			changeItemCarbs={(itemName, carbs) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.carbs = carbs;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+			changeItemProtein={(itemName, protein) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.protein = protein;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+			changeItemSugar={(itemName, sugar) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.sugar = sugar;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+			changeItemFat={(itemName, fat) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.fat = fat;
+				this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+			}}
+			changeItemSodium={(itemName, sodium) => {
+				var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+				foundIngredient.sodium = sodium;
 				this.setState({ inventory: newInventory });
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);
@@ -251,7 +292,12 @@ export default class App extends Component {
 							parseInt(ingParams[3], 10),  //calories is an int
 							parseInt(ingParams[4], 10), //seving is an int
 							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
-							parseInt(ingParams[6], 10),
+							parseInt(ingParams[6], 10), //isExpired is an int
+							parseInt(ingParams[7], 10), //carbs is an int
+							parseInt(ingParams[8], 10), //protein is an int
+							parseInt(ingParams[9], 10), //sugar is an int
+							parseInt(ingParams[10], 10), //fat is an int
+							parseInt(ingParams[11], 10), //sodium is an int
 						);
 						ingredientsList.push(ing);
 					}
