@@ -49,7 +49,7 @@ export default class App extends Component {
 	}
 
 	loginAndGetData = (userId) => {
-		this.cloneFirebaseInventory(userId)
+		this.createFirebaseInventoryListener(userId)
 		this.setState({
 			currentUserId: userId, screen: 'ingredients'
 		})
@@ -280,7 +280,7 @@ export default class App extends Component {
 		/>
 	}
 
-	cloneFirebaseInventory = (userId) => {
+	createFirebaseInventoryListener = (userId) => {
 		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
 			//snapshot.val() is the list we want
 			list = snapshot.val().slice(0);
