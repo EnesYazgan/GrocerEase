@@ -133,16 +133,25 @@ export default class App extends Component {
 		return <IngredientScreen
 			data={this.state.inventory}
 
+			checkBarcode={(barcode) => {
+				length = barcode.length
+				barcodeData = barcode.toString().substring(1,barcode.length)
+				console.log('checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
+				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
+					console.log('scanned barcode, checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
+					if (snapshot.exists()) {
+						console.log('exists in database')
+						changeItemQuantity(snapshot.val().name, 1)
+					} else {
+						console.log('does not exist in database')
+					}
+				})
+			}}
+      
 			fetchData={() => {
 				this.cloneFirebaseInventory(this.state.currentUserId);
 				console.log("reach fetchData: " + this.state.currentUserId);
 			}}
-
-			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
-				if (snapshot.exists()){
-				  changeItemQuantity(snapshot.val().name, 1);
-				}
-			})}}
 
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
@@ -272,45 +281,44 @@ export default class App extends Component {
 	}
 
 	cloneFirebaseInventory = (userId) => {
-		firebase.database().ref('/users/' + userId).once('value')
-			.then((snapshot) => {
-				//snapshot.val() is the list we want
-				list = snapshot.val().slice(0);
+		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
+			//snapshot.val() is the list we want
+			list = snapshot.val().slice(0);
 
-				//lists it properly
-				// console.log("User's List: " + list);
-				if (list.length > 0) {
-					var ingredientsList = [];
-
-					var ingParams;
-					var ing;
-					for (var i = 0; i < list.length; i++) {
-						ingParams = list[i].split(",");
-						ing = new Ingredient(
-							ingParams[0],  //name is a string
-							parseInt(ingParams[1], 10),  //quantity is an int
-							ingParams[2], //unit is a string
-							parseInt(ingParams[3], 10),  //calories is an int
-							parseInt(ingParams[4], 10), //seving is an int
-							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
-							parseInt(ingParams[6], 10), //isExpired is an int
-							parseInt(ingParams[7], 10), //carbs is an int
-							parseInt(ingParams[8], 10), //protein is an int
-							parseInt(ingParams[9], 10), //sugar is an int
-							parseInt(ingParams[10], 10), //fat is an int
-							parseInt(ingParams[11], 10), //sodium is an int
-						);
-						ingredientsList.push(ing);
-					}
-
-					console.log("Retrieved " + userId + "'s list:");
-					for (var i = 0; i < ingredientsList.length; i++) {
-						console.log("DB ings ==> " + ingredientsList[i].toSingleString());
-					}
-
-					this.setState({ inventory: ingredientsList }, this.getRecipes)
+			//lists it properly
+			// console.log("User's List: " + list);
+			if (list.length > 0) {
+				var ingredientsList = [];
+				var ingParams;
+				var ing;
+				for (var i = 0; i < list.length; i++) {
+					ingParams = list[i].split(",");
+					ing = new Ingredient(
+						ingParams[0],  //name is a string
+						parseInt(ingParams[1], 10),  //quantity is an int
+						ingParams[2], //unit is a string
+						parseInt(ingParams[3], 10),  //calories is an int
+						parseInt(ingParams[4], 10), //seving is an int
+						ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
+						parseInt(ingParams[6], 10), //isExpired is an int
+						parseInt(ingParams[7], 10), //carbs is an int
+						parseInt(ingParams[8], 10), //protein is an int
+						parseInt(ingParams[9], 10), //sugar is an int
+						parseInt(ingParams[10], 10), //fat is an int
+						parseInt(ingParams[11], 10), //sodium is an int
+					);
+					ingredientsList.push(ing);
 				}
-			});
+				);
+			}
+
+			console.log("Retrieved " + userId + "'s list:");
+			for (var i = 0; i < ingredientsList.length; i++) {
+				console.log("DB ings ==> " + ingredientsList[i].toSingleString());
+			}
+			this.setState({ inventory: ingredientsList }, this.getRecipes)
+		}
+		)
 	}
 
 	getRecipes = () => {
