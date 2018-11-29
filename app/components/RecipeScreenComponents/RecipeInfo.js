@@ -84,18 +84,19 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     fontWeight: 'bold',
-    color: 'black'
+    color: 'green'
   },
   excludesText: {
     fontSize: 15,
     padding: 5,
     paddingLeft: 40,
+    fontWeight: 'bold',
+    color: 'black'
   },
   infoTitle: {
     fontSize: 15,
     padding: 5,
     paddingLeft: 10,
     fontWeight: 'bold',
-    color: '#ccc'
   },
 });

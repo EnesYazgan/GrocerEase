@@ -124,8 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontWeight: 'bold',
     marginTop: 10,
-    marginBottom: 10,
-    /*marginRight: -60*/
+    marginBottom: 10
   },
   footer: {
     flexDirection: 'row',
