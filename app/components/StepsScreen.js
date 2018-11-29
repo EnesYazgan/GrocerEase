@@ -4,7 +4,7 @@ import Icon from './Icon';
 import List from './StepsScreenComponents/List';
 import ActionBar from './StepsScreenComponents/ActionBar';
 
-export default class StepsScreen extends Component {  
+export default class StepsScreen extends Component {
   state = {
     filter: this.props.data,
     text: '',
@@ -17,7 +17,7 @@ export default class StepsScreen extends Component {
     data: [],
     title: '',
   }
-  
+
   changeSortParameterThenOrderList = () => {
     this.setState({ sortParameter: !this.state.sortParameter })
     this.props.orderList(this.state.sortParameter)
@@ -33,7 +33,7 @@ export default class StepsScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = this.props.data.filter(item => item.substring(0, text.length) == text); 
+    var searchResults = this.props.data.filter(item => item.substring(0, text.length) == text);
     // var searchResults = [] //make a copy of the current array
     // for (var j = 0; j < this.props.data.length; j++) {
     //   var match = true
@@ -62,7 +62,7 @@ export default class StepsScreen extends Component {
               size={30}
             />
           </TouchableOpacity>
-          <Text style={styles.headerText}>How to Make {this.props.title}</Text>
+          <Text style={styles.headerText}>Recipe Steps</Text> /*{this.props.title}*/
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
-    marginRight: -60
+    /*marginRight: -60*/
   },
   footer: {
     flexDirection: 'row',

@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   icon: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   textInput: {
     flex: 1,

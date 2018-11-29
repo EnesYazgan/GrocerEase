@@ -18,6 +18,7 @@ export default class RecipeScreen extends Component {
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
+
   }
 
   componentDidMount() {

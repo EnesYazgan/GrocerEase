@@ -129,6 +129,8 @@ root_url = 'https://www.bonappetit.com'
 
 # combine hrefs with the base urls generate array of urls to parse
 urls = [root_url + recipe_href for recipe_href in recipe_hrefs]
+# urls.remove('https://www.bonappetit.com/recipe/creamy-kimchi-dip')
+# urls.remove('https://www.bonappetit.com/recipe/cider-braised-pork-shoulder-with-butternut-squash')
 
 recipes = []
 
@@ -156,8 +158,8 @@ for url in urls:
     ingredients = [stringUTF8(ingredient) for ingredient in ingredients]
     ingredients = [getIngredient(ingredient) for ingredient in ingredients]
 
-    for ingredient in ingredients:
-        print(ingredient)
+    # for ingredient in ingredients:
+    #     print(ingredient)
 
     # get equipment necessary
     equip_links = html.xpath('//div[@class="image-grid-item-image"]/div/a/@href')
@@ -172,9 +174,11 @@ for url in urls:
     # use list comprehension to run text_content on all steps
     steps = [stringUTF8(step) for step in steps]
 
-    recipe = Recipe(url, title, image_src, ingredients, equip_names, equip_links, steps)
-
-    recipes.append(recipe.toJSON() + ',')
+    if len(title) == 0 or len(ingredients) == 0 or len(equip_names) == 0 or len(equip_links) == 0 or len(equip_links) == 0 or len(steps) == 0 or len(title) > 75:
+        print(title)
+    else:
+        recipe = Recipe(url, title, image_src, ingredients, equip_names, equip_links, steps)
+        recipes.append(recipe.toJSON() + ',')
 
 recipe_json_string = ''.join(recipes)
 

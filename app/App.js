@@ -8,6 +8,19 @@ import LoginScreen from './components/LoginScreen';
 import RecipeScreen from './components/RecipeScreen';
 import DataBase from './components/firebase.js';
 
+//For android get rid of Yellow Box-------------------------
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
+const _console = _.clone(console);
+console.warn = message => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message);
+  }
+};
+//End Yellowbox ignore--------------------------------------
+
 const firebaseConfig = {
 	apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
 	authDomain: "grocerease-6e9ee.firebaseapp.com",
@@ -16,6 +29,7 @@ const firebaseConfig = {
 	storageBucket: "grocerease-6e9ee.appspot.com",
 	messagingSenderId: "719228868931"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -127,7 +141,7 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set'));
+					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set', 0));
 				}
 				else {
 					foundIngredient.quantity = foundIngredient.quantity + quantity
@@ -157,10 +171,11 @@ export default class App extends Component {
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
 
-      changeItemExpiration={(itemName, expiry) => {
+      changeItemExpiration={(itemName, expiry, num) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				foundIngredient.expiry = expiry;
+				foundIngredient.isExpired = num;
 				this.setState({ inventory: newInventory });
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);
@@ -215,7 +230,7 @@ export default class App extends Component {
 				list = snapshot.val().slice(0);
 
 				//lists it properly
-				//console.log("User's List: " + list);
+				// console.log("User's List: " + list);
 				if (list.length > 0) {
 					var ingredientsList = [];
 
@@ -230,6 +245,7 @@ export default class App extends Component {
 							parseInt(ingParams[3], 10),  //calories is an int
 							parseInt(ingParams[4], 10), //seving is an int
 							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
+							parseInt(ingParams[6], 10),
 						);
 						ingredientsList.push(ing);
 					}
