@@ -8,6 +8,19 @@ import LoginScreen from './components/LoginScreen';
 import RecipeScreen from './components/RecipeScreen';
 import DataBase from './components/firebase.js';
 
+//For android get rid of Yellow Box-------------------------
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
+const _console = _.clone(console);
+console.warn = message => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message);
+  }
+};
+//End Yellowbox ignore--------------------------------------
+
 const firebaseConfig = {
 	apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
 	authDomain: "grocerease-6e9ee.firebaseapp.com",
@@ -16,6 +29,7 @@ const firebaseConfig = {
 	storageBucket: "grocerease-6e9ee.appspot.com",
 	messagingSenderId: "719228868931"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
