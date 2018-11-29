@@ -14,10 +14,6 @@ export default class IngredientInfo extends React.Component {
     isDateTimePickerVisible: false,
   };
 
-  // componentDidMount() {
-  //
-  // }
-
   _showDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: true });
   }
@@ -37,13 +33,32 @@ export default class IngredientInfo extends React.Component {
         ? this.props.changeItemServingSize(this.props.item.key, 0)
         : this.props.changeItemServingSize(this.props.item.key, parseInt(text))
     }
+    setCarbs = (text) => {
+      text == ''
+        ? this.props.changeItemCarbs(this.props.item.key, 0)
+        : this.props.changeItemCarbs(this.props.item.key, parseInt(text))
+    }
+    setProtein = (text) => {
+      text == ''
+        ? this.props.changeItemProtein(this.props.item.key, 0)
+        : this.props.changeItemProtein(this.props.item.key, parseInt(text))
+    }
+    setSugar = (text) => {
+      text == ''
+        ? this.props.changeItemSugar(this.props.item.key, 0)
+        : this.props.changeItemSugar(this.props.item.key, parseInt(text))
+    }
+    setFat = (text) => {
+      text == ''
+        ? this.props.changeItemFat(this.props.item.key, 0)
+        : this.props.changeItemFat(this.props.item.key, parseInt(text))
+    }
+    setSodium = (text) => {
+      text == ''
+        ? this.props.changeItemSodium(this.props.item.key, 0)
+        : this.props.changeItemSodium(this.props.item.key, parseInt(text))
+    }
     setDate = (date) => {
-      // parsedDate = date.toString();
-      // dateArray = parsedDate.split(' ');
-      // onlyDate = dateArray[0] + " " + dateArray[1] + " "+ dateArray[2] + ", " + dateArray[3];
-      // this.props.changeItemExpiration(this.props.item.key, onlyDate);
-      // this.setState({dateChosen: onlyDate});
-      // this._hideDateTimePicker();
 
       parsedDate = date.toString();
       dateArray = parsedDate.split(' ');
@@ -111,6 +126,48 @@ export default class IngredientInfo extends React.Component {
       }
     }
 
+    incrementCarbs = () => {
+      this.props.changeItemCarbs(this.props.item.key, (this.props.item.carbs + 1) );
+    }
+    decrementCarbs = () => {
+      if(this.props.item.carbs > 0){
+        this.props.changeItemCarbs(this.props.item.key, (this.props.item.carbs - 1) );
+      }
+    }
+    incrementProtein = () => {
+      this.props.changeItemProtein(this.props.item.key, (this.props.item.protein + 1) );
+    }
+    decrementProtein = () => {
+      if(this.props.item.protein > 0){
+        this.props.changeItemProtein(this.props.item.key, (this.props.item.protein - 1) );
+      }
+    }
+    incrementSugar = () => {
+      this.props.changeItemSugar(this.props.item.key, (this.props.item.sugar + 1) );
+    }
+    decrementSugar = () => {
+      if(this.props.item.serving > 0){
+        this.props.changeItemSugar(this.props.item.key, (this.props.item.sugar - 1) );
+      }
+    }
+    incrementFat = () => {
+      this.props.changeItemFat(this.props.item.key, (this.props.item.fat + 1) );
+    }
+    decrementFat = () => {
+      if(this.props.item.fat > 0){
+        this.props.changeItemFat(this.props.item.key, (this.props.item.fat - 1) );
+      }
+    }
+    incrementSodium = () => {
+      this.props.changeItemSodium(this.props.item.key, (this.props.item.sodium + 1) );
+    }
+    decrementSodium = () => {
+      if(this.props.item.sodium > 0){
+        this.props.changeItemSodium(this.props.item.key, (this.props.item.sodium - 1) );
+      }
+    }
+
+
     bothSetDateAndExpirationAlert = (date) => {
       setDate(date);
       expirationAlert(date);
@@ -123,7 +180,7 @@ export default class IngredientInfo extends React.Component {
         </View>
 
         <View style={styles.listRow}>
-          <Text style={styles.textInput}>Calories</Text>
+          <Text style={styles.textInput}>Calories:</Text>
           <TouchableOpacity
             style={styles.iconContainer}
             onPress={decrementCalories}
@@ -139,13 +196,166 @@ export default class IngredientInfo extends React.Component {
             style={styles.numberInput}
             keyboardType={'numeric'}
             defaultValue={this.props.item.calories.toString()}
-            onChangeText={
-              setCalories
-            }
+            onChangeText={setCalories}
           />
           <TouchableOpacity
             style={styles.iconContainer}
             onPress={incrementCalories}
+          >
+            <Icon
+              name="add"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.listRow}>
+          <Text style={styles.textInput}>Carbs (grams): </Text>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={decrementCarbs}
+          >
+            <Icon
+              name="remove"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+          <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            style={styles.numberInput}
+            keyboardType={'numeric'}
+            defaultValue={this.props.item.carbs.toString()}
+            onChangeText={setCarbs}
+          />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={incrementCarbs}
+          >
+            <Icon
+              name="add"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.listRow}>
+          <Text style={styles.textInput}>Protein (grams): </Text>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={decrementProtein}
+          >
+            <Icon
+              name="remove"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+          <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            style={styles.numberInput}
+            keyboardType={'numeric'}
+            defaultValue={this.props.item.protein.toString()}
+            onChangeText={setProtein}
+          />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={incrementProtein}
+          >
+            <Icon
+              name="add"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.listRow}>
+          <Text style={styles.textInput}>Sugar (grams): </Text>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={decrementSugar}
+          >
+            <Icon
+              name="remove"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+          <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            style={styles.numberInput}
+            keyboardType={'numeric'}
+            defaultValue={this.props.item.sugar.toString()}
+            onChangeText={setSugar}
+          />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={incrementSugar}
+          >
+            <Icon
+              name="add"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.listRow}>
+          <Text style={styles.textInput}>Fat (grams): </Text>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={decrementFat}
+          >
+            <Icon
+              name="remove"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+          <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            style={styles.numberInput}
+            keyboardType={'numeric'}
+            defaultValue={this.props.item.fat.toString()}
+            onChangeText={setFat}
+          />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={incrementFat}
+          >
+            <Icon
+              name="add"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.listRow}>
+          <Text style={styles.textInput}>Sodium  (milligrams): </Text>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={decrementSodium}
+          >
+            <Icon
+              name="remove"
+              color="black"
+              size={20}
+            />
+          </TouchableOpacity>
+          <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            style={styles.numberInput}
+            keyboardType={'numeric'}
+            defaultValue={this.props.item.sodium.toString()}
+            onChangeText={setSodium}
+          />
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={incrementSodium}
           >
             <Icon
               name="add"
@@ -172,9 +382,7 @@ export default class IngredientInfo extends React.Component {
             style={styles.numberInput}
             keyboardType={'numeric'}
             defaultValue={this.props.item.serving.toString()}
-            onChangeText={
-              setServing
-            }
+            onChangeText={setServing}
           />
           <TouchableOpacity
             style={styles.iconContainer}

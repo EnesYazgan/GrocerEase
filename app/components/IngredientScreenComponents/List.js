@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
 import Icon from '../Icon';
 import IngredientInfo from './IngredientInfo';
 
@@ -11,7 +11,20 @@ export default class List extends Component {
 
   state = {
     infoPressed: null,
+    refreshing: false,
   }
+
+  fetchDataList = () => {
+    this.props.fetchData();
+    return true;
+  }
+
+  _onRefresh = () => {
+   this.setState({refreshing: true});
+   if(this.fetchDataList() == true){
+     this.setState({refreshing: false});
+   }
+ }
 
   render() {
     return (
@@ -21,6 +34,12 @@ export default class List extends Component {
           extraData = {this.state}
           data={
             this.props.data
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
           }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
@@ -149,6 +168,11 @@ export default class List extends Component {
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
             changeItemExpiration={this.props.changeItemExpiration}
+            changeItemCarbs={this.props.changeItemCarbs}
+            changeItemProtein={this.props.changeItemProtein}
+            changeItemSugar={this.props.changeItemSugar}
+            changeItemFat={this.props.changeItemFat}
+            changeItemSodium={this.props.changeItemSodium}
           />
           : null
         }
