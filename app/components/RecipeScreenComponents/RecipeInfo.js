@@ -10,7 +10,7 @@ export default class RecipeInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textInput}>Ingredients:</Text>
+        <Text style={styles.infoTitle}>Ingredients:</Text>
         {this.props.item.ingredients.map(element => {
           if (this.props.item.matchingIngredients.includes(element))
             return (
@@ -21,7 +21,7 @@ export default class RecipeInfo extends React.Component {
               <Text key={element.name} style={styles.excludesText}>{element.name}</Text>
             )
         })}
-        <Text style={styles.textInput}>Tools:</Text>
+        <Text style={styles.infoTitle}>Tools:</Text>
         {this.props.item.equipment_names.map(element => {
           return (
             <Text key={element} style={styles.textInput}>{element}</Text>
@@ -87,6 +87,11 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   excludesText: {
+    fontSize: 15,
+    padding: 5,
+    paddingLeft: 40,
+  },
+  infoTitle: {
     fontSize: 15,
     padding: 5,
     paddingLeft: 10,
