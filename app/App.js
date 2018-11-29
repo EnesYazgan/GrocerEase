@@ -45,6 +45,7 @@ export default class App extends Component {
 		testInv: [],
 		screen: 'login',
 		recipes: [],
+		refreshing: false,
 	}
 
 	loginAndGetData = (userId) => {
@@ -74,6 +75,7 @@ export default class App extends Component {
 			<this.GetCurrentScreen />
 		)
 	}
+
 
 	GetCurrentScreen = () => {
 		if (this.state.screen == 'login') {
@@ -130,6 +132,11 @@ export default class App extends Component {
 	constructedIngredientScreen = () => {
 		return <IngredientScreen
 			data={this.state.inventory}
+
+			fetchData={() => {
+				this.cloneFirebaseInventory(this.state.currentUserId);
+				console.log("reach fetchData: " + this.state.currentUserId);
+			}}
 
 			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
 				if (snapshot.exists()){

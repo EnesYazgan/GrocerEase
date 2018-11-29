@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
 import List from './IngredientScreenComponents/List';
 import ActionBar from './IngredientScreenComponents/ActionBar';
@@ -39,6 +39,8 @@ export default class IngredientScreen extends Component {
     var searchResults = this.props.data.filter(item => item.key.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
   }
+
+
 
   render() {
     return (
@@ -86,6 +88,7 @@ export default class IngredientScreen extends Component {
               ? this.props.data
               : this.state.filter
             }
+            fetchData={this.props.fetchData}
             changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
