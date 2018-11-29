@@ -149,6 +149,11 @@ export default class List extends Component {
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}
             changeItemExpiration={this.props.changeItemExpiration}
+            changeItemCarbs={this.props.changeItemCarbs}
+            changeItemProtein={this.props.changeItemProtein}
+            changeItemSugar={this.props.changeItemSugar}
+            changeItemFat={this.props.changeItemFat}
+            changeItemSodium={this.props.changeItemSodium}
           />
           : null
         }
