@@ -66,7 +66,7 @@ class ListRow extends PureComponent {
       <View>
         {
           this.props.visible
-            ? <TouchableOpacity style={styles.listRow}
+            ? <TouchableOpacity style={{flex: 1,flexWrap: 'wrap',flexDirection: "row",margin: 10,justifyContent: "space-between",alignItems: "center"}}
             onPress={this.props.infoButtonPressed}>
               <Text
                 style={styles.highlightedTextContainer}
@@ -74,7 +74,7 @@ class ListRow extends PureComponent {
                 {this.props.item}
               </Text>
             </TouchableOpacity>
-            : <TouchableOpacity style={styles.listRow}
+            : <TouchableOpacity style={{flex: 1,flexWrap: 'wrap',flexDirection: "row",margin: 10,justifyContent: "space-between",alignItems: "center"}}
             onPress={this.props.infoButtonPressed}>
               <Text
                 style={styles.textContainer}
@@ -91,6 +91,7 @@ class ListRow extends PureComponent {
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -143,13 +144,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     color: '#51A4F7',
-    fontSize: 20
+    fontSize: 15,
   },
   textContainer: {
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
-    fontSize: 20
+    fontSize: 15,
   },
   fadedTextContainer: {
     marginLeft: 10,

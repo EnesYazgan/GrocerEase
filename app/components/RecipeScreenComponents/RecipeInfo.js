@@ -10,13 +10,13 @@ export default class RecipeInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textInput}>Ingredients:</Text>
+        <Text style={styles.infoTitle}>Ingredients:</Text>
         {this.props.item.ingredients.map(element => {
           return (
-            <Text key={element.name} style={styles.textInput}>{element.name}</Text>
+            <Text key={element.name} style={styles.textInput}>{'\u2022' + " " + element.name}</Text>
           )
         })}
-        <Text style={styles.textInput}>Tools:</Text>
+        <Text style={styles.infoTitle}>Tools:</Text>
         {this.props.item.equipment_names.map(element => {
           return (
             <Text key={element} style={styles.textInput}>{element}</Text>
@@ -83,7 +83,12 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 15,
     padding: 5,
+    paddingLeft: 40,
+  },
+  infoTitle: {
+    fontSize: 15,
+    padding: 5,
     paddingLeft: 10,
     fontWeight: 'bold'
-  },
+  }
 });

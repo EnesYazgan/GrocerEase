@@ -82,11 +82,12 @@ class ListRow extends PureComponent {
             {this.props.item.title}
           </Text>
           <Text
-            style={styles.textContainer}
+            style={styles.ingredientInfo}
             onPress={this.handleTextPress}>
-            {this.props.item.matchingIngredients} out of {this.props.item.ingredients.length}
+            {this.props.item.matchingIngredients} / {this.props.item.ingredients.length}
           </Text>
           <Icon
+            style={styles.iconInfo}
             color='#51A4F7'
             name='information-circle'
             size={30}
@@ -95,7 +96,8 @@ class ListRow extends PureComponent {
         {
           this.props.visible
             ? <RecipeInfo item={this.props.item}
-              switchScreen={this.props.viewRecipeSteps} />
+              switchScreen={this.props.viewRecipeSteps}
+              />
             : null
         }
       </View>
@@ -157,7 +159,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
-    fontSize: 20
+    fontSize: 15,
+  },
+  ingredientInfo: {
+    marginRight: 10,
+    fontSize: 15,
   },
   fadedTextContainer: {
     marginLeft: 10,
@@ -172,6 +178,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: 30,
     height: 30,
+    marginRight:10,
   },
   iconContainer: {
     borderWidth: 1,
