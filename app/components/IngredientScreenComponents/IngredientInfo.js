@@ -111,32 +111,6 @@ export default class IngredientInfo extends React.Component {
       }
     }
 
-    expirationAlert = (date) => {
-      // this.props.item.expiry
-
-      console.log("ah " + dateArray[3]+month+dateArray[2]);
-      timeDifference = moment((dateArray[3]+month+dateArray[2]), "YYYYMMDD").fromNow();
-      console.log(timeDifference);
-      timeAgo = timeDifference.split(' ');
-
-      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"){
-        console.log("timeDifference: " + timeDifference);
-      	// alert("Expiration date for " + this.props.item.key + " is nearing! Think about replacing your " + this.props.item.key + ".");
-        this.state.isExpired = 2;
-      }else if(timeAgo[2] == "ago" || timeAgo[2] == "hours"){
-        console.log("timeDifference: " + timeDifference);
-        // alert("Expiration date for " + this.props.item.key + " has passed! Think about replacing your " + this.props.item.key + ".");
-        this.state.isExpired = 1;
-      }else{
-        console.log("timeDifference: " + timeDifference);
-        // alert("You're all set!");
-        this.state.isExpired = 0;
-      }
-
-      return timeDifference;
-
-    }
-
     bothSetDateAndExpirationAlert = (date) => {
       setDate(date);
       expirationAlert(date);
@@ -235,7 +209,8 @@ export default class IngredientInfo extends React.Component {
             this.props.item.isExpired == 0
               ? <Icon
                   style={styles.icon}
-                  name="checkmark-circle"
+                  /*name="checkmark-circle"*/
+                  name='happy'
                   size={30}
                   color="green"
                 />
@@ -245,7 +220,7 @@ export default class IngredientInfo extends React.Component {
             this.props.item.isExpired == 1
               ? <Icon
                   style={styles.icon}
-                  name="checkmark-circle"
+                  name='sad'
                   size={30}
                   color="orange"
                 />
@@ -255,7 +230,8 @@ export default class IngredientInfo extends React.Component {
             this.props.item.isExpired == 2
               ? <Icon
                   style={styles.icon}
-                  name="checkmark-circle"
+                  /*name="checkmark-circle"*/
+                  name='sad'
                   size={30}
                   color="red"
                 />
