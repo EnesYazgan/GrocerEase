@@ -1,17 +1,12 @@
 import React, { Component, PureComponent } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
-import RecipeInfo from './RecipeInfo';
+import StepInfo from './StepInfo';
 
 export default class List extends Component {
   static defaultProps = {
-    viewRecipeSteps: undefined,
     text: '',
     data: [],
-  }
-
-  state = {
-    infoPressed: null,
   }
 
   render() {
@@ -23,41 +18,17 @@ export default class List extends Component {
           data={
             this.props.data
           }
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
-          initialNumToRender={15}
         />
       </View>
     );
   }
 
   renderListRow = ({ item }) => {
-    viewRecipeSteps = () => {
-      this.props.viewRecipeSteps(item)
-    }
-
     return <ListRow
-      viewRecipeSteps={
-        viewRecipeSteps
-      }
-
       item={item}
-      infoButtonPressed={() => {
-        // console.log("got in" + item);
-        if (this.state.infoPressed == item) {
-          this.setState({ infoPressed: null });
-        } else {
-          this.setState({ infoPressed: item });
-        }
-      }
-      }
       visible={this.state.infoPressed == item}
     />
   }
@@ -77,43 +48,76 @@ export default class List extends Component {
 }
 
 class ListRow extends PureComponent {
+  incrementItemQuantity = () => {
+    this.props.changeItemQuantity(item.key, 1)
+  }
+
+  decrementItemQuantity = () => {
+    this.props.changeItemQuantity(item.key, -1)
+  }
+
+  setQuantity = (text) => {
+    text == ''
+      ? this.props.changeItemQuantity(item.key, -item.quantity)
+      : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
+  }
+
   render() {
-    return (
-      <View>
-        <TouchableOpacity style={styles.listRow}
-          onPress={this.props.infoButtonPressed}>
-          <Text
-            style={styles.textContainer}
-            onPress={this.handleTextPress}>
-            {this.props.item.title}
-          </Text>
-          <Text
-            style={styles.ingredientInfo}
-            onPress={this.handleTextPress}>
-            {this.props.item.matchingIngredients.length} out of {this.props.item.ingredients.length}
-          </Text>
+    <View style={styles.listRow}>
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={decrementItemQuantity}
+      >
+        <Icon
+          name="close"
+          color="red"
+          size={20}
+        />
+      </TouchableOpacity>
+      <Text
+        style={styles.textContainer}
+        onPress={this.handleTextPress}>
+        {item.key}
+      </Text>
+      <View style={styles.buttons}>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={decrementItemQuantity}
+        >
           <Icon
-            style={styles.iconInfo}
-            color='#51A4F7'
-            name='information-circle'
-            size={30}
+            name="remove"
+            color="#51A4F7"
+            size={20}
           />
         </TouchableOpacity>
-        {
-          this.props.visible
-            ? <RecipeInfo item={this.props.item}
-              switchScreen={this.props.viewRecipeSteps}
-              />
-            : null
-        }
+        <TextInput
+          underlineColorAndroid={'rgba(0,0,0,0)'}
+          style={styles.textContainer}
+          keyboardType={'numeric'}
+          defaultValue={item.quantity.toString()}
+          onChangeText={
+            setQuantity
+          }
+        />
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={incrementItemQuantity}
+        >
+          <Icon
+            name="add"
+            color="#51A4F7"
+            size={20}
+          />
+        </TouchableOpacity>
       </View>
-    )
+    </View>
   }
 }
 
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 15,
     padding: 10,
   },
   searchBar: {
@@ -155,19 +159,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 75,
+    height: 100,
   },
   buttons: {
     flexDirection: "row",
     marginRight: 10,
   },
-  textContainer: {
+  highlightedTextContainer: {
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
+    color: '#51A4F7',
     fontSize: 15,
   },
-  ingredientInfo: {
+  textContainer: {
+    flex: 1,
+    marginLeft: 10,
     marginRight: 10,
     fontSize: 15,
   },
@@ -178,22 +185,21 @@ const styles = StyleSheet.create({
     color: '#ccc'
   },
   iconInfo: {
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0)',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    width: 30,
-    height: 30,
-    marginRight:10,
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:30,
+    height:30,
   },
   iconContainer: {
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 30,
-    height: 30,
-    backgroundColor: '#fff',
-    borderRadius: 30,
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:30,
+    height:30,
+    backgroundColor:'#fff',
+    borderRadius:30,
   }
 });

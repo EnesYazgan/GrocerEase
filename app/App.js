@@ -133,25 +133,6 @@ export default class App extends Component {
 		return <IngredientScreen
 			data={this.state.inventory}
 
-			checkBarcode={(barcode) => {
-				length = barcode.length
-				barcodeData = barcode.toString().substring(1,barcode.length)
-				console.log('checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
-				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
-					console.log('scanned barcode, checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
-					if (snapshot.exists()) {
-						console.log('exists in database')
-						changeItemQuantity(snapshot.val().name, 1)
-					} else {
-						console.log('does not exist in database')
-					}
-				})
-			}}
-
-			fetchData={() => {
-				this.cloneFirebaseInventory(this.state.currentUserId);
-			}}
-
 			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
 				if (snapshot.exists()){
 				  changeItemQuantity(snapshot.val().name, 1);
@@ -172,7 +153,7 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set', 0, 0, 0, 0, 0, 0));
+					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity));
 				}else{
 					foundIngredient.quantity = foundIngredient.quantity + quantity
 					if (foundIngredient.quantity < 0)
@@ -322,15 +303,15 @@ export default class App extends Component {
 						parseInt(ingParams[11], 10), //sodium is an int
 					);
 					ingredientsList.push(ing);
+				}
 			 }
 
-			console.log("Retrieved " + userId + "'s list:");
-			for (var i = 0; i < ingredientsList.length; i++) {
-				console.log("DB ings ==> " + ingredientsList[i].toSingleString());
+				console.log("Retrieved " + userId + "'s list:");
+				if (this.state.inventory != ingredientsList) {
+					this.setState({ inventory: ingredientsList }, this.getRecipes)
+			  }
 			}
-			this.setState({ inventory: ingredientsList }, this.getRecipes)
-		  }
-    });
+		});
 	}
 
 	getRecipes = () => {

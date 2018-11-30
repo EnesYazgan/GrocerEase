@@ -14,16 +14,10 @@ export default class List extends Component {
     refreshing: false,
   }
 
-  fetchDataList = () => {
-    this.props.fetchData();
-    return true;
-  }
-
   _onRefresh = () => {
    this.setState({refreshing: true});
-   if(this.fetchDataList() == true){
-     this.setState({refreshing: false});
-   }
+   this.props.fetchData();
+   this.setState({refreshing: false});
  }
 
 
@@ -35,12 +29,6 @@ export default class List extends Component {
           extraData = {this.state}
           data={
             this.props.data
-          }
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
           }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
@@ -101,6 +89,35 @@ export default class List extends Component {
 
             <View style={styles.buttons}>
               <TouchableOpacity
+                style={styles.iconInfo}
+                onPress={infoButtonPressed}
+              >
+                {
+                  item.isExpired == 0
+                    ?
+                    <Icon
+                      name='information-circle'
+                      color="#51A4F7"
+                      size={30}
+                    />
+                    : item.isExpired == 1
+                      ?
+                      <Icon
+                        name='information-circle'
+                        color='orange'
+                        size={30}
+                      />
+                      : item.isExpired == 2
+                        ?
+                        <Icon
+                          name='information-circle'
+                          color="red"
+                          size={30}
+                        />
+                        : null
+                }
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={styles.iconContainer}
                 onPress={decrementItemQuantity}
               >
@@ -129,48 +146,6 @@ export default class List extends Component {
                   size={20}
                 />
               </TouchableOpacity>
-              {
-                item.isExpired == 0
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
-                    <Icon
-                    name='information-circle'
-                    color="#51A4F7"
-                    size={30}
-                    />
-                  </TouchableOpacity>
-                : null
-              }
-              {
-                item.isExpired == 1
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
-                    <Icon
-                      name='information-circle'
-                      color='orange'
-                      size={30}
-                    />
-                  </TouchableOpacity>
-                : null
-              }
-              {
-                item.isExpired == 2
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
-                    <Icon
-                      name='information-circle'
-                      color="red"
-                      size={30}
-                    />
-                  </TouchableOpacity>
-                : null
-              }
             </View>
         </View>
         {
