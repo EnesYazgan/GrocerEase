@@ -61,15 +61,18 @@ export default class List extends Component {
     }
 
     incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1)
+      this.props.changeItemQuantity(item.key, 1);
     }
 
     decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1)
+      this.props.changeItemQuantity(item.key, -1);
     }
 
-    setNewName = (text) => {
-      this.props.changeItemName(item.key, this.state.text);
+    setNewName = () => {
+      if(this.state.text != ''){
+        this.props.changeItemName(item.key, this.state.text);
+        this.setState({text:''});
+      }
     }
 
     setQuantity = (text) => {
@@ -97,6 +100,35 @@ export default class List extends Component {
 
 
             <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={decrementItemQuantity}
+              >
+                <Icon
+                  name="remove"
+                  color="#51A4F7"
+                  size={20}
+                />
+              </TouchableOpacity>
+              <TextInput
+                underlineColorAndroid={'rgba(0,0,0,0)'}
+                style={styles.textContainer}
+                keyboardType={'numeric'}
+                defaultValue={item.quantity.toString()}
+                onChangeText={
+                  setQuantity
+                }
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={incrementItemQuantity}
+              >
+                <Icon
+                  name="add"
+                  color="#51A4F7"
+                  size={20}
+                />
+              </TouchableOpacity>
               {
                 item.isExpired == 0
                 ? <TouchableOpacity
@@ -139,36 +171,6 @@ export default class List extends Component {
                   </TouchableOpacity>
                 : null
               }
-
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
-                <Icon
-                  name="remove"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
-              <TextInput
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                style={styles.textContainer}
-                keyboardType={'numeric'}
-                defaultValue={item.quantity.toString()}
-                onChangeText={
-                  setQuantity
-                }
-              />
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={incrementItemQuantity}
-              >
-                <Icon
-                  name="add"
-                  color="#51A4F7"
-                  size={20}
-                />
-              </TouchableOpacity>
             </View>
         </View>
         {
