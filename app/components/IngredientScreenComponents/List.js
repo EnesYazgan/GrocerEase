@@ -49,7 +49,9 @@ export default class List extends Component {
     }
 
     setNewName = () => {
-      if(this.state.text != ''){
+      console.log("this.state.text: " + this.state.text);
+      console.log("item.key: " + item.key);
+      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
         this.props.changeItemName(item.key, this.state.text);
         this.setState({text:''});
       }
