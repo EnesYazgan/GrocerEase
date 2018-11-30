@@ -314,7 +314,6 @@ export default class App extends Component {
 				if (this.state.inventory != ingredientsList) {
 					this.setState({ inventory: ingredientsList }, this.getRecipes)
 			  }
-			}
 		});
 	}
 
