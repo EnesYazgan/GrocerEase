@@ -25,9 +25,13 @@ export default class RecipeScreen extends Component {
     this.props.sortList()
   }
 
-  orderList = (sortingFunction) => {
+  /*orderList = (sortingFunction) => {
     list = this.props.data.sort(sortingFunction);
     this.setState({ filter: list })
+  }*/
+  changeSortParameterThenOrderList = () => {
+	this.props.orderList(this.state.sortParameter)
+    this.setState({ sortParameter: !this.state.sortParameter })
   }
 
   addNewItem = () => {
