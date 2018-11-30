@@ -147,7 +147,7 @@ export default class App extends Component {
 					}
 				})
 			}}
-      
+
 			fetchData={() => {
 				this.cloneFirebaseInventory(this.state.currentUserId);
 				console.log("reach fetchData: " + this.state.currentUserId);
@@ -308,17 +308,15 @@ export default class App extends Component {
 						parseInt(ingParams[11], 10), //sodium is an int
 					);
 					ingredientsList.push(ing);
-				}
-				);
-			}
+			 }
 
 			console.log("Retrieved " + userId + "'s list:");
 			for (var i = 0; i < ingredientsList.length; i++) {
 				console.log("DB ings ==> " + ingredientsList[i].toSingleString());
 			}
 			this.setState({ inventory: ingredientsList }, this.getRecipes)
-		}
-		)
+		  }
+    });
 	}
 
 	getRecipes = () => {
