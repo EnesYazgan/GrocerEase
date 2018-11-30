@@ -336,10 +336,10 @@ export default class App extends Component {
 				}
 			}
 
-			console.log("Retrieved " + userId + "'s list:");
-			if (this.state.inventory != ingredientsList) {
-				this.setState({ inventory: ingredientsList }, this.getRecipes)
-			}
+				console.log("Retrieved " + userId + "'s list:");
+				if (this.state.inventory != ingredientsList) {
+					this.setState({ inventory: ingredientsList }, this.getRecipes)
+			  }
 		});
 		
 	}

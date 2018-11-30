@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
 import IngredientInfo from './IngredientInfo';
 
@@ -11,15 +11,7 @@ export default class List extends Component {
 
   state = {
     infoPressed: null,
-    refreshing: false,
   }
-
-  _onRefresh = () => {
-   this.setState({refreshing: true});
-   this.props.fetchData();
-   this.setState({refreshing: false});
- }
-
 
   render() {
     return (
