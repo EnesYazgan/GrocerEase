@@ -86,6 +86,8 @@ export default class IngredientScreen extends Component {
               ? this.props.data
               : this.state.filter
             }
+            fetchData={this.props.fetchData}
+            changeItemName={this.props.changeItemName}
             changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}

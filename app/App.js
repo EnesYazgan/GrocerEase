@@ -133,21 +133,6 @@ export default class App extends Component {
 		return <IngredientScreen
 			data={this.state.inventory}
 
-			checkBarcode={(barcode) => {
-				length = barcode.length
-				barcodeData = barcode.toString().substring(1,barcode.length)
-				console.log('checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
-				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
-					console.log('scanned barcode, checking ' + '/barcode-upc' + length + '/' + barcodeData + '/')
-					if (snapshot.exists()) {
-						console.log('exists in database')
-						changeItemQuantity(snapshot.val().name, 1)
-					} else {
-						console.log('does not exist in database')
-					}
-				})
-			}}
-
 			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
 				if (snapshot.exists()){
 				  changeItemQuantity(snapshot.val().name, 1);
@@ -319,11 +304,12 @@ export default class App extends Component {
 					);
 					ingredientsList.push(ing);
 				}
+			 }
 
 				console.log("Retrieved " + userId + "'s list:");
 				if (this.state.inventory != ingredientsList) {
 					this.setState({ inventory: ingredientsList }, this.getRecipes)
-				}
+			  }
 			}
 		});
 	}

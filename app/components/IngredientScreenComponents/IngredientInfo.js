@@ -520,6 +520,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 1,
-    height: 50,
+    height: 35,
   }
 });
