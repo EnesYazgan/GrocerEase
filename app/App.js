@@ -137,7 +137,7 @@ export default class App extends Component {
 				this.createFirebaseInventoryListener(this.state.currentUserId);
 			}}
 
-			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
+			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length + '/' + barcode + '/').once("value",snapshot => {
 				if (snapshot.exists()){
 				  changeItemQuantity(snapshot.val().name, 1);
 				}
