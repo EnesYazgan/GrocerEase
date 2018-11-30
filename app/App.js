@@ -133,6 +133,10 @@ export default class App extends Component {
 		return <IngredientScreen
 			data={this.state.inventory}
 
+			fetchData={() => {
+				this.createFirebaseInventoryListener(this.state.currentUserId);
+			}}
+
 			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
 				if (snapshot.exists()){
 				  changeItemQuantity(snapshot.val().name, 1);
