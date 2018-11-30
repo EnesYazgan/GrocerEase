@@ -149,7 +149,7 @@ export default class App extends Component {
 			}}
 
 			fetchData={() => {
-				this.cloneFirebaseInventory(this.state.currentUserId);
+				this.createFirebaseInventoryListener(this.state.currentUserId);
 			}}
 
 			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
