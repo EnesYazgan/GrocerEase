@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from './Icon';
 import List from './IngredientScreenComponents/List';
 import ActionBar from './IngredientScreenComponents/ActionBar';
@@ -31,7 +31,7 @@ export default class IngredientScreen extends Component {
   }
 
   addNewItem = () => {
-    this.props.changeItemQuantity(this.state.text, 1)
+    this.props.changeItemQuantity(this.state.text)
     this.setState({ text: '', filter: this.props.data })
   }
 
@@ -86,6 +86,8 @@ export default class IngredientScreen extends Component {
               ? this.props.data
               : this.state.filter
             }
+            fetchData={this.props.fetchData}
+            changeItemName={this.props.changeItemName}
             changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}

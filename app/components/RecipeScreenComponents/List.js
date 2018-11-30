@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
 import Icon from '../Icon';
 import RecipeInfo from './RecipeInfo';
 
@@ -22,6 +22,12 @@ export default class List extends Component {
           extraData={this.state}
           data={
             this.props.data
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
           }
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows

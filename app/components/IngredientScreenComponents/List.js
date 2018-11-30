@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
 import Icon from '../Icon';
 import IngredientInfo from './IngredientInfo';
 
@@ -11,7 +11,15 @@ export default class List extends Component {
 
   state = {
     infoPressed: null,
+    refreshing: false,
   }
+
+  _onRefresh = () => {
+   this.setState({refreshing: true});
+   this.props.fetchData();
+   this.setState({refreshing: false});
+ }
+
 
   render() {
     return (
@@ -41,11 +49,18 @@ export default class List extends Component {
     }
 
     incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1)
+      this.props.changeItemQuantity(item.key, 1);
     }
 
     decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1)
+      this.props.changeItemQuantity(item.key, -1);
+    }
+
+    setNewName = () => {
+      if(this.state.text != ''){
+        this.props.changeItemName(item.key, this.state.text);
+        this.setState({text:''});
+      }
     }
 
     setQuantity = (text) => {
@@ -57,60 +72,51 @@ export default class List extends Component {
     //the actual rendering
     //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
 
+
     if (item.quantity > 0)
       return (
         <View>
           <View style={styles.listRow}>
-            <Text
-              style={styles.textContainer}
-              onPress={this.handleTextPress}>
-              {item.key}
-            </Text>
+
+            <TextInput style={styles.textContainer}
+              placeholder={item.key}
+              placeholderTextColor={'black'}
+              onChangeText={(text) => this.setState({text})}
+              onSubmitEditing={setNewName}
+              value={item.key}
+            />
+
 
             <View style={styles.buttons}>
-              {
-                item.isExpired == 0
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
-                    <Icon
-                    name='information-circle'
-                    color="#51A4F7"
-                    size={30}
-                    />
-                  </TouchableOpacity>
-                : null
-              }
-              {
-                item.isExpired == 1
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
+              <TouchableOpacity
+                style={styles.iconInfo}
+                onPress={infoButtonPressed}
+              >
+                {
+                  item.isExpired == 0
+                    ?
                     <Icon
                       name='information-circle'
-                      color='orange'
+                      color="#51A4F7"
                       size={30}
                     />
-                  </TouchableOpacity>
-                : null
-              }
-              {
-                item.isExpired == 2
-                ? <TouchableOpacity
-                    style={styles.iconInfo}
-                    onPress={infoButtonPressed}
-                  >
-                    <Icon
-                      name='information-circle'
-                      color="red"
-                      size={30}
-                    />
-                  </TouchableOpacity>
-                : null
-              }
-
+                    : item.isExpired == 1
+                      ?
+                      <Icon
+                        name='information-circle'
+                        color='orange'
+                        size={30}
+                      />
+                      : item.isExpired == 2
+                        ?
+                        <Icon
+                          name='information-circle'
+                          color="red"
+                          size={30}
+                        />
+                        : null
+                }
+              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.iconContainer}
                 onPress={decrementItemQuantity}
@@ -269,7 +275,8 @@ const styles = StyleSheet.create({
   textContainer: {
     marginLeft: 10,
     marginRight: 10,
-    fontSize: 20
+    fontSize: 20,
+    color: "black",
   },
   fadedTextContainer: {
     marginLeft: 10,
