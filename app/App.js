@@ -150,16 +150,30 @@ export default class App extends Component {
 
 			fetchData={() => {
 				this.cloneFirebaseInventory(this.state.currentUserId);
-				console.log("reach fetchData: " + this.state.currentUserId);
 			}}
+
+			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value",snapshot => {
+				if (snapshot.exists()){
+				  changeItemQuantity(snapshot.val().name, 1);
+				}
+			})}}
+
+      changeItemName={(itemName, newName) => {
+        var newInventory = this.state.inventory.slice(0);
+				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+        foundIngredient.key = newName;
+        // newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
+        this.setState({ inventory: newInventory });
+				//Update the database every time the list is changed. This works!
+				DataBase.updateMe(this.state.currentUserId, newInventory);
+      }}
 
 			changeItemQuantity={(itemName, quantity) => {
 				var newInventory = this.state.inventory.slice(0);
 				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 				if (typeof foundIngredient == 'undefined') {
 					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity, 'none', 0, 0, 'none set', 0, 0, 0, 0, 0, 0));
-				}
-				else {
+				}else{
 					foundIngredient.quantity = foundIngredient.quantity + quantity
 					if (foundIngredient.quantity < 0)
 						newInventory.splice(newInventory.indexOf(foundIngredient), 1)

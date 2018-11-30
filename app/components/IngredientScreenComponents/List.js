@@ -26,6 +26,7 @@ export default class List extends Component {
    }
  }
 
+
   render() {
     return (
       <View style={styles.container}>
@@ -67,6 +68,10 @@ export default class List extends Component {
       this.props.changeItemQuantity(item.key, -1)
     }
 
+    setNewName = (text) => {
+      this.props.changeItemName(item.key, this.state.text);
+    }
+
     setQuantity = (text) => {
       text == ''
         ? this.props.changeItemQuantity(item.key, -item.quantity)
@@ -76,15 +81,20 @@ export default class List extends Component {
     //the actual rendering
     //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
 
+
     if (item.quantity > 0)
       return (
         <View>
           <View style={styles.listRow}>
-            <Text
-              style={styles.textContainer}
-              onPress={this.handleTextPress}>
-              {item.key}
-            </Text>
+
+            <TextInput style={styles.textContainer}
+              placeholder={item.key}
+              placeholderTextColor={'black'}
+              onChangeText={(text) => this.setState({text})}
+              onSubmitEditing={setNewName}
+              value={item.key}
+            />
+
 
             <View style={styles.buttons}>
               {
@@ -288,7 +298,8 @@ const styles = StyleSheet.create({
   textContainer: {
     marginLeft: 10,
     marginRight: 10,
-    fontSize: 20
+    fontSize: 20,
+    color: "black",
   },
   fadedTextContainer: {
     marginLeft: 10,

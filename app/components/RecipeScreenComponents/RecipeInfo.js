@@ -24,7 +24,7 @@ export default class RecipeInfo extends React.Component {
         <Text style={styles.infoTitle}>Tools:</Text>
         {this.props.item.equipment_names.map(element => {
           return (
-            <Text key={element} style={styles.textInput}>{element}</Text>
+            <Text key={element} style={styles.excludesText}>{element}</Text>
           )
         })}
         <Button
@@ -80,23 +80,22 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
   },
   includesText: {
-    fontSize: 15,
+    fontSize: 14,
     padding: 5,
-    paddingLeft: 10,
-    fontWeight: 'bold',
+    paddingLeft: 40,
     color: 'green'
   },
   excludesText: {
-    fontSize: 15,
+    fontSize: 14,
     padding: 5,
     paddingLeft: 40,
-    fontWeight: 'bold',
-    color: 'black'
+    color: 'black',
   },
   infoTitle: {
     fontSize: 15,
     padding: 5,
     paddingLeft: 10,
     fontWeight: 'bold',
+    color: 'black'
   },
 });
