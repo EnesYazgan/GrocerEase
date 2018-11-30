@@ -31,7 +31,7 @@ export default class IngredientScreen extends Component {
   }
 
   addNewItem = () => {
-    this.props.changeItemQuantity(this.state.text, 1)
+    this.props.changeItemQuantity(this.state.text)
     this.setState({ text: '', filter: this.props.data })
   }
 
@@ -39,8 +39,6 @@ export default class IngredientScreen extends Component {
     var searchResults = this.props.data.filter(item => item.key.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
   }
-
-
 
   render() {
     return (
@@ -88,7 +86,6 @@ export default class IngredientScreen extends Component {
               ? this.props.data
               : this.state.filter
             }
-            fetchData={this.props.fetchData}
             changeItemQuantity={this.props.changeItemQuantity}
             changeItemCalories={this.props.changeItemCalories}
             changeItemServingSize={this.props.changeItemServingSize}

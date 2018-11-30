@@ -26,7 +26,8 @@ export default class RecipeScreen extends Component {
   }
 
   orderList = (sortingFunction) => {
-    this.setState({ filter: this.props.data.sort(sortingFunction) })
+    list = this.props.data.sort(sortingFunction);
+    this.setState({ filter: list })
   }
 
   addNewItem = () => {
@@ -77,6 +78,7 @@ export default class RecipeScreen extends Component {
               sortList={this.changeSortParameterThenOrderList}
             />
             <List
+              fetchData={this.props.fetchData}
               viewRecipeSteps={this.viewSteps}
               data={this.state.filter}
               changeItemQuantity={this.props.changeItemQuantity}
