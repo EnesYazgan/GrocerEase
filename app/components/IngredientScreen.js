@@ -21,9 +21,13 @@ export default class IngredientScreen extends Component {
     logOut: undefined,
     checkBarcode: undefined,
   }
-  //change the sort order state, then call the prop function to order the list accordingly
+  
+	shouldComponentUpdate(nextProps, nextState){
+		return true;
+	 }
   changeSortParameterThenOrderList = () => {
-    this.setState({ sortParameter: !this.state.sortParameter }, () => this.props.orderList(this.state.sortParameter))
+    this.props.orderList(this.state.sortParameter)
+    this.setState({ sortParameter: !this.state.sortParameter, filter: this.props.data })
   }
 
   toggleCamera = () => {
@@ -72,7 +76,6 @@ export default class IngredientScreen extends Component {
           this.state.cameraOn == false
             ? null
             : <BarcodeScanner
-              changeItemQuantity={this.props.changeItemQuantity}
               checkBarcode={this.props.checkBarcode}
             />
         }
@@ -87,21 +90,11 @@ export default class IngredientScreen extends Component {
           />
           /*show the list of ingredients, with functionality for all ingredient properties*/
           <List
+            {...this.props}
             data={this.state.text == ''
               ? this.props.data
               : this.state.filter
             }
-            fetchData={this.props.fetchData}
-            changeItemName={this.props.changeItemName}
-            changeItemQuantity={this.props.changeItemQuantity}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-            changeItemExpiration={this.props.changeItemExpiration}
-            changeItemCarbs={this.props.changeItemCarbs}
-            changeItemProtein={this.props.changeItemProtein}
-            changeItemSugar={this.props.changeItemSugar}
-            changeItemFat={this.props.changeItemFat}
-            changeItemSodium={this.props.changeItemSodium}
           />
         </View>
       </View>
