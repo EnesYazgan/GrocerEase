@@ -96,15 +96,13 @@ export default class IngredientInfo extends React.Component {
       /*after data parsed, close the date picker*/
       this._hideDateTimePicker();
       /*if the date is within 3 days of today, make isExpired=1, if is past, make isExpired=2, if much later, make isExpired=0 */
-      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days" || timeAgo[2] == "hours"){
+      if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"
+      || timeAgo[2] == "hours" || timeAgo[2] == "hour" || timeAgo[2] == "minutes"){
         this.props.changeItemExpiration(this.props.item.key, timeDifference, 1);
-        console.log(timeDifference + "..." + this.props.item.key + "..." + this.props.item.isExpired);
       }else if(timeAgo[2] == "ago"){
         this.props.changeItemExpiration(this.props.item.key, timeDifference, 2);
-        this.props.item.isExpired = 2;
       }else{
         this.props.changeItemExpiration(this.props.item.key, timeDifference, 0);
-        this.props.item.isExpired = 0;
       }
 
     }
