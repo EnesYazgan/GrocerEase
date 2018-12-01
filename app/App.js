@@ -159,7 +159,9 @@ export default class App extends Component {
 			data={this.state.inventory}
 
 			checkBarcode={(barcode) => {
-				firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value", snapshot => {
+				length = barcode.length
+				barcodeData = barcode.toString().substring(1,barcode.length)
+				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
 						changeItemQuantity(snapshot.val().name, 1);
 					} else {
@@ -211,13 +213,6 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 					newInventory.sort();
 					newInventory.reverse();
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				//DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
-
-			updateList={(newInventory) => {
-				console.log('the inventory that is being passed has a length...' + newInventory.length)
 				this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 			}}
 
