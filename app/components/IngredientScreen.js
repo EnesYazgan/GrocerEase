@@ -25,7 +25,6 @@ export default class IngredientScreen extends Component {
 	shouldComponentUpdate(nextProps, nextState){
 		return true;
 	 }
-
   changeSortParameterThenOrderList = () => {
     this.props.orderList(this.state.sortParameter)
     this.setState({ sortParameter: !this.state.sortParameter, filter: this.props.data })
@@ -34,12 +33,12 @@ export default class IngredientScreen extends Component {
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
-
+  //change the item quantity from App.js using the item inputted by the user, reset the state text.
   addNewItem = () => {
     this.props.changeItemQuantity(this.state.text)
     this.setState({ text: '', filter: this.props.data })
   }
-
+  //when user searches for an ingredient, access the list of ingredients stored.
   searchData = (text) => {
     var searchResults = this.props.data.filter(item => item.key.substring(0, text.length) == text);
     this.setState({ text: text, filter: searchResults })
@@ -50,6 +49,7 @@ export default class IngredientScreen extends Component {
       <View style={styles.container}>
         <StatusBar hidden />
         <View style={styles.banner}>
+          /*When pressed, switch to the recipes screen*/
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.switchScreen}>
             <Icon
@@ -60,6 +60,7 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>My Ingredients</Text>
+          /*Log out button*/
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon
@@ -70,6 +71,7 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
         </View>
+        /*If the camera is open, check for and read barcode*/
         {
           this.state.cameraOn == false
             ? null
@@ -78,6 +80,7 @@ export default class IngredientScreen extends Component {
             />
         }
         <View style={styles.container}>
+          /*show action bar with camera,add,search,sort options*/
           <ActionBar
             text={this.state.text}
             toggleCamera={this.toggleCamera}
@@ -85,6 +88,7 @@ export default class IngredientScreen extends Component {
             searchData={this.searchData}
             sortList={this.changeSortParameterThenOrderList}
           />
+          /*show the list of ingredients, with functionality for all ingredient properties*/
           <List
             {...this.props}
             data={this.state.text == ''

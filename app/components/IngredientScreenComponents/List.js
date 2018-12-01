@@ -31,7 +31,7 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-    //local functions
+    /*open or close the information button*/
     infoButtonPressed = () => {
       if (this.state.infoPressed == item) {
         this.setState({ infoPressed: null });
@@ -39,23 +39,28 @@ export default class List extends Component {
         this.setState({ infoPressed: item });
       }
     }
-
+    /*call the prop function in App.js to increase or decrease the item quantity*/
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1);
     }
-
     decrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, -1);
+    }
+
+    /*call the props function in App.js when user edits the item's name*/
+    setName = () => {
+      /*only update the name if the text inputted by the user is not null or undefined*/
+      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
+        this.props.changeItemName(item.key, this.state.text);
+        this.setState({text:''});
+      }
     }
 
     recordNameText = (text) => {
       this.setState({text: text})
     }
 
-    setName = () => {
-      this.props.changeItemName(item.key, this.state.text)
-    }
-
+    /*call the prop function in App.js to set the item quantity if the value is not null */
     setQuantity = (text) => {
       text == ''
         ? this.props.changeItemQuantity(item.key, -item.quantity)
@@ -98,28 +103,25 @@ export default class List extends Component {
                 size={30}
               />
             </TouchableOpacity>
-            {item.quantity > 0
-              ? <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={decrementItemQuantity}
+            >
+              {item.quantity > 0
+                ?
                 <Icon
                   name="remove"
                   color="#51A4F7"
                   size={20}
                 />
-              </TouchableOpacity>
-              : <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
+                :
                 <Icon
                   name="close"
                   color="red"
                   size={20}
                 />
-              </TouchableOpacity>
-            }
+              }
+            </TouchableOpacity>
             <TextInput
               underlineColorAndroid={'rgba(0,0,0,0)'}
               style={item.quantity > 0
