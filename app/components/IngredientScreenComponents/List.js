@@ -48,7 +48,7 @@ export default class List extends Component {
     }
 
     /*call the props function in App.js when user edits the item's name*/
-    setNewName = () => {
+    setName = () => {
       /*only update the name if the text inputted by the user is not null or undefined*/
       if(this.state.text != '' && typeof(this.state.text)!="undefined"){
         this.props.changeItemName(item.key, this.state.text);
@@ -88,22 +88,6 @@ export default class List extends Component {
             /*decrement,increment, or specifically set the item quantity*/
             <View style={styles.buttons}>
               <TouchableOpacity
-                style={styles.iconInfo}
-                onPress={infoButtonPressed}
-              >
-                <Icon
-                  name='information-circle'
-                  color={item.isExpired == 0
-                    ? "#51A4F7"
-                    : item.isExpired == 1
-                      ? 'orange'
-                      : item.isExpired == 2
-                        ? 'red'
-                        : 'black'}
-                  size={30}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
                 style={styles.iconContainer}
                 onPress={decrementItemQuantity}
               >
@@ -132,11 +116,27 @@ export default class List extends Component {
                   size={20}
                 />
               </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconInfo}
+                onPress={infoButtonPressed}
+              >
+                <Icon
+                  name='information-circle'
+                  color={item.isExpired == 0
+                    ? "#51A4F7"
+                    : item.isExpired == 1
+                      ? 'orange'
+                      : item.isExpired == 2
+                        ? 'red'
+                        : 'black'}
+                  size={30}
+                />
+              </TouchableOpacity>
             </View>
           </View>
           {
             this.state.infoPressed == item
-              ? <IngredientInfo item={item}   
+              ? <IngredientInfo item={item}
                 {...this.props}
               />
               : null
