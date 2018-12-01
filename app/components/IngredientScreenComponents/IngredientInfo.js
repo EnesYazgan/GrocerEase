@@ -58,8 +58,8 @@ export default class IngredientInfo extends React.Component {
         ? this.props.changeItemSodium(this.props.item.key, 0)
         : this.props.changeItemSodium(this.props.item.key, parseInt(text))
     }
+    /*parse date entered by user and format so Moment.js recognizes it and can compare it to today's date*/
     setDate = (date) => {
-
       parsedDate = date.toString();
       dateArray = parsedDate.split(' ');
 
@@ -89,12 +89,13 @@ export default class IngredientInfo extends React.Component {
       }else if(dateArray[1] == "Dec"){
         month = "12";
       }else{}
-
+      /*use Moment.js to determine if date entered is now, before, or later*/
       timeDifference = moment((dateArray[3]+month+dateArray[2]), "YYYYMMDD").fromNow();
+      /*timeAgo is the keyword that says the time difference, like "ago" means the date entered has past*/
       timeAgo = timeDifference.split(' ');
-
+      /*after data parsed, close the date picker*/
       this._hideDateTimePicker();
-
+      /*if the date is within 3 days of today, make isExpired=1, if is past, make isExpired=2, if much later, make isExpired=0 */
       if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days" || timeAgo[2] == "hours"){
         this.props.changeItemExpiration(this.props.item.key, timeDifference, 1);
         console.log(timeDifference + "..." + this.props.item.key + "..." + this.props.item.isExpired);
@@ -107,7 +108,7 @@ export default class IngredientInfo extends React.Component {
       }
 
     }
-
+    /*for the setter functions, make sure if decrementing that the value never goes below zero*/
     incrementCalories = () => {
       this.props.changeItemCalories(this.props.item.key, (this.props.item.calories + 1) );
     }
@@ -116,7 +117,6 @@ export default class IngredientInfo extends React.Component {
         this.props.changeItemCalories(this.props.item.key, (this.props.item.calories - 1) );
       }
     }
-
     incrementServing = () => {
       this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving + 1) );
     }
@@ -125,7 +125,6 @@ export default class IngredientInfo extends React.Component {
         this.props.changeItemServingSize(this.props.item.key, (this.props.item.serving - 1) );
       }
     }
-
     incrementCarbs = () => {
       this.props.changeItemCarbs(this.props.item.key, (this.props.item.carbs + 1) );
     }
@@ -170,10 +169,10 @@ export default class IngredientInfo extends React.Component {
 
     bothSetDateAndExpirationAlert = (date) => {
       setDate(date);
-      expirationAlert(date);
     }
 
     return (
+      /*list all the properties of Ingredient object, allow them to be decreased, increased, or set to specific value*/
       <View style={styles.container}>
         <View style={styles.listRow}>
           <Text style={styles.textInput}>Quantity:   {this.props.item.quantity}</Text>
@@ -412,42 +411,36 @@ export default class IngredientInfo extends React.Component {
             onConfirm={setDate}
             onCancel={this._hideDateTimePicker}
           />
-
+          /*determine which color and icon to display based on isExpired*/
           {
             this.props.item.isExpired == 0
-              ? <Icon
+              ?
+                <Icon
                   style={styles.icon}
                   /*name="checkmark-circle"*/
                   name='happy'
                   size={30}
                   color="green"
                 />
-              : null
+            : this.props.item.isExpired == 1
+            ?
+              <Icon
+                style={styles.icon}
+                name='sad'
+                size={30}
+                color="orange"
+              />
+            : this.props.item.isExpired == 2
+            ?
+              <Icon
+                style={styles.icon}
+                /*name="checkmark-circle"*/
+                name='sad'
+                size={30}
+                color="red"
+              />
+            : null
           }
-          {
-            this.props.item.isExpired == 1
-              ? <Icon
-                  style={styles.icon}
-                  name='sad'
-                  size={30}
-                  color="orange"
-                />
-              : null
-          }
-          {
-            this.props.item.isExpired == 2
-              ? <Icon
-                  style={styles.icon}
-                  /*name="checkmark-circle"*/
-                  name='sad'
-                  size={30}
-                  color="red"
-                />
-              : null
-          }
-
-
-
 
         </View>
       </View>

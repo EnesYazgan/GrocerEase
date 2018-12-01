@@ -31,7 +31,7 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-    //local functions
+    /*open or close the information button*/
     infoButtonPressed = () => {
       if (this.state.infoPressed == item) {
         this.setState({ infoPressed: null });
@@ -39,23 +39,28 @@ export default class List extends Component {
         this.setState({ infoPressed: item });
       }
     }
-
+    /*call the prop function in App.js to increase or decrease the item quantity*/
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, 1);
     }
-
     decrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, -1);
+    }
+
+    /*call the props function in App.js when user edits the item's name*/
+    setNewName = () => {
+      /*only update the name if the text inputted by the user is not null or undefined*/
+      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
+        this.props.changeItemName(item.key, this.state.text);
+        this.setState({text:''});
+      }
     }
 
     recordNameText = (text) => {
       this.setState({text: text})
     }
 
-    setName = () => {
-      this.props.changeItemName(item.key, this.state.text)
-    }
-
+    /*call the prop function in App.js to set the item quantity if the value is not null */
     setQuantity = (text) => {
       text == ''
         ? this.props.changeItemQuantity(item.key, -item.quantity)
@@ -64,7 +69,6 @@ export default class List extends Component {
 
     //the actual rendering
     //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
-
     if (item.quantity > 0)
       return (
         <View>
@@ -81,6 +85,7 @@ export default class List extends Component {
                 setName
               }
             />
+            /*decrement,increment, or specifically set the item quantity*/
             <View style={styles.buttons}>
               <TouchableOpacity
                 style={styles.iconInfo}
@@ -140,6 +145,7 @@ export default class List extends Component {
       )
     else
       return (
+        /*if the quantity of the item is 0, allow for removal of the item*/
         <View style={styles.listRow}>
           <Text
             style={styles.fadedTextContainer}
