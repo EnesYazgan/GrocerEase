@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl } from 'react-native';
 import Icon from '../Icon';
 import IngredientInfo from './IngredientInfo';
 
 export default class List extends Component {
   static defaultProps = {
-    text: '',
     data: [],
   }
 
   state = {
     infoPressed: null,
+    text: '',
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class List extends Component {
       <View style={styles.container}>
         <FlatList
           //A FlatList renders a component in multiple rows like a list, given an array of data.
-          extraData = {this.state}
+          extraData={this.state}
           data={
             this.props.data
           }
@@ -33,10 +33,10 @@ export default class List extends Component {
   renderListRow = ({ item }) => {
     //local functions
     infoButtonPressed = () => {
-      if(this.state.infoPressed == item){
-        this.setState({infoPressed: null});
-      }else{
-        this.setState({infoPressed: item});
+      if (this.state.infoPressed == item) {
+        this.setState({ infoPressed: null });
+      } else {
+        this.setState({ infoPressed: item });
       }
     }
 
@@ -48,13 +48,12 @@ export default class List extends Component {
       this.props.changeItemQuantity(item.key, -1);
     }
 
-    setNewName = () => {
-      console.log("this.state.text: " + this.state.text);
-      console.log("item.key: " + item.key);
-      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
-        this.props.changeItemName(item.key, this.state.text);
-        this.setState({text:''});
-      }
+    recordNameText = (text) => {
+      this.setState({text: text})
+    }
+
+    setName = () => {
+      this.props.changeItemName(item.key, this.state.text)
     }
 
     setQuantity = (text) => {
@@ -66,50 +65,38 @@ export default class List extends Component {
     //the actual rendering
     //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
 
-
     if (item.quantity > 0)
       return (
         <View>
           <View style={styles.listRow}>
-
-            <TextInput style={styles.textContainer}
-              placeholder={item.key}
+            <TextInput key={item.index}
+              style={styles.textContainer}
+              underlineColorAndroid={'rgba(0,0,0,0)'}
+              defaultValue={item.key}
               placeholderTextColor={'black'}
-              onChangeText={(text) => this.setState({text})}
-              onSubmitEditing={setNewName}
-              value={item.key}
+              onChangeText={
+                recordNameText
+              }
+              onSubmitEditing={
+                setName
+              }
             />
-
-
             <View style={styles.buttons}>
               <TouchableOpacity
                 style={styles.iconInfo}
                 onPress={infoButtonPressed}
               >
-                {
-                  item.isExpired == 0
-                    ?
-                    <Icon
-                      name='information-circle'
-                      color="#51A4F7"
-                      size={30}
-                    />
+                <Icon
+                  name='information-circle'
+                  color={item.isExpired == 0
+                    ? "#51A4F7"
                     : item.isExpired == 1
-                      ?
-                      <Icon
-                        name='information-circle'
-                        color='orange'
-                        size={30}
-                      />
+                      ? 'orange'
                       : item.isExpired == 2
-                        ?
-                        <Icon
-                          name='information-circle'
-                          color="red"
-                          size={30}
-                        />
-                        : null
-                }
+                        ? 'red'
+                        : 'black'}
+                  size={30}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.iconContainer}
@@ -141,22 +128,14 @@ export default class List extends Component {
                 />
               </TouchableOpacity>
             </View>
-        </View>
-        {
-          this.state.infoPressed == item
-          ? <IngredientInfo item={item}
-            changeItemQuantity={this.props.changeItemQuantity}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-            changeItemExpiration={this.props.changeItemExpiration}
-            changeItemCarbs={this.props.changeItemCarbs}
-            changeItemProtein={this.props.changeItemProtein}
-            changeItemSugar={this.props.changeItemSugar}
-            changeItemFat={this.props.changeItemFat}
-            changeItemSodium={this.props.changeItemSodium}
-          />
-          : null
-        }
+          </View>
+          {
+            this.state.infoPressed == item
+              ? <IngredientInfo item={item}   
+                {...this.props}
+              />
+              : null
+          }
         </View>
       )
     else
@@ -217,7 +196,7 @@ export default class List extends Component {
 }
 
 String.prototype.toTitleCase = function () {
-  return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 const styles = StyleSheet.create({
@@ -279,21 +258,21 @@ const styles = StyleSheet.create({
     color: '#ccc'
   },
   iconInfo: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'flex-end',
-    justifyContent:'flex-end',
-    width:30,
-    height:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    width: 30,
+    height: 30,
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:30,
-    height:30,
-    backgroundColor:'#fff',
-    borderRadius:30,
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    backgroundColor: '#fff',
+    borderRadius: 30,
   }
 });

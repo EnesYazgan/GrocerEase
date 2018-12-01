@@ -34,7 +34,7 @@ export default class DataBase{
 		}
 
 		//set it to the list corresponding to userID
-		let ref = firebase.database().ref('users/' + userId).set(update);
+		firebase.database().ref('users/' + userId).set(update);
 	}
 	
 	/*

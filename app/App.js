@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, AppState} from 'react-native'
+import { View, StatusBar, AppState } from 'react-native'
 //import * as firebase from 'firebase';
 import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
@@ -15,9 +15,9 @@ import _ from 'lodash';
 YellowBox.ignoreWarnings(['Setting a timer']);
 const _console = _.clone(console);
 console.warn = message => {
-  if (message.indexOf('Setting a timer') <= -1) {
-    _console.warn(message);
-  }
+	if (message.indexOf('Setting a timer') <= -1) {
+		_console.warn(message);
+	}
 };
 //End Yellowbox ignore--------------------------------------
 
@@ -45,7 +45,6 @@ export default class App extends Component {
 		testInv: [],
 		screen: 'login',
 		recipes: [],
-		refreshing: false,
 	}
 
 	loginAndGetData = (userId) => {
@@ -129,112 +128,83 @@ export default class App extends Component {
 		/>
 	}
 
+	changeIngredientInInventory = (itemName, attribute, newValue) => {
+		var newInventory = this.state.inventory.slice(0);
+		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+		console.log('index of found ingredient is ' + foundIngredient.index)
+		if (attribute != 'quantity') {
+			foundIngredient[attribute] = newValue;
+			console.log('index of found ingredient is still ' + foundIngredient.index)
+		}
+		else {
+			if (typeof foundIngredient == 'undefined') {
+				newIngredient = new Ingredient(itemName.toTitleCase(), newValue);
+				newIngredient.index = newInventory.length;
+				newInventory.push(newIngredient);
+			} else {
+				foundIngredient.quantity = foundIngredient.quantity + newValue
+				if (foundIngredient.quantity < 0)
+					newInventory.splice(newInventory.indexOf(foundIngredient), 1)
+			}
+		}
+		// newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
+		this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
+		//Update the database every time the list is changed. This works!
+	}
+
 	constructedIngredientScreen = () => {
 		return <IngredientScreen
 			data={this.state.inventory}
 
-			fetchData={() => {
-				this.createFirebaseInventoryListener(this.state.currentUserId);
+			checkBarcode={(barcode) => {
+				firebase.database().ref('/barcode-upc' + barcode.length() + '/' + barcode + '/').once("value", snapshot => {
+					if (snapshot.exists()) {
+						changeItemQuantity(snapshot.val().name, 1);
+					} else {
+						alert('barcode does not exist in database');
+					}
+				})
 			}}
 
-			checkBarcode={(barcode) => {firebase.database().ref('/barcode-upc' + barcode.length + '/' + barcode + '/').once("value",snapshot => {
-				if (snapshot.exists()){
-				  changeItemQuantity(snapshot.val().name, 1);
-				}
-			})}}
-
-      changeItemName={(itemName, newName) => {
-        var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-        foundIngredient.key = newName;
-        // newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
-        this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
-      }}
+			changeItemName={(itemName, newName) => {
+				this.changeIngredientInInventory(itemName, 'key', newName)
+			}}
 
 			changeItemQuantity={(itemName, quantity) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				if (typeof foundIngredient == 'undefined') {
-					newInventory.push(new Ingredient(itemName.toTitleCase(), quantity));
-				}else{
-					foundIngredient.quantity = foundIngredient.quantity + quantity
-					if (foundIngredient.quantity < 0)
-						newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-				}
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'quantity', quantity)
 			}}
 
 			changeItemCalories={(itemName, calories) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.calories = calories;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'calories', calories)
 			}}
 
 			changeItemServingSize={(itemName, serving) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.serving = serving;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'serving', serving)
 			}}
 
-      changeItemExpiration={(itemName, expiry, num) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.expiry = expiry;
-				foundIngredient.isExpired = num;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+			changeItemExpiration={(itemName, expiry, num) => {
+				this.changeIngredientInInventory(itemName, 'expiry', expiry)
+				this.changeIngredientInInventory(itemName, 'isExpired', num)
 			}}
 
 			changeItemCarbs={(itemName, carbs) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.carbs = carbs;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'carbs', carbs)
 			}}
+
 			changeItemProtein={(itemName, protein) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.protein = protein;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'protein', protein)
 			}}
+
 			changeItemSugar={(itemName, sugar) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.sugar = sugar;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'sugar', sugar)
 			}}
+      
 			changeItemFat={(itemName, fat) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.fat = fat;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'fat', fat)
 			}}
+      
 			changeItemSodium={(itemName, sodium) => {
-				var newInventory = this.state.inventory.slice(0);
-				var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-				foundIngredient.sodium = sodium;
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				DataBase.updateMe(this.state.currentUserId, newInventory);
+				this.changeIngredientInInventory(itemName, 'sodium', sodium)
 			}}
 
 			orderList={(parameter) => {
@@ -249,10 +219,12 @@ export default class App extends Component {
 				//Update the database every time the list is changed. This works!
 				DataBase.updateMe(this.state.currentUserId, newInventory);
 			}}
+
 			switchScreen={() => {
 				console.log('switching to recipes screen')
 				this.setState({ screen: 'recipes' });
 			}}
+
 			logOut={() => {
 				this.logoutAndClearData()
 			}}
@@ -309,39 +281,38 @@ export default class App extends Component {
 		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
 			//snapshot.val() is the list we want
 			list = snapshot.val().slice(0);
-
-			//lists it properly
-			// console.log("User's List: " + list);
-			if (list.length > 0) {
-				var ingredientsList = [];
-				var ingParams;
-				var ing;
-				for (var i = 0; i < list.length; i++) {
-					ingParams = list[i].split(",");
-					ing = new Ingredient(
-						ingParams[0],  //name is a string
-						parseInt(ingParams[1], 10),  //quantity is an int
-						ingParams[2], //unit is a string
-						parseInt(ingParams[3], 10),  //calories is an int
-						parseInt(ingParams[4], 10), //seving is an int
-						ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
-						parseInt(ingParams[6], 10), //isExpired is an int
-						parseInt(ingParams[7], 10), //carbs is an int
-						parseInt(ingParams[8], 10), //protein is an int
-						parseInt(ingParams[9], 10), //sugar is an int
-						parseInt(ingParams[10], 10), //fat is an int
-						parseInt(ingParams[11], 10), //sodium is an int
-					);
-					ingredientsList.push(ing);
+			if (list != this.state.inventory) {
+				console.log("the lists are incongruent");
+				//lists it properly
+				// console.log("User's List: " + list);
+				if (list.length > 0) {
+					var ingredientsList = [];
+					var ingParams;
+					var ing;
+					for (var i = 0; i < list.length; i++) {
+						ingParams = list[i].split(",");
+						ing = new Ingredient(
+							ingParams[0],  //name is a string
+							parseInt(ingParams[1], 10),  //quantity is an int
+							ingParams[2], //unit is a string
+							parseInt(ingParams[3], 10),  //calories is an int
+							parseInt(ingParams[4], 10), //seving is an int
+							ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
+							parseInt(ingParams[6], 10), //isExpired is an int
+							parseInt(ingParams[7], 10), //carbs is an int
+							parseInt(ingParams[8], 10), //protein is an int
+							parseInt(ingParams[9], 10), //sugar is an int
+							parseInt(ingParams[10], 10), //fat is an int
+							parseInt(ingParams[11], 10), //sodium is an int
+						);
+						ing.index = i;
+						ingredientsList.push(ing);
+					}
 				}
 			}
-
-				console.log("Retrieved " + userId + "'s list:");
-				if (this.state.inventory != ingredientsList) {
-					this.setState({ inventory: ingredientsList }, this.getRecipes)
-			  }
+      console.log("Retrieved " + userId + "'s list:");
+			this.setState({ inventory: ingredientsList }, this.getRecipes)
 		});
-		
 	}
 
 	getRecipes = () => {
@@ -371,9 +342,9 @@ export default class App extends Component {
 					else
 						return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
 				})
-				this.setState({recipes: list})
+				this.setState({ recipes: list })
 			})
-			.catch(console.log('CANT FIND THE RECIPE'))
+			.catch(() => console.log('CANT FIND THE RECIPE'))
 	}
 }
 

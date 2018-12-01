@@ -69,7 +69,6 @@ export default class IngredientScreen extends Component {
           this.state.cameraOn == false
             ? null
             : <BarcodeScanner
-              changeItemQuantity={this.props.changeItemQuantity}
               checkBarcode={this.props.checkBarcode}
             />
         }
@@ -86,17 +85,7 @@ export default class IngredientScreen extends Component {
               ? this.props.data
               : this.state.filter
             }
-            fetchData={this.props.fetchData}
-            changeItemName={this.props.changeItemName}
-            changeItemQuantity={this.props.changeItemQuantity}
-            changeItemCalories={this.props.changeItemCalories}
-            changeItemServingSize={this.props.changeItemServingSize}
-            changeItemExpiration={this.props.changeItemExpiration}
-            changeItemCarbs={this.props.changeItemCarbs}
-            changeItemProtein={this.props.changeItemProtein}
-            changeItemSugar={this.props.changeItemSugar}
-            changeItemFat={this.props.changeItemFat}
-            changeItemSodium={this.props.changeItemSodium}
+            {...this.props}
           />
         </View>
       </View>

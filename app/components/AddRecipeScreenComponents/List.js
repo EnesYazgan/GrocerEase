@@ -13,6 +13,7 @@ export default class List extends Component {
     return (
       <View style={styles.container}>
         <FlatList
+          keyboardShouldPersistTaps='always'
           //A FlatList renders a component in multiple rows like a list, given an array of data.
           extraData={this.state}
           data={
