@@ -45,6 +45,7 @@ export default class App extends Component {
 		testInv: [],
 		screen: 'login',
 		recipes: [],
+		receivingChange: true,
 	}
 
 	loginAndGetData = (userId) => {
@@ -68,6 +69,10 @@ export default class App extends Component {
 			}
 		});
 	}
+
+	shouldComponentUpdate(nextProps, nextState){
+		return true;
+	 }
 
 	render() {
 		return (
@@ -198,11 +203,9 @@ export default class App extends Component {
 			changeItemSugar={(itemName, sugar) => {
 				this.changeIngredientInInventory(itemName, 'sugar', sugar)
 			}}
-      
 			changeItemFat={(itemName, fat) => {
 				this.changeIngredientInInventory(itemName, 'fat', fat)
 			}}
-      
 			changeItemSodium={(itemName, sodium) => {
 				this.changeIngredientInInventory(itemName, 'sodium', sodium)
 			}}
@@ -239,32 +242,6 @@ export default class App extends Component {
 			sortList={
 				this.getRecipes
 			}
-			orderList={(parameter) => {
-				var list = this.state.recipes.slice(0);
-				if (parameter == true){
-					list.sort((recipeA, recipeB) => {	
-						var percentA = (recipeA.matchingIngredients.length * 100) / recipeA.ingredients.length;
-						var percentB = (recipeB.matchingIngredients.length * 100) / recipeB.ingredients.length;
-						
-						
-						return percentB - percentA;
-					})
-				} else {
-					list.sort((recipeA, recipeB) => {	
-						console.log("! Comparison made. \nA: " + recipeA.matchingIngredients.length + "\nB: " + recipeB.matchingIngredients.length);
-						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length){
-							console.log("comparison made, new got: " + recipeB.ingredients.length - recipeA.ingredients.length);
-							return (recipeB.ingredients.length - recipeA.ingredients.length)
-						}else{
-							console.log("comparison made, new got: " + recipeB.matchingIngredients.length - recipeA.matchingIngredients.length);
-							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
-						}
-					})
-				}
-				this.setState({recipes: list});
-				console.log("Recipes sorted");
-				console.log("sorted list of recipes!");
-			}}
 			userData={
 				this.state.inventory
 			}
@@ -309,9 +286,14 @@ export default class App extends Component {
 						ingredientsList.push(ing);
 					}
 				}
+
+				console.log("Retrieved " + userId + "'s list:");
+				if (this.state.receivingChange == true) {
+					this.setState({ inventory: ingredientsList }, this.getRecipes)
+				} else {
+					this.setState({ receivingChange: true })
+				}
 			}
-      console.log("Retrieved " + userId + "'s list:");
-			this.setState({ inventory: ingredientsList }, this.getRecipes)
 		});
 	}
 
@@ -344,7 +326,7 @@ export default class App extends Component {
 				})
 				this.setState({ recipes: list })
 			})
-			.catch(() => console.log('CANT FIND THE RECIPE'))
+			.catch(console.log('CANT FIND THE RECIPE'))
 	}
 }
 
