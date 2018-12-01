@@ -236,6 +236,32 @@ export default class App extends Component {
 			sortList={
 				this.getRecipes
 			}
+			orderList={(parameter) => {
+				var list = this.state.recipes.slice(0);
+				if (parameter == true){
+					list.sort((recipeA, recipeB) => {	
+						var percentA = (recipeA.matchingIngredients.length * 100) / recipeA.ingredients.length;
+						var percentB = (recipeB.matchingIngredients.length * 100) / recipeB.ingredients.length;
+						
+						
+						return percentB - percentA;
+					})
+				} else {
+					list.sort((recipeA, recipeB) => {	
+						console.log("! Comparison made. \nA: " + recipeA.matchingIngredients.length + "\nB: " + recipeB.matchingIngredients.length);
+						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length){
+							console.log("comparison made, new got: " + recipeB.ingredients.length - recipeA.ingredients.length);
+							return (recipeB.ingredients.length - recipeA.ingredients.length)
+						}else{
+							console.log("comparison made, new got: " + recipeB.matchingIngredients.length - recipeA.matchingIngredients.length);
+							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
+						}
+					})
+				}
+				this.setState({recipes: list});
+				console.log("Recipes sorted");
+				console.log("sorted list of recipes!");
+			}}
 			userData={
 				this.state.inventory
 			}
