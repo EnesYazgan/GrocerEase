@@ -67,105 +67,66 @@ export default class List extends Component {
         : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
     }
 
-    //the actual rendering
-    //two different components are used, one is visible when the quantity of the ingredient is 0, the other when it's greater than 0
-    if (item.quantity > 0)
-      return (
-        <View>
-          <View style={styles.listRow}>
-            <TextInput key={item.index}
-              style={styles.textContainer}
-              underlineColorAndroid={'rgba(0,0,0,0)'}
-              defaultValue={item.key}
-              placeholderTextColor={'black'}
-              onChangeText={
-                recordNameText
-              }
-              onSubmitEditing={
-                setName
-              }
-            />
-            /*decrement,increment, or specifically set the item quantity*/
-            <View style={styles.buttons}>
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
+    //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
+
+    return (
+      <View>
+        <View style={styles.listRow}>
+          <TextInput key={item.index}
+            style={item.quantity > 0
+              ? styles.textContainer
+              : styles.fadedTextContainer}
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            defaultValue={item.key}
+            placeholderTextColor={'black'}
+            onChangeText={
+              recordNameText
+            }
+            onSubmitEditing={
+              setName
+            }
+          />
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={styles.iconInfo}
+              onPress={infoButtonPressed}
+            >
+              <Icon
+                name='information-circle'
+                color={item.isExpired == 0
+                  ? "#51A4F7"
+                  : item.isExpired == 1
+                    ? 'orange'
+                    : item.isExpired == 2
+                      ? 'red'
+                      : 'black'}
+                size={30}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={decrementItemQuantity}
+            >
+              {item.quantity > 0
+                ?
                 <Icon
                   name="remove"
                   color="#51A4F7"
                   size={20}
                 />
-              </TouchableOpacity>
-              <TextInput
-                underlineColorAndroid={'rgba(0,0,0,0)'}
-                style={styles.textContainer}
-                keyboardType={'numeric'}
-                defaultValue={item.quantity.toString()}
-                onChangeText={
-                  setQuantity
-                }
-              />
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={incrementItemQuantity}
-              >
+                :
                 <Icon
-                  name="add"
-                  color="#51A4F7"
+                  name="close"
+                  color="red"
                   size={20}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.iconInfo}
-                onPress={infoButtonPressed}
-              >
-                <Icon
-                  name='information-circle'
-                  color={item.isExpired == 0
-                    ? "#51A4F7"
-                    : item.isExpired == 1
-                      ? 'orange'
-                      : item.isExpired == 2
-                        ? 'red'
-                        : 'black'}
-                  size={30}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {
-            this.state.infoPressed == item
-              ? <IngredientInfo item={item}
-                {...this.props}
-              />
-              : null
-          }
-        </View>
-      )
-    else
-      return (
-        /*if the quantity of the item is 0, allow for removal of the item*/
-        <View style={styles.listRow}>
-          <Text
-            style={styles.fadedTextContainer}
-            onPress={this.handleTextPress}>
-            {item.key}
-          </Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={decrementItemQuantity}
-            >
-              <Icon
-                name="close"
-                color="red"
-                size={20}
-              />
+              }
             </TouchableOpacity>
             <TextInput
               underlineColorAndroid={'rgba(0,0,0,0)'}
-              style={styles.fadedTextContainer}
+              style={item.quantity > 0
+                ? styles.textContainer
+                : styles.fadedTextContainer}
               keyboardType={'numeric'}
               defaultValue={item.quantity.toString()}
               onChangeText={
@@ -184,7 +145,15 @@ export default class List extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      )
+        {
+          this.state.infoPressed == item
+            ? <IngredientInfo item={item}
+              {...this.props}
+            />
+            : null
+        }
+      </View>
+    )
   }
 
   renderSeparator = () => {

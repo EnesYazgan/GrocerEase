@@ -23,12 +23,12 @@ export default class List extends Component {
           data={
             this.props.data
           }
-          refreshControl={
+          /*refrerefreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
             />
-          }
+          }*/
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}

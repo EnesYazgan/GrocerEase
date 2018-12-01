@@ -159,9 +159,12 @@ export default class App extends Component {
 			data={this.state.inventory}
 
 			checkBarcode={(barcode) => {
-				firebase.database().ref('/barcode-upc' + barcode.length + '/' + barcode + '/').once("value", snapshot => {
+				//we have to cut off the first digit of the barcode
+				length = barcode.length
+				barcodeData = barcode.toString().substring(1,barcode.length)
+				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
-						changeItemQuantity(snapshot.val().name, 1);
+						this.changeIngredientInInventory(itemName, 'quantity', 1)
 					} else {
 						alert('barcode does not exist in database');
 					}
@@ -172,7 +175,7 @@ export default class App extends Component {
 				this.changeIngredientInInventory(itemName, 'key', newName)
 			}}
 
-			changeItemQuantity={(itemName, quantity) => {
+			changeItemQuantity={(itemName, quantity = 1) => {
 				this.changeIngredientInInventory(itemName, 'quantity', quantity)
 			}}
 
@@ -211,13 +214,6 @@ export default class App extends Component {
 				var newInventory = this.state.inventory.slice(0);
 					newInventory.sort();
 					newInventory.reverse();
-				this.setState({ inventory: newInventory });
-				//Update the database every time the list is changed. This works!
-				//DataBase.updateMe(this.state.currentUserId, newInventory);
-			}}
-
-			updateList={(newInventory) => {
-				console.log('the inventory that is being passed has a length...' + newInventory.length)
 				this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 			}}
 
@@ -324,32 +320,41 @@ export default class App extends Component {
 		firebase.database().ref('/recipe').once('value')
 			.then((snapshot) => {
 				if (snapshot.exists()) {
-				list = snapshot.val().slice(0);
-				list.forEach(recipe => {
-					recipe.key = recipe.title
-					recipe.matchingIngredients = [];
-					this.state.inventory.forEach(userIngredient => {
-						if (typeof recipe.ingredients != 'undefined') {
+					list = snapshot.val().slice(0);
+					list.forEach(recipe => {
+						recipe.key = recipe.title
+						recipe.matchingIngredients = [];
+						this.state.inventory.forEach(userIngredient => {
+							let matchedPosition = 10000;
+							let matchedIngredient = null;
 							recipe.ingredients.forEach(ingredient => {
+								ingredient.perfectMatch = false;
 								ingredient.name = ingredient.name.toTitleCase()
-								if (ingredient.name.includes(userIngredient.key))
-									recipe.matchingIngredients.push(ingredient)
+								if (ingredient.name.indexOf(userIngredient.key) > -1 && ingredient.name.indexOf(userIngredient.key)/ingredient.name.length < matchedPosition) {
+									matchedPosition = ingredient.name.indexOf(userIngredient.key)/ingredient.name.length
+									matchedIngredient = ingredient;
+								}
 							})
+							if (matchedIngredient != null) {
+								recipe.matchingIngredients.push(matchedIngredient)
+								if (Number(matchedIngredient.quantity) <= userIngredient.quantity) {
+									matchedIngredient.perfectMatch = true;
+								}
+							}
 							recipe.equipment_names.forEach(tool => {
 								tool = tool.toTitleCase()
 							})
-						}
+						});
+						console.log('matching ingredients are ' + recipe.matchingIngredients)
 					});
-					console.log('matching ingredients are ' + recipe.matchingIngredients)
-				});
-				list.sort((recipeA, recipeB) => {
-					if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
-						return (recipeB.ingredients.length - recipeA.ingredients.length)
-					else
-						return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
-				})
-				this.setState({ recipes: list })
-			}
+					list.sort((recipeA, recipeB) => {
+						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
+							return (recipeB.ingredients.length - recipeA.ingredients.length)
+						else
+							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
+					})
+					this.setState({ recipes: list })
+				}
 			})
 			.catch(() => console.log('CANT FIND THE RECIPE'))
 	}

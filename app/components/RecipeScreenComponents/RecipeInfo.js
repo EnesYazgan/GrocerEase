@@ -12,14 +12,15 @@ export default class RecipeInfo extends React.Component {
       <View style={styles.container}>
         <Text style={styles.infoTitle}>Ingredients:</Text>
         {this.props.item.ingredients.map(element => {
-          if (this.props.item.matchingIngredients.includes(element))
-            return (
-              <Text key={element.name} style={styles.includesText}>{element.name}</Text>
-            )
-          else
-            return (
-              <Text key={element.name} style={styles.excludesText}>{element.name}</Text>
-            )
+          return (
+            <Text key={element.name}
+            style={this.props.item.matchingIngredients.includes(element)
+              ? (element.perfectMatch
+                ? styles.matchingText
+              : styles.almostText)
+              : styles.excludesText
+              }>{element.quantity} {element.name}</Text>
+          )
         })}
         <Text style={styles.infoTitle}>Tools:</Text>
         {this.props.item.equipment_names.map(element => {
@@ -79,11 +80,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
   },
-  includesText: {
+  matchingText: {
     fontSize: 14,
     padding: 5,
     paddingLeft: 40,
     color: 'green'
+  },
+  almostText: {
+    fontSize: 14,
+    padding: 5,
+    paddingLeft: 40,
+    color: 'orange'
   },
   excludesText: {
     fontSize: 14,
