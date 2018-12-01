@@ -62,7 +62,7 @@ export default class StepsScreen extends Component {
               size={30}
             />
           </TouchableOpacity>
-          <Text style={styles.headerText}>Recipe Steps</Text> /*{this.props.title}*/
+          <Text style={styles.headerText}>Recipe Steps</Text> 
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon

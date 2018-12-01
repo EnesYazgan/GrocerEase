@@ -22,7 +22,7 @@ export default class UserLogin extends Component{
     this.setState({ password: text });
     console.log("My password is:" + text);
   }
-  
+
   //sign up function that grabs the email and password from the text boxes and uses
   //firebase to create an account for the us
   signUpWithEmailAndPassword = () => {
@@ -55,20 +55,24 @@ export default class UserLogin extends Component{
           onChangeText={this.passwordText}
         />
         {/*log in button*/}
-        <TouchableOpacity
-          style={styles.button}
-          //when button pressed, grab email and password from text boxes
-          onPress={this.loginWithEmailAndPassword}
-        >
-          <Text style={styles.text}>Log In</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          //when button pressed, grab email and password from text boxes
-          onPress={this.signUpWithEmailAndPassword}
-        >
-          <Text style={styles.text}>Sign Up</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            //when button pressed, grab email and password from text boxes
+            onPress={this.loginWithEmailAndPassword}
+          >
+            <Text style={styles.text}>Log In</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            //when button pressed, grab email and password from text boxes
+            onPress={this.signUpWithEmailAndPassword}
+          >
+            <Text style={styles.text}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -76,7 +80,7 @@ export default class UserLogin extends Component{
 
 const styles = StyleSheet.create({
   headerText: {
-    backgroundColor: '#F5F6FF',
+    backgroundColor: '#fff',
     flexDirection: 'row',
     textAlign: 'center',
     fontSize: 32,
@@ -84,14 +88,20 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 10,
   },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   button: {
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#51A4F7',
     padding: 10,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 10,
-    width: 200
+    marginBottom: 0,
+    width: 200,
   },
   emailInput: {
     marginLeft: 20,
@@ -111,7 +121,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#F5F6FF'
+    backgroundColor: '#fff',
   },
   end: {
     flex: 1,

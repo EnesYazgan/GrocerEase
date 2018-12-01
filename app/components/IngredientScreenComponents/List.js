@@ -13,10 +13,6 @@ export default class List extends Component {
     text: '',
   }
 
-  componentDidUpdate(){
-    console.log('what is the state of infopresed?' + this.state.infoPressed)
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -58,10 +54,6 @@ export default class List extends Component {
 
     setName = () => {
       this.props.changeItemName(item.key, this.state.text)
-    }
-    
-    unfocus = () => {
-      this.setState({keyEdited: ''})
     }
 
     setQuantity = (text) => {
