@@ -21,9 +21,14 @@ export default class IngredientScreen extends Component {
     logOut: undefined,
     checkBarcode: undefined,
   }
+  
+	shouldComponentUpdate(nextProps, nextState){
+		return true;
+	 }
 
   changeSortParameterThenOrderList = () => {
-    this.setState({ sortParameter: !this.state.sortParameter }, () => this.props.orderList(this.state.sortParameter))
+    this.props.orderList(this.state.sortParameter)
+    this.setState({ sortParameter: !this.state.sortParameter, filter: this.props.data })
   }
 
   toggleCamera = () => {
@@ -81,11 +86,11 @@ export default class IngredientScreen extends Component {
             sortList={this.changeSortParameterThenOrderList}
           />
           <List
+            {...this.props}
             data={this.state.text == ''
               ? this.props.data
               : this.state.filter
             }
-            {...this.props}
           />
         </View>
       </View>
