@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from '../Icon';
+import Icon from '../SharedComponents/Icon';
 import RecipeInfo from './RecipeInfo';
 
 export default class List extends Component {
@@ -39,6 +39,7 @@ export default class List extends Component {
     }
 
     return <ListRow
+      {...this.props}
       viewRecipeSteps={
         viewRecipeSteps
       }
@@ -50,8 +51,7 @@ export default class List extends Component {
         } else {
           this.setState({ infoPressed: item });
         }
-      }
-      }
+      }}
       visible={this.state.infoPressed == item}
     />
   }
@@ -101,9 +101,12 @@ class ListRow extends PureComponent {
         </TouchableOpacity>
         {
           this.props.visible
-            ? <RecipeInfo item={this.props.item}
+            ? <RecipeInfo
+              {...this.props}
+              item={this.props.item}
               switchScreen={this.props.viewRecipeSteps}
-              />
+              setManualMatching={this.props.setManualMatching}
+            />
             : null
         }
       </View>

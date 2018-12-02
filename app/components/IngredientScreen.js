@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from './Icon';
+import { View, StyleSheet } from 'react-native';
 import List from './IngredientScreenComponents/List';
 import ActionBar from './IngredientScreenComponents/ActionBar';
 import BarcodeScanner from './IngredientScreenComponents/BarcodeScanner';
+import Banner from './SharedComponents/Banner';
 
 export default class IngredientScreen extends Component {
-  state = {
-    cameraOn: false,
-    filter: this.props.data,
-    text: '',
-    sortParameter: true,
-  }
-
   static defaultProps = {
     switchScreen: undefined,
     orderList: undefined,
@@ -22,13 +15,18 @@ export default class IngredientScreen extends Component {
     checkBarcode: undefined,
   }
 
-	shouldComponentUpdate(nextProps, nextState){
-		return true;
-	 }
+  state = {
+    cameraOn: false,
+    filter: this.props.data,
+    text: '',
+    sortParameter: true,
+  }
+
   changeSortParameterThenOrderList = () => {
     this.props.orderList(this.state.sortParameter)
     this.setState({ sortParameter: !this.state.sortParameter, filter: this.props.data })
   }
+  
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
@@ -44,43 +42,28 @@ export default class IngredientScreen extends Component {
     this.setState({ text: text, filter: searchResults })
   }
 
+  closeCameraAndCheckBarcode = (barcode) => {
+    this.setState({ cameraOn: false });
+    this.props.checkBarcode(barcode);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-		  {/*When pressed, switch to the recipes screen*/}
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.switchScreen}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='nutrition'
-              size={30}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>My Ingredients</Text>
-		  {/*Log out button*/}
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.logOut}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='log-out'
-              size={30}
-            />
-          </TouchableOpacity>
-        </View>
-        {/*If the camera is open, check for and read barcode*/}
+        <Banner
+          title='My Ingredients'
+          icon='nutrition'
+          logOut={this.props.logOut}
+          switchScreen={this.props.switchScreen}
+        />
         {
           this.state.cameraOn == false
             ? null
             : <BarcodeScanner
-              checkBarcode={this.props.checkBarcode}
+              checkBarcode={this.closeCameraAndCheckBarcode}
             />
         }
         <View style={styles.container}>
-		  {/*show action bar with camera,add,search,sort options*/}
           <ActionBar
             text={this.state.text}
             toggleCamera={this.toggleCamera}
@@ -88,7 +71,6 @@ export default class IngredientScreen extends Component {
             searchData={this.searchData}
             sortList={this.changeSortParameterThenOrderList}
           />
-          {/*show the list of ingredients, with functionality for all ingredient properties*/}
           <List
             {...this.props}
             data={this.state.text == ''
@@ -103,14 +85,6 @@ export default class IngredientScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttons: {
-    flexDirection: "row",
-    marginRight: 10,
-  },
-  banner: {
-    backgroundColor: '#51A4F7',
-    flexDirection: 'row',
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff'
@@ -122,36 +96,5 @@ const styles = StyleSheet.create({
   end: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  headerText: {
-    flexDirection: 'row',
-    flex: 1,
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    justifyContent: 'center',
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  iconContainer: {
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-    backgroundColor: '#51A4F7',
-    borderRadius: 10,
-  },
-  icon: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 20,
-    padding: 10,
   },
 });

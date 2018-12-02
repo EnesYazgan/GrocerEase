@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import Icon from '../Icon';
+import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from '../SharedComponents/Icon';
 
 export default class ActionBar extends Component {
   static defaultProps = {
@@ -12,14 +12,17 @@ export default class ActionBar extends Component {
   }
 
   clearTextInputAndAddNewItem = () => {
-    this.props.addNewItem()
     this.textInput.clear()
+    this.props.addNewItem()
+  }
+
+  focusOnTextInput = () => {
+    this.textInput.focus()
   }
 
   render() {
     return (
       <View style={styles.container}>
-		{/*if button pressed, sort the ingredients list*/}
         <TouchableOpacity
           style={styles.sortIconContainer}
           onPress={this.props.sortList}
@@ -31,7 +34,6 @@ export default class ActionBar extends Component {
             size={24}
           />
         </TouchableOpacity>
-        {/*open or close camera*/}
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={this.props.toggleCamera}
@@ -43,23 +45,29 @@ export default class ActionBar extends Component {
             size={24}
           />
         </TouchableOpacity>
-        {/*invoke searchData function based on user input*/}
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
-          placeholder="Add or search for food"
+          placeholder="Add or search for food!"
+          defaultValue={this.props.text}
           onChangeText={
             this.props.searchData
           }
         />
-        {/*if text entry blank, show search icon, otherwise clear the entry and add the item to inventory*/}
         {
           this.props.text == ''
-            ? <Icon
+            ? <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={
+                this.focusOnTextInput
+              }
+            >
+              <Icon
                 style={styles.icon}
                 name="search"
                 color="#ccc"
                 size={24}
               />
+            </TouchableOpacity>
             : <TouchableOpacity
               style={styles.iconContainer}
               onPress={

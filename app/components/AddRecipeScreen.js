@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from './Icon';
-import List from './StepsScreenComponents/List';
-import ActionBar from './StepsScreenComponents/ActionBar';
-import Ingredient from './objects/Ingredient';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import Icon from './SharedComponents/Icon';
+import List from './AddRecipeScreenComponents/List';
+import Banner from './SharedComponents/Banner';
+import Ingredient from '../objects/Ingredient'
 
 export default class AddRecipeScreen extends Component {
   state = {
@@ -14,6 +14,7 @@ export default class AddRecipeScreen extends Component {
     newTool: '',
     steps: [],
     newStep: '',
+    list: 'ingredients',
   }
 
   static defaultProps = {
@@ -22,17 +23,17 @@ export default class AddRecipeScreen extends Component {
     data: [],
     title: '',
   }
-  
+
   addNewIngredient = () => {
     var ingredientsCopy = this.state.ingredients.slice(0);
     ingredientsCopy.push(new Ingredient(this.state.newIngredient.toTitleCase()))
     this.setState({ ingredients: ingredientsCopy });
   }
-  
+
   recordToolText = (text) => {
     this.setState({ newTool: text });
   }
-  
+
   recordStepText = (text) => {
     this.setState({ newStep: text });
   }
@@ -40,11 +41,11 @@ export default class AddRecipeScreen extends Component {
   recordIngredientText = (text) => {
     this.setState({ newIngredient: text });
   }
-  
+
   recordToolText = (text) => {
     this.setState({ newTool: text });
   }
-  
+
   recordStepText = (text) => {
     this.setState({ newStep: text });
   }
@@ -73,82 +74,117 @@ export default class AddRecipeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-        <View style={styles.banner}>
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.switchScreen}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='arrow-back'
-              size={30}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Create a Recipe</Text>
-          <TouchableOpacity style={styles.iconContainer}
-            onPress={this.props.logOut}>
-            <Icon
-              style={styles.icon}
-              color='white'
-              name='log-out'
-              size={30}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.headerText}>Ingredients</Text>
-          <List
-            data={this.state.ingredients}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="New Ingredient"
-            onChangeText={this.recordIngredientText}
-          />
-          <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={
-              this.addNewIngredient
-            }
-          >
-            <Icon
-              style={styles.icon}
-              name="add-circle"
-              color="#51A4F7"
-              size={24}
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Tools</Text>
-          <List
-            data={this.state.tools
-            }
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="New Tool"
-            onChangeText={this.recordToolText}
-          />
-          <Text style={styles.headerText}>Steps</Text>
-          <List
-            data={this.state.steps
-            }
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="New Step"
-            onChangeText={this.recordStepText}
-          />
+        <Banner
+          title='Create a Recipe'
+          icon='flame'
+          logOut={this.props.logOut}
+          switchScreen={this.props.switchScreen}
+        />
+        {
+          this.state.list == 'ingredients'
+            ? <View>
+              <Text style={styles.headerText}>Ingredients</Text>
+              <List
+                data={this.state.ingredients}
+              />
+              <TextInput style={styles.textInput}
+                ref={input => { this.textInput = input }}
+                placeholder="Add or search for food!"
+                defaultValue={this.props.text}
+                onChangeText={
+                  this.props.searchData
+                }
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={
+                  this.addNewIngredient
+                }
+              >
+                <Icon
+                  style={styles.icon}
+                  name="add-circle"
+                  color="#51A4F7"
+                  size={24}
+                />
+              </TouchableOpacity>
+            </View>
+            : this.state.list == 'tools'
+              ? <View>
+                <Text style={styles.headerText}>Tools</Text>
+                <List
+                  data={this.state.tools
+                  }
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="New Tool"
+                  onChangeText={this.recordToolText}
+                />
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  onPress={
+                    this.addNewIngredient
+                  }
+                >
+                  <Icon
+                    style={styles.icon}
+                    name="add-circle"
+                    color="#51A4F7"
+                    size={24}
+                  />
+                </TouchableOpacity>
+              </View>
+              : <View>
+                <Text style={styles.headerText}>Steps</Text>
+                <List
+                  data={this.state.steps
+                  }
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="New Step"
+                  onChangeText={this.recordStepText}
+                />
+                <Button
+                  title='Save Recipe'
+                  onPress={this.saveRecipe} />
+              </View>
+        }
+        <View style={{
+          position: 'absolute',
+          width: '100%',
+          bottom: 0,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          paddingBottom: 25,
+          paddingTop: 10,
+        }}
+          backgroundColor='transparent'>
           <Button
-          title='Save Recipe'
-          onPress={this.saveRecipe}/>
+            title='Ingredients'
+            onPress={() => {
+              this.setState({ list: 'ingredients' })
+            }} />
+          <Button
+            title='Tools'
+            onPress={() => {
+              this.setState({ list: 'tools' })
+            }} />
+          <Button
+            title='Steps'
+            onPress={() => {
+              this.setState({ list: 'steps' })
+            }} />
         </View>
       </View>
     );
-	}
+  }
 }
 
 String.prototype.toTitleCase = function () {
-	return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+  return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 const styles = StyleSheet.create({
@@ -196,15 +232,14 @@ const styles = StyleSheet.create({
     marginRight: -60
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:50,
-    height:50,
-    backgroundColor: '#51A4F7',
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
     paddingTop: 10,
-    borderRadius:10,
+    borderRadius: 10,
   },
   icon: {
     flexDirection: 'row',
@@ -213,7 +248,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 10,
     padding: 10,
   },
 });
