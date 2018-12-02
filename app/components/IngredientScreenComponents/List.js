@@ -52,6 +52,7 @@ export default class List extends Component {
 
     recordNameText = (text) => {
       this.setState({ text: text })
+      console.log('inputted text is ' + text)
     }
 
     recordNumberText = (text) => {
@@ -60,16 +61,14 @@ export default class List extends Component {
 
     setQuantity = () => {
       let quantity = parseInt(Number(this.state.number));
-      if (quantity < 0) quantity = 0
+      if (quantity < 0 || isNaN(quantity)) quantity = 0
       this.props.changeItemQuantity(item.key, quantity)
     }
 
     /*call the props function in App.js when user edits the item's name*/
     setName = () => {
       /*only update the name if the text inputted by the user is not null or undefined*/
-      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
-        this.props.changeItemName(item.key, this.state.text);
-      }
+      this.props.changeItemName(item.key, this.state.text);
       this.setState({text:''});
     }
 

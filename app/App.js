@@ -38,7 +38,7 @@ export default class App extends Component {
 	loginAndGetData = (userId) => {
 		DataBase.createFirebaseInventoryListener(
 			userId,
-			this.state.receivingChange,
+			() => {return this.state.receivingChange},
 			(importedInventory) => this.setState({ inventory: importedInventory }),
 			() => this.setState({ receivingChange: true }),
 			() => this.setState({ loading: true }),
@@ -147,6 +147,9 @@ export default class App extends Component {
 				existingIngredient.quantity = existingIngredient.quantity + foundIngredient.quantity
 				newInventory.splice(newInventory.indexOf(foundIngredient), 1)
 			}
+			if (newValue == '') {
+				newInventory.splice(newInventory.indexOf(foundIngredient), 1)
+			}
 		}
 		foundIngredient[attribute] = newValue;
 		//remove item from list when quantity is less than 0
@@ -186,8 +189,6 @@ export default class App extends Component {
 			}}
 
 			changeItemExpiration={(itemName, expiry, num) => {
-				console.log('is expiry undefined? ' + (typeof expiry == 'undefined'))
-				console.log('is num undefined? ' + (typeof num == 'undefined'))
 				this.changeIngredientInInventory(itemName, 'expiry', expiry)
 				this.changeIngredientInInventory(itemName, 'isExpired', num)
 			}}

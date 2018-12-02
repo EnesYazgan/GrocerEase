@@ -26,10 +26,22 @@ export default class BarcodeScanner extends React.Component {
     const { hasCameraPermission } = this.state
     /*action if camera permission denied or null but camera accessed*/
     if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>
+      return <Text style={{
+        flexDirection: 'row',
+        flex: 1,
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+      }}>Requesting for camera permission</Text>
     }
     if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>
+      return <Text style={{
+        flexDirection: 'row',
+        flex: 1,
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+      }}>No access to camera</Text>
     }
     /*If camera permission granted, activate barcode scanner*/
     return (
@@ -44,6 +56,6 @@ export default class BarcodeScanner extends React.Component {
   /*if barcode recognized, check it against our database*/
   handleBarCodeScanned = ({ type, data }) => {
     this.props.checkBarcode(data)
-    alert(`Bar code with type ${type} and data ${data.toString()} has been scanned!`)
+    //alert(`Bar code with type ${type} and data ${data.toString()} has been scanned!`)
   }
 }
