@@ -50,15 +50,19 @@ export default class DataBase{
 	static checkBarcode(barcode, callback) {
 		length = barcode.length
 		if (Platform.OS === 'ios') length = length - 1
-		barcodeData = barcode.toString().substring(Platform.OS === 'ios' ? 2 : 1, barcode.length)
-		firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
-			if (snapshot.exists()) {
-				alert("You scanned " + snapshot.val().name);
-				callback(snapshot.val().name);
-			} else {
-				alert('barcode does not exist in database');
-			}
-		})
+		if (!isNaN(Number(barcode))) {
+			barcodeData = barcode.toString().substring(Platform.OS === 'ios' ? 2 : 1, barcode.length)
+			firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
+				if (snapshot.exists()) {
+					alert("You scanned " + snapshot.val().name);
+					callback(snapshot.val().name);
+				} else {
+					alert('barcode does not exist in database');
+				}
+			})
+		} else {
+			alert('invalid barcode');
+		}
 	}
 
 	static checkIfLoggedIn(loginCallback, logoutCallback) {

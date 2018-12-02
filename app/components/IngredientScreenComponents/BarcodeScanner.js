@@ -44,6 +44,6 @@ export default class BarcodeScanner extends React.Component {
   /*if barcode recognized, check it against our database*/
   handleBarCodeScanned = ({ type, data }) => {
     this.props.checkBarcode(data)
-    alert(`Bar code with type ${type} and data ${data.toString()} has been scanned!`)
+    //alert(`Bar code with type ${type} and data ${data.toString()} has been scanned!`)
   }
 }

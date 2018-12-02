@@ -29,7 +29,7 @@ export default class ActionBar extends Component {
         >
           <Icon
             style={styles.icon}
-            name="list"
+            name="list-box"
             color="#51A4F7"
             size={24}
           />
@@ -40,7 +40,7 @@ export default class ActionBar extends Component {
         >
           <Icon
             style={styles.icon}
-            name="camera"
+            name="barcode"
             color="#51A4F7"
             size={24}
           />

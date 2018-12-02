@@ -60,7 +60,7 @@ export default class List extends Component {
 
     setQuantity = () => {
       let quantity = parseInt(Number(this.state.number));
-      if (quantity < 0) quantity = 0
+      if (quantity < 0 || isNaN(quantity)) quantity = 0
       this.props.changeItemQuantity(item.key, quantity)
     }
 
