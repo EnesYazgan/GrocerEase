@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, TouchableOpacity, StatusBar, Platform} from 'react-native';
 import Icon from './Icon';
 import List from './IngredientScreenComponents/List';
 import ActionBar from './IngredientScreenComponents/ActionBar';
@@ -44,12 +44,15 @@ export default class IngredientScreen extends Component {
     this.setState({ text: text, filter: searchResults })
   }
 
+  closeCameraAndCheckBarcode = () => {
+    this.setState({ cameraOn: false });
+    this.props.checkBarcode();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
         <View style={styles.banner}>
-		  {/*When pressed, switch to the recipes screen*/}
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.switchScreen}>
             <Icon
@@ -60,7 +63,6 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>My Ingredients</Text>
-		  {/*Log out button*/}
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon
@@ -71,16 +73,14 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
         </View>
-        {/*If the camera is open, check for and read barcode*/}
         {
           this.state.cameraOn == false
             ? null
             : <BarcodeScanner
-              checkBarcode={this.props.checkBarcode}
+              checkBarcode={this.closeCameraAndCheckBarcode}
             />
         }
         <View style={styles.container}>
-		  {/*show action bar with camera,add,search,sort options*/}
           <ActionBar
             text={this.state.text}
             toggleCamera={this.toggleCamera}
@@ -88,7 +88,6 @@ export default class IngredientScreen extends Component {
             searchData={this.searchData}
             sortList={this.changeSortParameterThenOrderList}
           />
-          {/*show the list of ingredients, with functionality for all ingredient properties*/}
           <List
             {...this.props}
             data={this.state.text == ''
@@ -108,6 +107,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   banner: {
+    paddingTop: 30,
     backgroundColor: '#51A4F7',
     flexDirection: 'row',
   },

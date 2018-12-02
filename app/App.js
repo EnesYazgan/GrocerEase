@@ -169,6 +169,7 @@ export default class App extends Component {
 				barcodeData = barcode.toString().substring(1,barcode.length)
 				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
+						alert("congradulations, you scanned " + snapshot.val().name);
 						this.addIngredientToInventory(snapshot.val().name);
 					} else {
 						alert('barcode does not exist in database');

@@ -19,7 +19,6 @@ export default class ActionBar extends Component {
   render() {
     return (
       <View style={styles.container}>
-		{/*if button pressed, sort the ingredients list*/}
         <TouchableOpacity
           style={styles.sortIconContainer}
           onPress={this.props.sortList}
@@ -31,7 +30,6 @@ export default class ActionBar extends Component {
             size={24}
           />
         </TouchableOpacity>
-        {/*open or close camera*/}
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={this.props.toggleCamera}
@@ -43,15 +41,14 @@ export default class ActionBar extends Component {
             size={24}
           />
         </TouchableOpacity>
-        {/*invoke searchData function based on user input*/}
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
-          placeholder="Add or search for food"
+          placeholder="Add or search for food!"
+          defaultValue={this.props.text}
           onChangeText={
             this.props.searchData
           }
         />
-        {/*if text entry blank, show search icon, otherwise clear the entry and add the item to inventory*/}
         {
           this.props.text == ''
             ? <Icon
