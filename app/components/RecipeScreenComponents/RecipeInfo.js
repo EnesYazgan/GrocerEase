@@ -54,7 +54,7 @@ export default class RecipeInfo extends Component {
                           ? styles.matchingText
                           : styles.almostText)
                         : styles.excludesText
-                      , !this.props.item.manualMatching ? styles.indentedText : null]}>{element.quantity > 0 ? element.quantity : ''} {element.name}
+                      , !this.props.item.manualMatching ? {paddingLeft: 40} : null]}>{element.quantity > 0 ? element.quantity : ''} {element.name}
                     </Text>
                   </View>
                 </View>

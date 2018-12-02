@@ -40,10 +40,12 @@ export default class List extends Component {
         this.setState({ selectedItem: item });
       }
     }
+    
     /*call the prop function in App.js to increase or decrease the item quantity*/
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, item.quantity + 1);
     }
+
     decrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, item.quantity - 1);
     }
