@@ -186,6 +186,8 @@ export default class App extends Component {
 			}}
 
 			changeItemExpiration={(itemName, expiry, num) => {
+				console.log('is expiry undefined? ' + (typeof expiry == 'undefined'))
+				console.log('is num undefined? ' + (typeof num == 'undefined'))
 				this.changeIngredientInInventory(itemName, 'expiry', expiry)
 				this.changeIngredientInInventory(itemName, 'isExpired', num)
 			}}
