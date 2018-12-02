@@ -98,8 +98,9 @@ export default class DataBase{
 		)
 	}
 
-	static createFirebaseInventoryListener(userId, receivingChange, callback, secondCallback) {
+	static createFirebaseInventoryListener(userId, receivingChange, callback, secondCallback, startLoading, stopLoading) {
 		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
+			startLoading()
 			if (snapshot.exists()) {
 				//snapshot.val() is the list we want
 				list = snapshot.val()
@@ -129,11 +130,15 @@ export default class DataBase{
 						}
 					}
 
+					console.log('calling back recipe list')
 					callback(ingredientsList)
 				} else {
-					secondCallback(true)
+					secondCallback()
 				}
+			} else {
+				callback([])
 			}
+			stopLoading()
 		});
 	}
 }

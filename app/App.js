@@ -36,6 +36,14 @@ export default class App extends Component {
 	}
 
 	loginAndGetData = (userId) => {
+		DataBase.createFirebaseInventoryListener(
+			userId,
+			this.state.receivingChange,
+			(importedInventory) => this.setState({ inventory: importedInventory }),
+			() => this.setState({ receivingChange: true }),
+			() => this.setState({ loading: true }),
+			() => this.setState({ loading: false })
+		)
 		DataBase.getFirebaseRecipes((list) => {
 			list.forEach(recipe => {
 				recipe.key = recipe.title
@@ -51,13 +59,7 @@ export default class App extends Component {
 			});
 			this.checkRecipesWithMyIngredients(list)
 		})
-		DataBase.createFirebaseInventoryListener(
-			userId,
-			this.state.receivingChange,
-			(importedInventory) => this.setState({ loading: false, inventory: importedInventory }, this.checkRecipesWithMyIngredients(this.state.recipes)),
-			() => this.setState({ receivingChange: true })
-		)
-		this.setState({ currentUserId: userId, screen: 'ingredients', loading: true })
+		this.setState({ currentUserId: userId, screen: 'ingredients' })
 	}
 
 	logoutAndClearData = () => {
@@ -67,7 +69,6 @@ export default class App extends Component {
 
 	componentDidMount() {
 		DataBase.checkIfLoggedIn(this.loginAndGetData, this.logoutAndClearData)
-		this.setState({ loading: true })
 	}
 
 	render() {
@@ -109,13 +110,11 @@ export default class App extends Component {
 			signUp={(email, password) => {
 				if (!(email == undefined) && !(password == undefined)) {
 					DataBase.createUserWithEmailAndPassword(email, password, this.loginAndGetData)
-					this.setState({ loading: true })
 				}
 			}}
 			login={(email, password) => {
 				if (!(email == undefined) && !(password == undefined)) {
 					DataBase.signInWithEmailAndPassword(email, password, this.loginAndGetData)
-					this.setState({ loading: true })
 				}
 			}}
 			loading={this.state.loading}
