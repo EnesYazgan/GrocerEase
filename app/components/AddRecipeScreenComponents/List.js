@@ -1,7 +1,6 @@
 import React, { Component, PureComponent } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from '../Icon';
-import StepInfo from './StepInfo';
+import Icon from '../SharedComponents/Icon';
 
 export default class List extends Component {
   static defaultProps = {
@@ -30,7 +29,6 @@ export default class List extends Component {
   renderListRow = ({ item }) => {
     return <ListRow
       item={item}
-      visible={this.state.infoPressed == item}
     />
   }
 
@@ -49,21 +47,8 @@ export default class List extends Component {
 }
 
 class ListRow extends PureComponent {
-  incrementItemQuantity = () => {
-    this.props.changeItemQuantity(item.key, 1)
-  }
-
-  decrementItemQuantity = () => {
-    this.props.changeItemQuantity(item.key, -1)
-  }
-
-  setQuantity = (text) => {
-    text == ''
-      ? this.props.changeItemQuantity(item.key, -item.quantity)
-      : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
-  }
-
   render() {
+    return (
     <View style={styles.listRow}>
       <TouchableOpacity
         style={styles.iconContainer}
@@ -78,40 +63,10 @@ class ListRow extends PureComponent {
       <Text
         style={styles.textContainer}
         onPress={this.handleTextPress}>
-        {item.key}
+        {this.props.item.key}
       </Text>
-      <View style={styles.buttons}>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={decrementItemQuantity}
-        >
-          <Icon
-            name="remove"
-            color="#51A4F7"
-            size={20}
-          />
-        </TouchableOpacity>
-        <TextInput
-          underlineColorAndroid={'rgba(0,0,0,0)'}
-          style={styles.textContainer}
-          keyboardType={'numeric'}
-          defaultValue={item.quantity.toString()}
-          onChangeText={
-            setQuantity
-          }
-        />
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={incrementItemQuantity}
-        >
-          <Icon
-            name="add"
-            color="#51A4F7"
-            size={20}
-          />
-        </TouchableOpacity>
-      </View>
     </View>
+    )
   }
 }
 

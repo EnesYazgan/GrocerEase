@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {DatePickerIOS, View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from '../Icon';
+import Icon from '../SharedComponents/Icon';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
@@ -59,7 +59,7 @@ export default class IngredientInfo extends React.Component {
         : this.props.changeItemSodium(this.props.item.key, parseInt(text))
     }
     /*parse date entered by user and format so Moment.js recognizes it and can compare it to today's date*/
-    setDate = (date) => {
+    setDate = (date, index) => {
       parsedDate = date.toString();
       dateArray = parsedDate.split(' ');
 
@@ -98,11 +98,11 @@ export default class IngredientInfo extends React.Component {
       /*if the date is within 3 days of today, make isExpired=1, if is past, make isExpired=2, if much later, make isExpired=0 */
       if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"
       || timeAgo[2] == "hours" || timeAgo[2] == "hour" || timeAgo[2] == "minutes"){
-        this.props.changeItemExpiration(this.props.item.key, timeDifference, 1);
+        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 1);
       }else if(timeAgo[2] == "ago"){
-        this.props.changeItemExpiration(this.props.item.key, timeDifference, 2);
+        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 2);
       }else{
-        this.props.changeItemExpiration(this.props.item.key, timeDifference, 0);
+        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 0);
       }
 
     }
@@ -164,7 +164,6 @@ export default class IngredientInfo extends React.Component {
       }
     }
 
-
     bothSetDateAndExpirationAlert = (date) => {
       setDate(date);
     }
@@ -175,7 +174,6 @@ export default class IngredientInfo extends React.Component {
         <View style={styles.listRow}>
           <Text style={styles.textInput}>Quantity:   {this.props.item.quantity}</Text>
         </View>
-
         <View style={styles.listRow}>
           <Text style={styles.textInput}>Calories:</Text>
           <TouchableOpacity
@@ -399,7 +397,6 @@ export default class IngredientInfo extends React.Component {
           <Text style={styles.calendarText}>{this.props.item.expiry}</Text>
           <TouchableOpacity onPress={this._showDateTimePicker}>
             <Icon
-
               name="calendar"
               size={30}
             />
@@ -409,13 +406,12 @@ export default class IngredientInfo extends React.Component {
             onConfirm={setDate}
             onCancel={this._hideDateTimePicker}
           />
-          /*determine which color and icon to display based on isExpired*/
           {
+            /*determine which color and icon to display based on isExpired*/
             this.props.item.isExpired == 0
               ?
                 <Icon
                   style={styles.icon}
-                  /*name="checkmark-circle"*/
                   name='happy'
                   size={30}
                   color="green"
@@ -432,7 +428,6 @@ export default class IngredientInfo extends React.Component {
             ?
               <Icon
                 style={styles.icon}
-                /*name="checkmark-circle"*/
                 name='sad'
                 size={30}
                 color="red"

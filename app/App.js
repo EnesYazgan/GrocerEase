@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, StatusBar, AppState } from 'react-native'
-//import * as firebase from 'firebase';
-import firebase from 'firebase';
 import Ingredient from './objects/Ingredient';
 import IngredientScreen from './components/IngredientScreen';
 import LoginScreen from './components/LoginScreen';
 import RecipeScreen from './components/RecipeScreen';
 import DataBase from './components/firebase.js';
+import LoadingScreen from './components/LoadingScreen';
 
 //For android get rid of Yellow Box-------------------------
 import { YellowBox } from 'react-native';
@@ -21,18 +20,6 @@ console.warn = message => {
 };
 //End Yellowbox ignore--------------------------------------
 
-const firebaseConfig = {
-	apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-	authDomain: "grocerease-6e9ee.firebaseapp.com",
-	databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-	projectId: "grocerease-6e9ee",
-	storageBucket: "grocerease-6e9ee.appspot.com",
-	messagingSenderId: "719228868931"
-};
-
-
-firebase.initializeApp(firebaseConfig);
-
 export default class App extends Component {
 	constructor(props) {
 		super(props)
@@ -42,38 +29,46 @@ export default class App extends Component {
 		currentUserId: undefined,
 		appState: AppState.currentState,
 		inventory: [], //elements are ingredients
-		testInv: [],
 		screen: 'login',
 		recipes: [],
 		receivingChange: true,
+		loading: false,
 	}
 
 	loginAndGetData = (userId) => {
-		this.getRecipes()
-		this.createFirebaseInventoryListener(userId)
-		this.setState({
-			currentUserId: userId, screen: 'ingredients'
+		DataBase.getFirebaseRecipes((list) => {
+			list.forEach(recipe => {
+				recipe.key = recipe.title
+				recipe.manualMatching = false;
+				recipe.matchingIngredients = [];
+				recipe.ingredients.forEach(ingredient => {
+					ingredient.perfectMatch = false;
+					ingredient.name = ingredient.name.toTitleCase()
+				})
+				recipe.equipment_names.forEach(tool => {
+					tool = tool.toTitleCase()
+				})
+			});
+			this.checkRecipesWithMyIngredients(list)
 		})
+		DataBase.createFirebaseInventoryListener(
+			userId,
+			this.state.receivingChange,
+			(importedInventory) => this.setState({ loading: false, inventory: importedInventory }, this.checkRecipesWithMyIngredients(this.state.recipes)),
+			() => this.setState({ receivingChange: true })
+		)
+		this.setState({ currentUserId: userId, screen: 'ingredients', loading: true })
 	}
 
 	logoutAndClearData = () => {
-		firebase.auth().signOut();
-		this.setState({ currentUserId: undefined, inventory: [], screen: 'login' })
+		DataBase.signOut();
+		this.setState({ currentUserId: undefined, inventory: [], screen: 'login', loading: false })
 	}
 
 	componentDidMount() {
-		firebase.auth().onAuthStateChanged(firebaseUser => {
-			if (firebaseUser) {
-				this.loginAndGetData(firebase.auth().currentUser.uid)
-			} else {
-				this.logoutAndClearData()
-			}
-		});
+		DataBase.checkIfLoggedIn(this.loginAndGetData, this.logoutAndClearData)
+		this.setState({ loading: true })
 	}
-
-	shouldComponentUpdate(nextProps, nextState){
-		return true;
-	 }
 
 	render() {
 		return (
@@ -81,16 +76,30 @@ export default class App extends Component {
 		)
 	}
 
-
 	GetCurrentScreen = () => {
 		if (this.state.screen == 'login') {
 			return this.constructedLoginScreen();
 		} else {
-			if (this.state.screen == 'ingredients') {
-				return this.constructedIngredientScreen();
-			}
-			else if (this.state.screen == 'recipes') {
-				return this.constructedRecipeScreen();
+			if (this.state.loading == true) {
+				return <LoadingScreen
+					screen={this.state.screen}
+					logOut={() => {
+						this.logoutAndClearData()
+					}}
+					switchToRecipes={() => {
+						this.setState({ screen: 'recipes' });
+					}}
+					switchToIngredients={() => {
+						this.setState({ screen: 'ingredients' });
+					}}
+				/>
+			} else {
+				if (this.state.screen == 'ingredients') {
+					return this.constructedIngredientScreen();
+				}
+				else if (this.state.screen == 'recipes') {
+					return this.constructedRecipeScreen();
+				}
 			}
 		}
 	}
@@ -99,52 +108,31 @@ export default class App extends Component {
 		return <LoginScreen
 			signUp={(email, password) => {
 				if (!(email == undefined) && !(password == undefined)) {
-					// alert('Checking authentication', 'One moment please...');
-					firebase.auth().createUserWithEmailAndPassword(email, password)
-						.then(() => {
-							this.loginAndGetData(firebase.auth().currentUser.uid)
-						}
-						)
-						.catch(
-							(error) => {
-								var errorMessage = error.message;
-								alert(errorMessage);
-							}
-						)
+					DataBase.createUserWithEmailAndPassword(email, password, this.loginAndGetData)
+					this.setState({ loading: true })
 				}
 			}}
 			login={(email, password) => {
 				if (!(email == undefined) && !(password == undefined)) {
-					// alert('Checking authentication', 'One moment please...');
-					firebase.auth().signInWithEmailAndPassword(email, password)
-						.then(() => {
-							this.loginAndGetData(firebase.auth().currentUser.uid)
-						}
-						)
-						.catch(
-							(error) => {
-								var errorMessage = error.message;
-								alert(errorMessage);
-							}
-						)
+					DataBase.signInWithEmailAndPassword(email, password, this.loginAndGetData)
+					this.setState({ loading: true })
 				}
 			}}
+			loading={this.state.loading}
 		/>
 	}
 
 	addIngredientToInventory = (itemName) => {
-		console.log("in here: " + itemName);
 		var newInventory = this.state.inventory.slice(0);
 		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 		if (typeof foundIngredient == 'undefined') {
+			//if item already exists in list, increment quantity by 1
 			newIngredient = new Ingredient(itemName.toTitleCase());
 			newInventory.push(newIngredient);
-			console.log("got it: " + itemName);
 		} else {
-			//increment ingredient quantity
+			//if item already exists in list, increment quantity by 1
 			foundIngredient.quantity = foundIngredient.quantity + 1
 		}
-		// newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
 		this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 		//Update the database every time the list is changed. This works!
 	}
@@ -152,7 +140,17 @@ export default class App extends Component {
 	changeIngredientInInventory = (itemName, attribute, newValue) => {
 		var newInventory = this.state.inventory.slice(0);
 		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+		//if the name is going to change, check if item already exists in the array first. if it does, combine them
+		if (attribute == 'key') {
+			newValue = newValue.toTitleCase()
+			let existingIngredient = newInventory.find(eachIngredient => eachIngredient.key === newValue)
+			if (typeof existingIngredient != 'undefined') {
+				existingIngredient.quantity = existingIngredient.quantity + foundIngredient.quantity
+				newInventory.splice(newInventory.indexOf(foundIngredient), 1)
+			}
+		}
 		foundIngredient[attribute] = newValue;
+		//remove item from list when quantity is less than 0
 		if (attribute == 'quantity' && foundIngredient.quantity < 0)
 			newInventory.splice(newInventory.indexOf(foundIngredient), 1)
 		this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
@@ -164,17 +162,7 @@ export default class App extends Component {
 			data={this.state.inventory}
 
 			checkBarcode={(barcode) => {
-				//we have to cut off the first digit of the barcode
-				length = barcode.length
-				barcodeData = barcode.toString().substring(1,barcode.length)
-				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
-					if (snapshot.exists()) {
-						alert("congradulations, you scanned " + snapshot.val().name);
-						this.addIngredientToInventory(snapshot.val().name);
-					} else {
-						alert('barcode does not exist in database');
-					}
-				})
+				DataBase.checkBarcode(barcode, this.addIngredientToInventory)
 			}}
 
 			addItem={(itemName) => {
@@ -224,7 +212,7 @@ export default class App extends Component {
 			orderList={(parameter) => {
 				var newInventory = this.state.inventory.slice(0);
 				if (parameter == true) {
-					newInventory.sort(function (a,b) {return a.key.localeCompare(b.key)});
+					newInventory.sort(function (a, b) { return a.key.localeCompare(b.key) });
 				} else {
 					newInventory.reverse();
 				}
@@ -247,13 +235,13 @@ export default class App extends Component {
 				this.state.recipes
 			}
 			sortList={
-				() => {this.checkRecipesForMyIngredients(this.state.recipes)}
+				() => { this.checkRecipesWithMyIngredients(this.state.recipes); this.setState() }
 			}
 
 			orderList={(parameter) => {
 				var list = this.state.recipes.slice(0);
-				if (parameter == true){
-					list.sort(function (recipeA,recipeB) {
+				if (parameter == true) {
+					list.sort(function (recipeA, recipeB) {
 						var percentA = (recipeA.matchingIngredients.length * 100) / recipeA.ingredients.length;
 						var percentB = (recipeB.matchingIngredients.length * 100) / recipeB.ingredients.length;
 
@@ -261,14 +249,39 @@ export default class App extends Component {
 					})
 				} else {
 					list.sort(function (recipeA, recipeB) {
-						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length){
+						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length) {
 							return (recipeB.ingredients.length - recipeA.ingredients.length)
-						}else{
+						} else {
 							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
 						}
 					})
 				}
-				this.setState({recipes: list});
+				this.setState({ recipes: list });
+			}}
+
+			setManualMatching={(recipe, parameter) => {
+				var newInventory = this.state.recipes.slice(0);
+				var foundRecipe = newInventory.find(eachRecipe => eachRecipe.title === recipe.title);
+				foundRecipe.manualMatching = parameter;
+				this.setState({ recipes: newInventory, });
+			}}
+			removeIngredientFromMatching={(recipe, ingredient) => {
+				var newInventory = this.state.recipes.slice(0);
+				var foundRecipe = newInventory.find(eachRecipe => eachRecipe.title === recipe.title);
+				var foundIngredient = foundRecipe.matchingIngredients.find(eachIngredient => eachIngredient.name === ingredient.name);
+				if (typeof foundIngredient != 'undefined')
+					foundRecipe.matchingIngredients.splice(foundRecipe.matchingIngredients.indexOf(foundIngredient), 1)
+				this.setState({ recipes: newInventory, });
+			}}
+			addIngredientToMatching={(recipe, ingredient) => {
+				var newInventory = this.state.recipes.slice(0);
+				var foundRecipe = newInventory.find(eachRecipe => eachRecipe.title === recipe.title);
+				var foundIngredient = foundRecipe.ingredients.find(eachIngredient => eachIngredient.name === ingredient.name);
+				if (typeof foundIngredient != 'undefined') {
+					foundIngredient.perfectMatch = true;
+					foundRecipe.matchingIngredients.push(foundIngredient)
+				}
+				this.setState({ recipes: newInventory, });
 			}}
 
 			userData={
@@ -283,71 +296,44 @@ export default class App extends Component {
 		/>
 	}
 
-	createFirebaseInventoryListener = (userId) => {
-		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
-			if (snapshot.exists()) {
-				//snapshot.val() is the list we want
-				list = snapshot.val()
-				if (this.state.receivingChange == true) {
-					//lists it properly
-					if (list.length > 0) {
-						var ingredientsList = [];
-						var ingParams;
-						var ing;
-						for (var i = 0; i < list.length; i++) {
-							ingParams = list[i].split(",");
-							ing = new Ingredient(
-								ingParams[0],  //name is a string
-								parseInt(ingParams[1], 10),  //quantity is an int
-								ingParams[2], //unit is a string
-								parseInt(ingParams[3], 10),  //calories is an int
-								parseInt(ingParams[4], 10), //seving is an int
-								ingParams[5], //expiry is a string, unless we decide to make it be an int displaying days until expiry
-								parseInt(ingParams[6], 10), //isExpired is an int
-								parseInt(ingParams[7], 10), //carbs is an int
-								parseInt(ingParams[8], 10), //protein is an int
-								parseInt(ingParams[9], 10), //sugar is an int
-								parseInt(ingParams[10], 10), //fat is an int
-								parseInt(ingParams[11], 10), //sodium is an int
-							);
-							ingredientsList.push(ing);
+	checkRecipesWithMyIngredients = (list) => {
+		list.forEach(recipe => {
+			if (!recipe.manualMatching) {
+				recipe.matchingIngredients = [];
+				this.state.inventory.forEach(userIngredient => {
+					let latestMatch = 10000;
+					let matchedIngredient = null;
+					let percentMatch = 0;
+					recipe.ingredients.forEach(ingredient => {
+						ingredient.perfectMatch = false;
+						ingredient.name = ingredient.name.toTitleCase()
+						wordsInUserIngredient = userIngredient.key.split(" ");
+						wordsInUserIngredient.forEach(word => {
+							if (ingredient.name.indexOf(word) > -1) {
+								percentMatch = percentMatch + (1 / wordsInUserIngredient.length)
+							}
+							if (ingredient.name.indexOf(word) > -1 && ingredient.name.indexOf(word) / ingredient.name.length < latestMatch) {
+								matchedPosition = ingredient.name.indexOf(word) / ingredient.name.length
+								matchedIngredient = ingredient;
+							}
+						})
+						if (percentMatch > 0.4) {
+							matchedIngredient = ingredient;
+						}
+					})
+					if (matchedIngredient != null) {
+						recipe.matchingIngredients.push(matchedIngredient)
+						if ((matchedIngredient.name.length / userIngredient.key.length) < 5 || percentMatch > 0.5) {
+							matchedIngredient.perfectMatch = true;
 						}
 					}
-
-					this.setState({ inventory: ingredientsList }, this.checkRecipesForMyIngredients(this.state.recipes))
-				} else {
-					this.setState({ receivingChange: true })
-				}
+					recipe.equipment_names.forEach(tool => {
+						tool = tool.toTitleCase()
+					})
+				});
 			}
 		});
-	}
 
-	checkRecipesForMyIngredients = (list) => {
-		list.forEach(recipe => {
-			recipe.key = recipe.title
-			recipe.matchingIngredients = [];
-			this.state.inventory.forEach(userIngredient => {
-				let matchedPosition = 10000;
-				let matchedIngredient = null;
-				recipe.ingredients.forEach(ingredient => {
-					ingredient.perfectMatch = false;
-					ingredient.name = ingredient.name.toTitleCase()
-					if (ingredient.name.indexOf(userIngredient.key) > -1 && ingredient.name.indexOf(userIngredient.key)/ingredient.name.length < matchedPosition) {
-						matchedPosition = ingredient.name.indexOf(userIngredient.key)/ingredient.name.length
-						matchedIngredient = ingredient;
-					}
-				})
-				if (matchedIngredient != null) {
-					recipe.matchingIngredients.push(matchedIngredient)
-					if ((matchedIngredient.name.length/userIngredient.key.length) < 5) {
-						matchedIngredient.perfectMatch = true;
-					}
-				}
-				recipe.equipment_names.forEach(tool => {
-					tool = tool.toTitleCase()
-				})
-			});
-		});
 		list.sort((recipeA, recipeB) => {
 			if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
 				return (recipeB.ingredients.length - recipeA.ingredients.length)
@@ -355,16 +341,6 @@ export default class App extends Component {
 				return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
 		})
 		this.setState({ recipes: list })
-	}
-
-	getRecipes = () => {
-		firebase.database().ref('/recipe').once('value')
-			.then((snapshot) => {
-				if (snapshot.exists()) {
-					this.checkRecipesForMyIngredients(snapshot.val().slice(0));
-				}
-			})
-			.catch(() => console.log('CANT FIND THE RECIPE'))
 	}
 }
 
