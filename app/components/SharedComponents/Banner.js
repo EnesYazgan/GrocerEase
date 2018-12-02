@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, StatusBar, Platform} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, StatusBar, Platform } from 'react-native';
 import Icon from './Icon';
 
 export default class Banner extends Component {
