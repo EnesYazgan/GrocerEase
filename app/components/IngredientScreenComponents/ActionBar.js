@@ -71,6 +71,7 @@ export default class ActionBar extends Component {
               />
             </TouchableOpacity>
         }
+
       </View>
     );
   }

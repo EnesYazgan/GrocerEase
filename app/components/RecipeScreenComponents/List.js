@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl} from 'react-native';
+import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
 import RecipeInfo from './RecipeInfo';
 
@@ -8,6 +8,7 @@ export default class List extends Component {
     viewRecipeSteps: undefined,
     text: '',
     data: [],
+    sortParameter: true,
   }
 
   state = {
@@ -23,12 +24,6 @@ export default class List extends Component {
           data={
             this.props.data
           }
-          /*refrerefreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }*/
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
@@ -47,10 +42,9 @@ export default class List extends Component {
       viewRecipeSteps={
         viewRecipeSteps
       }
-
+      sortParameter={this.props.sortParameter}
       item={item}
       infoButtonPressed={() => {
-        // console.log("got in" + item);
         if (this.state.infoPressed == item) {
           this.setState({ infoPressed: null });
         } else {
@@ -77,6 +71,9 @@ export default class List extends Component {
 }
 
 class ListRow extends PureComponent {
+  static defaultProps = {
+    sortParameter: true,
+  }
   render() {
     return (
       <View>
@@ -90,7 +87,10 @@ class ListRow extends PureComponent {
           <Text
             style={styles.ingredientInfo}
             onPress={this.handleTextPress}>
-            {this.props.item.matchingIngredients.length} out of {this.props.item.ingredients.length}
+            {this.props.sortParameter
+              ? this.props.item.matchingIngredients.length + " out of " + this.props.item.ingredients.length
+              : Math.floor(100*this.props.item.matchingIngredients.length/this.props.item.ingredients.length) + "%"
+            }
           </Text>
           <Icon
             style={styles.iconInfo}

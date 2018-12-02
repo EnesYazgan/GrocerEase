@@ -98,7 +98,6 @@ export default class App extends Component {
 	constructedLoginScreen = () => {
 		return <LoginScreen
 			signUp={(email, password) => {
-				console.log("Sign up:");
 				if (!(email == undefined) && !(password == undefined)) {
 					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -115,7 +114,6 @@ export default class App extends Component {
 				}
 			}}
 			login={(email, password) => {
-				console.log("Log in:");
 				if (!(email == undefined) && !(password == undefined)) {
 					// alert('Checking authentication', 'One moment please...');
 					firebase.auth().signInWithEmailAndPassword(email, password)
@@ -135,11 +133,13 @@ export default class App extends Component {
 	}
 
 	addIngredientToInventory = (itemName) => {
+		console.log("in here: " + itemName);
 		var newInventory = this.state.inventory.slice(0);
 		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 		if (typeof foundIngredient == 'undefined') {
 			newIngredient = new Ingredient(itemName.toTitleCase());
 			newInventory.push(newIngredient);
+			console.log("got it: " + itemName);
 		} else {
 			//increment ingredient quantity
 			foundIngredient.quantity = foundIngredient.quantity + 1
@@ -170,15 +170,16 @@ export default class App extends Component {
 				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
 						alert("congradulations, you scanned " + snapshot.val().name);
-						this.changeIngredientInInventory(snapshot.val().name, 'quantity', 1)
+						this.addIngredientToInventory(snapshot.val().name);
 					} else {
 						alert('barcode does not exist in database');
 					}
 				})
 			}}
-			
+
 			addItem={(itemName) => {
-				this.addIngredientToInventory(itemName)
+				this.addIngredientToInventory(itemName);
+				console.log("getting added: " + itemName);
 			}}
 
 			changeItemName={(itemName, newName) => {
@@ -219,20 +220,18 @@ export default class App extends Component {
 			changeItemSodium={(itemName, sodium) => {
 				this.changeIngredientInInventory(itemName, 'sodium', sodium)
 			}}
-			
+
 			orderList={(parameter) => {
 				var newInventory = this.state.inventory.slice(0);
-				console.log('the parameter is... ' + parameter);
 				if (parameter == true) {
 					newInventory.sort(function (a,b) {return a.key.localeCompare(b.key)});
-				} else {					
+				} else {
 					newInventory.reverse();
 				}
 				this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 			}}
 
 			switchScreen={() => {
-				console.log('switching to recipes screen')
 				this.setState({ screen: 'recipes' });
 			}}
 
@@ -253,30 +252,25 @@ export default class App extends Component {
 
 			orderList={(parameter) => {
 				var list = this.state.recipes.slice(0);
-				console.log('the recipe parameter is... ' + parameter);
 				if (parameter == true){
-					list.sort(function (recipeA,recipeB) {	
+					list.sort(function (recipeA,recipeB) {
 						var percentA = (recipeA.matchingIngredients.length * 100) / recipeA.ingredients.length;
 						var percentB = (recipeB.matchingIngredients.length * 100) / recipeB.ingredients.length;
-						
+
 						return percentB - percentA;
 					})
 				} else {
-					list.sort(function (recipeA, recipeB) {	
-						console.log("! Comparison made. \nA: " + recipeA.matchingIngredients.length + "\nB: " + recipeB.matchingIngredients.length);
+					list.sort(function (recipeA, recipeB) {
 						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length){
-							console.log("comparison made, new got: " + recipeB.ingredients.length - recipeA.ingredients.length);
 							return (recipeB.ingredients.length - recipeA.ingredients.length)
 						}else{
-							console.log("comparison made, new got: " + recipeB.matchingIngredients.length - recipeA.matchingIngredients.length);
 							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
 						}
 					})
 				}
 				this.setState({recipes: list});
-				console.log("sorted list of recipes!");
 			}}
-			
+
 			userData={
 				this.state.inventory
 			}
@@ -295,9 +289,7 @@ export default class App extends Component {
 				//snapshot.val() is the list we want
 				list = snapshot.val()
 				if (this.state.receivingChange == true) {
-					console.log("the lists are incongruent");
 					//lists it properly
-					// console.log("User's List: " + list);
 					if (list.length > 0) {
 						var ingredientsList = [];
 						var ingParams;
@@ -322,7 +314,6 @@ export default class App extends Component {
 						}
 					}
 
-					console.log("Retrieved " + userId + "'s list:");
 					this.setState({ inventory: ingredientsList }, this.checkRecipesForMyIngredients(this.state.recipes))
 				} else {
 					this.setState({ receivingChange: true })
@@ -356,7 +347,6 @@ export default class App extends Component {
 					tool = tool.toTitleCase()
 				})
 			});
-			console.log('matching ingredients are ' + recipe.matchingIngredients)
 		});
 		list.sort((recipeA, recipeB) => {
 			if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
