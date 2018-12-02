@@ -5,15 +5,8 @@ import Icon from '../Icon';
 export default class ActionBar extends Component {
   static defaultProps = {
     text: '',
-    toggleCamera: undefined,
     addNewItem: undefined,
     searchData: undefined,
-    sortList: undefined,
-  }
-
-  clearTextInputAndAddNewItem = () => {
-    this.props.addNewItem()
-    this.textInput.clear()
   }
 
   render() {
@@ -32,33 +25,11 @@ export default class ActionBar extends Component {
         </TouchableOpacity>
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
-          placeholder="Add or search for recipes!"
+          placeholder="Search for recipes!"
           onChangeText={
             this.props.searchData
           }
         />
-        {
-          this.props.text == ''
-            ? <Icon
-                style={styles.icon}
-                name="search"
-                color="#ccc"
-                size={24}
-              />
-            : <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={
-                this.clearTextInputAndAddNewItem
-              }
-            >
-              <Icon
-                style={styles.icon}
-                name="add-circle"
-                color="#51A4F7"
-                size={24}
-              />
-            </TouchableOpacity>
-        }
       </View>
     );
   }

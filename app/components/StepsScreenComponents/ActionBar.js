@@ -19,17 +19,6 @@ export default class ActionBar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.sortIconContainer}
-          onPress={this.props.sortList}
-        >
-          <Icon
-            style={styles.icon}
-            name="list"
-            color="#51A4F7"
-            size={24}
-          />
-        </TouchableOpacity>
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
           placeholder="Add or search for recipes!"
