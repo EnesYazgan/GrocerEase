@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import Ingredient from '../objects/Ingredient';
-import React, { Component } from 'react';
+import { Platform } from 'react-native';
 
 const config = {
   apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
@@ -49,7 +49,8 @@ export default class DataBase{
 
 	static checkBarcode(barcode, callback) {
 		length = barcode.length
-		barcodeData = barcode.toString().substring(1, barcode.length)
+		if (Platform.OS === 'ios') length = length - 1
+		barcodeData = barcode.toString().substring(Platform.OS === 'ios' ? 2 : 1, barcode.length)
 		firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 			if (snapshot.exists()) {
 				alert("You scanned " + snapshot.val().name);
