@@ -1,7 +1,6 @@
 import React, { Component, PureComponent } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
 import Icon from '../Icon';
-import StepInfo from './StepInfo';
 
 export default class List extends Component {
   static defaultProps = {

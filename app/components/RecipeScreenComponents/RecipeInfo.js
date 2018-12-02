@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View, AppRegistry, Text, TextInput, Button, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from '../Icon';
+import Icon from '../SharedComponents/Icon';
 
 export default class RecipeInfo extends React.Component {
   static defaultProps = {
@@ -9,28 +9,39 @@ export default class RecipeInfo extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.infoTitle}>Ingredients:</Text>
-        {this.props.item.ingredients.map(element => {
-          return (
-            <View key={element.name}>
-              <Text
-                style={this.props.item.matchingIngredients.includes(element)
-                  ? (element.perfectMatch
-                    ? styles.matchingText
-                    : styles.almostText)
-                  : styles.excludesText
-                }>{element.quantity > 0 ? element.quantity : ''} {element.name}</Text>
-            </View>
-          )
-        })}
-        <Text style={styles.infoTitle}>Tools:</Text>
-        {this.props.item.equipment_names.map(element => {
-          return (
-            <Text key={element} style={styles.excludesText}>{element}</Text>
-          )
-        })}
+      <View style={{ flexDirection: "column" }}>
+        <View style={styles.container}>
+          <View style={[styles.container, {flexDirection: 'column' }]}>
+            <Text style={styles.infoTitle}>Ingredients:</Text>
+            {this.props.item.ingredients.map(element => {
+              return (
+                <View key={element.name}
+                  style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <View style={{flex: 1, flexWrap: 'wrap'}} >
+                    <Text
+                      style={this.props.item.matchingIngredients.includes(element)
+                        ? (element.perfectMatch
+                          ? styles.matchingText
+                          : styles.almostText)
+                        : styles.excludesText
+                      }>{element.quantity > 0 ? element.quantity : ''} {element.name}
+                    </Text>
+                  </View>
+                </View>
+              )
+            })}
+          </View>
+          <View style={[styles.container, { flexDirection: 'column' }]}>
+            <Text style={styles.infoTitle}>Tools:</Text>
+            {this.props.item.equipment_names.map(element => {
+              return (
+                <Text key={element} style={styles.indentedText}>{element}</Text>
+              )
+            })}
+          </View>
+        </View>
         <Button
+          style={styles.button}
           title='View Steps'
           onPress={this.props.switchScreen} />
       </View>
@@ -41,28 +52,20 @@ export default class RecipeInfo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: '#D0E3F5',
     justifyContent: 'center',
     alignItems: 'flex-start',
-  },
-  beginning: {
-    flex: 1,
-    justifyContent: 'flex-start',
-  },
-  end: {
-    flex: 1,
-    justifyContent: 'flex-end',
   },
   itemAndField: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
-  iconContainer: {
-    alignItems:'center',
+  button: {
+    alignItems:'flex-end',
     justifyContent:'center',
-    paddingTop: 5,
+    paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: '#D0E3F5',
@@ -71,13 +74,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'flex-end'
-  },
-  numberInput: {
-    fontSize: 15,
-    padding: 3,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderStyle: 'solid',
   },
   matchingText: {
     fontSize: 14,
@@ -96,6 +92,20 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 40,
     color: 'black',
+  },
+  indentedText: {
+    fontSize: 14,
+    padding: 5,
+    paddingLeft: 40,
+    color: 'black',
+  },
+  iconContainer: {
+    alignItems:'center',
+    justifyContent:'center',
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#D0E3F5',
   },
   infoTitle: {
     fontSize: 15,

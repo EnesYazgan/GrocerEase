@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar, ScrollView, RefreshControl } from 'react-native';
-import Icon from '../Icon';
+import { TextInput, View, StyleSheet, FlatList, TouchableOpacity, } from 'react-native';
+import Icon from '../SharedComponents/Icon';
 import IngredientInfo from './IngredientInfo';
 
 export default class List extends Component {
@@ -9,7 +9,7 @@ export default class List extends Component {
   }
 
   state = {
-    infoPressed: null,
+    selectedItem: null,
     text: '',
     number: '',
   }
@@ -34,10 +34,10 @@ export default class List extends Component {
   renderListRow = ({ item }) => {
     /*open or close the information button*/
     infoButtonPressed = () => {
-      if (this.state.infoPressed == item) {
-        this.setState({ infoPressed: null });
+      if (this.state.selectedItem == item) {
+        this.setState({ selectedItem: null });
       } else {
-        this.setState({ infoPressed: item });
+        this.setState({ selectedItem: item });
       }
     }
     /*call the prop function in App.js to increase or decrease the item quantity*/
@@ -63,8 +63,8 @@ export default class List extends Component {
       /*only update the name if the text inputted by the user is not null or undefined*/
       if(this.state.text != '' && typeof(this.state.text)!="undefined"){
         this.props.changeItemName(item.key, this.state.text);
-        this.setState({text:''});
       }
+      this.setState({text:''});
     }
 
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
@@ -74,14 +74,12 @@ export default class List extends Component {
         <View style={styles.listRow}>
           <TextInput key={item.index}
             style={item.quantity > 0
-              ? styles.textContainer
-              : styles.fadedTextContainer}
+              ? [styles.textContainer, {flex: 1}]
+              : [styles.fadedTextContainer, {flex: 1}]}
             underlineColorAndroid={'rgba(0,0,0,0)'}
-            placeholder={item.key}
-            placeholderTextColor={'black'}
             onChangeText={(text) => this.setState({text})}
             onSubmitEditing={setName}
-            value={item.key}
+            defaultValue={item.key}
           />
           <View style={styles.buttons}>
             <TouchableOpacity
@@ -146,7 +144,7 @@ export default class List extends Component {
           </View>
         </View>
         {
-          this.state.infoPressed == item
+          this.state.selectedItem == item
             ? <IngredientInfo item={item}
               {...this.props}
             />
@@ -184,26 +182,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
   textInput: {
     flex: 1,
     fontSize: 20,
     padding: 10,
-  },
-  searchBar: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderBottomWidth: 1,
   },
   icon: {
     marginRight: 10,
@@ -225,12 +207,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 20,
     color: "black",
+    flexWrap: 'wrap',
   },
   fadedTextContainer: {
     marginLeft: 10,
     marginRight: 10,
     fontSize: 20,
-    color: '#ccc'
+    color: '#ccc',
+    flexWrap: 'wrap',
   },
   iconInfo: {
     borderWidth: 1,

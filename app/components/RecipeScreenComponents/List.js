@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react';
 import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar} from 'react-native';
-import Icon from '../Icon';
+import Icon from '../SharedComponents/Icon';
 import RecipeInfo from './RecipeInfo';
 
 export default class List extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry, Button, View, TextInput, StatusBar, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { ActivityIndicator, View, TextInput, StatusBar, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class UserLogin extends Component{
   static defaultProps = {
@@ -70,6 +70,14 @@ export default class UserLogin extends Component{
             <Text style={styles.text}>Sign Up</Text>
           </TouchableOpacity>
         </View>
+        {
+          this.props.loading
+          ? <ActivityIndicator style={{
+            flex: 1, alignItems: 'center',
+            justifyContent: 'center'
+          }} size="large" color="#ccc" />
+          : null
+        }
       </View>
     );
   }

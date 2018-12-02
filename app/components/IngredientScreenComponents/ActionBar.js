@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, TextInput, View, Button, StyleSheet, FlatList, TouchableOpacity, StatusBar } from 'react-native';
-import Icon from '../Icon';
+import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from '../SharedComponents/Icon';
 
 export default class ActionBar extends Component {
   static defaultProps = {
@@ -12,8 +12,12 @@ export default class ActionBar extends Component {
   }
 
   clearTextInputAndAddNewItem = () => {
-    this.props.addNewItem()
     this.textInput.clear()
+    this.props.addNewItem()
+  }
+
+  focusOnTextInput = () => {
+    this.textInput.focus()
   }
 
   render() {
@@ -51,12 +55,19 @@ export default class ActionBar extends Component {
         />
         {
           this.props.text == ''
-            ? <Icon
+            ? <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={
+                this.focusOnTextInput
+              }
+            >
+              <Icon
                 style={styles.icon}
                 name="search"
                 color="#ccc"
                 size={24}
               />
+            </TouchableOpacity>
             : <TouchableOpacity
               style={styles.iconContainer}
               onPress={
