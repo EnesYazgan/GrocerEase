@@ -166,7 +166,7 @@ export default class App extends Component {
 			checkBarcode={(barcode) => {
 				//we have to cut off the first digit of the barcode
 				length = barcode.length
-				barcodeData = barcode.toString().substring(1,barcode.length)
+				barcodeData = barcode.toString()
 				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
 						this.addIngredientToInventory(snapshot.val().name);
