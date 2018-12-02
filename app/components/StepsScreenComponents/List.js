@@ -10,7 +10,7 @@ export default class List extends Component {
   }
 
   state = {
-    infoPressed: null,
+    index: -1,
   }
 
   render() {
@@ -30,19 +30,20 @@ export default class List extends Component {
     );
   }
 
-  renderListRow = ({ item }) => {
+  renderListRow = ({ item, index }) => {
     return <ListRow
       item={item}
+      index={index}
       infoButtonPressed={() => {
         // console.log("got in" + item);
-        if (this.state.infoPressed == item) {
-          this.setState({ infoPressed: null });
+        if (this.state.index == index) {
+          this.setState({ index: -1 });
         } else {
-          this.setState({ infoPressed: item });
+          this.setState({ index: index });
         }
       }
       }
-      visible={this.state.infoPressed == item}
+      visible={this.state.index > 0 ? (this.state.index < index ? 0 : this.state.index == index ? 1 : this.state.index > index ? 2 : -1) : -1}
     />
   }
 
@@ -65,23 +66,25 @@ class ListRow extends PureComponent {
     return (
       <View>
         {
-          this.props.visible
-            ? <TouchableOpacity style={{flex: 1,flexWrap: 'wrap',flexDirection: "row",margin: 10,justifyContent: "space-between",alignItems: "center"}}
+          <TouchableOpacity style={{ flex: 1, flexWrap: 'wrap', flexDirection: "row", margin: 10, justifyContent: "space-between", alignItems: "center" }}
             onPress={this.props.infoButtonPressed}>
-              <Text
-                style={styles.highlightedTextContainer}
-                onPress={this.handleTextPress}>
-                {this.props.item}
-              </Text>
-            </TouchableOpacity>
-            : <TouchableOpacity style={{flex: 1,flexWrap: 'wrap',flexDirection: "row",margin: 10,justifyContent: "space-between",alignItems: "center"}}
-            onPress={this.props.infoButtonPressed}>
-              <Text
-                style={styles.textContainer}
-                onPress={this.handleTextPress}>
-                {this.props.item}
-              </Text>
-            </TouchableOpacity>
+            <Text
+              style={this.props.visible == 0
+                ? styles.pastIndex
+                : this.props.visible == 1
+                ? styles.currentIndex
+                : this.props.visible == 2
+                ? styles.futureIndex
+                : null}>
+              {this.props.index}
+            </Text>
+            <Text
+              style={this.props.visible == 0
+                ? styles.highlightedTextContainer
+                : styles.textContainer}>
+              {this.props.item}
+            </Text>
+          </TouchableOpacity>
         }
       </View>
     )
@@ -91,7 +94,6 @@ class ListRow extends PureComponent {
 String.prototype.toTitleCase = function () {
   return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -158,7 +160,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#ccc'
   },
-  iconInfo: {
+  pastIndex: {
+    color: '#ccc',
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:30,
+    height:30,
+  },
+  futureIndex: {
+    color: '#51A4F7',
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    width:30,
+    height:30,
+  },
+  currentIndex: {
+    fontWeight: 'bold',
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'flex-end',

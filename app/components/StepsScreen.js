@@ -51,7 +51,6 @@ export default class StepsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
         <View style={styles.banner}>
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.switchScreen}>
@@ -74,13 +73,6 @@ export default class StepsScreen extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <ActionBar
-            text={this.state.text}
-            toggleCamera={this.toggleCamera}
-            addNewItem={this.addNewItem}
-            searchData={this.searchData}
-            sortList={this.changeSortParameterThenOrderList}
-          />
           <List
             data={this.state.text == ''
               ? this.props.data
@@ -100,6 +92,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   banner: {
+    paddingTop: 30,
     backgroundColor: '#51A4F7',
     flexDirection: 'row',
   },

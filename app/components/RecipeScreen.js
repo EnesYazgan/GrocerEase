@@ -47,7 +47,6 @@ export default class RecipeScreen extends Component {
     if (this.state.currentRecipe == null) {
       return (
         <View style={styles.container}>
-          <StatusBar hidden />
           <View style={styles.banner}>
             <TouchableOpacity style={styles.iconContainer}
               onPress={this.props.switchScreen}>
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   banner: {
+    paddingTop: 30,
     backgroundColor: '#51A4F7',
     flexDirection: 'row',
   },
