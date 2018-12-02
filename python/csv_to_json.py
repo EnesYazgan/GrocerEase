@@ -3,6 +3,7 @@ import json
 from selenium import webdriver # allow launching browser
 from selenium.common.exceptions import NoSuchElementException
 import os
+import numpy as np
 
 url = 'https://ndb.nal.usda.gov/ndb/search/list'
 
@@ -21,16 +22,16 @@ class BarcodeObject:
     def __init__(self, index, upc14, upc12, brand, name):
         # each input is stripped so there isn't any unnecessary whitespace
         self.index = index.strip()
-        if len(upc14) < 14:
-            diff = 14 - len(upc14)
-            self.upc14 = ('0' * diff) + upc14
-        else:
-            self.upc14 = upc14.strip()
-        if len(upc12) < 12:
-            diff = 12 - len(upc12)
-            self.upc12 = ('0' * diff) + upc12
-        else:
-            self.upc12 = upc12.strip()
+        # if len(upc14) < 14:
+        #     diff = 14 - len(upc14)
+        #     self.upc14 = ('0' * diff) + upc14
+        # else:
+        self.upc14 = upc14.strip()
+        # if len(upc12) < 12:
+        #     diff = 12 - len(upc12)
+        #     self.upc12 = ('0' * diff) + upc12
+        # else:
+        self.upc12 = upc12.strip()
         # self.upc14 = upc14.strip()
         # self.upc12 = upc12.strip()
         self.brand = brand.strip()
@@ -46,56 +47,81 @@ class BarcodeObject:
     # returns a json string representing the object, indexed by upc12 or upc14 value
     def toJSON(self, barcode):
         # format JSON string differently based on if it's upc12 or upc14
-        if hasattr(self, 'href'):
-            if barcode == 'upc14':
-                return '"{}": {{"upc12": "{}", "brand": "{}", "name": "{}", "href": "{}"}}'.format(self.upc14, self.upc12, self.brand, self.name, self.href)
-            else:
-                return '"{}": {{"upc14": "{}", "brand": "{}", "name": "{}", "href": "{}"}}'.format(self.upc12, self.upc14, self.brand, self.name, self.href)
-        else:
+        if not hasattr(self, 'food_name'):
             if barcode == 'upc14':
                 return '"{}": {{"upc12": "{}", "brand": "{}", "name": "{}"}}'.format(self.upc14, self.upc12, self.brand, self.name)
             else:
                 return '"{}": {{"upc14": "{}", "brand": "{}", "name": "{}"}}'.format(self.upc12, self.upc14, self.brand, self.name)
+        else:
+            if barcode == 'upc14':
+                return '"{}": {{"upc12": "{}", "brand": "{}", "name": "{}", "food_name": "{}"}}'.format(self.upc14, self.upc12, self.brand, self.name, self.food_name)
+            else:
+                return '"{}": {{"upc14": "{}", "brand": "{}", "name": "{}", "food_name": "{}"}}'.format(self.upc12, self.upc14, self.brand, self.name, self.food_name)
 
-    def addHref(self, href):
-        self.href = href
+    def addFoodName(self, food_name):
+        self.food_name = food_name
 
-def upc_lookup(driver, upc, barcode):
-    input = driver.find_element_by_id('qlookup')
-    input.clear()
-    input.send_keys(upc)
-
-    button = driver.find_element_by_xpath('/html/body/div[2]/div[2]/form/div[1]/div[1]/div[4]/input[1]')
-    button.click()
-
-    try:
-        driver.find_element_by_xpath('//*[@id="ndl.foods.description.label"]')
-        print(driver.find_element_by_xpath('/html/body/div[2]/div[2]/form/div[4]/table/tbody/tr/td[3]/a').text)
-        barcode.addHref(driver.find_element_by_xpath('/html/body/div[2]/div[2]/form/div[4]/table/tbody/tr/td[3]/a').get_attribute('href'))
-    except NoSuchElementException:
-        pass
-
+def chunk_string(array):
+    chonked = [chunk.strip().lower().split(' ') for chunk in array.split(',')]
+    # flatten the list into a 1d array
+    chonked = sum(chonked, [])
+    # remove all parenthesis
+    chonked = [chunk.replace('(', '').replace(')', '') for chunk in chonked]
+    return chonked
 
 barcodes_upc14 = []
 barcodes_upc12 = []
 
+food_names = ''
+with open('food_names_parsed.json') as json_file:
+    food_names = json.load(json_file)
+
+# print(food_names)
+
 # open CSV
 with open('grocery_upc_database.csv') as csvfile:
     readcsv = csv.reader(csvfile, delimiter=',')
-    driver = define_webdriver()
     for count, row in enumerate(readcsv):
-        driver.get(url)
-        # create new barcode with row of CSV
+        if count != 0:
+            # create new barcode with row of CSV
 
-        new_code = BarcodeObject(row[0], row[1], row[2], row[3], row[4])
-        # format of the row: [index, upc14, upc12, brand, name]
+            new_code = BarcodeObject(row[0], row[1], row[2], row[3], row[4])
+            # format of the row: [index, upc14, upc12, brand, name]
 
-        # append the appropriately formatted object to array
-        barcodes_upc14.append(new_code.toJSON('upc14'))
-        barcodes_upc12.append(new_code.toJSON('upc12'))
-
-        if count % 100 == 0:
-            print(count)
+            # input_ing = chunk_string(new_code.name)
+            #
+            # # print('input: {}'.format(input_ing))
+            #
+            # try:
+            #     # lists of match percentage per food name in database
+            #     match_indices = [list(np.in1d(food, input_ing)).count(True) / len(food) for food in food_names]
+            #
+            #     # list of max percentage indices
+            #     max_indices = [i for i,x in enumerate(match_indices) if x == max(match_indices)]
+            #
+            #     # print('indices of max: {}'.format(max_indices))
+            #
+            #     #
+            #     lens_of_maxes = [len(food_names[max]) for max in max_indices]
+            #
+            #     # print('length of the max: {}'.format(lens_of_maxes))
+            #
+            #     # food_names[max_indices.index(max(lens_of_maxes))]
+            #
+            #     # print(max(match_indices))
+            #
+            #     # max_index = match_indices.index(max(match_indices))
+            #     #
+            #     # new_code.addFoodName(' '.join(food_names[max_index]))
+            #
+            #     new_code.addFoodName(' '.join(food_names[max_indices[lens_of_maxes.index(max(lens_of_maxes))]]))
+            #
+            #     print('{} --- {}'.format(new_code.name, new_code.food_name))
+            # except ValueError:
+            #     pass
+            # append the appropriately formatted object to array
+            barcodes_upc14.append(new_code.toJSON('upc14'))
+            barcodes_upc12.append(new_code.toJSON('upc12'))
 
 # convert arrays to strings with commas, skip first index since it's the header
 barcodes_upc12_string = '{{{}}}'.format(','.join(barcodes_upc12[1:]).strip())
