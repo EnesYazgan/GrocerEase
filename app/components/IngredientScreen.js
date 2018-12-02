@@ -35,7 +35,7 @@ export default class IngredientScreen extends Component {
   }
   //change the item quantity from App.js using the item inputted by the user, reset the state text.
   addNewItem = () => {
-    this.props.changeItemQuantity(this.state.text)
+    this.props.addItem(this.state.text)
     this.setState({ text: '', filter: this.props.data })
   }
   //when user searches for an ingredient, access the list of ingredients stored.

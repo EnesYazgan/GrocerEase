@@ -19,7 +19,7 @@ export default class RecipeInfo extends React.Component {
                 ? styles.matchingText
               : styles.almostText)
               : styles.excludesText
-              }>{element.quantity} {element.name}</Text>
+              }>{element.quantity < 0 ? element.quantity : ''} {element.name}</Text>
           )
         })}
         <Text style={styles.infoTitle}>Tools:</Text>

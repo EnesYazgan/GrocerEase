@@ -11,6 +11,7 @@ export default class List extends Component {
   state = {
     infoPressed: null,
     text: '',
+    number: '',
   }
 
   render() {
@@ -41,10 +42,20 @@ export default class List extends Component {
     }
     /*call the prop function in App.js to increase or decrease the item quantity*/
     incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1);
+      this.props.changeItemQuantity(item.key, item.quantity + 1);
     }
     decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1);
+      this.props.changeItemQuantity(item.key, item.quantity - 1);
+    }
+
+    recordNumberText = (text) => {
+      this.setState({ number: text })
+    }
+
+    setQuantity = () => {
+      let quantity = parseInt(Number(this.state.number));
+      if (quantity < 0) quantity = 0
+      this.props.changeItemQuantity(item.key, quantity)
     }
 
     /*call the props function in App.js when user edits the item's name*/
@@ -58,13 +69,6 @@ export default class List extends Component {
 
     recordNameText = (text) => {
       this.setState({text: text})
-    }
-
-    /*call the prop function in App.js to set the item quantity if the value is not null */
-    setQuantity = (text) => {
-      text == ''
-        ? this.props.changeItemQuantity(item.key, -item.quantity)
-        : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
     }
 
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
@@ -130,6 +134,9 @@ export default class List extends Component {
               keyboardType={'numeric'}
               defaultValue={item.quantity.toString()}
               onChangeText={
+                recordNumberText
+              }
+              onSubmitEditing={
                 setQuantity
               }
             />
