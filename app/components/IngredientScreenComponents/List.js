@@ -32,7 +32,7 @@ export default class List extends Component {
   }
 
   renderListRow = ({ item }) => {
-    //local functions
+    /*open or close the information button*/
     infoButtonPressed = () => {
       if (this.state.infoPressed == item) {
         this.setState({ infoPressed: null });
@@ -40,11 +40,10 @@ export default class List extends Component {
         this.setState({ infoPressed: item });
       }
     }
-
+    /*call the prop function in App.js to increase or decrease the item quantity*/
     incrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, item.quantity + 1);
     }
-
     decrementItemQuantity = () => {
       this.props.changeItemQuantity(item.key, item.quantity - 1);
     }
@@ -59,12 +58,17 @@ export default class List extends Component {
       this.props.changeItemQuantity(item.key, quantity)
     }
 
-    recordNameText = (text) => {
-      this.setState({ text: text })
+    /*call the props function in App.js when user edits the item's name*/
+    setName = () => {
+      /*only update the name if the text inputted by the user is not null or undefined*/
+      if(this.state.text != '' && typeof(this.state.text)!="undefined"){
+        this.props.changeItemName(item.key, this.state.text);
+        this.setState({text:''});
+      }
     }
 
-    setName = () => {
-      this.props.changeItemName(item.key, this.state.text)
+    recordNameText = (text) => {
+      this.setState({text: text})
     }
 
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero

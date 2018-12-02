@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {AppRegistry, Button, View, TextInput, StatusBar, Text, TouchableOpacity, StyleSheet} from 'react-native';
-// import UI from './components/UI';
 
 export default class UserLogin extends Component{
   static defaultProps = {
@@ -12,12 +11,12 @@ export default class UserLogin extends Component{
     email: this.props.email,
     password: this.props.password,
   }
-
+  //set the email that user entered
   emailText = (text) => {
     this.setState({ email: text });
     console.log("My email is:" + text);
   }
-
+  //set the password that user entered
   passwordText = (text) => {
     this.setState({ password: text });
     console.log("My password is:" + text);
