@@ -10,13 +10,14 @@ url = 'https://ndb.nal.usda.gov/ndb/search/list'
 def define_webdriver():
     driver_option = webdriver.ChromeOptions()
     driver_option.add_argument(" — incognito")
-    chromedriver_path = '/home/simon/Desktop/GrocerEase/GrocerEase/python/chromedriver' # Change this to your own chromedriver path!
+    chromedriver_path = '/home/simon/Desktop/GrocerEase/GrocerEase/python/barcodes/chromedriver' # Change this to your own chromedriver path!
     def create_webdriver():
         return webdriver.Chrome(executable_path=chromedriver_path, chrome_options=driver_option)
     driver = create_webdriver()
     driver.get(url) # load site
     return driver
 
+# this object stores a barcode, keeping the name, brand and upc values together
 class BarcodeObject:
     # initialize the object
     def __init__(self, index, upc14, upc12, brand, name):

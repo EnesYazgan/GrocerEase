@@ -14,6 +14,7 @@ class FoodSpider(scrapy.Spider):
         for table in response.css('.table > tbody:nth-child(2)'):
             # select name from table row
             for row in table.css('tr > td:nth-child(3)'):
+                # output the name of the food
                 yield {'food_name': row.css('a::text').extract_first().strip()}
 
         # click the 'next' button and parse that page
