@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity, Platform } from 'react-native';
 
 export default class List extends Component {
   static defaultProps = {
@@ -30,14 +30,14 @@ export default class List extends Component {
         <View style={{
           position: 'absolute',
           width: '100%',
-          bottom: 0,          
+          bottom: 0,
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
           paddingBottom: 25,
           paddingTop: 10,
         }}
-        backgroundColor='transparent'>
+        backgroundColor={Platform.OS === 'ios' ? 'white' : 'transparent'}>
           <Button
             title='Previous Step'
             onPress={() => {
@@ -57,7 +57,7 @@ export default class List extends Component {
                 index = this.props.data.length
               } else {
                 this.scrollView.scrollToIndex({index: index, viewPosition: 0.5, animated: true})
-              }               
+              }
               this.setState({ index: index })
             }} />
         </View>
