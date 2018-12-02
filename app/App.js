@@ -143,7 +143,7 @@ export default class App extends Component {
 		if (attribute == 'key') {
 			newValue = newValue.toTitleCase()
 			let existingIngredient = newInventory.find(eachIngredient => eachIngredient.key === newValue)
-			if (typeof existingIngredient != 'undefined') {
+			if (typeof existingIngredient != 'undefined' && existingIngredient != foundIngredient) {
 				existingIngredient.quantity = existingIngredient.quantity + foundIngredient.quantity
 				newInventory.splice(newInventory.indexOf(foundIngredient), 1)
 			}
@@ -310,6 +310,7 @@ export default class App extends Component {
 						ingredient.perfectMatch = false;
 						ingredient.name = ingredient.name.toTitleCase()
 						wordsInUserIngredient = userIngredient.key.split(" ");
+						percentMatch = 0;
 						wordsInUserIngredient.forEach(word => {
 							if (ingredient.name.indexOf(word) > -1) {
 								percentMatch = percentMatch + (1 / wordsInUserIngredient.length)
@@ -329,9 +330,6 @@ export default class App extends Component {
 							matchedIngredient.perfectMatch = true;
 						}
 					}
-					recipe.equipment_names.forEach(tool => {
-						tool = tool.toTitleCase()
-					})
 				});
 			}
 		});

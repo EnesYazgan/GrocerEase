@@ -58,7 +58,7 @@ export default class UserLogin extends Component{
             //when button pressed, grab email and password from text boxes
             onPress={this.loginWithEmailAndPassword}
           >
-            <Text style={styles.text}>Log In</Text>
+            <Text style={styles.text}>{'Log In'}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
@@ -67,7 +67,7 @@ export default class UserLogin extends Component{
             //when button pressed, grab email and password from text boxes
             onPress={this.signUpWithEmailAndPassword}
           >
-            <Text style={styles.text}>Sign Up</Text>
+            <Text style={styles.text}>{'Sign Up'}</Text>
           </TouchableOpacity>
         </View>
         {
