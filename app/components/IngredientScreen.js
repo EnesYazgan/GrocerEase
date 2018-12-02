@@ -49,7 +49,7 @@ export default class IngredientScreen extends Component {
       <View style={styles.container}>
         <StatusBar hidden />
         <View style={styles.banner}>
-          /*When pressed, switch to the recipes screen*/
+		  {/*When pressed, switch to the recipes screen*/}
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.switchScreen}>
             <Icon
@@ -60,7 +60,7 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
           <Text style={styles.headerText}>My Ingredients</Text>
-          /*Log out button*/
+		  {/*Log out button*/}
           <TouchableOpacity style={styles.iconContainer}
             onPress={this.props.logOut}>
             <Icon
@@ -71,7 +71,7 @@ export default class IngredientScreen extends Component {
             />
           </TouchableOpacity>
         </View>
-        /*If the camera is open, check for and read barcode*/
+        {/*If the camera is open, check for and read barcode*/}
         {
           this.state.cameraOn == false
             ? null
@@ -80,7 +80,7 @@ export default class IngredientScreen extends Component {
             />
         }
         <View style={styles.container}>
-          /*show action bar with camera,add,search,sort options*/
+		  {/*show action bar with camera,add,search,sort options*/}
           <ActionBar
             text={this.state.text}
             toggleCamera={this.toggleCamera}
@@ -88,7 +88,7 @@ export default class IngredientScreen extends Component {
             searchData={this.searchData}
             sortList={this.changeSortParameterThenOrderList}
           />
-          /*show the list of ingredients, with functionality for all ingredient properties*/
+          {/*show the list of ingredients, with functionality for all ingredient properties*/}
           <List
             {...this.props}
             data={this.state.text == ''

@@ -71,7 +71,7 @@ export default class List extends Component {
 }
 
 class ListRow extends PureComponent {
-  defaultProps = {
+  static defaultProps = {
     sortParameter: true,
   }
   render() {
