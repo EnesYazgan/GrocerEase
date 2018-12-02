@@ -68,6 +68,7 @@ export default class List extends Component {
     /*call the props function in App.js when user edits the item's name*/
     setName = () => {
       /*only update the name if the text inputted by the user is not null or undefined*/
+      console.log('is the state text empty? ' + (this.state.text == ''));
       this.props.changeItemName(item.key, this.state.text);
     }
 
@@ -84,6 +85,7 @@ export default class List extends Component {
             onChangeText={recordNameText}
             onSubmitEditing={setName}
             defaultValue={item.key}
+            onFocus={() => {this.setState({text: item.key})}}
           />
           <View style={styles.buttons}>
             <TouchableOpacity
