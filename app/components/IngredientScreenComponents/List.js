@@ -67,10 +67,6 @@ export default class List extends Component {
       }
     }
 
-    recordNameText = (text) => {
-      this.setState({text: text})
-    }
-
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
 
     return (
@@ -81,14 +77,11 @@ export default class List extends Component {
               ? styles.textContainer
               : styles.fadedTextContainer}
             underlineColorAndroid={'rgba(0,0,0,0)'}
-            defaultValue={item.key}
+            placeholder={item.key}
             placeholderTextColor={'black'}
-            onChangeText={
-              recordNameText
-            }
-            onSubmitEditing={
-              setName
-            }
+            onChangeText={(text) => this.setState({text})}
+            onSubmitEditing={setName}
+            value={item.key}
           />
           <View style={styles.buttons}>
             <TouchableOpacity

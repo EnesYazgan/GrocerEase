@@ -133,11 +133,13 @@ export default class App extends Component {
 	}
 
 	addIngredientToInventory = (itemName) => {
+		console.log("in here: " + itemName);
 		var newInventory = this.state.inventory.slice(0);
 		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
 		if (typeof foundIngredient == 'undefined') {
 			newIngredient = new Ingredient(itemName.toTitleCase());
 			newInventory.push(newIngredient);
+			console.log("got it: " + itemName);
 		} else {
 			//increment ingredient quantity
 			foundIngredient.quantity = foundIngredient.quantity + 1
@@ -167,7 +169,7 @@ export default class App extends Component {
 				barcodeData = barcode.toString().substring(1,barcode.length)
 				firebase.database().ref('/barcode-upc' + length + '/' + barcodeData + '/').once("value", snapshot => {
 					if (snapshot.exists()) {
-						this.changeIngredientInInventory(itemName, 'quantity', 1)
+						this.addIngredientToInventory(snapshot.val().name);
 					} else {
 						alert('barcode does not exist in database');
 					}
@@ -175,7 +177,8 @@ export default class App extends Component {
 			}}
 
 			addItem={(itemName) => {
-				this.addIngredientToInventory(itemName)
+				this.addIngredientToInventory(itemName);
+				console.log("getting added: " + itemName);
 			}}
 
 			changeItemName={(itemName, newName) => {

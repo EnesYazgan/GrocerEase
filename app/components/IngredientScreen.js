@@ -21,7 +21,7 @@ export default class IngredientScreen extends Component {
     logOut: undefined,
     checkBarcode: undefined,
   }
-  
+
 	shouldComponentUpdate(nextProps, nextState){
 		return true;
 	 }
@@ -29,14 +29,14 @@ export default class IngredientScreen extends Component {
     this.props.orderList(this.state.sortParameter)
     this.setState({ sortParameter: !this.state.sortParameter, filter: this.props.data })
   }
-
   toggleCamera = () => {
     this.setState({ cameraOn: !this.state.cameraOn });
   }
   //change the item quantity from App.js using the item inputted by the user, reset the state text.
+  //order list so that the added item fits where needed
   addNewItem = () => {
-    this.props.addItem(this.state.text)
-    this.setState({ text: '', filter: this.props.data })
+    this.props.addItem(this.state.text);
+    this.setState({ text: '', filter: this.props.data });
   }
   //when user searches for an ingredient, access the list of ingredients stored.
   searchData = (text) => {
