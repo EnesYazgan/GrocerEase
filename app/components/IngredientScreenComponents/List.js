@@ -92,22 +92,6 @@ export default class List extends Component {
           />
           <View style={styles.buttons}>
             <TouchableOpacity
-              style={styles.iconInfo}
-              onPress={infoButtonPressed}
-            >
-              <Icon
-                name='information-circle'
-                color={item.isExpired == 0
-                  ? "#51A4F7"
-                  : item.isExpired == 1
-                    ? 'orange'
-                    : item.isExpired == 2
-                      ? 'red'
-                      : 'black'}
-                size={30}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
               style={styles.iconContainer}
               onPress={decrementItemQuantity}
             >
@@ -148,6 +132,22 @@ export default class List extends Component {
                 name="add"
                 color="#51A4F7"
                 size={20}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconInfo}
+              onPress={infoButtonPressed}
+            >
+              <Icon
+                name='information-circle'
+                color={item.isExpired == 0
+                  ? "#51A4F7"
+                  : item.isExpired == 1
+                    ? 'orange'
+                    : item.isExpired == 2
+                      ? 'red'
+                      : 'black'}
+                size={30}
               />
             </TouchableOpacity>
           </View>

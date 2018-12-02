@@ -34,7 +34,6 @@ export default class List extends Component {
     return <ListRow
       item={item}
       infoButtonPressed={() => {
-        // console.log("got in" + item);
         if (this.state.infoPressed == item) {
           this.setState({ infoPressed: null });
         } else {

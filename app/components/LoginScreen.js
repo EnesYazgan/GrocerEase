@@ -14,12 +14,10 @@ export default class UserLogin extends Component{
   //set the email that user entered
   emailText = (text) => {
     this.setState({ email: text });
-    console.log("My email is:" + text);
   }
   //set the password that user entered
   passwordText = (text) => {
     this.setState({ password: text });
-    console.log("My password is:" + text);
   }
 
   //sign up function that grabs the email and password from the text boxes and uses

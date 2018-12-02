@@ -1,4 +1,4 @@
-function Ingredient(key = 'ingredient has no name', quantity = 1, unit = 'no measuring units', calories = 0, serving = 0, expiry = 0, isExpired = 0, carbs = 0, protein = 0, sugar = 0, fat = 0, sodium = 0) {
+function Ingredient(key = 'ingredient has no name', quantity = 1, unit = 'no measuring units', calories = 0, serving = 0, expiry = 'none set', isExpired = 0, carbs = 0, protein = 0, sugar = 0, fat = 0, sodium = 0) {
     this.key = key;
     this.quantity = quantity;
     this.unit = unit;

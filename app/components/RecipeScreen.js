@@ -78,6 +78,7 @@ export default class RecipeScreen extends Component {
             />
             <List
               viewRecipeSteps={this.viewSteps}
+              sortParameter={this.state.sortParameter}
               data={this.state.text == ''
                 ? this.props.data
                 : this.state.filter
