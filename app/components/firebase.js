@@ -44,7 +44,7 @@ export default class DataBase{
 					callback(snapshot.val());
 				}
 			})
-			.catch(() => console.log('CANT FIND THE RECIPE'))
+			.catch(() => alert('You have been disconnected, changes will not be saved'))
 	}
 
 	static checkBarcode(barcode, callback) {

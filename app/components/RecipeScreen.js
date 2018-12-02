@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import List from './RecipeScreenComponents/List';
 import ActionBar from './RecipeScreenComponents/ActionBar';
 import StepsScreen from './StepsScreen';
@@ -61,6 +61,7 @@ export default class RecipeScreen extends Component {
               sortList={this.changeSortParameterThenOrderList}
             />
             <List
+              {...this.props}
               viewRecipeSteps={this.viewSteps}
               sortParameter={this.state.sortParameter}
               data={this.state.text == ''

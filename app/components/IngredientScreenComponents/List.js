@@ -48,6 +48,10 @@ export default class List extends Component {
       this.props.changeItemQuantity(item.key, item.quantity - 1);
     }
 
+    recordNameText = (text) => {
+      this.setState({ text: text })
+    }
+
     recordNumberText = (text) => {
       this.setState({ number: text })
     }
@@ -72,12 +76,12 @@ export default class List extends Component {
     return (
       <View>
         <View style={styles.listRow}>
-          <TextInput key={item.index}
+          <TextInput
             style={item.quantity > 0
               ? [styles.textContainer, {flex: 1}]
               : [styles.fadedTextContainer, {flex: 1}]}
             underlineColorAndroid={'rgba(0,0,0,0)'}
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={recordNameText}
             onSubmitEditing={setName}
             defaultValue={item.key}
           />
