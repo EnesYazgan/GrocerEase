@@ -44,6 +44,11 @@ export default class IngredientScreen extends Component {
     this.setState({ text: text, filter: searchResults })
   }
 
+  closeCameraAndCheckBarcode = () => {
+    this.setState({ cameraOn: false });
+    this.props.checkBarcode();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -72,7 +77,7 @@ export default class IngredientScreen extends Component {
           this.state.cameraOn == false
             ? null
             : <BarcodeScanner
-              checkBarcode={this.props.checkBarcode}
+              checkBarcode={this.closeCameraAndCheckBarcode}
             />
         }
         <View style={styles.container}>

@@ -43,7 +43,8 @@ export default class ActionBar extends Component {
         </TouchableOpacity>
         <TextInput style={styles.textInput}
           ref={input => { this.textInput = input }}
-          placeholder="Add or search for food"
+          placeholder="Add or search for food!"
+          defaultValue={this.props.text}
           onChangeText={
             this.props.searchData
           }

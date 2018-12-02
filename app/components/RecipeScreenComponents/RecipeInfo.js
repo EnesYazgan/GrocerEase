@@ -13,13 +13,15 @@ export default class RecipeInfo extends React.Component {
         <Text style={styles.infoTitle}>Ingredients:</Text>
         {this.props.item.ingredients.map(element => {
           return (
-            <Text key={element.name}
-            style={this.props.item.matchingIngredients.includes(element)
-              ? (element.perfectMatch
-                ? styles.matchingText
-              : styles.almostText)
-              : styles.excludesText
-              }>{element.quantity > 0 ? element.quantity : ''} {element.name}</Text>
+            <View key={element.name}>
+              <Text
+                style={this.props.item.matchingIngredients.includes(element)
+                  ? (element.perfectMatch
+                    ? styles.matchingText
+                    : styles.almostText)
+                  : styles.excludesText
+                }>{element.quantity > 0 ? element.quantity : ''} {element.name}</Text>
+            </View>
           )
         })}
         <Text style={styles.infoTitle}>Tools:</Text>
@@ -29,8 +31,8 @@ export default class RecipeInfo extends React.Component {
           )
         })}
         <Button
-        title='View Steps'
-        onPress={this.props.switchScreen}/>
+          title='View Steps'
+          onPress={this.props.switchScreen} />
       </View>
     );
   }
@@ -58,15 +60,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   iconContainer: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
     justifyContent:'center',
-    width:50,
-    height:50,
-    backgroundColor: '#51A4F7',
-    paddingTop: 10,
-    borderRadius:10,
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#D0E3F5',
   },
   icon: {
     flexDirection: 'row',
