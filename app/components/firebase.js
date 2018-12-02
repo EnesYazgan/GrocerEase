@@ -3,17 +3,17 @@ import Ingredient from '../objects/Ingredient';
 import { Platform } from 'react-native';
 
 const config = {
-  apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
-  authDomain: "grocerease-6e9ee.firebaseapp.com",
-  databaseURL: "https://grocerease-6e9ee.firebaseio.com",
-  projectId: "grocerease-6e9ee",
-  storageBucket: "grocerease-6e9ee.appspot.com",
-  messagingSenderId: "719228868931"
+	apiKey: "AIzaSyBh5vN_SwkYpZ7iwX3Auu0_xKVZMmlR8AI",
+	authDomain: "grocerease-6e9ee.firebaseapp.com",
+	databaseURL: "https://grocerease-6e9ee.firebaseio.com",
+	projectId: "grocerease-6e9ee",
+	storageBucket: "grocerease-6e9ee.appspot.com",
+	messagingSenderId: "719228868931"
 };
 
 firebase.initializeApp(config);
 
-export default class DataBase{
+export default class DataBase {
 	database = firebase;
 
 	//to delete a user..
@@ -25,7 +25,7 @@ export default class DataBase{
 	static updateMe(userId, list) {
 		//Add list elements to update array
 		const update = new Array();
-		for(var i = 0; i < list.length; i++){
+		for (var i = 0; i < list.length; i++) {
 			update[i] = list[i].toSingleString();
 		}
 
@@ -92,24 +92,25 @@ export default class DataBase{
 
 	static signInWithEmailAndPassword(email, password, callback) {
 		firebase.auth().signInWithEmailAndPassword(email, password)
-		.then(() => {
-			callback(firebase.auth().currentUser.uid)
-		})
-		.catch(
-			(error) => {
-				var errorMessage = error.message;
-				alert(errorMessage);
-			}
-		)
+			.then(() => {
+				callback(firebase.auth().currentUser.uid)
+			})
+			.catch(
+				(error) => {
+					var errorMessage = error.message;
+					alert(errorMessage);
+				}
+			)
 	}
 
-	static createFirebaseInventoryListener(userId, receivingChange, callback, secondCallback, startLoading, stopLoading) {
+	static createFirebaseInventoryListener(userId, isReceivingChange, callback, secondCallback, startLoading, stopLoading) {
 		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
-			startLoading()
-			if (snapshot.exists()) {
-				//snapshot.val() is the list we want
-				list = snapshot.val()
-				if (receivingChange == true) {
+			console.log('is receiving change? ' + isReceivingChange())
+			if (isReceivingChange() == true) {
+				startLoading()
+				if (snapshot.exists()) {
+					//snapshot.val() is the list we want
+					list = snapshot.val()
 					//lists it properly
 					if (list.length > 0) {
 						var ingredientsList = [];
@@ -138,12 +139,12 @@ export default class DataBase{
 					console.log('calling back recipe list')
 					callback(ingredientsList)
 				} else {
-					secondCallback()
+					callback([])
 				}
+				stopLoading()
 			} else {
-				callback([])
+				secondCallback()
 			}
-			stopLoading()
 		});
 	}
 }

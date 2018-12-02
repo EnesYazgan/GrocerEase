@@ -25,7 +25,7 @@ export default class ActionBar extends Component {
         >
           <Icon
             style={styles.icon}
-            name="list"
+            name="list-box"
             color="#51A4F7"
             size={24}
           />
