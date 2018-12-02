@@ -30,7 +30,7 @@ export default class List extends Component {
         <View style={{
           position: 'absolute',
           width: '100%',
-          bottom: 0,          
+          bottom: 0,
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
@@ -57,7 +57,7 @@ export default class List extends Component {
                 index = this.props.data.length
               } else {
                 this.scrollView.scrollToIndex({index: index, viewPosition: 0.5, animated: true})
-              }               
+              }
               this.setState({ index: index })
             }} />
         </View>
