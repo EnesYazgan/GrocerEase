@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity, Platform } from 'react-native';
 
 export default class List extends Component {
   static defaultProps = {
@@ -37,7 +37,7 @@ export default class List extends Component {
           paddingBottom: 25,
           paddingTop: 10,
         }}
-        backgroundColor='transparent'>
+        backgroundColor={Platform.OS === 'ios' ? 'white' : 'transparent'}>
           <Button
             title='Previous Step'
             onPress={() => {

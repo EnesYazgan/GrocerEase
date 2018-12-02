@@ -12,7 +12,11 @@ export default class Banner extends Component {
 
     render() {
         return (
-            <View style={styles.banner}>
+            <View style={[styles.banner, Platform.OS === 'ios' ? { paddingTop: 30 } : { paddingTop: 25 }]}>
+                <StatusBar
+                    backgroundColor="blue"
+                    barStyle="light-content"
+                />
                 <TouchableOpacity style={styles.iconContainer}
                     onPress={this.props.switchScreen}>
                     <Icon
@@ -39,7 +43,6 @@ export default class Banner extends Component {
 
 const styles = StyleSheet.create({
     banner: {
-        paddingTop: 30,
         backgroundColor: '#51A4F7',
         flexDirection: 'row',
     },
