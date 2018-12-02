@@ -51,7 +51,7 @@ export default class IngredientScreen extends Component {
     return (
       <View style={styles.container}>
         <Banner
-          title='My Ingredients'
+          title='My Groceries'
           icon='nutrition'
           logOut={this.props.logOut}
           switchScreen={this.props.switchScreen}
