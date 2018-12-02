@@ -36,7 +36,7 @@ export default class IngredientScreen extends Component {
   }
 
   addNewItem = () => {
-    this.props.changeItemQuantity(this.state.text)
+    this.props.addItem(this.state.text)
     this.setState({ text: '', filter: this.props.data })
   }
 

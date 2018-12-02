@@ -18,19 +18,14 @@ export default class RecipeScreen extends Component {
     orderList: undefined,
     changeItemQuantity: undefined,
     data: [],
-
   }
 
   componentDidMount() {
     this.props.sortList()
   }
 
-  /*orderList = (sortingFunction) => {
-    list = this.props.data.sort(sortingFunction);
-    this.setState({ filter: list })
-  }*/
   changeSortParameterThenOrderList = () => {
-	this.props.orderList(this.state.sortParameter)
+    this.props.orderList(this.state.sortParameter)
     this.setState({ sortParameter: !this.state.sortParameter })
   }
 
@@ -82,10 +77,11 @@ export default class RecipeScreen extends Component {
               sortList={this.changeSortParameterThenOrderList}
             />
             <List
-              fetchData={this.props.fetchData}
               viewRecipeSteps={this.viewSteps}
-              data={this.state.filter}
-              changeItemQuantity={this.props.changeItemQuantity}
+              data={this.state.text == ''
+                ? this.props.data
+                : this.state.filter
+              }
             />
           </View>
         </View>

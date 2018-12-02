@@ -11,6 +11,7 @@ export default class List extends Component {
   state = {
     infoPressed: null,
     text: '',
+    number: '',
   }
 
   render() {
@@ -41,25 +42,29 @@ export default class List extends Component {
     }
 
     incrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, 1);
+      this.props.changeItemQuantity(item.key, item.quantity + 1);
     }
 
     decrementItemQuantity = () => {
-      this.props.changeItemQuantity(item.key, -1);
+      this.props.changeItemQuantity(item.key, item.quantity - 1);
+    }
+
+    recordNumberText = (text) => {
+      this.setState({ number: text })
+    }
+
+    setQuantity = () => {
+      let quantity = parseInt(Number(this.state.number));
+      if (quantity < 0) quantity = 0
+      this.props.changeItemQuantity(item.key, quantity)
     }
 
     recordNameText = (text) => {
-      this.setState({text: text})
+      this.setState({ text: text })
     }
 
     setName = () => {
       this.props.changeItemName(item.key, this.state.text)
-    }
-
-    setQuantity = (text) => {
-      text == ''
-        ? this.props.changeItemQuantity(item.key, -item.quantity)
-        : this.props.changeItemQuantity(item.key, -item.quantity + parseInt(text))
     }
 
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
@@ -98,28 +103,25 @@ export default class List extends Component {
                 size={30}
               />
             </TouchableOpacity>
-            {item.quantity > 0
-              ? <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={decrementItemQuantity}
+            >
+              {item.quantity > 0
+                ?
                 <Icon
                   name="remove"
                   color="#51A4F7"
                   size={20}
                 />
-              </TouchableOpacity>
-              : <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={decrementItemQuantity}
-              >
+                :
                 <Icon
                   name="close"
                   color="red"
                   size={20}
                 />
-              </TouchableOpacity>
-            }
+              }
+            </TouchableOpacity>
             <TextInput
               underlineColorAndroid={'rgba(0,0,0,0)'}
               style={item.quantity > 0
@@ -128,6 +130,9 @@ export default class List extends Component {
               keyboardType={'numeric'}
               defaultValue={item.quantity.toString()}
               onChangeText={
+                recordNumberText
+              }
+              onSubmitEditing={
                 setQuantity
               }
             />

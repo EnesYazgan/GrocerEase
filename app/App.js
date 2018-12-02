@@ -49,6 +49,7 @@ export default class App extends Component {
 	}
 
 	loginAndGetData = (userId) => {
+		this.getRecipes()
 		this.createFirebaseInventoryListener(userId)
 		this.setState({
 			currentUserId: userId, screen: 'ingredients'
@@ -133,23 +134,27 @@ export default class App extends Component {
 		/>
 	}
 
+	addIngredientToInventory = (itemName) => {
+		var newInventory = this.state.inventory.slice(0);
+		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
+		if (typeof foundIngredient == 'undefined') {
+			newIngredient = new Ingredient(itemName.toTitleCase());
+			newInventory.push(newIngredient);
+		} else {
+			//increment ingredient quantity
+			foundIngredient.quantity = foundIngredient.quantity + 1
+		}
+		// newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
+		this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
+		//Update the database every time the list is changed. This works!
+	}
+
 	changeIngredientInInventory = (itemName, attribute, newValue) => {
 		var newInventory = this.state.inventory.slice(0);
 		var foundIngredient = newInventory.find(eachIngredient => eachIngredient.key === itemName);
-		if (attribute != 'quantity') {
-			foundIngredient[attribute] = newValue;
-		}
-		else {
-			if (typeof foundIngredient == 'undefined') {
-				newIngredient = new Ingredient(itemName.toTitleCase(), newValue);
-				newInventory.push(newIngredient);
-			} else {
-				foundIngredient.quantity = foundIngredient.quantity + newValue
-				if (foundIngredient.quantity < 0)
-					newInventory.splice(newInventory.indexOf(foundIngredient), 1)
-			}
-		}
-		// newInventory.splice(newInventory.indexOf(foundIngredient), 1, );
+		foundIngredient[attribute] = newValue;
+		if (attribute == 'quantity' && foundIngredient.quantity < 0)
+			newInventory.splice(newInventory.indexOf(foundIngredient), 1)
 		this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 		//Update the database every time the list is changed. This works!
 	}
@@ -169,6 +174,10 @@ export default class App extends Component {
 						alert('barcode does not exist in database');
 					}
 				})
+			}}
+			
+			addItem={(itemName) => {
+				this.addIngredientToInventory(itemName)
 			}}
 
 			changeItemName={(itemName, newName) => {
@@ -212,8 +221,12 @@ export default class App extends Component {
 			
 			orderList={(parameter) => {
 				var newInventory = this.state.inventory.slice(0);
-					newInventory.sort();
+				console.log('the parameter is... ' + parameter);
+				if (parameter == true) {
+					newInventory.sort(function (a,b) {return a.key.localeCompare(b.key)});
+				} else {					
 					newInventory.reverse();
+				}
 				this.setState({ inventory: newInventory, receivingChange: false }, () => DataBase.updateMe(this.state.currentUserId, newInventory));
 			}}
 
@@ -234,20 +247,21 @@ export default class App extends Component {
 				this.state.recipes
 			}
 			sortList={
-				this.getRecipes
+				() => {this.checkRecipesForMyIngredients(this.state.recipes)}
 			}
+
 			orderList={(parameter) => {
 				var list = this.state.recipes.slice(0);
+				console.log('the recipe parameter is... ' + parameter);
 				if (parameter == true){
-					list.sort((recipeA, recipeB) => {	
+					list.sort(function (recipeA,recipeB) {	
 						var percentA = (recipeA.matchingIngredients.length * 100) / recipeA.ingredients.length;
 						var percentB = (recipeB.matchingIngredients.length * 100) / recipeB.ingredients.length;
-						
 						
 						return percentB - percentA;
 					})
 				} else {
-					list.sort((recipeA, recipeB) => {	
+					list.sort(function (recipeA, recipeB) {	
 						console.log("! Comparison made. \nA: " + recipeA.matchingIngredients.length + "\nB: " + recipeB.matchingIngredients.length);
 						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length){
 							console.log("comparison made, new got: " + recipeB.ingredients.length - recipeA.ingredients.length);
@@ -259,9 +273,9 @@ export default class App extends Component {
 					})
 				}
 				this.setState({recipes: list});
-				console.log("Recipes sorted");
 				console.log("sorted list of recipes!");
 			}}
+			
 			userData={
 				this.state.inventory
 			}
@@ -308,7 +322,7 @@ export default class App extends Component {
 					}
 
 					console.log("Retrieved " + userId + "'s list:");
-					this.setState({ inventory: ingredientsList }, this.getRecipes)
+					this.setState({ inventory: ingredientsList }, this.checkRecipesForMyIngredients(this.state.recipes))
 				} else {
 					this.setState({ receivingChange: true })
 				}
@@ -316,44 +330,47 @@ export default class App extends Component {
 		});
 	}
 
+	checkRecipesForMyIngredients = (list) => {
+		list.forEach(recipe => {
+			recipe.key = recipe.title
+			recipe.matchingIngredients = [];
+			this.state.inventory.forEach(userIngredient => {
+				let matchedPosition = 10000;
+				let matchedIngredient = null;
+				recipe.ingredients.forEach(ingredient => {
+					ingredient.perfectMatch = false;
+					ingredient.name = ingredient.name.toTitleCase()
+					if (ingredient.name.indexOf(userIngredient.key) > -1 && ingredient.name.indexOf(userIngredient.key)/ingredient.name.length < matchedPosition) {
+						matchedPosition = ingredient.name.indexOf(userIngredient.key)/ingredient.name.length
+						matchedIngredient = ingredient;
+					}
+				})
+				if (matchedIngredient != null) {
+					recipe.matchingIngredients.push(matchedIngredient)
+					if ((matchedIngredient.name.length/userIngredient.key.length) < 5) {
+						matchedIngredient.perfectMatch = true;
+					}
+				}
+				recipe.equipment_names.forEach(tool => {
+					tool = tool.toTitleCase()
+				})
+			});
+			console.log('matching ingredients are ' + recipe.matchingIngredients)
+		});
+		list.sort((recipeA, recipeB) => {
+			if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
+				return (recipeB.ingredients.length - recipeA.ingredients.length)
+			else
+				return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
+		})
+		this.setState({ recipes: list })
+	}
+
 	getRecipes = () => {
 		firebase.database().ref('/recipe').once('value')
 			.then((snapshot) => {
 				if (snapshot.exists()) {
-					list = snapshot.val().slice(0);
-					list.forEach(recipe => {
-						recipe.key = recipe.title
-						recipe.matchingIngredients = [];
-						this.state.inventory.forEach(userIngredient => {
-							let matchedPosition = 10000;
-							let matchedIngredient = null;
-							recipe.ingredients.forEach(ingredient => {
-								ingredient.perfectMatch = false;
-								ingredient.name = ingredient.name.toTitleCase()
-								if (ingredient.name.indexOf(userIngredient.key) > -1 && ingredient.name.indexOf(userIngredient.key)/ingredient.name.length < matchedPosition) {
-									matchedPosition = ingredient.name.indexOf(userIngredient.key)/ingredient.name.length
-									matchedIngredient = ingredient;
-								}
-							})
-							if (matchedIngredient != null) {
-								recipe.matchingIngredients.push(matchedIngredient)
-								if (Number(matchedIngredient.quantity) <= userIngredient.quantity) {
-									matchedIngredient.perfectMatch = true;
-								}
-							}
-							recipe.equipment_names.forEach(tool => {
-								tool = tool.toTitleCase()
-							})
-						});
-						console.log('matching ingredients are ' + recipe.matchingIngredients)
-					});
-					list.sort((recipeA, recipeB) => {
-						if (recipeB.matchingIngredients.length == recipeA.matchingIngredients.length)
-							return (recipeB.ingredients.length - recipeA.ingredients.length)
-						else
-							return (recipeB.matchingIngredients.length - recipeA.matchingIngredients.length)
-					})
-					this.setState({ recipes: list })
+					this.checkRecipesForMyIngredients(snapshot.val().slice(0));
 				}
 			})
 			.catch(() => console.log('CANT FIND THE RECIPE'))
