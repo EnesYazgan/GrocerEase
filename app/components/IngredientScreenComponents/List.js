@@ -69,7 +69,6 @@ export default class List extends Component {
     setName = () => {
       /*only update the name if the text inputted by the user is not null or undefined*/
       this.props.changeItemName(item.key, this.state.text);
-      this.setState({text:''});
     }
 
     //showing the listRow constructed component. includes conditional rendering for when the quantity is equal to zero and greater than zero
