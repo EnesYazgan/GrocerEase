@@ -98,11 +98,11 @@ export default class IngredientInfo extends React.Component {
       /*if the date is within 3 days of today, make isExpired=1, if is past, make isExpired=2, if much later, make isExpired=0 */
       if(timeDifference == "in a day" || timeDifference == "in 2 days" || timeDifference == "in 3 days"
       || timeAgo[2] == "hours" || timeAgo[2] == "hour" || timeAgo[2] == "minutes"){
-        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 1);
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 1);
       }else if(timeAgo[2] == "ago"){
-        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 2);
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 2);
       }else{
-        this.props.changeItemExpiration(this.props.item.key, index, timeDifference, 0);
+        this.props.changeItemExpiration(this.props.item.key, timeDifference, 0);
       }
 
     }
@@ -162,10 +162,6 @@ export default class IngredientInfo extends React.Component {
       if(this.props.item.sodium > 0){
         this.props.changeItemSodium(this.props.item.key, (this.props.item.sodium - 1) );
       }
-    }
-
-    bothSetDateAndExpirationAlert = (date) => {
-      setDate(date);
     }
 
     return (
