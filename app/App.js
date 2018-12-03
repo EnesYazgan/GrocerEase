@@ -329,7 +329,10 @@ export default class App extends Component {
 						}
 					})
 					if (matchedIngredient != null) {
-						recipe.matchingIngredients.push(matchedIngredient)
+						let existingIngredient = recipe.matchingIngredients.find(eachIngredient => eachIngredient.name === matchedIngredient.name)
+						if (typeof existingIngredient == 'undefined') {
+							recipe.matchingIngredients.push(matchedIngredient);	
+						}
 						if ((matchedIngredient.name.length / userIngredient.key.length) < 5 || percentMatch > 0.6 || latestMatch > 0.6) {
 							matchedIngredient.perfectMatch = true;
 						}
