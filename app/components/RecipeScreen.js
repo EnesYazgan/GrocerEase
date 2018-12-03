@@ -35,7 +35,18 @@ export default class RecipeScreen extends Component {
   }
 
   searchData = (text) => {
-    var searchResults = this.props.data.filter(item => (item.title.includes(text)));
+    var searchResults = this.props.data.filter(recipe => {
+      if (recipe.title.includes(text.toTitleCase())) {
+        return true
+      }
+      else {
+        return recipe.ingredients.some(
+          function (ingredient) {
+            return ingredient.name.toTitleCase().includes(text.toTitleCase())
+          }
+        )
+      }
+    })
     this.setState({ text: text, filter: searchResults })
   }
 

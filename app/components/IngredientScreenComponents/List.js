@@ -24,6 +24,7 @@ export default class List extends Component {
             this.props.data
           }
           renderItem={this.renderListRow}
+          initialNumToRender={20}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
         />
@@ -52,7 +53,6 @@ export default class List extends Component {
 
     recordNameText = (text) => {
       this.setState({ text: text })
-      console.log('inputted text is ' + text)
     }
 
     recordNumberText = (text) => {

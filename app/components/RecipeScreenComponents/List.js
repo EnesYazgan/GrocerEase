@@ -27,7 +27,7 @@ export default class List extends Component {
           renderItem={this.renderListRow}
           //This optional parameter gives FlatList a component to render in-between rows
           ItemSeparatorComponent={this.renderSeparator}
-          initialNumToRender={15}
+          initialNumToRender={20}
         />
       </View>
     );
