@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, StatusBar, AppState } from 'react-native'
 import Ingredient from './objects/Ingredient';
 import IngredientScreen from './components/IngredientScreen';
 import LoginScreen from './components/LoginScreen';
@@ -27,7 +26,6 @@ export default class App extends Component {
 
 	state = {
 		currentUserId: undefined,
-		appState: AppState.currentState,
 		inventory: [], //elements are ingredients
 		screen: 'login',
 		recipes: [],
@@ -36,12 +34,12 @@ export default class App extends Component {
 	}
 
 	loginAndGetData = (userId) => {
+		this.setState({ loading: true })
 		DataBase.createFirebaseInventoryListener(
 			userId,
 			() => {return this.state.receivingChange},
 			(importedInventory) => this.setState({ inventory: importedInventory }),
 			() => this.setState({ receivingChange: true }),
-			() => this.setState({ loading: true }),
 			() => this.setState({ loading: false })
 		)
 		DataBase.getFirebaseRecipes((list) => {
@@ -169,7 +167,6 @@ export default class App extends Component {
 
 			addItem={(itemName) => {
 				this.addIngredientToInventory(itemName);
-				console.log("getting added: " + itemName);
 			}}
 
 			changeItemName={(itemName, newName) => {
@@ -237,7 +234,7 @@ export default class App extends Component {
 				this.state.recipes
 			}
 			sortList={
-				() => { this.checkRecipesWithMyIngredients(this.state.recipes); this.setState() }
+				() => { this.checkRecipesWithMyIngredients(this.state.recipes); }
 			}
 
 			orderList={(parameter) => {
@@ -267,6 +264,7 @@ export default class App extends Component {
 				foundRecipe.manualMatching = parameter;
 				this.setState({ recipes: newInventory, });
 			}}
+
 			removeIngredientFromMatching={(recipe, ingredient) => {
 				var newInventory = this.state.recipes.slice(0);
 				var foundRecipe = newInventory.find(eachRecipe => eachRecipe.title === recipe.title);
@@ -275,13 +273,19 @@ export default class App extends Component {
 					foundRecipe.matchingIngredients.splice(foundRecipe.matchingIngredients.indexOf(foundIngredient), 1)
 				this.setState({ recipes: newInventory, });
 			}}
+			
 			addIngredientToMatching={(recipe, ingredient) => {
 				var newInventory = this.state.recipes.slice(0);
 				var foundRecipe = newInventory.find(eachRecipe => eachRecipe.title === recipe.title);
 				var foundIngredient = foundRecipe.ingredients.find(eachIngredient => eachIngredient.name === ingredient.name);
 				if (typeof foundIngredient != 'undefined') {
-					foundIngredient.perfectMatch = true;
-					foundRecipe.matchingIngredients.push(foundIngredient)
+					let existingIngredient = foundRecipe.matchingIngredients.find(eachIngredient => eachIngredient.name === ingredient.name)
+					if (typeof existingIngredient != 'undefined') {
+						existingIngredient.perfectMatch = true;
+					} else {
+						foundIngredient.perfectMatch = true;
+						foundRecipe.matchingIngredients.push(foundIngredient)
+					}
 				}
 				this.setState({ recipes: newInventory, });
 			}}
@@ -303,11 +307,10 @@ export default class App extends Component {
 			if (!recipe.manualMatching) {
 				recipe.matchingIngredients = [];
 				this.state.inventory.forEach(userIngredient => {
-					let latestMatch = 10000;
+					let latestMatch = 0;
 					let matchedIngredient = null;
 					let percentMatch = 0;
 					recipe.ingredients.forEach(ingredient => {
-						ingredient.perfectMatch = false;
 						ingredient.name = ingredient.name.toTitleCase()
 						wordsInUserIngredient = userIngredient.key.split(" ");
 						percentMatch = 0;
@@ -315,7 +318,8 @@ export default class App extends Component {
 							if (ingredient.name.indexOf(word) > -1) {
 								percentMatch = percentMatch + (1 / wordsInUserIngredient.length)
 							}
-							if (ingredient.name.indexOf(word) > -1 && ingredient.name.indexOf(word) / ingredient.name.length < latestMatch) {
+							if (ingredient.name.indexOf(word) > -1 && ingredient.name.indexOf(word) / ingredient.name.length > latestMatch) {
+								latestMatch = ingredient.name.indexOf(word) / ingredient.name.length
 								matchedPosition = ingredient.name.indexOf(word) / ingredient.name.length
 								matchedIngredient = ingredient;
 							}
@@ -326,7 +330,7 @@ export default class App extends Component {
 					})
 					if (matchedIngredient != null) {
 						recipe.matchingIngredients.push(matchedIngredient)
-						if ((matchedIngredient.name.length / userIngredient.key.length) < 5 || percentMatch > 0.5) {
+						if ((matchedIngredient.name.length / userIngredient.key.length) < 5 || percentMatch > 0.6 || latestMatch > 0.6) {
 							matchedIngredient.perfectMatch = true;
 						}
 					}

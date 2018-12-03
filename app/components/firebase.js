@@ -44,7 +44,7 @@ export default class DataBase {
 					callback(snapshot.val());
 				}
 			})
-			.catch(() => alert('You have been disconnected, changes will not be saved'))
+			.catch(() => alert('There has been a connection error. Recipes can not be accessed.'))
 	}
 
 	static checkBarcode(barcode, callback) {
@@ -103,11 +103,9 @@ export default class DataBase {
 			)
 	}
 
-	static createFirebaseInventoryListener(userId, isReceivingChange, callback, secondCallback, startLoading, stopLoading) {
+	static createFirebaseInventoryListener(userId, isReceivingChange, callback, secondCallback, stopLoading) {
 		firebase.database().ref('/users/' + userId).on('value', (snapshot) => {
-			console.log('is receiving change? ' + isReceivingChange())
 			if (isReceivingChange() == true) {
-				startLoading()
 				if (snapshot.exists()) {
 					//snapshot.val() is the list we want
 					list = snapshot.val()
@@ -136,7 +134,6 @@ export default class DataBase {
 						}
 					}
 
-					console.log('calling back recipe list')
 					callback(ingredientsList)
 				} else {
 					callback([])
